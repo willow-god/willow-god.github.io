@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=11" id="mixia_vpid">
+    <title>清羽飞扬小站引导页</title>
+    <meta name="keywords" content="引导页">
+    <meta name="description" content="清羽飞扬小站引导页">
+    <link rel="icon" href="./favicon.ico">
+    <link rel="shortcut icon" href="./favicon.ico">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://font.onmicrosoft.cn/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaiscreen.css">
+    <style>
+        body {
+            font-family: "LXGW WenKai Screen", sans-serif;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f5f5f5;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 12px;
+            color: #666;
+        }
+        .notice {
+            position: absolute;
+            bottom: 60px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            color: #ffffff;
+        }
+        .typewriter {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: .15em solid orange;
+            animation: typing 3.5s steps(4, end), blink-caret 2.75s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: orange }
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="title">清羽飞扬の站点引导页</div>
+        <hr class="hr">
+        <div class="container">
+            <span id="hitokoto" class="typewriter">正在获取中...</span>
+        </div>
+        <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+        <hr class="hr">
+        <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+                <li class="navigation__item"><a href="https://www.qyliu.top" title="https://www.qyliu.top">访问国内主站</a></li>
+                <li class="navigation__item"><a href="https://qingyang.eu.org" title="https://qingyang.eu.org">访问国外分站</a></li>
+                <!-- <li class="navigation__item"><a href="/" target="_blank" title="待添加">待添加</a></li> -->
+                
+            </ul>
+        </nav>
+        
+    </div>
+    <div class="notice">公告: 国内主站点以及国外加速站点已建成，gitee page以及github page将弃用，请点击上方按钮进行跳转</div>
+    <div class="footer">
+        ©2021 - 2024 By LiuShen<br>
+        ICP:陕ICP备2024028531号-1     公网安备:陕公网安备61011602000637号
+    </div>
+    <div class="landscape"></div>
+    <div class="filter"></div>
+    <canvas id="canvas" width="1366" height="638"></canvas>
+    <script type="text/javascript" src="./js/style.js"></script>
+    
+</body>
+</html>
