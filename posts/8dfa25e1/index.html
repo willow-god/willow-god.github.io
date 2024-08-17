@@ -1,0 +1,2777 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>计算机网络期末总复习 | LiuShen's Blog</title><meta name="author" content="Willow-God"><meta name="copyright" content="Willow-God"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="应该注意到标题的改变了吧，本来是一章节一章节的复习，奈何我突然发现，老师画的重点和考研的重点并不是很符合，没办法咯，于是我决定将计算机网络考研复习部分的内容暂时搁置，后面逐步更新，反正一定是会更新的，因为408必考呀！然后将期末复习内容先整理出来，按照老师的考点进行复习。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络期末总复习">
+<meta property="og:url" content="https://blog.liushen.fun/posts/8dfa25e1/index.html">
+<meta property="og:site_name" content="LiuShen's Blog">
+<meta property="og:description" content="应该注意到标题的改变了吧，本来是一章节一章节的复习，奈何我突然发现，老师画的重点和考研的重点并不是很符合，没办法咯，于是我决定将计算机网络考研复习部分的内容暂时搁置，后面逐步更新，反正一定是会更新的，因为408必考呀！然后将期末复习内容先整理出来，按照老师的考点进行复习。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.qyliu.top/i/2024/05/31/66598ca129913.png">
+<meta property="article:published_time" content="2024-05-30T16:48:00.000Z">
+<meta property="article:modified_time" content="2024-06-08T17:22:00.000Z">
+<meta property="article:author" content="Willow-God">
+<meta property="article:tag" content="期末复习">
+<meta property="article:tag" content="计算机网络">
+<meta property="article:tag" content="学习资料">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.qyliu.top/i/2024/05/31/66598ca129913.png"><link rel="shortcut icon" href="/info/avatar.ico"><link rel="canonical" href="https://blog.liushen.fun/posts/8dfa25e1/index.html"><link rel="preconnect"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css?v=5.0.0"><link rel="stylesheet" href="/css/custom.css?v=5.0.0"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css?v=6.6.0"><link rel="stylesheet" href="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.css?v=5.0.36" media="print" onload="this.media='all'"><script>(()=>{
+      const saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+      
+      window.btf = {
+        saveToLocal: saveToLocal,
+        getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+          script.src = url
+          script.async = true
+          script.onerror = reject
+          script.onload = script.onreadystatechange = function() {
+            const loadState = this.readyState
+            if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+            script.onload = script.onreadystatechange = null
+            resolve()
+          }
+
+          Object.keys(attr).forEach(key => {
+            script.setAttribute(key, attr[key])
+          })
+
+          document.head.appendChild(script)
+        }),
+
+        getCSS: (url, id = false) => new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+          link.rel = 'stylesheet'
+          link.href = url
+          if (id) link.id = id
+          link.onerror = reject
+          link.onload = link.onreadystatechange = function() {
+            const loadState = this.readyState
+            if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+            link.onload = link.onreadystatechange = null
+            resolve()
+          }
+          document.head.appendChild(link)
+        }),
+
+        addGlobalFn: (key, fn, name = false, parent = window) => {
+          const pjaxEnable = true
+          if (!pjaxEnable && key.startsWith('pjax')) return
+
+          const globalFn = parent.globalFn || {}
+          const keyObj = globalFn[key] || {}
+    
+          if (name && keyObj[name]) return
+    
+          name = name || Object.keys(keyObj).length
+          keyObj[name] = fn
+          globalFn[key] = keyObj
+          parent.globalFn = globalFn
+        }
+      }
+    
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+      
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })()</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"7IX3UBC6JW","apiKey":"4ac2846352e499675081f1277fb961c1","indexName":"My Blog","hitsPerPage":6,"languages":{"input_placeholder":"搜索全站文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"本篇文章从发布到现在已经隔了","messageNext":"天了，里面的内容可能过期了，你要自己甄别一下哟👉👈"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":400,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":1000,"languages":{"author":"作者: Willow-God","link":"链接: ","source":"来源: LiuShen's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js?v=4.12.0',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '计算机网络期末总复习',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: undefined,
+  isToc: true,
+  postUpdate: '2024-06-09 01:22:00'
+}</script><link rel="stylesheet" href="/config/Yozai-Medium/result.css"><link rel="stylesheet" href="/config/memos/memos.css"></head><body><svg aria-hidden="true" style="position:absolute; overflow:hidden; width:0; height:0"><symbol id="icon-sun" viewBox="0 0 1024 1024"><path d="M960 512l-128 128v192h-192l-128 128-128-128H192v-192l-128-128 128-128V192h192l128-128 128 128h192v192z" fill="#FFD878" p-id="8420"></path><path d="M736 512a224 224 0 1 0-448 0 224 224 0 1 0 448 0z" fill="#FFE4A9" p-id="8421"></path><path d="M512 109.248L626.752 224H800v173.248L914.752 512 800 626.752V800h-173.248L512 914.752 397.248 800H224v-173.248L109.248 512 224 397.248V224h173.248L512 109.248M512 64l-128 128H192v192l-128 128 128 128v192h192l128 128 128-128h192v-192l128-128-128-128V192h-192l-128-128z" fill="#4D5152" p-id="8422"></path><path d="M512 320c105.888 0 192 86.112 192 192s-86.112 192-192 192-192-86.112-192-192 86.112-192 192-192m0-32a224 224 0 1 0 0 448 224 224 0 0 0 0-448z" fill="#4D5152" p-id="8423"></path></symbol><symbol id="icon-moon" viewBox="0 0 1024 1024"><path d="M611.370667 167.082667a445.013333 445.013333 0 0 1-38.4 161.834666 477.824 477.824 0 0 1-244.736 244.394667 445.141333 445.141333 0 0 1-161.109334 38.058667 85.077333 85.077333 0 0 0-65.066666 135.722666A462.08 462.08 0 1 0 747.093333 102.058667a85.077333 85.077333 0 0 0-135.722666 65.024z" fill="#FFB531" p-id="11345"></path><path d="M329.728 274.133333l35.157333-35.157333a21.333333 21.333333 0 1 0-30.165333-30.165333l-35.157333 35.157333-35.114667-35.157333a21.333333 21.333333 0 0 0-30.165333 30.165333l35.114666 35.157333-35.114666 35.157334a21.333333 21.333333 0 1 0 30.165333 30.165333l35.114667-35.157333 35.157333 35.157333a21.333333 21.333333 0 1 0 30.165333-30.165333z" fill="#030835" p-id="11346"></path></symbol></svg><!-- hexo injector head_end start --><link rel="stylesheet" href="/config/swiper/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="/config/swiper/swiperstyle.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="LiuShen's Blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="LiuShen's Blog" type="application/rss+xml">
+<div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="wizard-scene"><div class="wizard-objects"><div class="wizard-square"></div><div class="wizard-circle"></div><div class="wizard-triangle"></div></div><div class="wizard"><div class="wizard-body"></div><div class="wizard-right-arm"><div class="wizard-right-hand"></div></div><div class="wizard-left-arm"><div class="wizard-left-hand"></div></div><div class="wizard-head"><div class="wizard-beard"></div><div class="wizard-face"><div class="wizard-adds"></div></div><div class="wizard-hat"><div class="wizard-hat-of-the-hat"></div><div class="wizard-four-point-star --first"></div><div class="wizard-four-point-star --second"></div><div class="wizard-four-point-star --third"></div></div></div></div></div></div><script async="async">(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+  
+  preloader.initLoading()
+  
+  let loaded = false;
+  
+  window.addEventListener('load', () => { 
+      if (!loaded) {
+          preloader.endLoading();
+          loaded = true;
+      }
+  });
+
+  setTimeout(() => {
+      if (!loaded) {
+          preloader.endLoading();
+          loaded = true;
+      }
+  }, 5000);
+
+  
+  window.addEventListener('load',() => { preloader.endLoading() })
+  setTimeout(function(){preloader.endLoading();}, 3000);
+  document.getElementById('loading-box').addEventListener('click',()=> {preloader.endLoading()})
+
+  if (true) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><!--.avatar-img.is-center--><!--  img(src=url_for(theme.avatar.img) onerror=`onerror=null;src='${theme.error_img.flink}'` alt="avatar")--><div class="is-center" id="sidebar-avatar"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/03/21/65fc570ca9fe7.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">Willow-God</div><div class="author-info__description">清羽 〄 飞扬</div></div><div class="site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">69</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/willow-god"><i class="fab fa-github"></i><span>Follow Me 🛫</span></a><div class="menu-info-social-icons is-center"><a class="social-icon" href="mailto:01@liushen.fun" target="_blank" title="Email"><i class="fa-solid fa-envelope"></i></a><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2411457922&amp;site=qq&amp;menu=yes" target="_blank" title="QQ：2411457922"><i class="fa-brands fa-qq"></i></a><a class="social-icon" href="https://wakatime.com/@LiuShen" target="_blank" title="Wakatime"><i class="fa-solid fa-chart-column"></i></a><a class="social-icon" href="https://blog.liushen.fun/atom.xml" target="_blank" title="rss地址"><i class="fa-solid fa-rss"></i></a></div><div class="menus_items visible"><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-home"></i><span> 导航</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/"><i class="fa-fw fa-solid fa-house-laptop"></i><span> 博客主页</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.liushen.fun/"><i class="fa-fw fa-solid fa-house-flag"></i><span> 导航主页</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://xc.liushen.fun/"><i class="fa-fw fa fa-camera-retro"></i><span> 个人相册</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-graduation-cap"></i><span> 整理</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时光卷轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 文章标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 文章分类</span></a></li><li><a class="site-page child" href="/charts/"><i class="fa-fw fa-solid fa-chart-pie"></i><span> 文章通览</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa-solid fa-user-group"></i><span> 友人</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链展示</span></a></li><li><a class="site-page child" href="/addlink/"><i class="fa-fw fa fa-at"></i><span> 友链申请</span></a></li><li><a class="site-page child" href="/fcircle/"><i class="fa-fw fa-solid fa-circle-nodes"></i><span> 朋友动态</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-paper-plane"></i><span> 留言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/comment/"><i class="fa-fw fa-solid fa-chalkboard"></i><span> 留言白板</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://m.liushen.fun/"><i class="fa-fw fa-solid fa-basketball"></i><span> 盐焗星球</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa-solid fa-stethoscope"></i><span> 服务</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://um.liushen.fun/"><i class="fa-fw fa-solid fa-eye-low-vision"></i><span> 访客统计</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://pan.liushen.fun/"><i class="fa-fw fa-solid fa-laptop-file"></i><span> 资源分享</span></a></li><li><a class="site-page child" href="/subscribe/"><i class="fa-fw fa-solid fa-rss"></i><span> 订阅本站</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-list"></i><span> 关于</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fa fa-address-card"></i><span> 站长资料</span></a></li><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-commenting"></i><span> 日常说说</span></a></li><li><a class="site-page child" href="/devices/"><i class="fa-fw fa-solid fa-tachograph-digital"></i><span> 我的设备</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(https://cdn.qyliu.top/i/2024/05/31/66598ca129913.png);"><nav id="nav"><span id="blog-info"><a href="/" title="LiuShen's Blog"><span class="site-name">LiuShen's Blog</span></a></span><div id="menus"></div><div class="menus_items visible"><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-home"></i><span> 导航</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/"><i class="fa-fw fa-solid fa-house-laptop"></i><span> 博客主页</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.liushen.fun/"><i class="fa-fw fa-solid fa-house-flag"></i><span> 导航主页</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://xc.liushen.fun/"><i class="fa-fw fa fa-camera-retro"></i><span> 个人相册</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-graduation-cap"></i><span> 整理</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时光卷轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 文章标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 文章分类</span></a></li><li><a class="site-page child" href="/charts/"><i class="fa-fw fa-solid fa-chart-pie"></i><span> 文章通览</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa-solid fa-user-group"></i><span> 友人</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链展示</span></a></li><li><a class="site-page child" href="/addlink/"><i class="fa-fw fa fa-at"></i><span> 友链申请</span></a></li><li><a class="site-page child" href="/fcircle/"><i class="fa-fw fa-solid fa-circle-nodes"></i><span> 朋友动态</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-paper-plane"></i><span> 留言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/comment/"><i class="fa-fw fa-solid fa-chalkboard"></i><span> 留言白板</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://m.liushen.fun/"><i class="fa-fw fa-solid fa-basketball"></i><span> 盐焗星球</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa-solid fa-stethoscope"></i><span> 服务</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://um.liushen.fun/"><i class="fa-fw fa-solid fa-eye-low-vision"></i><span> 访客统计</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://pan.liushen.fun/"><i class="fa-fw fa-solid fa-laptop-file"></i><span> 资源分享</span></a></li><li><a class="site-page child" href="/subscribe/"><i class="fa-fw fa-solid fa-rss"></i><span> 订阅本站</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-list"></i><span> 关于</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fa fa-address-card"></i><span> 站长资料</span></a></li><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-commenting"></i><span> 日常说说</span></a></li><li><a class="site-page child" href="/devices/"><i class="fa-fw fa-solid fa-tachograph-digital"></i><span> 我的设备</span></a></li></ul></div></div><center id="name-container"><a id="page-name" href="javascript:btf.scrollToDest(0, 500)">PAGE_NAME</a></center><div id="nav-right"><div id="travellings"><a class="site-page" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html" title="友链接力-随机开往"><i class="fa-solid fa-bus fa-fw"></i></a></div><div id="ten-years"><a class="site-page" target="_blank" rel="noopener" href="https://foreverblog.cn/go.html" title="友链接力-十年之约"><i class="fa-brands fa-nfc-symbol fa-fw"></i></a></div><div id="random"><a class="site-page" href="javascript:randomPost()" title="随机前往一个文章"><i class="fa-solid fa-shuffle fa-fw"></i></a></div><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i></span></div><div id="toggle-menu"><span class="site-page" href="javascript:void(0);" title="展开菜单"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">计算机网络期末总复习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-05-30T16:48:00.000Z" title="发表于 2024-05-31 00:48:00">2024-05-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-06-08T17:22:00.000Z" title="更新于 2024-06-09 01:22:00">2024-06-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/">学习资料</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">32.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>99分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="计算机网络期末总复习"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/posts/8dfa25e1/#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="碎碎念"><a href="#碎碎念" class="headerlink" title="碎碎念"></a>碎碎念</h2><p>在进行计算机网络课程的复习记录时，我遇到了一个意料之外的情况。起初，我计划严格按照课程顺序，逐章节进行深入复习并记录。然而，在复习过程中，我意识到教师强调的重点与考研考核的核心内容存在偏差。鉴于此，我决定对考研复习部分做临时调整，尽管已着手撰写的数据链路层内容已近半，这一变动实属无奈。但请放心，这部分内容未来必定会得到补充，毕竟408考试的重要性不言而喻。</p>
+<p>因此，当前阶段我将优先学习并分享针对期末考试的复习资料，基本依据教师所划重点进行，以确保复习的针对性与效率。本文目前正处于持续更新状态，目的是为了避免因内容分散而造成的冗余。原计划是完成后再统一发布，但考虑个人复习进度的实际情况，决定提前分享。目前文章前端已涵盖教师重点标示的详细内容，可供大家参考使用。</p>
+<h2 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a>更新记录</h2><ul>
+<li>2024-05-31：完成第一章节，第二章节内容</li>
+<li>2024-06-01：完成第三章节上半小结</li>
+<li>2024-06-02：完成第三章节下半小结，还剩一小半</li>
+<li>2024-06-03：完成第三章节</li>
+<li>2024-06-04：开始第四章节内容</li>
+<li>2024-06-05：完成第四章节基于终点的转发之前的内容</li>
+<li>2024-06-06：完成第四章节内部网关协议RIP</li>
+<li>2024-06-07：完成第四章节</li>
+<li>2024-06-08：完成第五章节TCP可靠传输实现</li>
+<li>2024-06-09：完成所有内容，画上圆满句号</li>
+</ul>
+<h2 id="考点总览"><a href="#考点总览" class="headerlink" title="考点总览"></a>考点总览</h2><h3 id="第1章-概述（基本概念）"><a href="#第1章-概述（基本概念）" class="headerlink" title="第1章 概述（基本概念）"></a>第1章 概述（基本概念）</h3><ul>
+<li><p>计算机网络的定义，特点，互联网概述及其组成</p>
+</li>
+<li><p>速率（bit/s），带宽，吞吐量，时延（包括发送时延、传播时延、处理时延、排队时延），时延带宽积，往返时间（RTT）</p>
+</li>
+<li><p>电路交换，报文交换，分组交换，交换方式的比较</p>
+</li>
+<li><p>分层的概念和优点，OSI/RM和TCP/IP体系结构的比较</p>
+</li>
+<li><p>应用层，运输层（TCP/UDP），网际层（IP），数据链路层，物理层</p>
+</li>
+<li><p>信道利用率的概念，网络利用率的概念，两者之间的区别</p>
+</li>
+<li><p>应用层，运输层，网际层，数据链路层，物理层</p>
+</li>
+<li><p>TCP/IP模型的层次结构，每层的功能和协议</p>
+</li>
+</ul>
+<h3 id="第2章-物理层（基本概念）"><a href="#第2章-物理层（基本概念）" class="headerlink" title="第2章 物理层（基本概念）"></a>第2章 物理层（基本概念）</h3><ul>
+<li>物理层基本概念与特性</li>
+<li>数据通信系统模型</li>
+<li>编码方式（不归零制、归零制、曼彻斯特编码、差分曼彻斯特编码）</li>
+<li>信道基本概念（单工、半双工、全双工通信，基带信号与带通信号）</li>
+<li>信道极限容量（奈氏准则、信噪比、香农公式）</li>
+<li>信道复用技术（频分复用、时分复用、波分复用、码分复用）重点</li>
+<li>传输媒体（导引型与非导引型）</li>
+</ul>
+<h3 id="第3章-数据链路层（大题重点）"><a href="#第3章-数据链路层（大题重点）" class="headerlink" title="第3章 数据链路层（大题重点）"></a>第3章 数据链路层（大题重点）</h3><ul>
+<li>数据链路层地位与作用</li>
+<li>数据链路与帧</li>
+<li>点对点协议 PPP</li>
+<li>局域网数据链路层</li>
+<li>透明传输（字节填充、字符填充）</li>
+<li>CRC 冗余码计算</li>
+<li>三个基本问题（封装成帧、透明传输、差错控制）</li>
+<li>CSMA/CD 协议（原理、要点、工作流程）</li>
+<li>以太网的信道利用率与碰撞检测</li>
+<li>传播时延计算</li>
+<li>以太网的 MAC 层</li>
+<li>以太网自学习功能</li>
+</ul>
+<h3 id="第4章-网络层（都是重点）"><a href="#第4章-网络层（都是重点）" class="headerlink" title="第4章 网络层（都是重点）"></a>第4章 网络层（都是重点）</h3><ul>
+<li>网络层基本概念（虚电路与数据报服务对比）</li>
+<li>软件定义网络 SDN</li>
+<li>使用中间设备进行互联</li>
+<li>IP 地址（表示方法、结构、分类、CIDR、特殊IP地址、各类IP地址范围、超网构造）大题</li>
+<li>ARP 协议（流程、使用两个地址的原因）</li>
+<li>IP 数据报首部字段、分片、基于终点的转发</li>
+<li>IPv6 表示方法、从 IPv4 到 IPv6 的过渡</li>
+<li>路由选择协议（RIP、OSPF）</li>
+<li>IP 多播基本概念、协议</li>
+<li>虚拟专用网 VPN 与网络地址转换 NAT</li>
+</ul>
+<h3 id="第5章-运输层（都是重点）"><a href="#第5章-运输层（都是重点）" class="headerlink" title="第5章 运输层（都是重点）"></a>第5章 运输层（都是重点）</h3><ul>
+<li>运输层协议概述：进程间通信、UDP和TCP的主要特点、端口的作用</li>
+<li>用户数据报协议UDP：无连接、尽最大努力交付、首部格式、与TCP的区别、典型应用</li>
+<li>传输控制协议TCP：面向连接、可靠交付、全双工通信、面向字节流、连接的建立和释放、报文段首部格式</li>
+<li>可靠传输的工作原理：停止等待协议、连续ARQ协议、信道利用率计算</li>
+<li>TCP可靠传输的实现：三段握手、同步位、终止位、最大报文段长度MSS</li>
+<li>TCP流量控制：滑动窗口机制、发送缓存与发送窗口的关系、可变窗口流量控制举例</li>
+<li>TCP拥塞控制：拥塞控制定义、拥塞控制算法、慢开始和拥塞避免控制举例</li>
+<li>TCP连接管理：TCP状态转换、有限状态机、连接的建立和释放、四报文握手过程</li>
+<li>计算时间部分：RTT测量、超时重传时间RTO设置</li>
+</ul>
+<h3 id="第6章-应用层（无大重点）"><a href="#第6章-应用层（无大重点）" class="headerlink" title="第6章 应用层（无大重点）"></a>第6章 应用层（无大重点）</h3><ul>
+<li>域名系统 DNS</li>
+<li>文件传送协议</li>
+<li>远程终端协议 TELNET</li>
+<li>万维网 WWW</li>
+<li>电子邮件</li>
+<li>动态主机配置协议 DHCP</li>
+<li>简单网络管理协议 SNMP</li>
+<li>应用进程跨越网络的通信</li>
+<li>P2P 应用</li>
+</ul>
+<h3 id="第9章-无线网络和移动网络（看看）"><a href="#第9章-无线网络和移动网络（看看）" class="headerlink" title="第9章 无线网络和移动网络（看看）"></a>第9章 无线网络和移动网络（看看）</h3><ul>
+<li>大致看看，没重点（反正老师是这么说的）</li>
+</ul>
+<h2 id="第一章：概述"><a href="#第一章：概述" class="headerlink" title="第一章：概述"></a>第一章：概述</h2><h3 id="定义和特点"><a href="#定义和特点" class="headerlink" title="定义和特点"></a>定义和特点</h3><ul>
+<li><strong>定义</strong>: 计算机网络主要是由一些通用的、可编程的硬件设备通过通信媒介互联而成,这些硬件设备并非专门用来实现某一特定目的,如传送数据或视频信号。它们能够传送多种不同类型的数据,并支持广泛的应用。</li>
+<li><strong>特点</strong>:<ul>
+<li>可扩展性: 网络可以灵活地添加或移除设备。</li>
+<li>可编程性: 网络设备包含中央处理器,可以根据需求执行不同的任务。</li>
+<li>互操作性: 不同的网络设备和系统能够互相通信和协作。</li>
+<li>分布式: 网络中的资源和控制是分散的。</li>
+</ul>
+</li>
+</ul>
+<h3 id="基本特点"><a href="#基本特点" class="headerlink" title="基本特点"></a>基本特点</h3><ol>
+<li><p><strong>连通性 (Connectivity)</strong></p>
+<ul>
+<li>互联网提供了高度的连通性，使用户之间能够便捷地交换信息。</li>
+<li>这种连通性让上网用户之间可以非常经济地交换各种信息，好像这些用户终端都彼此直接连通一样。</li>
+</ul>
+</li>
+<li><p><strong>资源共享 (Sharing)</strong></p>
+<ul>
+<li>互联网实现了信息共享、软件共享、硬件共享。</li>
+<li>资源共享使得网络中的资源好像就在用户身边一样，可以非常地方便使用。</li>
+<li>这些基本特点构成了Internet提供许多服务的基础。</li>
+</ul>
+</li>
+</ol>
+<h3 id="互联网概述"><a href="#互联网概述" class="headerlink" title="互联网概述"></a>互联网概述</h3><ul>
+<li><p><strong>互联网概述</strong>: 互联网是一个全球性的计算机网络系统,由数以百万计的私人、公共、学术、商业和政府网络组成,通过电子、无线和光纤网络技术相互连接。</p>
+</li>
+<li><p><strong>组成部分</strong>:</p>
+<ul>
+<li><strong>边缘部分</strong>: 由所有连接在互联网上的主机(端系统)组成，用户直接使用，用于通信和资源共享。<ul>
+<li>处在互联网边缘部分的就是连接在互联网上的所有的主机。这些主机又称为端系统</li>
+</ul>
+</li>
+<li><strong>核心部分</strong>: 由网络和路由器组成，为边缘部分提供连通性和交换服务。<ul>
+<li>是互联网中最复杂的部分。</li>
+<li>向网络边缘中的主机提供连通性，使任何一台主机都能够向其他主机通信。</li>
+<li>在网络核心部分起特殊作用的是路由器 (router)。</li>
+<li>路由器是实现分组交换 (packet switching) 的关键构件，其任务是转发收到的分组。</li>
+</ul>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/29/6656005c11b41.png" alt="边缘和核心"></p>
+</li>
+</ul>
+<h3 id="性能指标"><a href="#性能指标" class="headerlink" title="性能指标"></a>性能指标</h3><ul>
+<li><p><strong>速率</strong>: 数据传输速率,单位通常是bit/s、kbit/s、Mbit/s、Gbit/s 等，往往是指额定速率或标称速率，非实际运行。</p>
+</li>
+<li><p><strong>带宽</strong>: 链路能够传输数据的最高速率</p>
+<ul>
+<li><strong>频域</strong>：某信道允许通过的信号频带范围称为该信道的带宽（或通频带）单位是赫（或千赫、兆赫、吉赫等）。</li>
+<li><strong>时域</strong>：网络中某通道传送数据的能力，表示在单位时间内网络中的某信道所能通过的“最高数据率”，单位就是数据率的单位 bit/s。</li>
+</ul>
+<p>两者本质相同。一条通信链路的“带宽”越宽，其所能传输的“最高数据率”也越高。</p>
+</li>
+<li><p><strong>吞吐量</strong>: 单位时间内通过网络的实际数据量。</p>
+</li>
+<li><p><strong>时延</strong>: 数据从源到目的地所需的时间,包括:</p>
+<ul>
+<li><p>发送时延: 数据帧从发送开始到发送完毕的时间。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/29/66560519bec22.png"></p>
+</li>
+<li><p>传播时延: 信号在传输介质中传播的时间。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/29/6656052c6f2ba.png"></p>
+</li>
+<li><p>处理时延: 路由器或主机处理数据的时间。</p>
+</li>
+<li><p>排队时延: 数据在路由器中等待处理的时间。</p>
+</li>
+</ul>
+<p>对于高速网络链路，我们提高的仅仅是数据的发送速率，而不是比特在链路上的传播速率，提高数据的发送速率只是减小了数据的发送时延。（P85习题）</p>
+</li>
+<li><p><strong>时延带宽积</strong>: 传播时延与带宽的乘积,表示链路中可以容纳的数据量。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/29/665605ab8cc9f.png"></p>
+</li>
+<li><p><strong>往返时间(RTT)</strong>: 数据从发送方发出到接收方确认收到的总时间。（P89习题）</p>
+</li>
+</ul>
+<h3 id="交换方式"><a href="#交换方式" class="headerlink" title="交换方式"></a>交换方式</h3><ul>
+<li><p><strong>电路交换</strong>: 建立专用物理通路,占用通信资源直到通信结束。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/29/665600cd8b1f5.png" alt="电路交换主要特点"></p>
+<ul>
+<li>特点: 建立连接、通话、释放连接三个阶段。</li>
+<li>优点: 通信双方始终占用端到端的通信资源。</li>
+<li>缺点: 通信线路利用率低。</li>
+</ul>
+</li>
+<li><p><strong>报文交换</strong>: 整个报文在传输前先存储在交换节点,然后转发至下一个节点。</p>
+<ul>
+<li>特点: 存储-转发方式,时延较长。</li>
+<li>优点：基于存储转发原理</li>
+<li>缺点: 时延太长，没人用。</li>
+</ul>
+</li>
+<li><p><strong>分组交换</strong>: 数据被分割成小的数据包(分组),独立选择路由进行传输。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/29/6656015d89fe2.png" alt="分组交换的还原"></p>
+<ul>
+<li>特点: 存储-转发方式,动态分配传输带宽。</li>
+<li>优点: 动态分配，逐段占用，为每个分组独立选择最合适的转发路由，可以不先建立连接，可靠的网络协议，分布式多路由分组交换网，网络生存性高。</li>
+<li>缺点: 引入排队延迟,不保证带宽,增加开销。</li>
+</ul>
+</li>
+<li><p>注：互联网的核心部分采用分组交换技术。</p>
+</li>
+<li><p><strong>区别</strong>：</p>
+<ul>
+<li><p><strong>连接</strong>：电路交换需要建立和释放连接，而报文交换和分组交换不需要建立端到端的连接。</p>
+</li>
+<li><p><strong>数据传输单元</strong>：电路交换是比特流直达终点，报文交换是整个报文作为数据传输单元，分组交换则是将报文划分为多个分组。</p>
+</li>
+<li><p><strong>存储与转发</strong>：报文交换和分组交换都采用存储转发技术，但分组交换的存储转发发生在每个分组级别上，而不是整个报文。</p>
+</li>
+<li><p><strong>网络效率</strong>：分组交换通常比报文交换更有效，因为它允许更灵活的路由选择和更好的带宽利用。</p>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/29/665603449587c.png" alt="区别"></p>
+</li>
+</ul>
+<h3 id="分层思想"><a href="#分层思想" class="headerlink" title="分层思想"></a>分层思想</h3><ul>
+<li><strong>分层概念</strong>: 将复杂问题分解为多个小问题,每一层提供特定的服务给上层,并使用下层的服务，每一层具有不同的功能。</li>
+<li><strong>优点</strong>:<ul>
+<li>简化了设计和实现。</li>
+<li>增强了模块化,易于维护和升级。</li>
+<li>促进了标准化。</li>
+</ul>
+</li>
+<li><strong>缺点：</strong><ul>
+<li>有些功能会重复出现，因而产生了额外开销。</li>
+</ul>
+</li>
+<li>分层主要功能：<ul>
+<li>差错控制：使相应层次对等方的通信更加可靠。</li>
+<li>流量控制：发送端的发送速率必须使接收端来得及接收，不要太快。</li>
+<li>分段和重装：发送端将要发送的数据块划分为更小的单位，在接收端将其还原。</li>
+<li>复用和分用：发送端几个高层会话复用一条低层的连接，在接收端再进行分用。</li>
+<li>连接建立和释放：交换数据前先建立一条逻辑连接，数据传送结束后释放连接。</li>
+</ul>
+</li>
+</ul>
+<h3 id="OSI-RM和TCP-IP"><a href="#OSI-RM和TCP-IP" class="headerlink" title="OSI/RM和TCP/IP"></a>OSI/RM和TCP/IP</h3><ul>
+<li><strong>OSI/RM</strong>: 七层模型,包括物理层、数据链路层、网络层、传输层、会话层、表示层和应用层。<ul>
+<li>优点: 标准化程度高,层次清晰。</li>
+<li>缺点: 实现复杂,缺乏商业驱动力。</li>
+</ul>
+</li>
+<li><strong>TCP/IP</strong>: 四层模型,包括应用层、运输层、网际层和网络接口层。<ul>
+<li>优点: 实现简单,运行效率高,有商业驱动力。</li>
+<li>缺点: 层次划分不如OSI/RM清晰。</li>
+</ul>
+</li>
+<li><strong>五层架构：</strong>集结两者的优点，最终形成了五层协议的体系架构。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/29/66574e415e346.png" alt="各个协议"></p>
+<h3 id="功能和协议"><a href="#功能和协议" class="headerlink" title="功能和协议"></a>功能和协议</h3><ul>
+<li><strong>应用层</strong>: 与用户的应用进程直接交互,如HTTP、SMTP等，定义应用进程间通信和交互的规则，数据单元为报文</li>
+<li><strong>运输层</strong>: 提供进程间的通信,包括TCP(传输控制协议)和UDP(用户数据报协议)，具有复用和分用的功能<ul>
+<li><strong>复用</strong>：在同一网络连接上，多个应用程序可以同时发送数据。运输层通过端口号来区分不同的应用程序，使得数据能够正确地发送到目标应用程序。</li>
+<li><strong>分用</strong>：当数据到达接收端时，运输层根据端口号将数据分发到正确的应用程序。这个过程确保了不同应用程序的数据能够被正确地识别和处理。</li>
+<li><strong>TCP</strong>：面向连接的协议，确保数据传输的可靠性。使用报文段作为数据传输的基本单位。</li>
+<li><strong>UDP</strong>：无连接的协议，提供尽力而为的服务，不保证数据传输的可靠性。使用用户数据报作为数据传输的基本单位。</li>
+</ul>
+</li>
+<li><strong>网际（网络）层</strong>: 负责数据包从源到目的地的整个传输过程,主要协议是IP，有两个具体任务，路由选择和转发。<ul>
+<li><strong>路由选择（Routing）</strong>：网络层使用路由算法来确定数据包在网络中的最佳路径。这个过程涉及到在路由器上生成转发表，转发表包含了如何将数据包从一个网络转发到另一个网络的指令。</li>
+<li><strong>转发（Forwarding）</strong>：当路由器接收到一个数据包时，它会查看自己的转发表，并根据表中的信息将数据包转发到下一个路由器，直到数据包到达目的地。</li>
+</ul>
+</li>
+<li><strong>数据链路层</strong>: 在相邻节点间传输帧,可能包括错误检测和纠正机制。</li>
+<li><strong>物理层</strong>: 涉及物理媒介的传输,如电缆和交换器。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/29/6657505727867.png" alt="基本过程"></p>
+<h3 id="信道利用率-网络利用率"><a href="#信道利用率-网络利用率" class="headerlink" title="信道利用率/网络利用率"></a>信道利用率/网络利用率</h3><ul>
+<li><strong>信道利用率</strong>: 信道被用于传输数据的时间比例。</li>
+<li><strong>网络利用率</strong>: 整个网络中所有信道利用率的平均值。</li>
+<li><strong>区别</strong>: 信道利用率关注的是单个信道的使用情况,而网络利用率关注的是整个网络的使用情况。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/30/665751492a38c.png"></p>
+<h3 id="TCP-IP模型"><a href="#TCP-IP模型" class="headerlink" title="TCP/IP模型"></a>TCP/IP模型</h3><ul>
+<li><strong>应用层</strong>: 为用户提供网络应用和服务。</li>
+<li><strong>运输层</strong>: 确保数据的完整性和可靠性,协议包括TCP和UDP。</li>
+<li><strong>网际层</strong>: 负责数据包从源头到目的地的整个传输过程,主要协议是IP。</li>
+<li><strong>网络接口层</strong>: 涉及实际的硬件传输介质,如以太网、Wi-Fi等。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/30/6657517aa5b35.png"></p>
+<h2 id="第二章：物理层"><a href="#第二章：物理层" class="headerlink" title="第二章：物理层"></a>第二章：物理层</h2><h3 id="物理层基本概念与特性"><a href="#物理层基本概念与特性" class="headerlink" title="物理层基本概念与特性"></a>物理层基本概念与特性</h3><p>物理层主要负责在传输媒体上传输数据比特流，其作用是屏蔽不同传输媒体和通信手段的差异。物理层协议也称为物理层规程。物理层的主要任务是确定与传输媒体接口的四个特性：</p>
+<ol>
+<li><strong>机械特性</strong>：接口所用接线器的形状、尺寸、引线排列等。</li>
+<li><strong>电气特性</strong>：接口电缆各条线上的电压范围。</li>
+<li><strong>功能特性</strong>：某条线上特定电平电压的意义。</li>
+<li><strong>过程特性</strong>：不同功能事件的出现顺序。</li>
+</ol>
+<h3 id="数据通信系统模型"><a href="#数据通信系统模型" class="headerlink" title="数据通信系统模型"></a>数据通信系统模型</h3><p>数据通信系统由三大部分构成：源系统（发送端）、传输系统（传输网络）和目的系统（接收端）。数据通信涉及数字比特流的发送和接收，通过调制解调器等设备在公用电话网等传输系统中进行。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/30/66588ea32d1f8.png" alt="数据通信系统模型"></p>
+<ol>
+<li><strong>消息 (Message)</strong> ： 消息是通信中的基本单位，它包含了要传输的信息内容。消息可以是话音、文字、图像、视频等形式，即任何有意义的信息序列。在网络通信中，消息通常指代封装了一定语义内容的数据包，它可能包含了控制信息、用户数据等。</li>
+<li><strong>数据 (Data)</strong> ： 数据是运送消息的实体，是有意义的符号序列。在计算机和通信系统中，数据通常指代以二进制形式存在的信息，例如，”11001001001100111101011011001110” 就是一个数据序列的例子。数据可以是数字、字符、指令等，它们在传输过程中需要被编码和解码。</li>
+<li><strong>信号 (Signal)</strong> ： 信号是数据的电气或电磁的表现。在通信过程中，数据需要通过某种形式的信号来传输。信号可以是模拟信号，其中代表消息的参数取值是连续的；也可以是数字信号，其参数取值是离散的。信号通过传输媒介（如电缆、无线电波、光纤等）传播。</li>
+<li><strong>码元 (Bit)</strong> ： 码元是数字通信中 代表不同离散数值的基本信号单位。在使用时间域（时域）的波形表示数字信号时，一个码元通常对应一个特定的电压或电流状态，代表二进制数中的0或1。码元是构成数字信号的基本元素，多个码元的组合形成了可以传输复杂信息的数字数据流。</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/26/66534067a1f86.png"></p>
+<h3 id="编码方式"><a href="#编码方式" class="headerlink" title="编码方式"></a>编码方式</h3><p>编码方式是数字信号的电气或电磁表现，主要有以下几种：</p>
+<ol>
+<li><strong>不归零制</strong>：正电平代表1，负电平代表0。</li>
+<li><strong>归零制</strong>：正脉冲代表1，负脉冲代表0。</li>
+<li><strong>曼彻斯特编码</strong>：位周期中心的跳变代表0或1（可逆）。</li>
+<li><strong>差分曼彻斯特编码</strong>：位中心跳变表示数据变化，边界跳变表示数据位。<ul>
+<li>曼彻斯特编码和差分曼彻斯特编码产生的信号频率比不归零制高。</li>
+<li>不归零制不能从信号波形本身中提取信号时钟频率（这叫做没有自同步能力）。</li>
+<li>曼彻斯特编码和差分曼彻斯特编码具有自同步能力。</li>
+</ul>
+</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/30/66589b0082fc9.png"></p>
+<p>每种编码方式在信号频率和自同步能力上有所不同。</p>
+<p>基带信号是原始信号，它包含了从信号源直接得到的频率成分，通常这些频率较低，甚至包含直流成分。然而，并非所有信道都能够有效地传输这些低频或直流分量。因此，需要通过调制过程来适应信道的特性，以确保信号能够被有效地传输。</p>
+<p>调制是将基带信号转换为适合在信道中传输的形式的过程。以下是几种基本的调制方法：</p>
+<ol>
+<li><strong>调幅 (AM - Amplitude Modulation)</strong> ：<ul>
+<li>在调幅中，载波的振幅根据基带数字信号的变化而变化。</li>
+<li>调制后的信号包含基带信号的信息，通过改变载波的振幅来表示。</li>
+</ul>
+</li>
+<li><strong>调频 (FM - Frequency Modulation)</strong> ：<ul>
+<li>在调频中，载波的频率随着基带数字信号的变化而变化。</li>
+<li>调制后的信号频率反映了基带信号的变化。</li>
+</ul>
+</li>
+<li><strong>调相 (PM - Phase Modulation)</strong> ：<ul>
+<li>在调相中，载波的初始相位随着基带数字信号的变化而变化。</li>
+<li>调制后的信号的相位变化携带了基带信号的信息。</li>
+</ul>
+</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/30/66589fd28ea31.png"></p>
+<p>调制的目的是将基带信号的频率范围搬移到适合信道传输的频段，并且转换成模拟信号，以便于在各种通信信道中有效传播。通过调制，可以克服基带信号直接传输时的限制，如频率成分过低或包含直流分量等问题。</p>
+<h3 id="信道基本概念"><a href="#信道基本概念" class="headerlink" title="信道基本概念"></a>信道基本概念</h3><p>信道是信息传输的媒体，通信方式可以分为：</p>
+<ol>
+<li><strong>单工通信</strong>：只有一个方向的通信。</li>
+<li><strong>半双工通信</strong>：双方可发送信息，但不能同时进行。</li>
+<li><strong>全双工通信</strong>：双方可同时发送和接收信息。</li>
+</ol>
+<p>信号类型分为：</p>
+<ol>
+<li><strong>基带信号</strong>：原始信号，包含低频成分。</li>
+<li><strong>带通信号</strong>：基带信号调制到更高频率的信号。</li>
+</ol>
+<h3 id="信道极限容量"><a href="#信道极限容量" class="headerlink" title="信道极限容量"></a>信道极限容量</h3><p>信道的传输速率受到多种因素的限制，包括信道能够通过的频率范围和信噪比：</p>
+<ol>
+<li><p><strong>奈氏准则</strong>：带宽W（Hz）的信道最高传输速率为2W码元/秒。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/30/6658a0198d14a.png"></p>
+</li>
+<li><p><strong>信噪比</strong>：信号与噪声功率的比值，影响信号的清晰度。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/30/6658a03649cd8.png"></p>
+</li>
+<li><p><strong>香农公式</strong>：极限信息传输速率C = W log2(1+S/N) bit/s，其中W是带宽，S是信号功率，N是噪声功率。</p>
+</li>
+<li><p><strong>极限信息传输速率：</strong>其中W为信道的带宽 (Hz)；S为信道内所传信号的平均功率；N为信道内部的高斯噪声功率。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/30/6658a0684f987.png"></p>
+</li>
+</ol>
+<ul>
+<li><strong>注意：</strong>奈氏准则强调了在无噪声条件下，通过提高编码效率来增加传输速率的可能性；而香农公式则提醒我们，在实际应用中，信道的噪声限制了传输速率的最大值，这是工程师在设计通信系统时必须考虑的物理限制。</li>
+</ul>
+<h3 id="信道复用技术"><a href="#信道复用技术" class="headerlink" title="信道复用技术"></a>信道复用技术</h3><p>信道复用技术允许多个用户共享同一个通信信道，从而提高信道的传输效率和利用率。</p>
+<h4 id="频分复用-FDM"><a href="#频分复用-FDM" class="headerlink" title="频分复用 (FDM)"></a>频分复用 (FDM)</h4><ul>
+<li><strong>概念</strong>：将整个信道的带宽划分为多个子频带，每个子频带分配给一个用户或通信链路。</li>
+<li><strong>特点</strong>：所有用户在同样的时间占用不同的带宽资源。</li>
+<li><strong>应用</strong>：传统的模拟通信系统，如电话网络。</li>
+<li><strong>频分多址接入FDMA：</strong>N个用户或者多个使用一个或多个宽带。</li>
+</ul>
+<h4 id="时分复用-TDM"><a href="#时分复用-TDM" class="headerlink" title="时分复用 (TDM)"></a>时分复用 (TDM)</h4><ul>
+<li><strong>概念</strong>：将时间划分为一段段等长的时分复用帧（TDM帧），每个用户在每个TDM帧中占用固定序号的时隙。</li>
+<li><strong>特点</strong>：每个用户所占用的时隙是周期性出现的，所有用户在不同时间占用同样的频带宽度，时分复用可能会导致信道利用率不高，因为如果用户暂无数据，可能会导致该时隙处于空闲状态。</li>
+<li><strong>应用</strong>：数字通信系统，如电话交换和某些类型的网络。</li>
+<li><strong>时分多址接入TDMA：</strong>N个用户或者多个使用一个或多个间隙。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/26/6653492a1d615.png" alt="时分复用"></p>
+<h4 id="波分复用-WDM"><a href="#波分复用-WDM" class="headerlink" title="波分复用 (WDM)"></a>波分复用 (WDM)</h4><ul>
+<li><strong>概念</strong>：在光通信中，使用一根光纤来同时传输多个不同波长的光信号。</li>
+<li><strong>特点</strong>：每个波长的信号可以看作是使用了一个独立的“虚拟”光纤。</li>
+<li><strong>应用</strong>：现代光纤通信网络，大幅提升光纤的传输容量。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/26/665349e331492.png" alt="波分复用"></p>
+<ul>
+<li>复用器：将多个输入信号合并成一个单一的输出信号，以便在单一的传输媒介（如电缆、光纤等）上进行传输。这是通过按顺序分配每个输入信号到输出信号的不同时间段或频率槽来实现的。</li>
+<li>分用器：将接收到的复合信号分解回多个原始的独立信号。这样，每个用户或设备可以接收到属于自己的那一部分信号。</li>
+</ul>
+<h4 id="码分复用-CDMA"><a href="#码分复用-CDMA" class="headerlink" title="码分复用 (CDMA)"></a>码分复用 (CDMA)</h4><ul>
+<li><p><strong>概念</strong>：每个用户可以在同样的时间使用同样的频带进行通信，但使用不同的码型，因此不会造成干扰。</p>
+</li>
+<li><p><strong>特点</strong>：用户数据通过唯一的码片序列进行编码，接收端通过匹配的码片序列进行解码。</p>
+</li>
+<li><p><strong>应用</strong>：蜂窝移动通信网络，如3G和4G。</p>
+</li>
+<li><p><strong>原理：</strong>允许多个用户在同一时间和同一频率带宽上进行通信，而不会互相干扰。CDMA的工作原理基于独特的码片序列为每个用户站分配一个唯一的标识，这些码片序列在数学上是正交的。</p>
+<ol>
+<li><strong>码片序列分配</strong>：<ul>
+<li>每个站被分配一个独特的m位码片序列，这个序列对于每个站都是唯一的。</li>
+</ul>
+</li>
+<li><strong>比特与码片的关系</strong>：<ul>
+<li>发送比特“1”时，发送站发送自己的m位码片序列。</li>
+<li>发送比特“0”时，发送站发送该码片序列的二进制反码。</li>
+</ul>
+</li>
+<li><strong>扩频技术</strong>：<ul>
+<li>CDMA使用扩频技术，将原始数据信号的频带宽度扩展到原来的m倍。</li>
+<li>实际发送的数据率变为原始数据率的m倍（𝑚𝑏<em>mb</em> bit/s）。</li>
+</ul>
+</li>
+<li><strong>正交性</strong>：<ul>
+<li>分配给不同站的码片序列必须互相正交，即它们的规格化内积（点积）为零，这保证了信号之间的正交性，减少了干扰。</li>
+</ul>
+</li>
+<li><strong>信号的发送与接收</strong>：<ul>
+<li>在发送端，每个站发送自己的码片序列或其反码，表示数据比特。</li>
+<li>在接收端，使用与发送站相同的码片序列，通过计算规格化内积来检测和解调原始的比特。</li>
+</ul>
+</li>
+<li><strong>扩频的两大类</strong>：<ul>
+<li>直接序列扩频（DSSS）：通过将数据信号与伪随机噪声序列（码片序列）相乘来实现扩频。</li>
+<li>跳频扩频（FHSS）：通过快速在不同频率间切换来实现扩频。</li>
+</ul>
+</li>
+<li><strong>CDMA的特点</strong>：<ul>
+<li>码片序列的正交性使得多个用户可以同时使用相同的频段进行通信，而不会产生相互干扰。</li>
+<li>每个站的码片向量与自己的码片向量的规格化内积是1，而与反码的规格化内积是-1。</li>
+</ul>
+</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/31/6658a9d6c29c1.png" alt="CDMA"></p>
+<p>有点难懂，举个栗子：</p>
+<p>我们在一个很大的房间里，里面有很多人在同时说话。为了让每个人都能听到自己想要听的人说话，而不被其他人的谈话声干扰，我们可以给每个人分配一个独特的耳语方式。这个耳语方式就像是CDMA中的“码片序列”，是一组只有你和说话者才知道的秘密信号。</p>
+<ol>
+<li><strong>分配秘密信号</strong>：首先，我们给房间里的每个人一个专属的耳语方式，这个耳语方式是一组特定的“信号”。</li>
+<li><strong>说话时使用秘密信号</strong>：当我想传信息给你时，我会用这个秘密信号来“耳语”。如果我想说“是”，我就用这个秘密信号；如果我想说“不”，我就用它的相反信号。</li>
+<li><strong>声音扩散</strong>：当我耳语时，声音会在整个房间里扩散开来，但是因为只有你知道这个秘密信号，所以只有你能听到我说的话。</li>
+<li><strong>保持私密</strong>：因为每个人的耳语方式都是独一无二的，所以即使房间里有很多人在同时说话，你也只会听到用你的专属耳语方式传来的声音，其他人的谈话声不会干扰到你。</li>
+<li><strong>两种耳语技巧</strong>：有两种主要的耳语技巧，一种是“直接序列扩频”，就像我不断地改变声音的音调来耳语；另一种是“跳频扩频”，就像我在耳语时快速地在不同的音调之间跳转。</li>
+<li><strong>确保每个人都听得清楚</strong>：我们确保每个人的耳语方式都是特别的，这样即使有很多人在说话，你也能找到那个专属于你的耳语声音。</li>
+<li><strong>接收信息</strong>：当你想听到我说的话时，你会用你的耳朵去捕捉那个专属于你的耳语声音，其他的耳语声对你来说就像是背景噪音，不会干扰到你。</li>
+</ol>
+<p>所以，CDMA就像是一个高级的耳语派对，每个人都可以用自己的秘密方式来说话，而不会影响其他人的对话。这样，即使在一个非常繁忙的通信环境中，也能保持通信的清晰和私密。</p>
+</li>
+</ul>
+<h4 id="统计时分复用-STDM"><a href="#统计时分复用-STDM" class="headerlink" title="统计时分复用 (STDM)"></a>统计时分复用 (STDM)</h4><ul>
+<li><strong>概念</strong>：时分复用帧不是固定分配时隙，而是按需动态地分配时隙，适应不同用户的实际通信需求。</li>
+<li><strong>特点</strong>：可以提高线路的利用率，尤其在用户通信需求不均匀时更为有效。</li>
+<li><strong>应用</strong>：数据网络和某些类型的语音网络，可以更灵活地分配带宽。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/26/6653490d3ef3d.png" alt="统计时分复用"></p>
+<p>这些复用技术各有优势和适用场景，选择合适的复用技术取决于通信系统的具体需求和特性。例如，FDM适用于频带较宽且用户数较少的场景，而TDM和STDM适用于用户数较多且通信需求相对均衡的场景。WDM和CDMA则分别适用于光通信和移动通信等现代通信系统。</p>
+<h3 id="传输媒体"><a href="#传输媒体" class="headerlink" title="传输媒体"></a>传输媒体</h3><p>传输介质是数据传输系统中在发送器和接收器之间的物理通路，分为两大类：导引型传输媒体和非导引型传输媒体。</p>
+<h4 id="导引型"><a href="#导引型" class="headerlink" title="导引型"></a>导引型</h4><p>导引型传输媒体指电磁波沿固体媒介（如铜线或光纤）被导向传播的媒体。</p>
+<ol>
+<li><p><strong>双绞线</strong></p>
+<ul>
+<li>最古老但又最常用的传输媒体。</li>
+<li>由两根互相绝缘的铜导线并排放在一起，然后用规则的方法绞合起来构成。</li>
+<li>绞合度越高，可用的数据传输率越高。</li>
+<li>分为两大类：<ul>
+<li>无屏蔽双绞线（UTP）: 无屏蔽层，价格较便宜。</li>
+<li>屏蔽双绞线（STP）: 带屏蔽层，必须有接地线。<ul>
+<li><strong>x/UTP</strong>：表示对整条双绞线电缆进行屏蔽，但具体屏蔽材料未指定。</li>
+<li><strong>F/UTP</strong> (Foiled UTP)：表明电缆采用铝箔屏蔽层，提供基本的电磁干扰(EMI)防护。</li>
+<li><strong>S/UTP</strong> (Braid Screen UTP)：表明电缆采用金属编织层进行屏蔽，提供更高级别的EMI防护。</li>
+<li><strong>SF/UTP</strong>：结合了铝箔屏蔽层和金属编织层屏蔽，提供更高级别的屏蔽效果。</li>
+<li><strong>FTP</strong> 或 <strong>U/FTP</strong> (Unshielded FTP)：把电缆中的每一对双绞线都加上铝箔屏蔽层；”U”表示对整条电缆不另增加屏蔽层，即外层没有额外的屏蔽。</li>
+<li><strong>F/FTP</strong>：在每对双绞线的铝箔屏蔽基础上，对整条电缆再加上一层铝箔屏蔽，提供更全面的防护。</li>
+<li><strong>S/FTP</strong>：在每对双绞线的铝箔屏蔽基础上，对整条电缆再加上金属编织层屏蔽，提供最高级别的屏蔽效果。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>同轴电缆</strong></p>
+<ul>
+<li>由内导体铜质芯线、绝缘层、网状编织的外导体屏蔽层及保护塑料外层组成。</li>
+<li>具有很好的抗干扰特性，被广泛用于传输较高速率的数据。</li>
+<li>分为基带同轴电缆和宽带同轴电缆。</li>
+</ul>
+</li>
+<li><p><strong>光纤</strong></p>
+<ul>
+<li><p>光纤通信通过传递光脉冲来进行通信，具有非常大的传输带宽。</p>
+</li>
+<li><p>发送端需要有光源，如发光二极管或半导体激光器。</p>
+</li>
+<li><p>接收端需要有光检测器，如光电二极管。</p>
+</li>
+<li><p>光纤由非常透明的石英玻璃拉成细丝，主要由纤芯和包层构成。</p>
+</li>
+<li><p>分为单模光纤和多模光纤：</p>
+<ul>
+<li>单模光纤：直径小，适合远距离传输，制造成本高。</li>
+<li>多模光纤：可存在多条不同角度入射的光线，适合近距离传输。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/31/6658a351bcfe8.png"></p>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="非导引型传输媒体"><a href="#非导引型传输媒体" class="headerlink" title="非导引型传输媒体"></a>非导引型传输媒体</h4><p>非导引型传输媒体指的是在自由空间中传播的电磁波，这种传输方式通常被称为无线传输。</p>
+<ul>
+<li><p><strong>无线电微波</strong>：</p>
+<ul>
+<li>具有强大的穿透能力，能够传播远距离，广泛应用于各种通信领域，例如手机通信。无线电波在空间中主要沿直线传播。</li>
+</ul>
+<ul>
+<li>占有特殊重要的地位，频率范围在300 MHz到300 GHz（波长从1米到1毫米）。</li>
+<li>主要使用的频率范围是2 GHz到40 GHz。</li>
+<li>在空间中直线传播，地球表面的传播距离受到限制，一般约为50公里左右。</li>
+<li>使用100米高的天线塔，传播距离可以增大到100公里。</li>
+<li>微波通信可能会受到多径效应的影响，即基站发出的信号经过多个障碍物反射，沿多条路径按不同时间到达接收方，导致信号叠加后产生失真。</li>
+<li>误码率与信噪比、调制方式和数据率有关。信噪比越大，误码率越低；对于相同的信噪比，数据率越高的调制技术误码率也越高。用户的地理位置变化会引起信道特性改变，从而影响信噪比和误码率。</li>
+</ul>
+</li>
+<li><p><strong>卫星通信</strong>：</p>
+<ul>
+<li>具有大通信容量和远距离通信能力，通信比较稳定，通信费用与通信距离无关。</li>
+<li>存在较大的传播时延，大约在250到300毫秒之间。但需注意，卫星信道的传播时延较大，并不意味着使用卫星信道传送数据的时延也一定较大（意思就是其他的比如处理时延，排队时延等能优化到很小，最后加起来并不一定大）。</li>
+<li>保密性相对较差，造价较高。</li>
+<li>低轨道卫星通信系统（卫星高度在2000公里以下）已经开始使用，大功率、大容量、低轨道宽带卫星正在空间部署，构成高速空间链路。</li>
+</ul>
+</li>
+<li><p><strong>红外线和激光</strong>：</p>
+<ul>
+<li>将信号转换为红外线或激光信号，在空间中沿固定方向传播。</li>
+<li>通常用于短距离无线通信，如无线局域网(WLAN)中的红外通信。</li>
+</ul>
+</li>
+</ul>
+<h2 id="第三章：数据链路层"><a href="#第三章：数据链路层" class="headerlink" title="第三章：数据链路层"></a>第三章：数据链路层</h2><h3 id="数据链路层地位与作用"><a href="#数据链路层地位与作用" class="headerlink" title="数据链路层地位与作用"></a>数据链路层地位与作用</h3><p>数据链路层在网络体系结构中扮演着至关重要的角色。无论是局域网中的主机、交换机，还是广域网中的路由器，都必须实现数据链路层。它负责在相邻网络设备之间传输帧，确保数据的准确传递，不同链路层可能采用不同的数据链路层协议</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/01/6659f7d4b229c.png" alt="数据链路层"></p>
+<ol>
+<li>点对点信道：使用一对一的点对点通信方式</li>
+<li>广播信道：使用一对多的<strong>广播通信</strong>方式，必须使用专用的共享信道协议来协调这些主机的数据发送。</li>
+</ol>
+<h3 id="数据链路与帧"><a href="#数据链路与帧" class="headerlink" title="数据链路与帧"></a>数据链路与帧</h3><p>数据链路层将比特流封装成帧。帧是数据链路层传输的数据单位，包含数据和必要的控制信息。帧的首部和尾部用于帧定界，即确定帧的界限。最大传送单元MTU规定了所能传送的帧的数据部分长度上限。</p>
+<h3 id="数据链路与帧-1"><a href="#数据链路与帧-1" class="headerlink" title="数据链路与帧"></a>数据链路与帧</h3><h4 id="链路（Link）"><a href="#链路（Link）" class="headerlink" title="链路（Link）"></a>链路（Link）</h4><ul>
+<li><strong>定义</strong>：链路是一条无源的点到点的物理线路段，中间没有任何其他的交换结点。它只是一条通路的一个组成部分，有时也被称为物理链路。</li>
+<li><strong>功能</strong>：链路负责在网络设备之间提供一条物理通道，使数据能够从一个节点传输到另一个节点。</li>
+</ul>
+<h4 id="数据链路（Data-Link）"><a href="#数据链路（Data-Link）" class="headerlink" title="数据链路（Data Link）"></a>数据链路（Data Link）</h4><ul>
+<li><strong>定义</strong>：数据链路是在链路的基础上，通过硬件和软件实现控制数据传输的协议，从而构成的逻辑链路。</li>
+<li><strong>组成</strong>：数据链路层通常由适配器（即网卡）来实现，它负责在物理链路上按照协议规定的方式传输数据。</li>
+<li><strong>功能</strong>：数据链路层确保物理链路上的数据能够有序、可靠地传输，它还负责处理帧的封装、透明传输、差错控制等任务。</li>
+</ul>
+<h4 id="帧（Frame）"><a href="#帧（Frame）" class="headerlink" title="帧（Frame）"></a>帧（Frame）</h4><ul>
+<li><strong>定义</strong>：帧是数据链路层传输的数据单位。它由数据和必要的控制信息组成，用于在网络中的设备之间传输数据。</li>
+<li><strong>结构</strong>：一个典型的帧结构包括首部、数据部分和尾部（有时称为帧定界符）。<ul>
+<li><strong>首部</strong>：包含了帧的起始信息，可能包括同步信息、地址信息等。</li>
+<li><strong>数据部分</strong>：承载实际要传输的数据。</li>
+<li><strong>尾部</strong>：标记帧的结束，并可能包含错误检测或纠正信息，如循环冗余检验（CRC）。</li>
+</ul>
+</li>
+<li><strong>帧定界</strong>：帧的首部和尾部的一个主要作用是进行帧定界，即确定帧的开始和结束，这样接收方就可以正确地识别和处理收到的数据。</li>
+<li><strong>最大传送单元（MTU）</strong> ：MTU规定了数据链路层所能传送的帧的数据部分的最大长度。超过MTU的大数据需要在传输前进行分片处理。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/01/6659f9ac236fa.png" alt="点对点信道的数据链路层"></p>
+<h4 id="三个基本问题"><a href="#三个基本问题" class="headerlink" title="三个基本问题"></a>三个基本问题</h4><p>数据链路层的三个基本问题是封装成帧、透明传输和差错控制。</p>
+<ol>
+<li><p>封装成帧 (Framing)</p>
+<p>封装成帧是在一段数据的前后分别添加首部和尾部，构成一个帧的过程。这样做的主要目的是：</p>
+<ul>
+<li><strong>帧定界</strong>：确定帧的开始和结束位置，使得接收方能够识别出完整的帧。</li>
+<li><strong>最大传送单元 (MTU)</strong> ：规定了所能传送的帧的数据部分长度上限，确保数据帧在网络中传输时不会超出网络的最大承载能力。</li>
+</ul>
+</li>
+<li><p>透明传输</p>
+<p>透明传输指的是数据链路层能够传输所有类型的数据，包括那些可能与帧定界符或控制字符相同的数据。问题在于，如果数据中包含与帧定界符相同的比特组合，接收方可能会错误地识别帧边界，导致数据传输出错。为解决这个问题，数据链路层采用以下技术：</p>
+<ul>
+<li><strong>字节填充</strong>：在数据中每个特定的字符前插入一个转义字符，以避免与帧定界符冲突。</li>
+<li><strong>字符填充</strong>：与字节填充类似，但在数据中插入特定的填充字符，以保证数据的透明性。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/01/6659fadb10f70.png"></p>
+</li>
+<li><p>差错控制 (Error Control) </p>
+<p><strong>误码率 BER (Bit Error Rate)：</strong>在一段时间内，传输错误的比特占所传输比特总数的比率。</p>
+<p>差错控制是确保数据传输可靠性的机制。在数据传输过程中，可能会因为各种因素（如噪声、干扰等）导致比特差错。差错控制的主要方法包括：</p>
+<ul>
+<li><strong>循环冗余检验 (CRC)</strong> ：一种常用的检错方法，通过在数据后面添加冗余码（帧检验序列FCS）来检测帧中的差错。</li>
+<li><strong>差错检测</strong>：通过特定的算法（如CRC）来检测数据中的错误。</li>
+<li><strong>错误恢复</strong>：在检测到错误后，采取相应的措施来恢复数据，如请求重传等。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/01/6659fb9b90ccf.png"></p>
+<ul>
+<li><p>冗余码的计算：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/01/6659fd220b7fb.png"></p>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>可靠传输：</strong>数据链路层的发送端发送什么，在接收端就收到什么。</p>
+<p>传输差错可分为两大类： </p>
+<ul>
+<li>比特差错； </li>
+<li>传输差错：帧丢失、帧重复或帧失序等。</li>
+</ul>
+<p>在数据链路层使用 CRC 检验，能够实现无比特差错的传输，但这还不是可靠传输，要做到可靠传输，还必须再加上帧编号、确认和重传等机制。 </p>
+<h3 id="点对点协议-PPP"><a href="#点对点协议-PPP" class="headerlink" title="点对点协议 PPP"></a>点对点协议 PPP</h3><p>点对点协议（PPP）是一种数据链路层通信协议，用于在两个网络实体间建立、配置和测试数据链路连接。</p>
+<h4 id="PPP协议的特点："><a href="#PPP协议的特点：" class="headerlink" title="PPP协议的特点："></a>PPP协议的特点：</h4><ol>
+<li><strong>简单性</strong>：PPP的设计简单，易于实现。</li>
+<li><strong>封装成帧</strong>：PPP能够将网络层的数据封装成帧，以便在数据链路层传输。</li>
+<li><strong>透明性</strong>：PPP保证了数据传输的透明性，即数据中的特殊字符不会被误解为控制信息。</li>
+<li><strong>多种网络层协议</strong>：PPP可以在一条物理链路上支持多种网络层协议。</li>
+<li><strong>多种类型链路</strong>：PPP能在多种类型的链路上运行，包括串行和并行链路。</li>
+<li><strong>差错检测</strong>：PPP具备强大的差错检测能力，能够检测接收端收到的帧是否有差错，并丢弃有差错的帧。</li>
+<li><strong>检测连接状态</strong>：PPP能够自动检测链路是否处于正常工作状态。</li>
+<li><strong>最大传送单元（MTU）</strong>：PPP为每种类型的点对点链路设置了MTU的标准默认值，以促进不同实现之间的互操作性。</li>
+<li><strong>网络层地址协商</strong>：PPP提供了一种机制，使得通信的两个网络层实体能够协商或配置彼此的网络层地址。</li>
+<li><strong>数据压缩协商</strong>：PPP允许双方协商使用数据压缩算法，以提高传输效率。</li>
+</ol>
+<h4 id="PPP协议的组成："><a href="#PPP协议的组成：" class="headerlink" title="PPP协议的组成："></a>PPP协议的组成：</h4><p>PPP由以下三个主要部分组成：</p>
+<ol>
+<li><strong>封装IP数据报的方法</strong>：PPP定义了如何将IP数据报封装在串行链路帧中。</li>
+<li><strong>链路控制协议（LCP）</strong>：LCP负责建立、配置和测试数据链路连接。它还处理数据链路层的认证和加密。</li>
+<li><strong>网络控制协议（NCP）</strong>：NCP用于在两个网络层实体间建立和配置网络层协议的参数。</li>
+</ol>
+<h4 id="PPP协议的帧格式："><a href="#PPP协议的帧格式：" class="headerlink" title="PPP协议的帧格式："></a>PPP协议的帧格式：</h4><p>PPP帧包含以下几个关键字段：</p>
+<ul>
+<li><strong>标志字段</strong>：用于标识PPP帧的开始和结束，通常为01111110。</li>
+<li><strong>地址字段</strong>：通常设置为0xFF，表示帧发往所有设备。</li>
+<li><strong>控制字段</strong>：通常设置为0x03，表示无编号信息。</li>
+<li><strong>协议字段</strong>：指示信息字段中包含的数据类型。</li>
+<li><strong>信息字段</strong>：包含实际传输的数据，长度可变。</li>
+<li><strong>帧检验序列（FCS）</strong>：用于检测帧在传输过程中是否出现错误。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/01/665a00145eea9.png" alt="帧格式"></p>
+<h4 id="透明传输问题："><a href="#透明传输问题：" class="headerlink" title="透明传输问题："></a>透明传输问题：</h4><p>PPP使用两种方法来解决透明传输问题，即避免数据中的特殊字符被误认为是帧的边界：</p>
+<ul>
+<li><strong>字节填充法</strong>：用于异步传输，通过在特殊字符前填充特殊字节来避免混淆。</li>
+<li><strong>零比特填充法</strong>：用于同步传输，通过在发送数据中连续的1后面添加0来避免混淆。</li>
+</ul>
+<h4 id="PPP协议的工作状态："><a href="#PPP协议的工作状态：" class="headerlink" title="PPP协议的工作状态："></a>PPP协议的工作状态：</h4><p>PPP链路的建立和维护包括以下状态：</p>
+<ol>
+<li>物理层连接建立。</li>
+<li>LCP配置协商，以建立链路。</li>
+<li>鉴别过程，可选。</li>
+<li>NCP配置协商，用于分配网络层参数，如IP地址。</li>
+<li>链路维护，包括错误检测和链路状态监控。</li>
+<li>链路终止，包括释放连接和资源。</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/01/665a00bfc80b6.png" alt="PPP协议状态图"></p>
+<h3 id="局域网数据链路层"><a href="#局域网数据链路层" class="headerlink" title="局域网数据链路层"></a>局域网数据链路层</h3><p>局域网的数据链路层具有广播功能，便于系统扩展和演变，提高了系统的可靠性、可用性和生存性。局域网的数据链路层分为LLC子层和MAC子层，其中MAC子层负责控制对媒体的访问。</p>
+<p>局域网（LAN）的主要特点和优点如下：</p>
+<h4 id="主要特点："><a href="#主要特点：" class="headerlink" title="主要特点："></a>主要特点：</h4><ol>
+<li><strong>单位所有</strong> ：网络资产归属于单一组织或单位。</li>
+<li><strong>地理范围有限</strong> ：覆盖的地理区域相对较小。</li>
+<li><strong>站点数目有限</strong> ：网络连接的设备数量较少。</li>
+</ol>
+<h4 id="主要优点："><a href="#主要优点：" class="headerlink" title="主要优点："></a>主要优点：</h4><ol>
+<li><strong>广播功能</strong>：便于从一个站点访问全网。</li>
+<li><strong>扩展性</strong>：系统易于扩展和演变。</li>
+<li><strong>灵活性</strong>：设备位置可灵活调整和改变。</li>
+<li><strong>可靠性</strong>：提高了系统的可靠性。</li>
+<li><strong>可用性</strong>：提高了系统的可用性。</li>
+<li><strong>生存性</strong>：提高了系统的生存性。</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/01/665b3b6e650cb.png" alt="三种类型局域网"></p>
+<h4 id="发现问题："><a href="#发现问题：" class="headerlink" title="发现问题："></a>发现问题：</h4><p>由于共享信道，若多个设备在信道上同时发送数据，则会造成彼此干扰，导致发送失败，于是我们研究出了频分复用，时分复用，波分复用，码分复用，并且还有动态媒体接入控制，动态媒体接入控制（Dynamic Media Access Control, DMAC）是局域网中用于管理多个设备如何访问共享传输媒体的一组技术。</p>
+<ol>
+<li>随机接入：<ul>
+<li><strong>所有用户均可发送</strong>：在随机接入方法中，网络上的所有用户都可以随时发送数据。</li>
+<li><strong>无中心控制</strong>：没有中心控制系统来调度数据的发送，用户自主决定何时发送数据。</li>
+<li><strong>适用场景</strong>：适用于用户数量较少或者数据传输需求不高的环境。</li>
+</ul>
+</li>
+<li>受控接入：<ul>
+<li><strong>轮询（Polling）</strong>：在受控接入中，一个中心控制系统（如集线器或交换机）按照特定的顺序逐个询问每个用户设备是否需要发送数据。</li>
+<li><strong>有序访问</strong>：通过轮询，网络中的设备按照既定顺序获得发送数据的机会，从而控制数据传输的顺序。</li>
+<li><strong>减少冲突</strong>：这种方法可以减少数据发送时的冲突和碰撞，提高网络的效率。</li>
+<li><strong>适用场景</strong>：适用于用户数量较多或对网络访问有特定要求的环境。</li>
+</ul>
+</li>
+</ol>
+<p>这两种方法各有优势和局限性，选择哪种方法取决于网络的具体需求和环境。在实际应用中，还有其他的DMAC技术，如CSMA/CD（Carrier Sense Multiple Access with Collision Detection）等，它们结合了随机和受控接入的特点，以适应不同的网络条件和性能要求，下面会讲到。</p>
+<h4 id="数据链路层分层"><a href="#数据链路层分层" class="headerlink" title="数据链路层分层"></a>数据链路层分层</h4><ol>
+<li><strong>逻辑链路控制（LLC）子层：</strong><ul>
+<li><strong>功能</strong>：LLC子层主要负责管理和控制网络层与数据链路层之间的通信。它提供逻辑通信和错误控制机制。</li>
+<li><strong>与传输媒体无关</strong>：LLC子层的设计独立于传输媒体的类型，这意味着它不关心数据是如何在物理媒介上传输的。</li>
+<li><strong>服务接口</strong>：LLC子层为网络层提供统一的服务接口，使得网络层不必关心下层的具体实现细节。</li>
+<li><strong>不可见性</strong>：LLC子层对于网络层来说是透明的，即网络层看不到LLC子层的具体操作。</li>
+</ul>
+</li>
+<li><strong>媒体接入控制（MAC）子层：</strong><ul>
+<li><strong>功能</strong>：MAC子层负责控制对共享传输媒体的访问。它管理数据帧如何在物理媒介上发送和接收。</li>
+<li><strong>与传输媒体有关</strong>：MAC子层的设计和实现依赖于传输媒体的特性，如电缆类型、信号传输方式等。</li>
+<li><strong>地址管理</strong>：MAC子层处理物理地址，即MAC地址，用于在局域网内标识和寻址网络设备。</li>
+<li><strong>冲突控制</strong>：在共享媒体的环境中，MAC子层还负责冲突检测和解决，如在以太网中使用的CSMA/CD协议。</li>
+</ul>
+</li>
+</ol>
+<h4 id="适配器"><a href="#适配器" class="headerlink" title="适配器"></a>适配器</h4><ol>
+<li><strong>串行/并行转换</strong>：适配器在计算机和网络之间转换数据流的传输方式。由于计算机内部总线通常工作于并行模式，而局域网传输通常是串行的，适配器负责在这两者之间转换数据。</li>
+<li><strong>数据缓存</strong>：适配器提供缓存区（Buffer），用于暂存即将发送到局域网的数据或刚从局域网接收到的数据。这有助于协调数据传输速度和处理时间差异。</li>
+<li><strong>硬件寻址</strong>：适配器拥有自己的物理地址，即MAC地址。这个地址用于在局域网内标识设备，并使得适配器能够正确地发送和接收帧。</li>
+<li><strong>实现以太网协议</strong>：适配器硬件或固件中实现了数据链路层的以太网协议，包括帧的封装、透明传输、差错检测等功能。</li>
+<li><strong>接口操作系统</strong>：适配器允许操作系统通过设备驱动程序与其交互，驱动程序提供了一套标准化的接口供操作系统调用，以控制网络适配器的行为。</li>
+<li><strong>数据链路层功能</strong>：适配器执行数据链路层的大部分功能，包括帧的构建与解析、错误检测与报告等。</li>
+<li><strong>媒体访问控制</strong>：在共享媒体的局域网中，适配器参与媒体访问控制机制（如CSMA/CD），以确保数据能够高效且无冲突地传输。</li>
+<li><strong>适配不同网络技术</strong>：适配器使得计算机能够适应不同类型的网络技术，如以太网、令牌环网等，只要安装相应的适配器即可。</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/01/665b42b3134ac.png" alt="适配器"></p>
+<h3 id="CSMA-CD-协议"><a href="#CSMA-CD-协议" class="headerlink" title="CSMA/CD 协议"></a>CSMA/CD 协议</h3><p>CSMA/CD（Carrier Sense Multiple Access with Collision Detection）是局域网中用于控制对共享媒体访问的协议。其工作原理是在发送数据前检测信道是否空闲（载波监听），发送时检测是否有碰撞发生。如果检测到碰撞，发送站会停止发送，并在随机时间后重传数据。</p>
+<p>最早的以太网将计算机连载一根总线上，总线使广播通信非常简单，可靠，但是为了实现一对一通信，将接收站的硬件地址写入帧首部中的目的地址字段中，仅当数据帧中的目的地址与适配器硬件地址一致时，才能接收这个数据帧。这就不可避免多个站点同时发送导致碰撞。下面的方法就是解决碰撞的。</p>
+<p>CSMA/CD协议的要点：</p>
+<ol>
+<li><p><strong>多点接入</strong>：CSMA/CD用于多点接入的网络，即多台计算机通过同一条物理介质（如以太网电缆）连接到网络。</p>
+</li>
+<li><p><strong>边发送边载波监听</strong>：不管在发送数据的过程中或者在发送数据之前，设备必须持续监听媒体，以便检测可能发生的碰撞（即两个或多个设备同时发送数据）。</p>
+</li>
+<li><p><strong>碰撞检测</strong>：如果设备在发送数据时，通过信道上的信号电压变化情况，当电压摆动超过一定门限值时，即为检测到碰撞，它会立即停止发送，并发送一个特殊的碰撞信号，告知网络上的其他设备发生了碰撞。</p>
+</li>
+<li><p><strong>退避算法</strong>：当检测到碰撞后，设备会执行退避算法，即等待一个随机时间间隔后再次尝试发送数据。这个随机时间间隔有助于减少设备再次发生碰撞的概率。</p>
+</li>
+<li><p><strong>截断二进制指数退避</strong>：CSMA/CD使用截断二进制指数退避算法来确定重传所需的延迟时间。如果连续多次发生碰撞，退避时间会指数增长，但有一个上限，下面是计算方法：</p>
+<ul>
+<li>停止发送数据。</li>
+<li>等待一个随机的时间，这个时间是根据基本退避时间和一个随机数决定的。</li>
+<li>基本退避时间是争用期的两倍，即 2×51.22×51.2 μs。</li>
+<li>从0到 2^k−1 的整数集合中随机选择一个数 𝑟，其中𝑘是重传尝试的次数，但𝑘的值不会超过10。</li>
+<li>重传所需的延迟时间是 𝑟 乘以基本退避时间。</li>
+<li>如果一个帧在尝试16次之后仍然发送失败，设备将停止尝试，并通知上层协议。</li>
+</ul>
+</li>
+<li><p><strong>争用期</strong>：争用期是衡量信号在局域网中传播的时间。如果设备在争用期内没有检测到碰撞，那么可以认为发送的数据帧成功，表现为下面的2t，具体的争用期时间 = 51.2 μs。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/01/665b457f0d2f6.png"></p>
+</li>
+<li><p><strong>最大传输单元（MTU）</strong>：CSMA/CD规定了以太网帧的最小长度，以确保即使在最坏的情况下，发送的数据帧也不会因为碰撞而被错误地识别为由碰撞引起的短帧。</p>
+</li>
+<li><p><strong>不适用于高速网络</strong>：随着网络速度的提升，CSMA/CD协议由于其性能限制，不再适用于高速以太网（如千兆以太网和更高速度的网络），这些网络通常使用全双工通信和交换机来避免碰撞。</p>
+</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/01/665b44cb28f34.png" alt="大致流程"></p>
+<h3 id="信道利用率"><a href="#信道利用率" class="headerlink" title="信道利用率"></a>信道利用率</h3><p>多个站在以太网上同时工作就可能会发生碰撞。 当发生碰撞时，信道资源实际上是被浪费了。因此，当扣除碰撞所造成的信道损失后，以太网总的信道利用率并不能达到 100%。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/02/665b4f5964311.png" alt="以太网被占用情况"></p>
+<h4 id="参数a的定义："><a href="#参数a的定义：" class="headerlink" title="参数a的定义："></a>参数a的定义：</h4><ul>
+<li><strong>参数 a</strong>：定义为以太网单程端到端传播时延𝜏与帧的发送时间𝑇0比。</li>
+<li><strong>公式</strong>：a = 𝜏/𝑇0</li>
+</ul>
+<h4 id="提高信道利用率："><a href="#提高信道利用率：" class="headerlink" title="提高信道利用率："></a>提高信道利用率：</h4><ol>
+<li><strong>减小传播时延 𝜏</strong>：传播时延是指信号从发送端到接收端所需的时间，减小这个时间可以减少信道被无效占用的可能性。</li>
+<li><strong>增加帧的发送时间 𝑇0</strong>：帧的发送时间是指成功发送一个帧所需的总时间，增加这个时间（即发送更长的帧）可以减少每次传输的相对时延开销。</li>
+<li><strong>优化网络设计</strong>：通过合理设计网络，比如使用交换机代替集线器，可以减少碰撞域的大小，从而降低碰撞概率，提高信道利用率。</li>
+<li><strong>使用全双工模式</strong>：在全双工模式下，发送和接收可以同时进行，不需要CSMA/CD协议来处理碰撞，从而提高信道利用率。</li>
+<li><strong>限制帧长</strong>：避免过短的帧频繁发送，因为短帧意味着更多的时延开销，会降低信道利用率。</li>
+<li><strong>使用高效的数据传输技术</strong>：例如，使用更高效的编码技术或压缩数据以减少需要传输的数据量，可以提高信道利用率。</li>
+</ol>
+<h4 id="最大值："><a href="#最大值：" class="headerlink" title="最大值："></a>最大值：</h4><ul>
+<li><strong>理想情况</strong>：在理想情况下，如果参数𝑎远小于1，信道利用率可以接近最大值。</li>
+<li><strong>实际情况</strong>：但实际上，由于碰撞和其他网络条件的限制，以太网的信道利用率通常低于理想值。据统计，当以太网的利用率达到30%时，网络已经处于重载状态。</li>
+</ul>
+<h3 id="以太网的-MAC-层"><a href="#以太网的-MAC-层" class="headerlink" title="以太网的 MAC 层"></a>以太网的 MAC 层</h3><p>以太网的MAC层负责控制对媒体的访问，并定义了硬件地址（MAC地址）。MAC地址是全球唯一的，用于标识网络设备。</p>
+<h4 id="MAC层的功能："><a href="#MAC层的功能：" class="headerlink" title="MAC层的功能："></a>MAC层的功能：</h4><ol>
+<li><strong>媒体访问控制</strong>：MAC层负责控制网络设备对共享传输媒体的访问，以避免数据发送时的冲突和碰撞。</li>
+<li><strong>帧的封装与传输</strong>：MAC层将来自上层（如LLC层）的数据封装成帧，然后通过物理层发送到网络上。</li>
+<li><strong>帧的接收与处理</strong>：MAC层还负责接收来自物理层的帧，并进行必要的处理，如错误检测和帧的传递给上层。</li>
+<li><strong>硬件地址管理</strong>：MAC层管理网络设备的硬件地址，即MAC地址。</li>
+</ol>
+<h4 id="MAC物理地址："><a href="#MAC物理地址：" class="headerlink" title="MAC物理地址："></a>MAC物理地址：</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/02/665c911889d97.png"></p>
+<ol>
+<li><strong>全球唯一性</strong>：每个网络设备的MAC地址都是全球唯一的，由IEEE组织负责分配和管理。</li>
+<li><strong>地址结构</strong>：MAC地址是48位的地址，通常表示为6个十六进制数字，每个数字代表8位（一个字节）。</li>
+<li><strong>OUI</strong>：MAC地址的前24位称为组织唯一标识符（OUI），由IEEE分配给不同的厂商。</li>
+<li><strong>扩展标识符</strong>：MAC地址的后24位由厂商自行分配，称为扩展标识符。</li>
+<li><strong>地址分配</strong>：MAC地址被固化在网络设备的适配器（如网卡）的ROM中。</li>
+<li><strong>单站地址与组地址</strong>：MAC地址的第一个字节的最低位称为I/G（Individual/Group）位，用于区分单站地址（I/G位为0）和组地址（I/G位为1），组地址用来多播。</li>
+<li><strong>广播地址</strong>：特殊的MAC地址，所有48位都为1，用于广播通信，只能作为目的地址。</li>
+<li><strong>全球管理与本地管理</strong>：MAC地址的第一个字节的最低第二位称为G/L（Global/Local）位，用于区分全球管理地址（G/L位为0）和本地管理地址（G/L位为1）。</li>
+</ol>
+<h4 id="MAC帧："><a href="#MAC帧：" class="headerlink" title="MAC帧："></a>MAC帧：</h4><p>以太网的MAC层负责帧的接收和过滤。适配器硬件会检查每个传入帧的MAC地址，只接收那些目的地址与本站适配器地址匹配的单播帧、所有设备的广播帧，以及适配器订阅的多播帧。不匹配的帧将被丢弃。混杂模式下，适配器会接收所有网络上的帧，不论其目的地址。</p>
+<ol>
+<li><p><strong>目的地址</strong>：帧首部中的目的地址字段，用于指定接收帧的设备的MAC地址。</p>
+</li>
+<li><p><strong>源地址</strong>：帧首部中的源地址字段，用于标识发送帧的设备的MAC地址。</p>
+</li>
+<li><p><strong>类型字段</strong>：用于指示上层协议类型，以便接收设备可以将其传递给正确的上层协议。</p>
+</li>
+<li><p><strong>数据字段</strong>：MAC 客户数据字段，包含实际传输的数据，最小长度 64 字节 - 18 字节的首部和尾部 = 数据字段的最小长度（46字节） </p>
+</li>
+<li><p><strong>帧检验序列（FCS）</strong>：用于检测帧在传输过程中是否出现错误。</p>
+</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/03/665c9702be8b6.png"></p>
+<p>以太网的MAC帧格式主要有两种标准，分别是DIX Ethernet V2标准和IEEE的802.3标准，最常用的是前者，也就是上面介绍的，以太网的MAC帧需要符合特定规范以保证数据传输的有效性和准确性。有效的MAC帧应满足以下条件：数据字段的实际长度与帧头部的相应字段值相符，确保帧长为整数个字节；帧检验序列（FCS）未检测到错误；数据字段长度介于46到1500字节之间。有效的MAC帧整体长度应在64到1518字节之间。若MAC帧不符合这些规范，将被视为无效并被网络设备丢弃。以太网本身不负责重传这些丢弃的帧，重传机制通常由上层协议如TCP来实现。</p>
+<h4 id="二者区别："><a href="#二者区别：" class="headerlink" title="二者区别："></a>二者区别：</h4><p>DIX Ethernet V2标准和IEEE的802.3标准之间的主要区别在于它们的帧格式中”类型/长度”字段的用途和解释方式，以及对LLC子层的支持。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/03/665c9892ed2d2.png"></p>
+<ol>
+<li>DIX Ethernet V2标准：<ul>
+<li><strong>类型字段</strong>：固定2字节，用于标识上层协议的类型，如IPv4、ARP等。</li>
+<li><strong>数据字段</strong>：长度为46到1500字节，用于传输实际的数据。</li>
+<li><strong>帧检验序列FCS</strong>：4字节，用于错误检测。</li>
+</ul>
+</li>
+<li>IEEE 802.3标准：<ul>
+<li>长度/类型字段：2字节，根据其值的不同，可以表示两种不同的信息：<ul>
+<li>当该字段的值大于0x0600时，它被解释为”类型”，与DIX Ethernet V2标准中的类型字段相同。</li>
+<li>当该字段的值小于0x0600时，它被解释为”长度”，表示数据字段的长度。</li>
+</ul>
+</li>
+<li><strong>数据字段</strong>：长度可以根据”长度/类型”字段的解释而变化，但通常也是46到1500字节。</li>
+<li><strong>帧检验序列FCS</strong>：同样为4字节，用于错误检测。</li>
+</ul>
+</li>
+</ol>
+<h4 id="MAC层的硬件："><a href="#MAC层的硬件：" class="headerlink" title="MAC层的硬件："></a>MAC层的硬件：</h4><ol>
+<li><strong>适配器（网卡）</strong>：网络设备通过适配器与局域网进行通信，适配器实现MAC层的功能。</li>
+<li><strong>串行/并行转换</strong>：适配器负责在计算机和网络之间转换数据流的传输方式。</li>
+<li><strong>缓存</strong>：适配器通常包含缓存，用于暂存数据。</li>
+<li><strong>设备驱动程序</strong>：适配器与计算机的操作系统协作，通过设备驱动程序提供标准化的接口。</li>
+</ol>
+<h3 id="以太网自学习功能"><a href="#以太网自学习功能" class="headerlink" title="以太网自学习功能"></a>以太网自学习功能</h3><p>以太网交换机具有自学习功能，能够自动学习并记录MAC地址与端口的映射关系，从而提高数据传输的效率和准确性。自学习过程涉及交换机接收帧、查找和更新交换表，以及转发帧到正确的接口。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/03/665c9a0ca0009.png"></p>
+<ol>
+<li><strong>自学习过程</strong>：<ul>
+<li>当以太网交换机首次启动时，它的交换表是空的。</li>
+<li>交换机通过接收经过接口的帧来学习源地址。</li>
+</ul>
+</li>
+<li><strong>交换表的更新</strong>：<ul>
+<li>交换机接收到一个帧后，会检查帧的源地址。</li>
+<li>将源地址与接收帧的接口关联，并记录在交换表中。</li>
+</ul>
+</li>
+<li><strong>转发决策</strong>：<ul>
+<li>交换机查找交换表，确定目的地址对应的接口。</li>
+<li>如果找到匹配项，交换机将帧转发到相应的接口。</li>
+<li>如果未找到匹配项，交换机可能会将帧广播到所有接口，除了接收帧的接口。</li>
+</ul>
+</li>
+<li><strong>帧的转发</strong>：<ul>
+<li>当交换机收到一个帧，它会检查目的地址。</li>
+<li>如果目的地址是本地的，交换机将帧传递给相应的接收端口。</li>
+<li>如果目的地址是远程的，交换机将帧转发到正确的输出接口。</li>
+</ul>
+</li>
+<li><strong>交换表的维护</strong>：<ul>
+<li>交换表中的每个条目通常有一个老化时间。</li>
+<li>如果在老化时间内没有再次学习到该地址，对应的条目将从交换表中删除。</li>
+</ul>
+</li>
+<li><strong>交换机互连时的自学习</strong>：<ul>
+<li>当两台或多台交换机互连时，它们通过转发帧互相学习彼此的交换表。</li>
+<li>这允许交换机了解网络中所有设备的地址和位置。</li>
+</ul>
+</li>
+<li><strong>自学习的优势</strong>：<ul>
+<li>自学习功能使得交换机即插即用，无需手动配置。</li>
+<li>交换机能够自动适应网络变化，如设备移动或更换接口。</li>
+</ul>
+</li>
+<li><strong>自学习的限制</strong>：<ul>
+<li>如果网络中存在环路，自学习可能导致无限循环，需要使用生成树协议（STP）来避免。</li>
+</ul>
+</li>
+<li><strong>生成树协议（STP）</strong>：<ul>
+<li>STP用于防止交换网络中的环路。</li>
+<li>通过逻辑上断开某些链路，STP确保网络是无环路的树状结构。</li>
+</ul>
+</li>
+</ol>
+<p>后面的内容老师没有画重点，所以就这样结束咯！明天开始第四章的内容，加油！快过半了呜呜呜。</p>
+<h2 id="第四章：网络层"><a href="#第四章：网络层" class="headerlink" title="第四章：网络层"></a>第四章：网络层</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><h4 id="两种服务"><a href="#两种服务" class="headerlink" title="两种服务"></a>两种服务</h4><ul>
+<li><p><strong>虚电路服务</strong>：建立连接，可靠通信，分组沿同一条路径传输，端到端差错处理和流量控制由网络负责。</p>
+<ul>
+<li>只是一条逻辑上的连接，分组都沿着这条逻辑连接按照存储转发方式传送，并不是真正建立了一条物理连接。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/03/665de878377fb.webp"></p>
+</li>
+<li><p><strong>数据报服务</strong>：无连接，尽最大努力交付，分组独立传输，不保证顺序、完整性或时限，主机负责可靠通信，可以灵活地适应不同类型的网络环境和通信需求，支持各种应用层协议，通过动态路由选择协议来确定数据报的最佳传输路径，而不是依赖于静态的或预先定义的路径。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/04/665de9128c904.webp"></p>
+</li>
+<li><p><strong>二者对比：</strong></p>
+<table>
+<thead>
+<tr>
+<th>对比的方面</th>
+<th>虚电路服务</th>
+<th>数据报服务</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>思路</td>
+<td>可靠通信应当由网络来保证</td>
+<td>可靠通信应当由用户主机来保证</td>
+</tr>
+<tr>
+<td>连接的建立</td>
+<td>必须有</td>
+<td>不需要</td>
+</tr>
+<tr>
+<td>终点地址</td>
+<td>仅在连接建立阶段使用，每个分组使用短的虚电路号</td>
+<td>每个分组都有终点的完整地址</td>
+</tr>
+<tr>
+<td>分组的转发</td>
+<td>属于同一条虚电路的分组均按照同一路由进行转发</td>
+<td>每个分组独立选择路由进行转发</td>
+</tr>
+<tr>
+<td>当结点出故障时</td>
+<td>所有通过出故障的结点的虚电路均不能工作</td>
+<td>出故障的结点可能会丢失分组，一些路由可能会发生变化</td>
+</tr>
+<tr>
+<td>分组的顺序</td>
+<td>总是按发送顺序到达终点</td>
+<td>到达终点时不一定按发送顺序</td>
+</tr>
+<tr>
+<td>端到端的差错处理和流量控制</td>
+<td>可以由网络负责，也可以由用户主机负责</td>
+<td>由用户主机负责</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h4 id="两个层面"><a href="#两个层面" class="headerlink" title="两个层面"></a>两个层面</h4><ul>
+<li><strong>数据层面：</strong><ul>
+<li>路由器根据自己生成的转发表，把收到的分组从查找到的相应接口转发出去。</li>
+<li>独立工作。</li>
+<li>采用硬件进行转发，速度快。</li>
+</ul>
+</li>
+<li><strong>控制层面：</strong><ul>
+<li>根据路由选择协议所用的算法计算路由，创建出本路由器的路由表。</li>
+<li>需要许多路由器协同动作。</li>
+<li>采用软件计算，速度慢。</li>
+</ul>
+</li>
+</ul>
+<h4 id="软件定义网络SDN"><a href="#软件定义网络SDN" class="headerlink" title="软件定义网络SDN"></a>软件定义网络SDN</h4><ul>
+<li><strong>SDN 概念</strong>：将网络控制层与数据层分离，通过软件集中控制网络行为。</li>
+<li><strong>SDN 控制器</strong>：负责计算路由，生成路由器的转发表。</li>
+<li><strong>数据层面</strong>：路由器根据转发表转发分组。</li>
+</ul>
+<h3 id="网际协议IP"><a href="#网际协议IP" class="headerlink" title="网际协议IP"></a>网际协议IP</h3><h4 id="虚拟互联网络"><a href="#虚拟互联网络" class="headerlink" title="虚拟互联网络"></a>虚拟互联网络</h4><ul>
+<li><p><strong>实现网络互连互通的问题</strong>：在网络互连时需要解决多个问题，尤其是异构网络如何互相连接。</p>
+</li>
+<li><p><strong>中间设备的作用</strong>：使用中间设备来实现网络的互连，这些设备包括网关、路由器、网桥、交换机和转发器。</p>
+</li>
+<li><p>网络互连与虚拟互连网络：</p>
+<ul>
+<li><strong>互连网络</strong>：指多个网络通过中间设备连接在一起，但每个网络仍然是独立的。</li>
+<li><strong>虚拟互连网络</strong>：通过路由器连接形成的一个统一的网络，使得主机在通信时感觉像是在同一个网络上。</li>
+<li>注意，使用转发器或者网桥不叫网络互连，转发器、网桥或交换机仅把一个网络扩大了，仍然是一个网络。</li>
+</ul>
+</li>
+<li><p><strong>IP网的概念</strong>：在虚拟互连网络上，主机通信时不需要关心具体的网络异构细节，这得益于IP协议的统一作用。</p>
+</li>
+<li><p><strong>分组在互联网中的传送</strong>：分组在互联网中通过多个路由器间接交付，可能会经过不同的路径到达目的地。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/04/665debf19a942.webp"></p>
+</li>
+</ul>
+<h4 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h4><ul>
+<li><p>IP地址及其表示方法</p>
+<ul>
+<li><strong>定义</strong>：IP地址是互联网上每台主机或路由器接口的唯一标识。</li>
+<li><strong>表示方法</strong>：采用32位点分十进制记法，例如128.11.3.31。</li>
+<li><strong>分配机构</strong>：由互联网名字和数字分配机构ICANN负责全球IP地址的分配。</li>
+</ul>
+</li>
+<li><p>分类的IP地址</p>
+<ul>
+<li><p>A类地址</p>
+<ul>
+<li>网络号字段：1字节</li>
+<li>主机号字段：3字节</li>
+<li>可指派网络数：126</li>
+<li>每个网络最大主机数：16777214</li>
+</ul>
+</li>
+<li><p>B类地址</p>
+<ul>
+<li>网络号字段：2字节</li>
+<li>主机号字段：2字节</li>
+<li>可指派网络数：16383</li>
+<li>每个网络最大主机数：65534</li>
+</ul>
+</li>
+<li><p>C类地址</p>
+<ul>
+<li>网络号字段：3字节</li>
+<li>主机号字段：1字节</li>
+<li>可指派网络数：2097151</li>
+<li>每个网络最大主机数：254</li>
+</ul>
+</li>
+<li><p><strong>D类地址</strong>：用于多播，不用于网络地址，1110开头</p>
+</li>
+<li><p><strong>E类地址</strong>：保留，用于实验和未来使用，1111开头</p>
+</li>
+<li><p><strong>注意：</strong></p>
+<p>A 类网络地址中， 网络号 0 和 127 是保留地址，不指派。0 表示“本网络”，127 保留作为本地环回测试地址。</p>
+<p>B 类网络地址中，网络号 128.0  是被 IANA 保留的，不指派。采用无分类编址（CIDR）时可以指派。 </p>
+<p>C 类网络地址中，网络号 192.0.0 是被 IANA 保留的，不指派。采用无分类编址（CIDR）时可以指派。 指派主机号时，要扣除全 0 和全 1 。全 0 和全 1 有特殊含义和用途。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>特殊IP地址：</strong></p>
+<table>
+<thead>
+<tr>
+<th>网络号</th>
+<th>主机号</th>
+<th>代表的意思</th>
+<th>源地址使用</th>
+<th>目的地址使用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td>在本网络上的本主机（见 6.6 节 DHCP 协议）</td>
+<td>可以</td>
+<td>不可</td>
+</tr>
+<tr>
+<td>0</td>
+<td>X</td>
+<td>在本网络上主机号为 X 的主机</td>
+<td>可以</td>
+<td>不可</td>
+</tr>
+<tr>
+<td>全1</td>
+<td>全1</td>
+<td>只在本网络上进行广播（各路由器均不转发）</td>
+<td>不可</td>
+<td>可以</td>
+</tr>
+<tr>
+<td>Y</td>
+<td>全1</td>
+<td>对网络号为 Y 的网络上的所有主机进行广播</td>
+<td>不可</td>
+<td>可以</td>
+</tr>
+<tr>
+<td>127</td>
+<td>非全0或全1的任何数</td>
+<td>用于本地软件环回测试</td>
+<td>可以</td>
+<td>可以</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>无分类编址CIDR</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/04/665f3611c228f.webp"></p>
+<ul>
+<li><p><strong>定义</strong>：CIDR（Classless Inter-Domain Routing）消除了传统的A、B、C类地址的分类，允许更灵活的IP地址分配。</p>
+</li>
+<li><p><strong>网络前缀</strong>：CIDR地址包含一个网络前缀和主机号，如128.14.35.7/20，其中/20表示网络前缀长度。</p>
+</li>
+<li><p><strong>地址块</strong>：CIDR将具有相同网络前缀的IP地址组成一个地址块，可指派数是2^n-2。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/04/665f3675e61dc.webp"></p>
+</li>
+<li><p><strong>地址掩码</strong>：用于快速确定IP地址的网络部分，如255.255.255.0，1的个数就是网络前缀的个数</p>
+</li>
+<li><p><strong>网络地址</strong>：网络地址 = (二进制的 IP 地址) AND (地址掩码)</p>
+<p>举个栗子：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/04/665f377497a13.webp"></p>
+</li>
+<li><p><strong>常用CIDR地址</strong></p>
+<table>
+<thead>
+<tr>
+<th>网络前缀长度</th>
+<th>点分十进制</th>
+<th>包含的地址数</th>
+<th>相当于包含分类的网络数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/13</td>
+<td>255.248.0.0</td>
+<td>512 K</td>
+<td>8 个B类或2048 个C类</td>
+</tr>
+<tr>
+<td>/14</td>
+<td>255.252.0.0</td>
+<td>256 K</td>
+<td>4个B类或1024个C类</td>
+</tr>
+<tr>
+<td>/15</td>
+<td>255.254.0.0</td>
+<td>128 K</td>
+<td>2个B类或512个C类</td>
+</tr>
+<tr>
+<td>/16</td>
+<td>255.255.0.0</td>
+<td>64 K</td>
+<td>1个B类或256个C类</td>
+</tr>
+<tr>
+<td>/17</td>
+<td>255.255.128.0</td>
+<td>32 K</td>
+<td>128个C类</td>
+</tr>
+<tr>
+<td>/18</td>
+<td>255.255.192.0</td>
+<td>16 K</td>
+<td>64个C类</td>
+</tr>
+<tr>
+<td>/19</td>
+<td>255.255.224.0</td>
+<td>8 K</td>
+<td>32个C类</td>
+</tr>
+<tr>
+<td>/20</td>
+<td>255.255.240.0</td>
+<td>4 K</td>
+<td>16个C类</td>
+</tr>
+<tr>
+<td>/21</td>
+<td>255.255.248.0</td>
+<td>2 K</td>
+<td>8个C类</td>
+</tr>
+<tr>
+<td>/22</td>
+<td>255.255.252.0</td>
+<td>1 K</td>
+<td>4个C类</td>
+</tr>
+<tr>
+<td>/23</td>
+<td>255.255.254.0</td>
+<td>512</td>
+<td>2个C类</td>
+</tr>
+<tr>
+<td>/24</td>
+<td>255.255.255.0</td>
+<td>256</td>
+<td>1个C类</td>
+</tr>
+<tr>
+<td>/25</td>
+<td>255.255.255.128</td>
+<td>128</td>
+<td>1/2个C类</td>
+</tr>
+<tr>
+<td>/26</td>
+<td>255.255.255.192</td>
+<td>64</td>
+<td>1/4个C类</td>
+</tr>
+<tr>
+<td>/27</td>
+<td>255.255.255.224</td>
+<td>32</td>
+<td>1/8个C类</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+</li>
+<li><p>特殊CIDR地址块</p>
+<table>
+<thead>
+<tr>
+<th>网络前缀长度</th>
+<th>点分十进制</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/32</td>
+<td>255.255.255.255</td>
+<td>就是一个IP地址。这个特殊地址用于主机路由，表示单个特定主机。</td>
+</tr>
+<tr>
+<td>/31</td>
+<td>255.255.255.254</td>
+<td>这个地址块用于点对点链路，提供两个IP地址，主机号分别为0和1。</td>
+</tr>
+<tr>
+<td>/0</td>
+<td>0.0.0.0</td>
+<td>同时IP地址也是全0，即0.0.0.0/0。用于默认路由，表示路由表中的最后选择。</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>构造超网</p>
+<p>构造超网（Supernetting）是CIDR（无分类域间路由选择）的一个特性，它允许将多个连续的IP地址段或网络合并成一个更大的网络，这个更大的网络就被称为超网。这种技术主要用于简化路由表的规模，减少路由表中的条目数量，从而提高路由效率。</p>
+<p>在构造超网的过程中，可以将多个具有相同网络前缀的较小网络合并为一个更大的网络。例如，如果有三个连续的C类网络：</p>
+<ul>
+<li>128.14.0.0/24</li>
+<li>128.14.1.0/24</li>
+<li>128.14.15.0/24</li>
+</ul>
+<p>每个网络都有自己的子网掩码255.255.255.0，这意味着每个网络可以有256个IP地址（从0到255，除去网络地址和广播地址）。</p>
+<p>当我们构造超网时，这些网络可以合并为一个更大的网络，具有更短的网络前缀。例如，它们可以合并为一个/20的网络：</p>
+<ul>
+<li>128.14.0.0/20</li>
+</ul>
+<p>新的超网的网络前缀是20位，这意味着这个超网包含了2^(32-20) = 4096个IP地址，这覆盖了上述三个C类网络的地址范围。超网的子网掩码是255.255.240.0，这个掩码表示前20位是网络前缀，剩下的12位用于主机。</p>
+<p>构造超网的过程简化了路由表，因为一个单一的超网条目可以代替多个较小网络的条目。这样，路由协议只需要维护和传播更少的网络前缀信息，从而减少了路由表的大小和路由协议的复杂性。</p>
+</li>
+<li><p>IP地址的特点</p>
+<ul>
+<li><strong>唯一性</strong>：IP地址在全球范围内是唯一的。</li>
+<li><strong>分等级结构</strong>：IP地址的分等级结构方便了地址的分配和管理。</li>
+<li><strong>路由聚合</strong>：CIDR使得可以实现路由聚合，减少了路由器转发表的大小，提高了路由效率。</li>
+<li><strong>多归属主机</strong>：当主机连接到多个网络时，需要具有多个不同的IP地址。</li>
+<li><strong>网络和子网</strong>：互联网将具有相同网络前缀的主机视为同一个网络或子网的一部分。</li>
+<li><strong>平等对待</strong>：互联网对所有IP地址同等对待，无论其大小或范围。</li>
+</ul>
+</li>
+</ul>
+<h3 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h3><ul>
+<li><p><strong>区别</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/05/665f3bf491de5.webp" alt="区别"></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>流程</strong>：解析IP地址对应的MAC地址，使用ARP请求和响应。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/05/665f3ce6b3f2d.webp" alt="工作流程"></p>
+</li>
+<li><p><strong>四种典型情况</strong></p>
+<ol>
+<li><strong>发送方是主机，要把IP数据报发送到本网络上的另一个主机。</strong><ul>
+<li>在这种情况下，发送主机使用ARP来解析目的主机的MAC地址。因为两台主机位于同一局域网内，所以ARP请求会直接在局域网内广播，以获取目的主机的MAC地址。</li>
+</ul>
+</li>
+<li><strong>发送方是主机，要把IP数据报发送到另一个网络上的一个主机。</strong><ul>
+<li>在这个场景中，发送主机首先使用ARP解析其本地网络上的一个路由器的MAC地址，而不是最终目的主机的MAC地址。然后，它将IP数据报发送到这个路由器，由路由器来完成将数据报转发到目标网络的任务。</li>
+</ul>
+</li>
+<li><strong>发送方是路由器，要把IP数据报转发到本网络上的一个主机。</strong><ul>
+<li>如果路由器收到一个IP数据报，并且该数据报的目的地址属于路由器直接连接的局域网，路由器将使用ARP来查找目的主机的MAC地址，并将数据报直接转发到该主机。</li>
+</ul>
+</li>
+<li><strong>发送方是路由器，要把IP数据报转发到另一个网络上的一个主机。</strong><ul>
+<li>在这种情况下，路由器使用ARP来解析另一个路由器（位于目标网络的下一个跳）的MAC地址。一旦获得MAC地址，路由器将把IP数据报发送到下一个跳路由器，由下一个跳路由器继续转发过程，直至数据报到达目的地。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p><strong>使用两个地址的原因</strong>：IP地址用于网络层寻址，MAC地址用于链路层寻址。</p>
+<ol>
+<li><strong>MAC地址的局限性</strong>：每个网络设备都有一个唯一的MAC地址，用于局域网内的设备识别和通信。但是，MAC地址之间的转换非常复杂，且对以太网MAC地址进行寻址也是极其困难的。</li>
+<li><strong>IP地址的优势</strong>：IP地址的出现解决了这个复杂问题。它提供了一种更加抽象和简化的方式来识别和寻址网络上的设备。</li>
+<li><strong>简化的网络通信</strong>：连接到互联网的主机只需要拥有一个唯一的IP地址。通过IP地址，不同网络上的主机可以像在同一个网络上那样进行通信，即使这背后需要多次调用ARP来解析MAC地址。</li>
+<li><strong>自动化的过程</strong>：ARP协议自动进行IP地址到MAC地址的转换，这个过程对用户来说是透明的，不需要用户干预。</li>
+<li><strong>IP网络的便利性</strong>：在虚拟的IP网络上，使用IP地址进行通信非常方便。它抽象了下层网络的细节，使得互联网上的通信变得更加简单和直接。</li>
+</ol>
+</li>
+</ul>
+<h3 id="IP数据报"><a href="#IP数据报" class="headerlink" title="IP数据报"></a>IP数据报</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/05/665f3e3fed92f.webp" alt="数据报"></p>
+<ul>
+<li><p><strong>首部字段</strong>：版本、首部长度、总长度、标识、标志、片偏移、生存时间、协议、首部检验和、源地址、目的地址等。</p>
+<ol>
+<li><p><strong>版本（Version）</strong>：占4位，用于标识IP协议的版本。对于IPv4，版本号为4。</p>
+</li>
+<li><p><strong>首部长度（Header Length）</strong>：也称为互联网协议头长度字段，占4位，表示IP数据报首部的长度，单位是32位字（一个单位为4字节），因此首部长度的最大值是60字节。</p>
+</li>
+<li><p><strong>总长度（Total Length）</strong>：占16位，指整个IP数据报的长度，包括首部和数据部分，单位是字节。最大长度为65535字节。</p>
+</li>
+<li><p><strong>标识（Identification）</strong>：占16位，用于唯一标识主机发送的每一份数据报，以便于在数据报分片后能够重新组装。</p>
+</li>
+<li><p><strong>标志（Flags）</strong>：占3位，用于控制和指示分片操作。其中最重要的是MF（More Fragments）标志，它指示是否还有更多的分片。</p>
+</li>
+<li><p><strong>片偏移（Fragment Offset）</strong>：占13位，表示当前分片在原始数据报中的位置，单位是8字节。</p>
+</li>
+<li><p><strong>生存时间（Time to Live, TTL）</strong>：占8位，用于限制数据报在网络中的生命周期，每经过一个路由器，TTL减1，当TTL为0时，数据报将被丢弃。</p>
+</li>
+<li><p><strong>协议（Protocol）</strong>：占8位，指明上层使用的是什么协议，如TCP、UDP、ICMP等，以便数据报到达目的地后能够正确交付给对应的上层协议。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/05/665f3f871feec.webp"></p>
+</li>
+<li><p><strong>首部检验和（Header Checksum）</strong>：占16位，用于检验IP数据报首部在传输过程中是否出现错误。它只检验首部，不包括数据部分。</p>
+</li>
+<li><p><strong>源地址（Source Address）</strong>：占32位，标识发送数据报的主机的IP地址。</p>
+</li>
+<li><p><strong>目的地址（Destination Address）</strong>：占32位，标识数据报要发送到的主机的IP地址。</p>
+</li>
+</ol>
+</li>
+<li><p><strong>分片</strong>：当IP数据报大小超过MTU时，需要分片。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/05/665f3ed6d1d99.webp" alt="数据分片"></p>
+<ul>
+<li><p>与分片有关的数值</p>
+<table>
+<thead>
+<tr>
+<th>数据报类型</th>
+<th>总长度</th>
+<th>标识</th>
+<th>MF</th>
+<th>DF</th>
+<th>片偏移</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>原始数据报</td>
+<td>3820</td>
+<td>12345</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>数据报片1</td>
+<td>1420</td>
+<td>12345</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>数据报片2</td>
+<td>1420</td>
+<td>12345</td>
+<td>1</td>
+<td>0</td>
+<td>175</td>
+</tr>
+<tr>
+<td>数据报片3</td>
+<td>1020</td>
+<td>12345</td>
+<td>0</td>
+<td>0</td>
+<td>350</td>
+</tr>
+</tbody></table>
+<p><strong>说明：</strong></p>
+<ul>
+<li><strong>总长度</strong>：表示每个数据报或数据报片的总字节数，包括IP首部和数据部分。</li>
+<li><strong>标识</strong>：用于唯一标识一个原始数据报，所有属于同一个原始数据报的分片都会有相同的标识值。</li>
+<li><strong>MF(More Fragments)</strong> ：表示是否还有更多的分片。MF=1表示后面还有分片，MF=0表示这是最后一个分片。</li>
+<li><strong>DF(Don’t Fragment)</strong> ：表示是否允许对数据报进行分片。DF=0表示允许分片，DF=1表示不允许分片。</li>
+<li><strong>片偏移</strong>：表示当前分片相对于原始数据报开始的位置，单位是8字节。例如，片偏移为175表示该分片是原始数据报的第22个字节开始的部分（175/8=21.875，向下取整到22个8字节块）。</li>
+</ul>
+<p>原始数据报的大小为3820字节，由于网络的MTU（最大传输单元）限制，它被分成了三个片。每个片都有自己的总长度、保持与原始数据报相同的标识，以及根据它们在原始数据报中的位置设置的片偏移值。最后一个分片的MF标志为0，表示没有更多的分片。DF标志在所有片中都为0，表示允许分片。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>基于终点的转发</strong>：根据数据报首部中的目的地址来转发数据包。</p>
+<ol>
+<li><p>基于终点的转发概念：</p>
+<ul>
+<li><strong>逐跳转发</strong>：分组在互联网中是逐跳转发的，即每个分组独立地从源头传送到目的地。</li>
+<li><strong>目的地址</strong>：转发决策基于数据报首部中的目的IP地址。</li>
+</ul>
+</li>
+<li><p>转发过程：</p>
+<ol>
+<li><strong>检查本地网络</strong>：首先检查目的地址是否在本地网络上，如果是，则直接交付。</li>
+<li><strong>查找转发表</strong>：如果不在本地网络，路由器查找自己的转发表，寻找与目的地址匹配的条目。</li>
+<li><strong>最长前缀匹配</strong>：在转发表中进行最长前缀匹配，选择最具体的路由条目。</li>
+<li><strong>转发到下一跳</strong>：根据匹配的路由条目，将分组转发到指定的下一跳路由器。</li>
+</ol>
+</li>
+<li><p>转发表结构：</p>
+<ul>
+<li><strong>目的网络地址</strong>：用于匹配目的IP地址的网络部分。</li>
+<li><strong>下一跳地址</strong>：指示分组应该转发到的下一个路由器。</li>
+</ul>
+</li>
+<li><p>特点：</p>
+<ul>
+<li><strong>独立性</strong>：每个分组独立选择路由，与其它分组无关。</li>
+<li><strong>灵活性</strong>：可以适应网络拓扑的变化，通过更新转发表来调整路由。</li>
+<li><strong>无状态</strong>：转发过程不需要维护状态信息，每个分组独立处理。</li>
+</ul>
+</li>
+<li><p>示例：</p>
+<p>假设有以下转发表项：</p>
+<ul>
+<li>128.1.3.64/26 → R2，接口1</li>
+<li>128.1.2.128/25 → 直接，接口1</li>
+<li>128.1.2.192/26 → 直接，接口0</li>
+</ul>
+<p>当源主机H1需要发送分组到目的地址128.1.2.132时：</p>
+<ul>
+<li>H1首先检查是否在本地网络上，不在则发送给路由器R1。</li>
+<li>R1查找转发表，执行最长前缀匹配：<ul>
+<li>128.1.2.132与128.1.2.128/25匹配（因为128.1.2.132 &amp; 255.255.255.128 = 128.1.2.128）。</li>
+</ul>
+</li>
+<li>R1将分组转发到接口1的下一跳路由器。</li>
+</ul>
+</li>
+<li><p>最长前缀匹配原则：</p>
+<ul>
+<li><strong>定义</strong>：当存在多个匹配的路由条目时，选择具有最长网络前缀的条目作为最佳匹配。</li>
+<li><strong>目的</strong>：确保路由选择尽可能具体，从而提高路由的精确性和效率。</li>
+</ul>
+</li>
+<li><p>路由分组算法：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/05/666083aa53658.webp"></p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h3><h4 id="Pv6的基本首部"><a href="#Pv6的基本首部" class="headerlink" title="Pv6的基本首部"></a>Pv6的基本首部</h4><ul>
+<li><p><strong>更大的地址空间</strong>：将地址从IPv4的32位增大到了128位。</p>
+</li>
+<li><p><strong>扩展的地址层次结构</strong>：可以划分为更多的层次。</p>
+</li>
+<li><p><strong>灵活的首部格式</strong>：定义了许多可选的扩展首部。</p>
+</li>
+<li><p><strong>改进的选项</strong>：允许数据报包含有选项的控制信息，选项放在有效载荷中。</p>
+</li>
+<li><p><strong>支持即插即用</strong>：不需要使用DHCP进行IP地址配置，可以在没有DHCP服务器的情况下自动配置自己的IP地址。</p>
+</li>
+<li><p><strong>支持资源的预分配</strong>：支持需要保证一定带宽和时延的应用。</p>
+</li>
+<li><p><strong>首部长度</strong>：固定的40字节，8字节对齐，首部长度必须是8字节的整数倍。</p>
+</li>
+<li><p><strong>基本首部字段</strong>：版本、通信量类、流标号、有效载荷长度、跳数限制、下一个首部、源地址、目的地址。</p>
+</li>
+<li><p><strong>一般形式：</strong>基本首部（固定40字节的首部长度和八个首部字段数），有效载荷（零个或多个拓展首部加数据部分）</p>
+</li>
+<li><p><strong>对首部的修改：</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/05/666086d0d31b9.webp" alt="对首部的修改"></p>
+</li>
+</ul>
+<h4 id="IPv6的地址"><a href="#IPv6的地址" class="headerlink" title="IPv6的地址"></a>IPv6的地址</h4><ul>
+<li><p><strong>单播地址</strong>（Unicast）：传统的点对点通信。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/05/6660891ca8a82.webp" alt="划分方法"></p>
+</li>
+<li><p><strong>多播地址</strong>（Multicast）：一点对多点的通信。</p>
+</li>
+<li><p><strong>任播地址</strong>（Anycast）：IPv6新增，数据报交付给最近的一个组内成员。</p>
+</li>
+<li><p><strong>冒号十六进制记法</strong>：用于表示128位的地址。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/05/6660880e7ca9f.webp"></p>
+</li>
+<li><p><strong>零压缩</strong>：简化地址表示，连续的零可以用一对冒号取代。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/05/6660881b3d7d8.webp"></p>
+</li>
+<li><p><strong>点分十进制记法的后缀</strong>：在IPv4向IPv6转换阶段特别有用。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/05/66608897ce4a1.webp" alt="直接截图了，懒得整理了……"></p>
+</li>
+</ul>
+<h4 id="从IPv4向IPv6过渡"><a href="#从IPv4向IPv6过渡" class="headerlink" title="从IPv4向IPv6过渡"></a>从IPv4向IPv6过渡</h4><ul>
+<li><p><strong>逐步演进，向后兼容</strong>：IPv6系统必须能够接收和转发IPv4分组，并为IPv4分组选择路由。</p>
+</li>
+<li><p>过渡策略：</p>
+<ul>
+<li><p>使用<strong>双协议栈</strong>：同时支持IPv4和IPv6协议。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/05/666089a008a8c.webp"></p>
+</li>
+<li><p>使用<strong>隧道技术</strong>：将IPv6数据报封装在IPv4数据报中穿越IPv4网络。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/05/6660898e925bb.webp"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="ICMPv6"><a href="#ICMPv6" class="headerlink" title="ICMPv6"></a>ICMPv6</h4><ul>
+<li><strong>ICMPv6</strong>：IPv6的ICMP版本，用于反馈差错信息。</li>
+<li><strong>包含ARP和IGMP协议的功能</strong>：简化了协议数量，统一了功能。</li>
+</ul>
+<h4 id="基本首部格式"><a href="#基本首部格式" class="headerlink" title="基本首部格式"></a>基本首部格式</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/05/66608722d9a13.webp"></p>
+<ul>
+<li><strong>版本</strong>（4位）：指明协议版本，IPv6中该字段总是6。</li>
+<li><strong>通信量类</strong>（8位）：区分不同的IPv6数据报类别或优先级。</li>
+<li><strong>流标号</strong>（20位）：标识同一流中的所有数据报。</li>
+<li><strong>有效载荷长度</strong>（16位）：指明除基本首部外的字节数，最大值64KB。</li>
+<li><strong>跳数限制</strong>（8位）：类似于IPv4中的TTL。</li>
+<li><strong>下一个首部</strong>（8位）：指示数据报的下一个协议头。</li>
+<li><strong>源地址</strong>和<strong>目的地址</strong>（各128位）：数据报发送和接收的IP地址。</li>
+</ul>
+<h4 id="IPv6地址分类"><a href="#IPv6地址分类" class="headerlink" title="IPv6地址分类"></a>IPv6地址分类</h4><ul>
+<li><strong>未指明地址</strong>（::/128）：只有一个地址，全零。</li>
+<li><strong>环回地址</strong>（::1/128）：用于本地测试。</li>
+<li><strong>多播地址</strong>（FF00::/8）：用于多播通信。</li>
+<li><strong>本地链路单播地址</strong>（FE80::/10）：未连接到互联网，仅在本地链路上有效。</li>
+<li><strong>全球单播地址</strong>：除上述四种外，所有其他二进制前缀。</li>
+</ul>
+<h3 id="路由选择协议"><a href="#路由选择协议" class="headerlink" title="路由选择协议"></a>路由选择协议</h3><h4 id="基本概念-1"><a href="#基本概念-1" class="headerlink" title="基本概念"></a>基本概念</h4><ul>
+<li><p><strong>路由选择协议</strong>：属于网络层控制层面的内容，负责在网络中选择数据传输的最佳路径，分为静态和动态。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/05/66608ace321c8.webp"></p>
+</li>
+<li><p><strong>分为两个层次：</strong></p>
+<ul>
+<li>自治系统之间的路由选择 或 域间路由选择 (interdomain routing)；</li>
+<li>自治系统内部的路由选择 或 域内路由选择 (intradomain routing)；</li>
+</ul>
+</li>
+<li><p><strong>自治系统 AS：</strong>是在单一技术管理下的许多网络、IP地址以及路由器，而这些路由器使用一种自治系统内部的路由选择协议和共同的度量。每一个 AS 对其他 AS 表现出的是一个单一的和一致的路由选择策略。</p>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/05/66608b7e399ff.webp" alt="网关协议"></p>
+<h4 id="内部网关协议RIP"><a href="#内部网关协议RIP" class="headerlink" title="内部网关协议RIP"></a>内部网关协议RIP</h4><ul>
+<li><p><strong>RIP(Routing Information Protocol)</strong> ：一种基于距离矢量的路由选择协议。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/06/66608cd5e4b79.webp" alt="最短路径"></p>
+</li>
+<li><p><strong>工作原理</strong>：使用Bellman-Ford算法，通过广播或组播更新路由信息，以跳数作为路由度量。</p>
+</li>
+<li><p><strong>距离：</strong>RIP协议中的”距离”也被称为”跳数”（hop count），它是一个度量，用来衡量到达目的地网络的路径长度。RIP协议使用这个跳数来选择到达目的地的最佳路径，即跳数最少的路径。当网络拓扑发生变化时，RIP协议通过交换路由信息来更新各个路由器的路由表，以确保所有路由器都拥有到达目的地的最短路径信息。</p>
+<ul>
+<li><strong>路由器到直接连接的网络的距离</strong>：等于1。这意味着如果路由器直接连接到某个网络，那么它到这个网络的距离是1跳。</li>
+<li><strong>路由器到非直接连接的网络的距离</strong>：等于所经过的路由器数加1。也就是说，每通过一个路由器，到达目的地网络的距离就增加1跳。</li>
+<li><strong>“距离”的最大值</strong>：在RIP协议中，一条路径最多只能包含15个路由器。因此，”距离”的最大值为15跳。</li>
+<li><strong>“距离”为16</strong>：当”距离”的值为16时，相当于表示目的地网络是不可达的。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/06/66608c12d5b5c.webp" alt="距离"></p>
+</li>
+<li><p>特点：</p>
+<ul>
+<li>仅和相邻路由器交换信息。 </li>
+<li>交换的信息是当前本路由器所知道的全部信息，即自己的路由表。 </li>
+<li>按固定时间间隔交换路由信息，例如，每隔 30 秒。当网络拓扑发生变化时，路由器也及时向相邻路由器通告拓扑变化后的路由信息。</li>
+<li>好消息传播快，坏消息传播慢。</li>
+</ul>
+</li>
+</ul>
+<h4 id="内部网关协议OSPF"><a href="#内部网关协议OSPF" class="headerlink" title="内部网关协议OSPF"></a>内部网关协议OSPF</h4><ul>
+<li><p><strong>OSPF(Open Shortest Path First)</strong> ：一种基于链路状态的路由选择协议。</p>
+</li>
+<li><p>工作原理：</p>
+<ul>
+<li>使用Dijkstra算法计算最短路径。</li>
+<li>通过洪泛法在自治系统内部交换链路状态信息。</li>
+<li>采用分布式的链路状态协议 (link state protocol)。</li>
+</ul>
+</li>
+<li><p>特点：</p>
+<ul>
+<li>更适合大型网络。</li>
+<li>快速收敛。</li>
+<li>支持区域划分，减少路由信息的交换。<ol>
+<li>区域：<ul>
+<li><strong>主干区域（Backbone Area）</strong>：标识符为0.0.0.0，其作用是用来连通其他下层区域。主干区域是OSPF网络的核心，所有其他区域都必须直接或间接地连接到这个区域。</li>
+<li><strong>普通区域（Non-Backbone Areas）</strong>：除了主干区域以外的其他区域。普通区域可以包含一个或多个网络和路由器，它们之间通过主干区域进行路由信息的交换。</li>
+</ul>
+</li>
+<li>优点：<ul>
+<li><strong>减少通信量</strong>：通过将网络划分为多个区域，可以减少整个网络上的通信量，因为路由信息只在区域内或与主干区域之间交换。</li>
+<li><strong>减少维护状态数量</strong>：每个路由器只需要维护与自己直接相连的区域的路由信息，而不需要了解整个自治系统中的所有路由信息。</li>
+<li><strong>提高路由效率</strong>：在较小的区域内，路由器可以更快地计算出最短路径，因为需要考虑的网络和链路较少。</li>
+<li><strong>增强网络稳定性</strong>：限制了路由计算的范围，使得单个区域的故障不会影响到整个自治系统。</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li><strong>信息种类增多</strong>：OSPF协议需要处理不同类型的分组，如问候分组、数据库描述分组、链路状态请求分组、链路状态更新分组和链路状态确认分组，这使得协议更加复杂。</li>
+<li><strong>配置和管理复杂性</strong>：划分区域增加了网络设计和配置的复杂性，需要仔细规划区域边界和选择合适的路由器作为区域边界路由器（ABR）或主干路由器（BR）。</li>
+<li><strong>可能影响路由最优性</strong>：在某些情况下，区域划分可能导致路由不是全局最优的，因为路由决策是在局部区域内做出的。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>工作流程：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/07/6661dd2c05425.webp" alt="工作流程"></p>
+</li>
+</ul>
+<h4 id="外部网关协议BGP"><a href="#外部网关协议BGP" class="headerlink" title="外部网关协议BGP"></a>外部网关协议BGP</h4><ul>
+<li><strong>BGP(Border Gateway Protocol)</strong> ：用于不同自治系统间的路由选择。</li>
+<li><strong>BGP-4</strong>：当前使用的版本，支持CIDR和路由聚合。</li>
+<li>特点：<ul>
+<li>支持策略路由。</li>
+<li>允许网络提供者定义路由策略。</li>
+<li>使用路径向量协议，考虑AS路径和下一跳信息。</li>
+</ul>
+</li>
+</ul>
+<h4 id="路由器的构成"><a href="#路由器的构成" class="headerlink" title="路由器的构成"></a>路由器的构成</h4><ul>
+<li><p>路由器结构：</p>
+<ul>
+<li><p>控制层面（软件）</p>
+<p>：负责路由选择和管理。</p>
+<ul>
+<li>路由选择协议。</li>
+<li>路由表。</li>
+</ul>
+</li>
+<li><p>数据层面（硬件）</p>
+<p>：负责分组的接收、转发和排队。</p>
+<ul>
+<li>输入端口。</li>
+<li>输出端口。</li>
+<li>交换结构。</li>
+<li>缓存管理。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>转发与路由选择的区别：</p>
+<ul>
+<li><strong>转发</strong>：根据路由表中的信息将分组发送到下一个目的地。</li>
+<li><strong>路由选择</strong>：动态地选择数据传输的路径。</li>
+</ul>
+</li>
+</ul>
+<h3 id="IP多播"><a href="#IP多播" class="headerlink" title="IP多播"></a>IP多播</h3><h4 id="IP多播的基本概念"><a href="#IP多播的基本概念" class="headerlink" title="IP多播的基本概念"></a>IP多播的基本概念</h4><ul>
+<li><p><strong>多播（Multicast）</strong>：又称为组播，是一种将数据从单个源点发送到多个目的地的技术。</p>
+</li>
+<li><p><strong>目的</strong>：更有效地支持一对多或多对多的通信，减少网络资源的消耗。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/07/6661de29449dc.webp" alt="多播可大大节省资源"></p>
+</li>
+</ul>
+<h4 id="在局域网上进行硬件多播"><a href="#在局域网上进行硬件多播" class="headerlink" title="在局域网上进行硬件多播"></a>在局域网上进行硬件多播</h4><ul>
+<li><p><strong>硬件多播</strong>：局域网硬件支持多播功能，可以直接将数据发送到多播组内的所有成员，无需复制分组。</p>
+</li>
+<li><p><strong>以太网多播地址</strong>：由IANA指定的特定以太网地址块，用于标识多播组。</p>
+<ul>
+<li><strong>IANA(Internet Assigned Numbers Authority)</strong> ：互联网数字分配机构，负责全球互联网上的IP地址和域名的分配和管理。</li>
+<li><strong>以太网多播地址范围</strong>：IANA分配了特定的以太网地址块用作多播地址，这些地址的范围是从<code>01-00-5E-00-00-00</code>到<code>01-00-5E-7F-FF-FF</code>。</li>
+<li><strong>多播地址数量</strong>：在这个范围内，共有223个地址被指定为以太网多播地址。</li>
+<li><strong>多播地址的结构</strong>：在48位的以太网地址中，用于多播的地址有固定的前缀<code>01-00-5E</code>，这意味着前25位是固定的，而剩下的23位可以用来标识不同的多播组。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/07/6661df147ee54.webp" alt="D类IP地址与以太网多播地址的映射关系"></p>
+</li>
+<li><p>收到多播数据报的主机，还要在IP层对IP地址进行过滤，把不是本主机要接收的数据报丢弃。</p>
+</li>
+</ul>
+<h4 id="IGMP和多播路由选择协议"><a href="#IGMP和多播路由选择协议" class="headerlink" title="IGMP和多播路由选择协议"></a>IGMP和多播路由选择协议</h4><ul>
+<li><p>IGMP (Internet Group Management Protocol)：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/07/6661df8e7f82a.webp"></p>
+<ul>
+<li>管理多播组成员的加入和退出。</li>
+<li>允许多播路由器了解其连接的局域网上是否有主机加入了特定的多播组。</li>
+<li>版本包括IGMPv1、IGMPv2和IGMPv3。</li>
+</ul>
+</li>
+<li><p>多播路由选择协议：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/07/6661dfab07739.webp"></p>
+<ul>
+<li>确保多播数据报以最小的代价传送给所有多播组成员。</li>
+<li>动态适应多播组成员的变化，即使网络拓扑没有变化。</li>
+</ul>
+</li>
+</ul>
+<h4 id="多播IP地址"><a href="#多播IP地址" class="headerlink" title="多播IP地址"></a>多播IP地址</h4><ul>
+<li><strong>D类地址</strong>：用于多播的数据报，地址范围为224.0.0.0至239.255.255.255。</li>
+<li><strong>多播地址的使用</strong>：只能作为目的地址，不能作为源地址。</li>
+</ul>
+<h4 id="多播数据报的特点"><a href="#多播数据报的特点" class="headerlink" title="多播数据报的特点"></a>多播数据报的特点</h4><ul>
+<li><strong>目的地址</strong>：使用D类IP地址。</li>
+<li><strong>协议字段</strong>：值为2，表示使用IGMP。</li>
+<li><strong>交付保证</strong>：尽最大努力交付，但不保证能够交付到多播组内的所有成员。</li>
+<li><strong>ICMP差错报文</strong>：对多播数据报不产生ICMP差错报文，比如ping不通。</li>
+</ul>
+<h4 id="多播路由选择"><a href="#多播路由选择" class="headerlink" title="多播路由选择"></a>多播路由选择</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/07/6661e051ba4b8.webp"></p>
+<ul>
+<li><p><strong>洪泛与剪除</strong>：适用于较小的多播组，使用反向路径广播（RPB）策略避免兜圈子。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/07/6661e09809825.webp" alt="RPB"></p>
+</li>
+<li><p><strong>隧道技术</strong>：适用于多播组位置地理上分散的情况。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/07/6661e11720905.webp"></p>
+</li>
+<li><p><strong>基于核心的发现技术</strong>：为每个多播组指定一个核心路由器，构建以核心路由器为根节点的多播转发树。</p>
+</li>
+</ul>
+<h4 id="多播路由选择协议的类型"><a href="#多播路由选择协议的类型" class="headerlink" title="多播路由选择协议的类型"></a>多播路由选择协议的类型</h4><ul>
+<li><strong>DVMRP(Distance Vector Multicast Routing Protocol)</strong> ：互联网上使用的第一个多播路由选择协议。</li>
+<li><strong>CBT(Core Based Tree)</strong> ：基于核心的转发树。</li>
+<li><strong>MOSPF(Multicast Extensions to OSPF)</strong> ：开放最短通路优先的多播扩展。</li>
+<li><strong>PIM-SM(Protocol Independent Multicast-Sparse Mode)</strong> ：协议无关多播-稀疏方式，已成为互联网标准。</li>
+<li><strong>PIM-DM(Protocol Independent Multicast-Dense Mode)</strong> ：协议无关多播-密集方式。</li>
+</ul>
+<h3 id="虚拟专用网-VPN-与网络地址转换-NAT"><a href="#虚拟专用网-VPN-与网络地址转换-NAT" class="headerlink" title="虚拟专用网 VPN 与网络地址转换 NAT"></a>虚拟专用网 VPN 与网络地址转换 NAT</h3><h4 id="虚拟专用网-VPN"><a href="#虚拟专用网-VPN" class="headerlink" title="虚拟专用网 VPN"></a>虚拟专用网 VPN</h4><ul>
+<li><p><strong>定义</strong>：VPN是一种技术，允许在公共网络（如互联网）上建立加密的、安全的通信隧道，模拟私有网络的连接。</p>
+</li>
+<li><p><strong>目的</strong>：解决IP地址不足的问题，允许机构内部的计算机使用非全球唯一的IP地址进行通信，同时保持数据的安全性。</p>
+</li>
+<li><p><strong>怎么判断？</strong></p>
+<ul>
+<li><p>专用地址只能用作本地地址，而不能用作全球地址。 </p>
+</li>
+<li><p>互联网中的所有路由器对目的地址是专用地址的数据报一律不进行转发。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/07/6661e1ede5921.webp"></p>
+</li>
+</ul>
+</li>
+<li><p><strong>类型</strong>：</p>
+<ul>
+<li><strong>内联网 (Intranet VPN)</strong> ：为同一机构的不同部门或地点提供安全的通信。</li>
+<li><strong>外联网 (Extranet VPN)</strong> ：连接不同机构的网络，允许安全的信息交换。</li>
+<li><strong>远程访问 VPN (Remote Access VPN)</strong> ：允许远程用户安全地访问机构的内部网络。</li>
+</ul>
+</li>
+<li><p><strong>实现</strong>：通过隧道技术，将数据封装在公共网络的数据包中，然后在目的地进行解密。</p>
+</li>
+</ul>
+<h4 id="网络地址转换-NAT"><a href="#网络地址转换-NAT" class="headerlink" title="网络地址转换 NAT"></a>网络地址转换 NAT</h4><ul>
+<li><p><strong>定义</strong>：NAT是一种技术，允许在专用网络上使用专用（非全球唯一）地址的设备与互联网上的设备通信。</p>
+</li>
+<li><p><strong>目的</strong>：解决IPv4地址耗尽问题，允许多个设备共享一个或少数几个全球IP地址。</p>
+</li>
+<li><p><strong>工作原理</strong>：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/07/6661e29ee3f46.webp"></p>
+<ul>
+<li><strong>源NAT (Source NAT)</strong> ：更改数据包的源地址，通常在专用网络连接到互联网的路由器上进行。</li>
+<li><strong>目的NAT (Destination NAT)</strong> ：更改数据包的目的地址，用于将进入的数据包转发到专用网络上的正确设备。</li>
+</ul>
+</li>
+<li><p><strong>NAT的类型</strong>：</p>
+<ul>
+<li><p><strong>传统NAT (Traditional NAT)</strong> ：仅转换IP地址。</p>
+</li>
+<li><p><strong>网络地址与端口号转换 NAPT (Network Address and Port Translation)</strong> ：转换IP地址和传输层端口号，允许多个设备共享单个IP地址。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/07/6661e31065258.webp"></p>
+</li>
+</ul>
+</li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li>NAT允许专用网络内的多个设备同时访问互联网，而不需要为每个设备分配一个全球IP地址。</li>
+<li>NAT可能导致一些网络应用的问题，因为它更改了数据包的源和目的地址。</li>
+</ul>
+</li>
+</ul>
+<h2 id="第五章：运输层"><a href="#第五章：运输层" class="headerlink" title="第五章：运输层"></a>第五章：运输层</h2><h3 id="运输层协议概述"><a href="#运输层协议概述" class="headerlink" title="运输层协议概述"></a>运输层协议概述</h3><ul>
+<li><p><strong>进程间通信</strong>：运输层负责在网络中不同主机的应用进程之间提供通信服务，提供应用进程之间的逻辑通信服务</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/08/666332e896fcc.webp"></p>
+</li>
+<li><p><strong>UDP和TCP的主要特点</strong>：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/08/66633346123e8.webp"></p>
+<ul>
+<li><p><strong>UDP</strong>（用户数据报协议）：</p>
+<ul>
+<li><strong>不可靠信道</strong>：UDP不保证数据的可靠传输，不提供数据传输的确认或重传机制。</li>
+<li><strong>无连接</strong>：在传送数据之前，UDP不需要建立连接，发送方可以立即开始发送数据。</li>
+<li><strong>尽最大努力交付</strong>：UDP提供一种尽力而为的服务，不保证数据的顺序、完整性或可靠性。</li>
+<li><strong>适用于实时应用</strong>：由于UDP的低延迟特性，它适用于对实时性要求较高的应用，如语音通信、视频流、在线游戏等。</li>
+<li><strong>简单高效</strong>：UDP的首部开销小（仅8字节），没有复杂的控制机制，因此处理速度快，时延低。</li>
+</ul>
+</li>
+<li><p><strong>TCP</strong>（传输控制协议）：</p>
+<ul>
+<li><strong>全双工可靠信道</strong>：TCP提供了一个可靠的双向通信通道，确保数据按序、完整、正确地传输。</li>
+<li><strong>面向连接</strong>：在数据传输前，TCP需要通过三次握手过程建立连接，确保通信双方准备好进行数据交换。</li>
+<li><strong>提供可靠交付</strong>：TCP通过序列号、确认应答、重传机制等确保数据的可靠传输。</li>
+<li><strong>适用于需要可靠传输的应用</strong>：对于需要确保数据完整性和顺序的应用，如Web浏览（HTTP）、文件传输（FTP）、邮件传输（SMTP）等，TCP是首选协议。</li>
+<li><strong>不提供广播或多播服务</strong>：TCP不支持同时向多个目的地发送数据的广播或多播服务。</li>
+<li><strong>开销较多</strong>：由于TCP需要维护连接状态、序列号、确认应答等，因此在数据传输上相比UDP有更多的开销。</li>
+<li><strong>流量控制和拥塞控制</strong>：TCP通过滑动窗口机制实现流量控制，通过拥塞控制算法避免网络拥塞，保证网络的高效使用。</li>
+<li><strong>连接的建立和释放</strong>：TCP通过三次握手建立连接，通过四次挥手过程释放连接，确保连接的稳定和可靠。</li>
+</ul>
+</li>
+<li><p>UDP和TCP的应用：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/08/666333f43ff7a.webp"></p>
+</li>
+</ul>
+</li>
+<li><p><strong>端口的作用</strong>：端口号用于区分同一主机上的不同服务，是进程通信的端点标识。</p>
+<ul>
+<li><p><strong>端口号</strong></p>
+<ol>
+<li>端口号是一个16位的数字，用于在运输层标识特定的应用进程。</li>
+<li>端口号使得主机上的多个进程能够同时进行网络通信，每个进程通过唯一的端口号与外界通信。</li>
+</ol>
+</li>
+<li><p><strong>软件端口与硬件端口</strong></p>
+<ol>
+<li><strong>软件端口</strong>：指的是逻辑上的端口，由软件用来标识不同的服务或进程，与物理层无关。</li>
+<li><strong>硬件端口</strong>：通常指的是物理设备上的接口，如以太网端口、USB端口等，它们是物理层的组成部分。</li>
+</ol>
+</li>
+<li><p><strong>TCP/IP运输层端口的标志</strong></p>
+<ol>
+<li>在TCP/IP协议栈中，端口用一个16位的端口号进行标志，允许有65,535个不同的端口号。</li>
+<li>端口号只具有本地意义，即它们只在本计算机上用于区分不同的应用进程。</li>
+</ol>
+</li>
+<li><p><strong>三种类别的端口</strong></p>
+<ol>
+<li><p><strong>熟知端口</strong>（Well-known ports）：范围从0到1023，这些端口号被分配给常见的服务和应用程序，是全球通用的。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/08/6663357324f80.webp" alt="常用熟知端口"></p>
+</li>
+<li><p><strong>登记端口</strong>（Registered ports）：范围从1024到49151，这些端口号用于用户或应用程序注册的特定服务，需要在互联网授权机构（如IANA）进行登记。</p>
+</li>
+<li><p><strong>短暂端口</strong>（Ephemeral ports）：范围从49152到65535，这些端口号用于临时的通信会话，在通信结束后会被系统收回，可以被重新分配给新的通信使用。</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="用户数据报协议UDP"><a href="#用户数据报协议UDP" class="headerlink" title="用户数据报协议UDP"></a>用户数据报协议UDP</h3><p>UDP 只在 IP 的数据报服务之上增加了一些功能：复用和分用，差错检测。</p>
+<ul>
+<li><p><strong>无连接</strong>：UDP发送数据之前不需要建立连接。它允许数据的发送方直接发送数据到接收方，无需事先建立稳定的连接状态。</p>
+</li>
+<li><p><strong>尽最大努力交付</strong>：UDP提供尽力而为的服务，但不保证数据的可靠交付。这意味着数据可能在传输过程中丢失或出错，UDP不会尝试重传丢失的数据。</p>
+</li>
+<li><p><strong>面向报文</strong>：UDP一次传送和交付一个完整的报文。发送方的报文在发送时不会被拆分，接收方接收到的也是完整的报文，前提是该报文在传输过程中没有丢失。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/08/6663363137b88.webp" alt="面向报文"></p>
+</li>
+<li><p><strong>没有拥塞控制</strong>：UDP不包含拥塞控制机制。即使网络出现拥塞，UDP也不会降低发送速率，这使得UDP适合于实时应用，如多媒体通信，其中网络拥塞不应影响数据的发送频率。</p>
+</li>
+<li><p><strong>通信模式灵活</strong>：UDP支持多种通信模式，包括一对一、一对多、多对一和多对多的交互通信。</p>
+</li>
+<li><p><strong>首部开销小</strong>：UDP的首部只有8个字节，这使得它非常高效，尤其是在传输小数据包时。UDP首部包括源端口、目的端口、长度和检验和等字段。</p>
+</li>
+</ul>
+<ul>
+<li>总结：UDP是一种简单方便的协议，适用于那些对实时性要求高、可以容忍一定数据丢失的应用场景。然而，由于其不提供可靠性保证，需要可靠性的应用则需要在应用层实现额外的机制。</li>
+</ul>
+<h4 id="UDP首部格式"><a href="#UDP首部格式" class="headerlink" title="UDP首部格式"></a>UDP首部格式</h4><ol>
+<li><strong>源端口</strong>：标识发送方的端口号，可为0或特定服务的熟知端口。</li>
+<li><strong>目的端口</strong>：标识接收方的端口号，用于将数据正确分发给目标应用。</li>
+<li><strong>长度</strong>：UDP数据报的总长度，包括首部和数据，最小值为8字节。</li>
+<li><strong>检验和</strong>：用于检测数据报在传输中的准确性，错误则丢弃。</li>
+</ol>
+<p>首部结构紧凑，仅8字节，支持快速处理，适合对实时性要求高的应用。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/08/66633767aba83.webp"></p>
+<h4 id="端口处理"><a href="#端口处理" class="headerlink" title="端口处理"></a>端口处理</h4><ul>
+<li><strong>端口交付</strong>：接收方的UDP实体根据报文首部中的目的端口号，将收到的UDP报文交付给相应的端口和应用进程。这是通过端口号来识别和分发数据给正确的接收进程。</li>
+<li><strong>端口不可达</strong>：如果接收方UDP发现报文中的目的端口号没有对应的应用进程，即该端口不存在，它会丢弃该报文。同时，为了通知发送方，接收方会通过ICMP（互联网控制报文协议）发送一个“端口不可达”的差错报文，告知发送方无法完成端口交付。</li>
+</ul>
+<h4 id="检验和计算"><a href="#检验和计算" class="headerlink" title="检验和计算"></a>检验和计算</h4><p>UDP使用检验和来检测报文在传输过程中是否出现错误。检验和的计算方法如下：</p>
+<ol>
+<li><strong>伪首部</strong>：在计算检验和之前，构造一个12字节的伪首部，这个伪首部包括源IP地址、目的IP地址以及UDP长度。伪首部仅用于计算检验和，实际报文中不包含。</li>
+<li><strong>检验和覆盖范围</strong>：将伪首部、UDP首部和数据部分连续排列，构成一个完整的数据块。</li>
+<li><strong>计算过程</strong>：按照网络字节序（大端序），对这个数据块进行二进制加法求和。如果求和结果超出16位，则对结果进行再次求和，直到结果适合16位。</li>
+<li><strong>结果处理</strong>：将计算得到的16位求和结果取反，得到检验和值，填入UDP首部的检验和字段。</li>
+<li><strong>接收方验证</strong>：接收方收到UDP报文后，使用相同的方法重新计算检验和，并与报文中的检验和字段比较。如果两者不同，说明报文在传输过程中可能已损坏，接收方将丢弃该报文。</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/08/6663382919307.webp" alt="计算过程"></p>
+<h3 id="传输控制协议TCP"><a href="#传输控制协议TCP" class="headerlink" title="传输控制协议TCP"></a>传输控制协议TCP</h3><ul>
+<li><strong>面向连接</strong>：在数据传输前需要建立连接，在不可靠的IP网络服务基础之上提供可靠交付的服务。</li>
+<li><strong>可靠交付</strong>：确保数据正确、按序、完整地传输，每一条TCP连接只能有两个端点 (endpoint)，每一条 TCP 连接只能是点对点的（一对一）。 </li>
+<li><strong>全双工通信</strong>：可以同时发送和接收数据。</li>
+<li><strong>面向字节流</strong>：对应用层数据不区分边界，以字节流方式处理。</li>
+<li><strong>连接的建立和释放</strong>：通过三次握手建立连接，通过四次挥手释放连接。</li>
+<li><strong>报文段首部格式</strong>：包含源端口、目的端口、序号、确认号、窗口大小等控制信息。</li>
+</ul>
+<p>TCP不保证接收方应用程序所收到的数据块和发送方应用程序所发出的数据块具有对应大小的关系，但接收方应用程序收到的字节流必须和发送方应用程序发出的字节流完全一样。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/08/6663394517bcd.webp" alt="面向流"></p>
+<h4 id="TCP连接"><a href="#TCP连接" class="headerlink" title="TCP连接"></a>TCP连接</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/08/66633a0ab940f.webp" alt="TCP把连接作为最基本的抽象"></p>
+<ol>
+<li><strong>TCP连接的抽象性</strong>：TCP连接是由TCP协议软件提供的，它在两个通信实体之间创建了一个逻辑上的通信通道。</li>
+<li><strong>端点标识</strong>：TCP连接的每个端点都是通过一个套接字来标识的，套接字由IP地址和端口号组成。</li>
+<li><strong>套接字的唯一性</strong>：每个套接字都是唯一的，即使它们共享同一个IP地址或端口号。这是因为每个TCP连接都有其独特的一对套接字（即通信双方的IP地址和端口号）。</li>
+<li><strong>多连接支持</strong>：一个IP地址可以同时参与多个TCP连接，每个连接通过不同的端口号区分。</li>
+<li><strong>端口号的复用</strong>：即使端口号相同，只要IP地址不同，也可以在不同的TCP连接中使用。</li>
+<li><strong>连接的确定性</strong>：每一条TCP连接都是由通信两端的两个端点（套接字）唯一确定的。这意味着即使多个连接使用了相同的端口号，它们仍然可以通过不同的IP地址或不同的端口号组合来区分。</li>
+<li><strong>端点（套接字）的结构</strong>：套接字通常表示为<code>(IP地址, 端口号)</code>，例如<code>(192.168.1.1, 80)</code>，其中<code>192.168.1.1</code>是IP地址，<code>80</code>是端口号。</li>
+</ol>
+<p>每一条 TCP 连接唯一地被通信两端的两个端点（即两个套接字）所确定。</p>
+<h3 id="可靠传输的工作原理"><a href="#可靠传输的工作原理" class="headerlink" title="可靠传输的工作原理"></a>可靠传输的工作原理</h3><h4 id="停止等待协议（Stop-and-Wait）"><a href="#停止等待协议（Stop-and-Wait）" class="headerlink" title="停止等待协议（Stop-and-Wait）"></a>停止等待协议（Stop-and-Wait）</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/08/66633d422c203.webp"></p>
+<p>停止等待协议是一种最基本的可靠传输协议，其核心思想是：</p>
+<ul>
+<li><strong>一对一传输</strong>：发送方在发送一个数据帧后，必须等待接收方确认（ACK）该帧已成功接收，然后再发送下一个数据帧。</li>
+<li><strong>超时重传</strong>：如果在规定时间内没有收到确认，发送方会重新发送数据帧。</li>
+<li><strong>确认机制</strong>：接收方接收到数据帧，验证无误后，发送一个确认帧回给发送方。</li>
+<li><strong>简单性</strong>：此协议实现简单，但信道利用率低，因为发送方在等待确认期间无法发送其他数据。</li>
+</ul>
+<h4 id="连续ARQ协议（Continuous-ARQ）"><a href="#连续ARQ协议（Continuous-ARQ）" class="headerlink" title="连续ARQ协议（Continuous ARQ）"></a>连续ARQ协议（Continuous ARQ）</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/08/66633d54389a7.webp"></p>
+<p>连续ARQ协议提高了数据传输的效率，其特点包括：</p>
+<ul>
+<li><p><strong>流水线传输</strong>：发送方在发送一个数据帧后，不必等待确认即可发送后续数据帧，实现流水线传输。</p>
+</li>
+<li><p><strong>发送窗口</strong>：发送方维护一个发送窗口，窗口内的数据帧可以连续发送，而不需要等待每个帧的确认。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/08/66633da72de9d.webp"></p>
+</li>
+<li><p><strong>累积确认</strong>：接收方对按序到达的数据帧发送确认，但这个确认只针对最后一个正确接收的数据帧，表示之前的所有帧都已被正确接收。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/08/66633dd405282.webp"></p>
+</li>
+<li><p><strong>Go-Back-N</strong>：当发生丢帧时，接收方发送一个重传请求，发送方需要重传从该帧开始的所有未确认帧。</p>
+</li>
+<li><p><strong>效率问题</strong>：在高错误率的信道上，连续ARQ可能会导致大量帧的重传，从而降低传输效率。</p>
+</li>
+</ul>
+<h4 id="信道利用率计算"><a href="#信道利用率计算" class="headerlink" title="信道利用率计算"></a>信道利用率计算</h4><p>信道利用率是指在单位时间内成功传输的数据量与总传输量（包括重传）的比值。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/08/66633cba623b3.webp"></p>
+<ul>
+<li><p><strong>理想情况</strong>：如果信道没有错误，所有数据帧都一次性成功传输，信道利用率最高。</p>
+</li>
+<li><p><strong>停止等待协议</strong>：信道利用率受往返时间（RTT）影响很大，因为发送方在每个数据帧发送后都要等待确认。 </p>
+<p>信道利用率=数据传输时间/（数据传输时间+确认等待时间）</p>
+</li>
+<li><p><strong>连续ARQ协议</strong>：由于可以连续发送多个帧，信道利用率得到提高。但是，重传会降低信道利用率。 </p>
+<p>信道利用率=成功传输的数据量/总传输量（包括重传）</p>
+</li>
+</ul>
+<h4 id="TCP报文段首部格式"><a href="#TCP报文段首部格式" class="headerlink" title="TCP报文段首部格式"></a>TCP报文段首部格式</h4><ol>
+<li><strong>源端口号（Source Port）</strong>：2字节，标识发送方的端口号。</li>
+<li><strong>目的端口号（Destination Port）</strong>：2字节，标识接收方的端口号。</li>
+<li><strong>序列号（Sequence Number）</strong>：4字节，表示本报文段所发送的数据的第一个字节的序号。</li>
+<li><strong>确认号（Acknowledgment Number）</strong>：4字节，期望接收到的下一个报文段的数据的第一个字节的序号，<strong>若确认号 = N，则表明：到序号 N – 1 为止的所有数据都已正确收到。</strong></li>
+<li><strong>数据偏移（Data Offset）</strong>：4位，指示TCP报文段的数据起始处距离报文段起始处的距离，单位是32位字（4字节），也即首部长度。</li>
+<li><strong>保留（Reserved）</strong>：6位，保留位，目前必须置为0。</li>
+<li>控制位（Control Flags）：<ul>
+<li><strong>URG（Urgent Pointer）</strong>：紧急指针有效。</li>
+<li><strong>ACK（Acknowledgment）</strong>：确认号有效为1，无效为0。</li>
+<li><strong>PSH（Push Function）</strong>：1时接收方应尽快将报文段交给应用层。</li>
+<li><strong>RST（Reset）</strong>：1时重置由于某种原因出现错误的连接。</li>
+<li><strong>SYN（Synchronize）</strong>：发起一个连接。<ul>
+<li>当 SYN = 1，ACK = 0 时，表明这是一个连接请求报文段。 </li>
+<li>当 SYN = 1，ACK = 1 时，表明这是一个连接接受报文段。</li>
+</ul>
+</li>
+<li><strong>FIN（Finish）</strong>：1时释放运输连接。</li>
+</ul>
+</li>
+<li><strong>窗口（Window）</strong>：2字节，表示接收方的接收窗口大小，用于流量控制，<strong>窗口字段明确指出了现在允许对方发送的数据量。窗口值经常在动态变化。</strong></li>
+<li><strong>检验和（Checksum）</strong>：2字节，用于错误检测，覆盖了整个的TCP报文段，包括首部和数据。</li>
+<li><strong>紧急指针（Urgent Pointer）</strong>：2字节，当URG控制位为1时，指出本报文段中的紧急数据的末尾在报文段中的位置。</li>
+<li><strong>选项（Options）</strong>：长度可变，最长可达40字节，用于特定功能的扩展，如最大报文段长度MSS、窗口扩大、时间戳等。</li>
+<li><strong>填充（Padding）</strong>：确保整个TCP首部长度是32位字的整数倍。</li>
+</ol>
+<h3 id="TCP可靠传输的实现"><a href="#TCP可靠传输的实现" class="headerlink" title="TCP可靠传输的实现"></a>TCP可靠传输的实现</h3><ul>
+<li><strong>三段握手</strong>：用于建立连接，包括SYN、SYN-ACK和ACK报文段。</li>
+<li><strong>同步位（SYN）</strong>：用于开始一个新连接。</li>
+<li><strong>终止位（FIN）</strong>：用于释放连接。</li>
+<li><strong>最大报文段长度MSS</strong>：在三次握手过程中告知对方TCP段的最大长度。</li>
+</ul>
+<h4 id="以字节为单位的滑动窗口"><a href="#以字节为单位的滑动窗口" class="headerlink" title="以字节为单位的滑动窗口"></a>以字节为单位的滑动窗口</h4><ul>
+<li><strong>滑动窗口机制</strong>：TCP使用以字节为单位的滑动窗口来控制数据的发送和接收。</li>
+<li><strong>发送窗口</strong>：发送方根据接收方的接收能力（接收窗口大小）来确定窗口大小，并在窗口范围内发送数据。</li>
+<li><strong>接收窗口</strong>：接收方告知发送方其当前的接收能力，即接收窗口的大小。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/08/66647cf7b06de.webp"></p>
+<p>注意！</p>
+<ul>
+<li>第一，发送窗口是根据接收窗口设置的，但在同一时刻，发送窗口并不总是和接收窗口一样大（因为有一定的时间滞后）。 </li>
+<li>第二，TCP 标准没有规定对不按序到达的数据应如何处理。通常是先临时存放在接收窗口中，等到字节流中所缺少的字节收到后，再按序交付上层的应用进程。 </li>
+<li>第三，TCP 要求接收方必须有累积确认的功能，以减小传输开销。接收方可以在合适的时候发送确认，也可以在自己有数据要发送时把确认信息顺便捎带上。但接收方不应过分推迟发送确认，否则会导致发送方不必要的重传，捎带确认实际上并不经常发生。</li>
+</ul>
+<h4 id="超时重传时间的选择"><a href="#超时重传时间的选择" class="headerlink" title="超时重传时间的选择"></a>超时重传时间的选择</h4><ol>
+<li><p><strong>超时重传机制</strong>：TCP使用超时重传机制来确保数据包成功传输。如果在发送数据后一定时间内没有收到接收方的确认应答，发送方将重新发送数据。</p>
+</li>
+<li><p><strong>往返时间（RTT）</strong> ：超时重传时间基于对往返时间的估计。RTT是从发送方发送数据到接收方确认返回的总时间。</p>
+</li>
+<li><p><strong>加权平均往返时间（SRTT）</strong> ：为了平滑RTT的波动，TCP维护一个加权平均的往返时间SRTT，使用特定的平滑因子α进行更新。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/08/66647f788f1e5.webp"></p>
+<ul>
+<li>其中，𝟎≤𝜶&lt;𝟏 。 若 𝛂→𝟎，表示 RTT 值更新较慢。 若 𝛂→𝟏，表示 RTT 值更新较快。 RFC 6298 推荐的𝛂值为 1/8，即 0.125。</li>
+</ul>
+</li>
+<li><p><strong>超时重传时间(RTO)</strong> ：RTO通常设置为SRTT的加权平均加上4倍的RTT偏差（RTTD）。这种设置旨在避免因小的延迟波动而频繁重传。</p>
+</li>
+<li><p><strong>RTT偏差（RTTD）</strong> ：RTTD衡量RTT的波动大小，也是通过加权平均的方式进行更新，使用平滑因子β。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/09/666480370ba9c.webp"></p>
+</li>
+<li><p><strong>RFC 6298建议</strong> ：根据RFC 6298，RTO的推荐计算公式为： RTO=SRTT+4×RTTDRTO=SRTT+4×RTTD</p>
+</li>
+<li><p><strong>Karn算法</strong> ：在计算RTT时忽略由于重传而得到的RTT样本，因为这些样本可能不反映正常的网络延迟。</p>
+</li>
+<li><p><strong>修正的Karn算法</strong> ：在连续重传的情况下，逐步增加RTO的值，以避免因网络条件改善而过早重传。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/09/6664821b1d871.webp"></p>
+</li>
+<li><p><strong>快速重传</strong> ：当发送方连续收到三个相同的ACK，表明可能有数据包丢失，此时发送方会立即重传而不需要等待RTO。</p>
+</li>
+<li><p><strong>快速恢复</strong> ：在快速重传后，TCP进入快速恢复状态，通过减少拥塞窗口大小来调整发送速率，而不是立即进入慢开始阶段。</p>
+</li>
+<li><p><strong>避免全局同步</strong> ：在网络拥塞时，多个TCP连接可能同时减少发送速率，导致全局同步现象，影响网络吞吐量。合理的RTO设置可以减少这种情况的发生。</p>
+</li>
+<li><p><strong>持续计时器</strong> ：当接收方通知发送方窗口大小为零时，发送方使用持续计时器定期发送探测报文段，以检测接收方窗口是否重新打开。</p>
+</li>
+</ol>
+<h4 id="选择确认SACK"><a href="#选择确认SACK" class="headerlink" title="选择确认SACK"></a>选择确认SACK</h4><ul>
+<li><p><strong>SACK机制</strong>：选择确认允许接收方告知发送方哪些数据段已经被成功接收，哪些需要重传。</p>
+</li>
+<li><p><strong>SACK选项</strong>：在TCP首部的选项字段中，使用SACK选项来报告不连续的、已接收的数据段。</p>
+</li>
+<li><p><strong>解决乱序问题</strong>：当数据段乱序到达时，SACK可以指导发送方只重传丢失的段，而不是所有后续段。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/09/6664832d1b016.webp" alt="SACK"></p>
+</li>
+</ul>
+<h3 id="TCP流量控制"><a href="#TCP流量控制" class="headerlink" title="TCP流量控制"></a>TCP流量控制</h3><h4 id="利用滑动窗口实现流量控制"><a href="#利用滑动窗口实现流量控制" class="headerlink" title="利用滑动窗口实现流量控制"></a>利用滑动窗口实现流量控制</h4><ol>
+<li><p><strong>流量控制目的</strong>：确保发送方的发送速率与接收方的接收能力相匹配，防止接收方因数据量过大而无法处理。</p>
+</li>
+<li><p><strong>滑动窗口机制</strong>：TCP利用滑动窗口来控制发送方的数据流，接收方通过通告窗口大小来指示发送方可以发送的数据量。</p>
+</li>
+<li><p><strong>接收窗口通告</strong>：接收方根据自身缓冲区的情况，设置接收窗口大小，并通过TCP报文的窗口字段通知发送方。</p>
+</li>
+<li><p><strong>发送窗口限制</strong>：发送方的发送窗口大小受限于接收方通告的接收窗口大小，不能超过该窗口大小发送数据。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/09/666487aef024e.webp"></p>
+</li>
+<li><p><strong>持续计时器</strong>：当接收方窗口大小为零时，发送方启动持续计时器，定期发送探测报文段，探测接收方窗口是否重新打开。</p>
+</li>
+<li><p><strong>死锁风险</strong>：如果发送方因窗口为零而停止发送，而接收方等待新数据以更新窗口，可能会发生死锁。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/09/6664882d5d1ad.webp"></p>
+</li>
+<li><p><strong>解决死锁</strong>：持续计时器到期后，发送方发送探测报文段，即使窗口为零，也尝试获取接收方的最新窗口状态，以打破死锁。</p>
+</li>
+<li><p><strong>流量控制举例</strong>：</p>
+<ul>
+<li>初始时，接收方通告窗口大小为400字节。</li>
+<li>发送方发送数据，每次根据接收方通告的窗口大小调整发送量。</li>
+<li>数据包丢失或ACK延时可能导致发送方超时重传，同时接收方窗口可能变化。</li>
+</ul>
+</li>
+</ol>
+<h4 id="TCP传输效率"><a href="#TCP传输效率" class="headerlink" title="TCP传输效率"></a>TCP传输效率</h4><ol>
+<li><p><strong>传输效率影响因素</strong>：</p>
+<ul>
+<li>TCP的传输效率受多种因素影响，包括网络带宽、延迟、丢包率、拥塞控制算法等。</li>
+</ul>
+</li>
+<li><p><strong>TCP发送时机控制</strong>：</p>
+<ul>
+<li>TCP有三种机制控制发送报文段的时机： <ul>
+<li>a. 当缓存中数据量达到最大报文段长度MSS时自动发送。 </li>
+<li>b. 应用进程请求发送时，即使不足MSS也进行发送。 </li>
+<li>c. 根据设置的计时器，时间到期即使缓存中数据不足MSS也发送。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>糊涂窗口综合症</strong>：</p>
+<ul>
+<li><p>当接收方每次只读取少量数据时，会导致发送方频繁发送小数据块，降低传输效率。例如，发送1字节数据需要20字节的TCP报文段首部和20字节的IP数据报首部，有效数据传输效率极低。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/09/66648918904a1.webp"></p>
+</li>
+</ul>
+</li>
+<li><p><strong>发送方糊涂窗口综合症解决方案</strong>：</p>
+<ul>
+<li><p>使用Nagle算法，它通过合并小的数据包减少发送次数，提高传输效率。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/09/666489391b72c.webp" alt="Nagle"></p>
+</li>
+</ul>
+</li>
+<li><p><strong>接收方糊涂窗口综合症</strong>：</p>
+<ul>
+<li><p>当接收方应用进程消耗数据太慢，导致接收窗口长时间保持很小，发送方只能发送少量数据。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/09/6664895f7871e.webp"></p>
+</li>
+</ul>
+</li>
+<li><p><strong>接收方糊涂窗口综合症解决方案</strong>：</p>
+<ul>
+<li>接收方等待一段时间，直到接收缓存有足够的空间容纳一个最长的报文段或接收缓存有一半空闲空间，然后发送确认报文并通知发送方当前窗口大小。</li>
+</ul>
+</li>
+</ol>
+<h3 id="TCP拥塞控制"><a href="#TCP拥塞控制" class="headerlink" title="TCP拥塞控制"></a>TCP拥塞控制</h3><h4 id="拥塞控制的一般原理"><a href="#拥塞控制的一般原理" class="headerlink" title="拥塞控制的一般原理"></a>拥塞控制的一般原理</h4><ol>
+<li><p><strong>拥塞定义</strong>：当网络资源的需求超过可用部分时，网络性能下降，吞吐量随输入负荷增大而降低的现象。</p>
+</li>
+<li><p><strong>拥塞产生原因</strong>：可能由节点缓存容量小、链路容量不足、处理机处理速率慢等因素引起。</p>
+</li>
+<li><p><strong>拥塞控制难点</strong>：拥塞控制设计复杂，因为它是一个动态问题，且拥塞本身可能加剧拥塞。</p>
+</li>
+<li><p><strong>开环与闭环控制</strong>：开环控制基于预测进行控制，闭环控制基于网络状态反馈进行调节。</p>
+</li>
+<li><p><strong>闭环控制措施</strong>：包括监测网络状态指标（如缓存丢弃率、队列长度等），并将拥塞信息反馈给源站。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/09/66648b1a222bf.webp"></p>
+</li>
+<li><p><strong>控制措施的挑战</strong>：控制措施需要在及时性和稳定性之间找到平衡，避免引起系统振荡或反应迟缓。</p>
+</li>
+</ol>
+<h4 id="TCP的拥塞控制方法"><a href="#TCP的拥塞控制方法" class="headerlink" title="TCP的拥塞控制方法"></a>TCP的拥塞控制方法</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/09/66648d54dc116.webp" alt="整体控制流程图"></p>
+<ol>
+<li><p><strong>拥塞窗口（cwnd）</strong>：TCP通过拥塞窗口控制发送数据量，窗口大小根据网络拥塞程度动态变化。</p>
+</li>
+<li><p><strong>发送窗口决定因素</strong>：真正的发送窗口值是接收方窗口和拥塞窗口中较小的一个。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/09/66648b4f62d2c.webp"></p>
+</li>
+<li><p><strong>慢开始算法</strong>：在连接建立初期，cwnd按指数增长，探测网络负载能力（SMSS，发送方最大报文段，N是原先未被确认的、但现在被刚收到的确认报文段所确认的字节数）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/09/66648bb077076.webp"></p>
+</li>
+<li><p><strong>拥塞避免算法</strong>：当cwnd达到一定值后，cwnd按线性增长，减少拥塞风险。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/09/66648c920ae39.webp" alt="慢开始和拥塞避免轮番使用"></p>
+</li>
+<li><p><strong>快重传算法</strong>：连续收到三个重复确认时，立即重传丢失的数据段。</p>
+</li>
+<li><p><strong>快恢复算法</strong>：与快重传结合使用，调整cwnd和ssthresh，避免网络拥塞。</p>
+</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/09/66648ab9f1861.webp" alt="拥塞控制与流量控制的区别"></p>
+<h4 id="主动队列管理（AQM）"><a href="#主动队列管理（AQM）" class="headerlink" title="主动队列管理（AQM）"></a>主动队列管理（AQM）</h4><ol>
+<li><p><strong>AQM概念</strong>：主动队列管理是一种网络拥塞预防机制，通过主动丢弃数据包来避免拥塞。</p>
+</li>
+<li><p><strong>AQM与TCP的关系</strong>：AQM可以改善TCP的拥塞控制性能，减少因拥塞导致的性能下降。</p>
+</li>
+<li><p><strong>RED（Random Early Detection）</strong>：一种AQM算法，通过随机丢弃队列中的数据包来预防拥塞。</p>
+</li>
+<li><p><strong>RED工作原理</strong>：设置最小和最大门限值，根据队列长度和这些门限值决定数据包的丢弃概率，概率P按照线性规律变化。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/09/66648e813b698.webp" alt="随即早期检测RED"></p>
+</li>
+<li><p><strong>AQM的挑战</strong>：选择合适的丢弃策略和参数，避免过度丢弃或拥塞。</p>
+</li>
+</ol>
+<h3 id="TCP连接管理"><a href="#TCP连接管理" class="headerlink" title="TCP连接管理"></a>TCP连接管理</h3><h4 id="TCP的连接建立"><a href="#TCP的连接建立" class="headerlink" title="TCP的连接建立"></a>TCP的连接建立</h4><ol>
+<li><p><strong>连接建立过程</strong>：TCP使用三报文握手协议建立连接。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/09/66648fc07ebaf.webp" alt="三报文握手"></p>
+<ul>
+<li>客户端发送SYN报文以开始连接。</li>
+<li>服务器响应SYN-ACK报文，表示接受连接请求。</li>
+<li>客户端发送ACK报文确认连接。</li>
+</ul>
+</li>
+<li><p><strong>状态转换</strong>：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/09/666490016d52b.webp" alt="状态"></p>
+<ul>
+<li>客户端从CLOSED状态转换到SYN_SENT状态。</li>
+<li>服务器从CLOSED状态转换到SYN_RECEIVED状态。</li>
+<li>客户端和服务器最终都进入ESTABLISHED状态。</li>
+</ul>
+</li>
+<li><p><strong>参数协商</strong>：在连接建立过程中，双方可以协商最大窗口大小、选项设置等参数。</p>
+</li>
+<li><p><strong>资源分配</strong>：为新连接分配必要的资源，如缓存空间和连接表项。</p>
+</li>
+</ol>
+<h4 id="TCP的连接释放"><a href="#TCP的连接释放" class="headerlink" title="TCP的连接释放"></a>TCP的连接释放</h4><ol>
+<li><p><strong>连接释放过程</strong>：TCP使用四报文挥手协议释放连接。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/09/6664907d1821b.webp" alt="四报文握手"></p>
+<ul>
+<li>通信一方发送FIN报文段，请求关闭连接。</li>
+<li>对方响应ACK报文段，确认连接释放。</li>
+<li>如果另一方也有数据发送完毕，发送FIN报文段。</li>
+<li>最终双方确认关闭连接，进入CLOSED状态。</li>
+</ul>
+</li>
+<li><p><strong>状态转换</strong>：</p>
+<ul>
+<li>从ESTABLISHED状态开始，根据FIN报文的发送和接收，可能经历FIN_WAIT_1、FIN_WAIT_2、CLOSE_WAIT、LAST_ACK等状态。</li>
+</ul>
+</li>
+<li><p><strong>半关闭状态</strong>：当一方完成数据发送并进入CLOSE_WAIT状态时，另一方仍可发送数据。</p>
+</li>
+<li><p><strong>TIME_WAIT状态</strong>：主动关闭方在发送完最后一个ACK后，进入TIME_WAIT状态，等待2MSL时间以确保被动关闭方接收到最后的ACK。</p>
+</li>
+<li><p><strong>保活计时器</strong>：用于检测TCP连接的空闲状态，通过发送探测报文段来维持连接。</p>
+</li>
+</ol>
+<h4 id="TCP有限状态机"><a href="#TCP有限状态机" class="headerlink" title="TCP有限状态机"></a>TCP有限状态机</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/09/666490f5db89d.webp" alt="我不到啊，PPT没讲"></p>
+<ol>
+<li><strong>状态机概念</strong>：TCP通过有限状态机（FSM）管理连接的不同状态和状态转换。</li>
+<li><strong>主要状态</strong>：<ul>
+<li>CLOSED：初始状态，没有连接。</li>
+<li>LISTEN：服务器等待连接请求的状态。</li>
+<li>SYN_SENT：客户端发送连接请求后的状态。</li>
+<li>SYN_RECEIVED：服务器收到连接请求后的状态。</li>
+<li>ESTABLISHED：连接建立成功，数据传输状态。</li>
+<li>FIN_WAIT_1：一方请求关闭连接，等待另一方确认。</li>
+<li>FIN_WAIT_2：确认关闭连接，等待对方FIN报文。</li>
+<li>CLOSE_WAIT：接收到对方FIN报文，等待本地应用关闭连接。</li>
+<li>LAST_ACK：本地应用关闭连接，等待对方确认。</li>
+<li>TIME_WAIT：等待2MSL时间后确保连接完全关闭。</li>
+<li>CLOSING：双方同时尝试关闭连接的状态。</li>
+</ul>
+</li>
+</ol>
+<h3 id="计算时间部分"><a href="#计算时间部分" class="headerlink" title="计算时间部分"></a>计算时间部分</h3><h4 id="RTT测量"><a href="#RTT测量" class="headerlink" title="RTT测量"></a>RTT测量</h4><ol>
+<li><strong>RTT定义</strong>：往返时间（RTT）是数据从发送方发送到接收方，并从接收方返回确认所需的总时间。</li>
+<li><strong>RTT的测量方法</strong>：<ul>
+<li>通过在TCP段中包含时间戳，并在接收方收到后立即发送确认，其中包含接收到的时间戳，发送方可以计算RTT。</li>
+</ul>
+</li>
+</ol>
+<h4 id="超时重传时间RTO设置"><a href="#超时重传时间RTO设置" class="headerlink" title="超时重传时间RTO设置"></a>超时重传时间RTO设置</h4><ol>
+<li><p><strong>RTO定义</strong>：超时重传时间（RTO）是TCP发送方在发送数据后等待确认的最长时间。</p>
+</li>
+<li><p><strong>RTO的计算</strong>：基于对RTT的测量和估计，RTO应略大于观察到的RTT。</p>
+</li>
+<li><p><strong>加权平均往返时间RTTS</strong>：</p>
+<ul>
+<li>公式：<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/09/66649195d410a.webp"></li>
+<li>其中α是平滑因子，通常取值接近0.125。</li>
+</ul>
+</li>
+<li><p><strong>RTT偏差RTTD</strong>：</p>
+<ul>
+<li>公式：<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/09/6664927e5acdb.webp"></li>
+<li>其中β是另一个平滑因子，通常取值接近0.25。</li>
+</ul>
+</li>
+<li><p><strong>RFC 6298推荐的RTO计算公式</strong>：</p>
+<ul>
+<li>公式：<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/09/666493883e33b.webp"></li>
+</ul>
+</li>
+<li><p><strong>Karn算法</strong>：在计算RTT时忽略由于重传而得到的RTT样本，以避免影响RTO的准确性。</p>
+</li>
+<li><p><strong>修正的Karn算法</strong>：</p>
+<ul>
+<li>当连续发生重传时，逐步增加RTO的值，以减少不必要的重传。</li>
+</ul>
+</li>
+<li><p><strong>超时重传时间的调整</strong>：</p>
+<ul>
+<li>当确认报文段到达时，如果确认是对原始报文段的确认还是对重传报文段的确认，需要根据报文段序列号和确认号进行判断。</li>
+</ul>
+</li>
+<li><p><strong>持续计时器</strong>：</p>
+<ul>
+<li>当接收方窗口为零时，发送方使用持续计时器定期发送探测报文段，以检测接收方窗口是否重新打开。</li>
+</ul>
+</li>
+</ol>
+<p><em>大部分讲完了，后面的老师说没有重点，所以我就一笔带过了</em></p>
+<h2 id="第六章-应用层"><a href="#第六章-应用层" class="headerlink" title="第六章 应用层"></a>第六章 应用层</h2><h3 id="域名系统-DNS"><a href="#域名系统-DNS" class="headerlink" title="域名系统 DNS"></a>域名系统 DNS</h3><ul>
+<li><strong>概述</strong>: 互联网使用的命名系统，将域名转换为IP地址，提供核心服务。</li>
+<li><strong>域名结构</strong>: 层次树状结构，如<code>www.qyliu.top</code>。</li>
+<li><strong>域名服务器</strong>: 运行域名服务器程序的专设结点，负责域名到IP地址的解析。</li>
+<li><strong>解析过程</strong>: 使用UDP通信，通过本地域名服务器进行解析。</li>
+</ul>
+<h3 id="文件传送协议"><a href="#文件传送协议" class="headerlink" title="文件传送协议"></a>文件传送协议</h3><ul>
+<li><strong>FTP</strong>: 文件传送协议，提供交互式访问，允许指定文件类型与格式。</li>
+<li><strong>TFTP</strong>: 简单文件传送协议，使用UDP，适用于小规模文件传输。</li>
+</ul>
+<h3 id="远程终端协议-TELNET"><a href="#远程终端协议-TELNET" class="headerlink" title="远程终端协议 TELNET"></a>远程终端协议 TELNET</h3><ul>
+<li>允许用户通过TCP连接登录到远程主机，实现远程操作。</li>
+</ul>
+<h3 id="万维网-WWW"><a href="#万维网-WWW" class="headerlink" title="万维网 WWW"></a>万维网 WWW</h3><ul>
+<li><strong>概述</strong>: 一个大规模的、联机式信息储藏所，提供分布式服务。</li>
+<li><strong>URL</strong>: 统一资源定位符，用于标识互联网上的资源。</li>
+<li><strong>HTTP</strong>: 超文本传送协议，定义了浏览器与服务器通信的格式和规则。</li>
+</ul>
+<h3 id="电子邮件"><a href="#电子邮件" class="headerlink" title="电子邮件"></a>电子邮件</h3><ul>
+<li>包括电子邮件的概述、SMTP、POP3、IMAP等协议，以及MIME的使用。</li>
+</ul>
+<h3 id="动态主机配置协议-DHCP"><a href="#动态主机配置协议-DHCP" class="headerlink" title="动态主机配置协议 DHCP"></a>动态主机配置协议 DHCP</h3><ul>
+<li>自动分配IP地址给网络中的主机，提供即插即用连网机制。</li>
+</ul>
+<h3 id="简单网络管理协议-SNMP"><a href="#简单网络管理协议-SNMP" class="headerlink" title="简单网络管理协议 SNMP"></a>简单网络管理协议 SNMP</h3><ul>
+<li>网络管理协议，用于监视和控制网络设备。</li>
+</ul>
+<h3 id="应用进程跨越网络的通信"><a href="#应用进程跨越网络的通信" class="headerlink" title="应用进程跨越网络的通信"></a>应用进程跨越网络的通信</h3><ul>
+<li>介绍应用进程如何通过系统调用和API与网络进行通信。</li>
+</ul>
+<h3 id="P2P-应用"><a href="#P2P-应用" class="headerlink" title="P2P 应用"></a>P2P 应用</h3><ul>
+<li><strong>概述</strong>: P2P技术允许网络中的节点直接进行通信和数据交换。</li>
+<li><strong>集中目录服务器</strong>: 如Napster，使用集中目录服务器进行文件索引。</li>
+<li><strong>全分布式结构</strong>: 如Gnutella，不使用集中目录服务器，采用洪泛法查询。</li>
+<li><strong>文件分发分析</strong>: 比较客户-服务器方式和P2P方式在文件分发效率上的差异。</li>
+<li><strong>搜索对象</strong>: 讨论了在P2P网络中搜索对象的不同技术，如DHT。</li>
+</ul>
+<h2 id="第九章：无线网络和移动网络"><a href="#第九章：无线网络和移动网络" class="headerlink" title="第九章：无线网络和移动网络"></a>第九章：无线网络和移动网络</h2><h3 id="无线局域网-WLAN"><a href="#无线局域网-WLAN" class="headerlink" title="无线局域网 WLAN"></a>无线局域网 WLAN</h3><ul>
+<li><strong>组成</strong>: 便携站、移动站、有固定基础设施的WLAN、无固定基础设施的WLAN。</li>
+<li><strong>IEEE 802.11</strong>: 包括基本服务集BSS、扩展服务集ESS、信道、MAC地址、SSID、漫游等概念。</li>
+<li><strong>物理层</strong>: 802.11标准，涉及不同频段、数据率、调制方法等。</li>
+<li><strong>MAC层协议</strong>: 解决共享信道上的碰撞问题，使用CSMA/CA协议。</li>
+<li><strong>MAC帧</strong>: 控制帧、数据帧和管理帧，包含帧控制、地址、序号控制等字段。</li>
+</ul>
+<h3 id="无线个人区域网-WPAN"><a href="#无线个人区域网-WPAN" class="headerlink" title="无线个人区域网 WPAN"></a>无线个人区域网 WPAN</h3><ul>
+<li><strong>定义</strong>: 个人工作地方的电子设备通过无线技术自组网络，范围约10米。</li>
+<li><strong>标准</strong>: IEEE 802.15工作组制定，包括蓝牙、ZigBee等。</li>
+<li><strong>蓝牙</strong>: 包括低耗能蓝牙BLE、传统蓝牙，数据率和传输距离不同。</li>
+<li><strong>ZigBee</strong>: 低速WPAN，适用于电子设备间无线通信，功耗低，网络容量大。</li>
+</ul>
+<h3 id="蜂窝移动通信网"><a href="#蜂窝移动通信网" class="headerlink" title="蜂窝移动通信网"></a>蜂窝移动通信网</h3><ul>
+<li><strong>发展简介</strong>: 从1G到4G的演进，涉及蜂窝技术、GPRS、EDGE、3G、4G等。</li>
+<li><strong>GSM系统</strong>: 2G蜂窝通信系统，包括基站子系统和网络子系统。</li>
+<li><strong>3G UMTS</strong>: 第三代蜂窝移动通信系统，使用DS-WCDMA或TD-SCDMA。</li>
+<li><strong>4G LTE</strong>: 长期演进技术，全IP网络，高数据率，包括E-UTRAN和EPC。</li>
+</ul>
+<h3 id="移动IP"><a href="#移动IP" class="headerlink" title="移动IP"></a>移动IP</h3><ul>
+<li><strong>基本概念</strong>: 允许计算机在移动中保留原始IP地址，对上层应用透明。</li>
+<li><strong>使用概念</strong>: 包括归属网络、被访网络、永久地址、转交地址、归属代理、外地代理。</li>
+<li><strong>通信步骤</strong>: 涉及数据报的封装、转发、拆封等过程。</li>
+<li><strong>问题</strong>: 三角形路由选择问题，可通过直接路由选择和移动用户定位协议解决。</li>
+</ul>
+<h3 id="移动网络对高层协议的影响"><a href="#移动网络对高层协议的影响" class="headerlink" title="移动网络对高层协议的影响"></a>移动网络对高层协议的影响</h3><ul>
+<li><strong>TCP报文段丢失</strong>: 影响TCP拥塞控制，可能导致发送速率降低。</li>
+<li><strong>处理方法</strong>: 本地恢复、让TCP发送方知道无线链路使用情况、拆分TCP连接。</li>
+</ul>
+<h2 id="完结"><a href="#完结" class="headerlink" title="完结"></a>完结</h2><p>随着键盘上最后一个字符的敲击声渐渐消散，我的计算机网络复习提纲终于画上了圆满的句号。34000多个字，不仅仅是数字的累积，更是我知识积累和思维深度的体现。每一句话，每一个概念，都是我精心挑选和整理的结果，它们承载着我对计算机网络领域的热爱和对知识的渴望。</p>
+<p>这10天的旅程，是挑战，也是成长。每当夜深人静，只有电脑屏幕的微光陪伴着我，我仿佛能听到知识在脑海中流转的声音。每一个难题的攻克，每一次思路的清晰，都让我更加坚信：坚持和努力，是通往成功的必经之路。</p>
+<p>现在，当我回望这一路走来的足迹，心中充满了感慨。这份提纲，不仅是复习的资料，更是我学习历程的见证。它见证了我的努力，我的坚持，以及我对未来的无限憧憬。在未来的日子里，我将继续带着这份信念，带着这份对知识的热爱，继续前行。我相信，每一次，都是对自我能力的一次提升，都是对未来可能性的一次探索。</p>
+<p>感谢这段旅程，感谢这份提纲，感谢我自己。让我带着这份成就，迎接新的挑战，创造更多的辉煌。</p>
+<h2 id="休息一下"><a href="#休息一下" class="headerlink" title="休息一下"></a>休息一下</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/09/66649828d8808.webp" alt="为什么熬夜后反而变精神了"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.liushen.fun/">Willow-God</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.liushen.fun/posts/8dfa25e1/">https://blog.liushen.fun/posts/8dfa25e1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.liushen.fun" target="_blank">LiuShen's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习</a><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/">学习资料</a></div><div class="post-share"><div class="social-share" data-image="https://cdn.qyliu.top/i/2024/05/31/66598ca129913.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="/pluginsSrc/butterfly-extsrc/sharejs/dist/css/share.min.css?v=1.1.3" media="print" onload="this.media='all'"><script src="/pluginsSrc/butterfly-extsrc/sharejs/dist/js/social-share.min.js?v=1.1.3" defer=""></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>来😍鼠标过来一点~</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/config/img/wechat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/config/img/wechat.png" alt="微信"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/config/img/wechat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/config/img/wechat.png" alt="支付宝"></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="prev-post pull-left" href="/posts/6d87a301/" title="计算机网络考研复习：物理层"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/25/6650c3202f779.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">计算机网络考研复习：物理层</div></div></a><a class="next-post pull-right" href="/posts/a84f5e47/" title="Alist宝塔部署及其美化"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/03/665de5d5a3aae.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Alist宝塔部署及其美化</div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a href="/posts/f2c15334/" title="计算机网络考研复习：概述"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/22/664dfc89133c2.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-05-23</div><div class="title">计算机网络考研复习：概述</div></div></a><a href="/posts/6d87a301/" title="计算机网络考研复习：物理层"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/25/6650c3202f779.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-05-27</div><div class="title">计算机网络考研复习：物理层</div></div></a><a href="/posts/f7016786/" title="Java课程主要内容回顾"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wallpapercave.com/wp/wp7250277.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-01</div><div class="title">Java课程主要内容回顾</div></div></a></div></div><hr class="custom-hr"><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/03/21/65fc570ca9fe7.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info-name">Willow-God</div><div class="author-info-description">清羽 〄 飞扬</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">69</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/willow-god"><i class="fab fa-github"></i><span>Follow Me 🛫</span></a><div class="card-info-social-icons"><a class="social-icon" href="mailto:01@liushen.fun" target="_blank" title="Email"><i class="fa-solid fa-envelope"></i></a><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2411457922&amp;site=qq&amp;menu=yes" target="_blank" title="QQ：2411457922"><i class="fa-brands fa-qq"></i></a><a class="social-icon" href="https://wakatime.com/@LiuShen" target="_blank" title="Wakatime"><i class="fa-solid fa-chart-column"></i></a><a class="social-icon" href="https://blog.liushen.fun/atom.xml" target="_blank" title="rss地址"><i class="fa-solid fa-rss"></i></a></div></div><div class="card-widget" id="card-poem"><div id="poem_sentence"></div><div id="poem_info"><div id="poem_dynasty"></div><div id="poem_author"></div></div></div><script src="/js/jinrishici.js" charset="utf-8"></script><script type="text/javascript">jinrishici.load(function(result) {
+var sentence = document.querySelector("#poem_sentence")
+var author = document.querySelector("#poem_author")
+var dynasty = document.querySelector("#poem_dynasty")
+
+var sentenceText = result.data.content
+sentenceText = sentenceText.substr(0, sentenceText.length - 1);
+sentence.innerHTML = sentenceText
+dynasty.innerHTML = result.data.origin.dynasty
+author.innerHTML = result.data.origin.author + '《' + result.data.origin.title + '》'
+});</script><div class="card-widget card-announcement"><div class="item-headline"><i class="fa fa-user"></i><span>欢迎来访者</span></div><div id="welcome-info"></div><script src="/js/txmap.js"></script><script data-pjax="data-pjax">var longitude="108.546767";
+var Latitude="34.579480";
+var txkey="44BBZ-IZPLZ-V6PXP-ZYLRT-JKFH3-DOFJ6";
+var ipLoacation;
+window.onload = () => {welcometxmap()};
+document.addEventListener("pjax:complete", welcometxmap());</script></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p><strong>博客架构概览：</strong><br>⚙️框架核心：Hexo<br>🕹️界面设计：Butterfly<br>🔮安全保障：长亭雷池<br>🔩管理工具：宝塔面板，1Panel<br>🎰服务器支持：阿里云，腾讯云<br>🎲CDN加速：多吉云，无畏云<br><strong>快捷跳转地址：</strong><br>👻博客主站：<a href="https://blog.liushen.fun">blog.liushen.fun</a><br>😶‍🌫️博客分栏：<a target="_blank" rel="noopener" href="https://www.qingyang.eu.org">qingyang.eu.org</a><br>🤖个人导航：<a target="_blank" rel="noopener" href="https://www.liushen.fun">www.liushen.fun</a><br></p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/config/img/notice.gif" alt="可爱捏" title="可爱捏" style="width:100%; border-radius:10px;"></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A2%8E%E7%A2%8E%E5%BF%B5"><span class="toc-text">碎碎念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E8%AE%B0%E5%BD%95"><span class="toc-text">更新记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%80%83%E7%82%B9%E6%80%BB%E8%A7%88"><span class="toc-text">考点总览</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC1%E7%AB%A0-%E6%A6%82%E8%BF%B0%EF%BC%88%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%EF%BC%89"><span class="toc-text">第1章 概述（基本概念）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC2%E7%AB%A0-%E7%89%A9%E7%90%86%E5%B1%82%EF%BC%88%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%EF%BC%89"><span class="toc-text">第2章 物理层（基本概念）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC3%E7%AB%A0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%EF%BC%88%E5%A4%A7%E9%A2%98%E9%87%8D%E7%82%B9%EF%BC%89"><span class="toc-text">第3章 数据链路层（大题重点）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC4%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%B1%82%EF%BC%88%E9%83%BD%E6%98%AF%E9%87%8D%E7%82%B9%EF%BC%89"><span class="toc-text">第4章 网络层（都是重点）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC5%E7%AB%A0-%E8%BF%90%E8%BE%93%E5%B1%82%EF%BC%88%E9%83%BD%E6%98%AF%E9%87%8D%E7%82%B9%EF%BC%89"><span class="toc-text">第5章 运输层（都是重点）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC6%E7%AB%A0-%E5%BA%94%E7%94%A8%E5%B1%82%EF%BC%88%E6%97%A0%E5%A4%A7%E9%87%8D%E7%82%B9%EF%BC%89"><span class="toc-text">第6章 应用层（无大重点）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC9%E7%AB%A0-%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C%EF%BC%88%E7%9C%8B%E7%9C%8B%EF%BC%89"><span class="toc-text">第9章 无线网络和移动网络（看看）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E6%A6%82%E8%BF%B0"><span class="toc-text">第一章：概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%92%8C%E7%89%B9%E7%82%B9"><span class="toc-text">定义和特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%89%B9%E7%82%B9"><span class="toc-text">基本特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%92%E8%81%94%E7%BD%91%E6%A6%82%E8%BF%B0"><span class="toc-text">互联网概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87"><span class="toc-text">性能指标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E6%8D%A2%E6%96%B9%E5%BC%8F"><span class="toc-text">交换方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B1%82%E6%80%9D%E6%83%B3"><span class="toc-text">分层思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OSI-RM%E5%92%8CTCP-IP"><span class="toc-text">OSI/RM和TCP/IP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E5%92%8C%E5%8D%8F%E8%AE%AE"><span class="toc-text">功能和协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E9%81%93%E5%88%A9%E7%94%A8%E7%8E%87-%E7%BD%91%E7%BB%9C%E5%88%A9%E7%94%A8%E7%8E%87"><span class="toc-text">信道利用率/网络利用率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP-IP%E6%A8%A1%E5%9E%8B"><span class="toc-text">TCP/IP模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0%EF%BC%9A%E7%89%A9%E7%90%86%E5%B1%82"><span class="toc-text">第二章：物理层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%A9%E7%90%86%E5%B1%82%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%89%B9%E6%80%A7"><span class="toc-text">物理层基本概念与特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9E%8B"><span class="toc-text">数据通信系统模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F"><span class="toc-text">编码方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E9%81%93%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">信道基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E9%81%93%E6%9E%81%E9%99%90%E5%AE%B9%E9%87%8F"><span class="toc-text">信道极限容量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E9%81%93%E5%A4%8D%E7%94%A8%E6%8A%80%E6%9C%AF"><span class="toc-text">信道复用技术</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%91%E5%88%86%E5%A4%8D%E7%94%A8-FDM"><span class="toc-text">频分复用 (FDM)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%B6%E5%88%86%E5%A4%8D%E7%94%A8-TDM"><span class="toc-text">时分复用 (TDM)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A2%E5%88%86%E5%A4%8D%E7%94%A8-WDM"><span class="toc-text">波分复用 (WDM)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A0%81%E5%88%86%E5%A4%8D%E7%94%A8-CDMA"><span class="toc-text">码分复用 (CDMA)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%9F%E8%AE%A1%E6%97%B6%E5%88%86%E5%A4%8D%E7%94%A8-STDM"><span class="toc-text">统计时分复用 (STDM)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E8%BE%93%E5%AA%92%E4%BD%93"><span class="toc-text">传输媒体</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%BC%E5%BC%95%E5%9E%8B"><span class="toc-text">导引型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E5%AF%BC%E5%BC%95%E5%9E%8B%E4%BC%A0%E8%BE%93%E5%AA%92%E4%BD%93"><span class="toc-text">非导引型传输媒体</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="toc-text">第三章：数据链路层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%9C%B0%E4%BD%8D%E4%B8%8E%E4%BD%9C%E7%94%A8"><span class="toc-text">数据链路层地位与作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E4%B8%8E%E5%B8%A7"><span class="toc-text">数据链路与帧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E4%B8%8E%E5%B8%A7-1"><span class="toc-text">数据链路与帧</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%93%BE%E8%B7%AF%EF%BC%88Link%EF%BC%89"><span class="toc-text">链路（Link）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%EF%BC%88Data-Link%EF%BC%89"><span class="toc-text">数据链路（Data Link）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%A7%EF%BC%88Frame%EF%BC%89"><span class="toc-text">帧（Frame）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E4%B8%AA%E5%9F%BA%E6%9C%AC%E9%97%AE%E9%A2%98"><span class="toc-text">三个基本问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%82%B9%E5%AF%B9%E7%82%B9%E5%8D%8F%E8%AE%AE-PPP"><span class="toc-text">点对点协议 PPP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#PPP%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="toc-text">PPP协议的特点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PPP%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%BB%84%E6%88%90%EF%BC%9A"><span class="toc-text">PPP协议的组成：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PPP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%B8%A7%E6%A0%BC%E5%BC%8F%EF%BC%9A"><span class="toc-text">PPP协议的帧格式：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%8F%E6%98%8E%E4%BC%A0%E8%BE%93%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="toc-text">透明传输问题：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PPP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%8A%B6%E6%80%81%EF%BC%9A"><span class="toc-text">PPP协议的工作状态：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%80%E5%9F%9F%E7%BD%91%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="toc-text">局域网数据链路层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="toc-text">主要特点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E4%BC%98%E7%82%B9%EF%BC%9A"><span class="toc-text">主要优点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%91%E7%8E%B0%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="toc-text">发现问题：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%88%86%E5%B1%82"><span class="toc-text">数据链路层分层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E9%85%8D%E5%99%A8"><span class="toc-text">适配器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSMA-CD-%E5%8D%8F%E8%AE%AE"><span class="toc-text">CSMA/CD 协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E9%81%93%E5%88%A9%E7%94%A8%E7%8E%87"><span class="toc-text">信道利用率</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E6%95%B0a%E7%9A%84%E5%AE%9A%E4%B9%89%EF%BC%9A"><span class="toc-text">参数a的定义：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%90%E9%AB%98%E4%BF%A1%E9%81%93%E5%88%A9%E7%94%A8%E7%8E%87%EF%BC%9A"><span class="toc-text">提高信道利用率：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E5%80%BC%EF%BC%9A"><span class="toc-text">最大值：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A5%E5%A4%AA%E7%BD%91%E7%9A%84-MAC-%E5%B1%82"><span class="toc-text">以太网的 MAC 层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MAC%E5%B1%82%E7%9A%84%E5%8A%9F%E8%83%BD%EF%BC%9A"><span class="toc-text">MAC层的功能：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MAC%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80%EF%BC%9A"><span class="toc-text">MAC物理地址：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MAC%E5%B8%A7%EF%BC%9A"><span class="toc-text">MAC帧：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E8%80%85%E5%8C%BA%E5%88%AB%EF%BC%9A"><span class="toc-text">二者区别：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MAC%E5%B1%82%E7%9A%84%E7%A1%AC%E4%BB%B6%EF%BC%9A"><span class="toc-text">MAC层的硬件：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A5%E5%A4%AA%E7%BD%91%E8%87%AA%E5%AD%A6%E4%B9%A0%E5%8A%9F%E8%83%BD"><span class="toc-text">以太网自学习功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0%EF%BC%9A%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="toc-text">第四章：网络层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%A4%E7%A7%8D%E6%9C%8D%E5%8A%A1"><span class="toc-text">两种服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%A4%E4%B8%AA%E5%B1%82%E9%9D%A2"><span class="toc-text">两个层面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E5%AE%9A%E4%B9%89%E7%BD%91%E7%BB%9CSDN"><span class="toc-text">软件定义网络SDN</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP"><span class="toc-text">网际协议IP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E4%BA%92%E8%81%94%E7%BD%91%E7%BB%9C"><span class="toc-text">虚拟互联网络</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IP%E5%9C%B0%E5%9D%80"><span class="toc-text">IP地址</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ARP%E5%8D%8F%E8%AE%AE"><span class="toc-text">ARP协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IP%E6%95%B0%E6%8D%AE%E6%8A%A5"><span class="toc-text">IP数据报</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPv6"><span class="toc-text">IPv6</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Pv6%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%A6%96%E9%83%A8"><span class="toc-text">Pv6的基本首部</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IPv6%E7%9A%84%E5%9C%B0%E5%9D%80"><span class="toc-text">IPv6的地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8EIPv4%E5%90%91IPv6%E8%BF%87%E6%B8%A1"><span class="toc-text">从IPv4向IPv6过渡</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ICMPv6"><span class="toc-text">ICMPv6</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E9%A6%96%E9%83%A8%E6%A0%BC%E5%BC%8F"><span class="toc-text">基本首部格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IPv6%E5%9C%B0%E5%9D%80%E5%88%86%E7%B1%BB"><span class="toc-text">IPv6地址分类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E5%8D%8F%E8%AE%AE"><span class="toc-text">路由选择协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-1"><span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E9%83%A8%E7%BD%91%E5%85%B3%E5%8D%8F%E8%AE%AERIP"><span class="toc-text">内部网关协议RIP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E9%83%A8%E7%BD%91%E5%85%B3%E5%8D%8F%E8%AE%AEOSPF"><span class="toc-text">内部网关协议OSPF</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%96%E9%83%A8%E7%BD%91%E5%85%B3%E5%8D%8F%E8%AE%AEBGP"><span class="toc-text">外部网关协议BGP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%99%A8%E7%9A%84%E6%9E%84%E6%88%90"><span class="toc-text">路由器的构成</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IP%E5%A4%9A%E6%92%AD"><span class="toc-text">IP多播</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IP%E5%A4%9A%E6%92%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">IP多播的基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8%E5%B1%80%E5%9F%9F%E7%BD%91%E4%B8%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E5%A4%9A%E6%92%AD"><span class="toc-text">在局域网上进行硬件多播</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IGMP%E5%92%8C%E5%A4%9A%E6%92%AD%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E5%8D%8F%E8%AE%AE"><span class="toc-text">IGMP和多播路由选择协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E6%92%ADIP%E5%9C%B0%E5%9D%80"><span class="toc-text">多播IP地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E6%92%AD%E6%95%B0%E6%8D%AE%E6%8A%A5%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-text">多播数据报的特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E6%92%AD%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9"><span class="toc-text">多播路由选择</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E6%92%AD%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-text">多播路由选择协议的类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E4%B8%93%E7%94%A8%E7%BD%91-VPN-%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2-NAT"><span class="toc-text">虚拟专用网 VPN 与网络地址转换 NAT</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E4%B8%93%E7%94%A8%E7%BD%91-VPN"><span class="toc-text">虚拟专用网 VPN</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2-NAT"><span class="toc-text">网络地址转换 NAT</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0%EF%BC%9A%E8%BF%90%E8%BE%93%E5%B1%82"><span class="toc-text">第五章：运输层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%BE%93%E5%B1%82%E5%8D%8F%E8%AE%AE%E6%A6%82%E8%BF%B0"><span class="toc-text">运输层协议概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE%E6%8A%A5%E5%8D%8F%E8%AE%AEUDP"><span class="toc-text">用户数据报协议UDP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#UDP%E9%A6%96%E9%83%A8%E6%A0%BC%E5%BC%8F"><span class="toc-text">UDP首部格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E5%A4%84%E7%90%86"><span class="toc-text">端口处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A3%80%E9%AA%8C%E5%92%8C%E8%AE%A1%E7%AE%97"><span class="toc-text">检验和计算</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E8%BE%93%E6%8E%A7%E5%88%B6%E5%8D%8F%E8%AE%AETCP"><span class="toc-text">传输控制协议TCP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E8%BF%9E%E6%8E%A5"><span class="toc-text">TCP连接</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">可靠传输的工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%81%9C%E6%AD%A2%E7%AD%89%E5%BE%85%E5%8D%8F%E8%AE%AE%EF%BC%88Stop-and-Wait%EF%BC%89"><span class="toc-text">停止等待协议（Stop-and-Wait）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E7%BB%ADARQ%E5%8D%8F%E8%AE%AE%EF%BC%88Continuous-ARQ%EF%BC%89"><span class="toc-text">连续ARQ协议（Continuous ARQ）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%A1%E9%81%93%E5%88%A9%E7%94%A8%E7%8E%87%E8%AE%A1%E7%AE%97"><span class="toc-text">信道利用率计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E6%8A%A5%E6%96%87%E6%AE%B5%E9%A6%96%E9%83%A8%E6%A0%BC%E5%BC%8F"><span class="toc-text">TCP报文段首部格式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">TCP可靠传输的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A5%E5%AD%97%E8%8A%82%E4%B8%BA%E5%8D%95%E4%BD%8D%E7%9A%84%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3"><span class="toc-text">以字节为单位的滑动窗口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B6%85%E6%97%B6%E9%87%8D%E4%BC%A0%E6%97%B6%E9%97%B4%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-text">超时重传时间的选择</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E7%A1%AE%E8%AE%A4SACK"><span class="toc-text">选择确认SACK</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="toc-text">TCP流量控制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E5%AE%9E%E7%8E%B0%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="toc-text">利用滑动窗口实现流量控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E4%BC%A0%E8%BE%93%E6%95%88%E7%8E%87"><span class="toc-text">TCP传输效率</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="toc-text">TCP拥塞控制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E7%9A%84%E4%B8%80%E8%88%AC%E5%8E%9F%E7%90%86"><span class="toc-text">拥塞控制的一般原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E7%9A%84%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E6%96%B9%E6%B3%95"><span class="toc-text">TCP的拥塞控制方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E5%8A%A8%E9%98%9F%E5%88%97%E7%AE%A1%E7%90%86%EF%BC%88AQM%EF%BC%89"><span class="toc-text">主动队列管理（AQM）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E8%BF%9E%E6%8E%A5%E7%AE%A1%E7%90%86"><span class="toc-text">TCP连接管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E7%9A%84%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B"><span class="toc-text">TCP的连接建立</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E7%9A%84%E8%BF%9E%E6%8E%A5%E9%87%8A%E6%94%BE"><span class="toc-text">TCP的连接释放</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA"><span class="toc-text">TCP有限状态机</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%97%B6%E9%97%B4%E9%83%A8%E5%88%86"><span class="toc-text">计算时间部分</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RTT%E6%B5%8B%E9%87%8F"><span class="toc-text">RTT测量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B6%85%E6%97%B6%E9%87%8D%E4%BC%A0%E6%97%B6%E9%97%B4RTO%E8%AE%BE%E7%BD%AE"><span class="toc-text">超时重传时间RTO设置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E5%BA%94%E7%94%A8%E5%B1%82"><span class="toc-text">第六章 应用层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F-DNS"><span class="toc-text">域名系统 DNS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%BC%A0%E9%80%81%E5%8D%8F%E8%AE%AE"><span class="toc-text">文件传送协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E7%BB%88%E7%AB%AF%E5%8D%8F%E8%AE%AE-TELNET"><span class="toc-text">远程终端协议 TELNET</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%87%E7%BB%B4%E7%BD%91-WWW"><span class="toc-text">万维网 WWW</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6"><span class="toc-text">电子邮件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E4%B8%BB%E6%9C%BA%E9%85%8D%E7%BD%AE%E5%8D%8F%E8%AE%AE-DHCP"><span class="toc-text">动态主机配置协议 DHCP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86%E5%8D%8F%E8%AE%AE-SNMP"><span class="toc-text">简单网络管理协议 SNMP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E8%BF%9B%E7%A8%8B%E8%B7%A8%E8%B6%8A%E7%BD%91%E7%BB%9C%E7%9A%84%E9%80%9A%E4%BF%A1"><span class="toc-text">应用进程跨越网络的通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P2P-%E5%BA%94%E7%94%A8"><span class="toc-text">P2P 应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B9%9D%E7%AB%A0%EF%BC%9A%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C"><span class="toc-text">第九章：无线网络和移动网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91-WLAN"><span class="toc-text">无线局域网 WLAN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E7%BA%BF%E4%B8%AA%E4%BA%BA%E5%8C%BA%E5%9F%9F%E7%BD%91-WPAN"><span class="toc-text">无线个人区域网 WPAN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%9C%82%E7%AA%9D%E7%A7%BB%E5%8A%A8%E9%80%9A%E4%BF%A1%E7%BD%91"><span class="toc-text">蜂窝移动通信网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8IP"><span class="toc-text">移动IP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C%E5%AF%B9%E9%AB%98%E5%B1%82%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-text">移动网络对高层协议的影响</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E7%BB%93"><span class="toc-text">完结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%91%E6%81%AF%E4%B8%80%E4%B8%8B"><span class="toc-text">休息一下</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/4dc716ec/" title="Friend-Circle-Lite:轻量友链朋友圈"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/19/6699436fe02ec.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Friend-Circle-Lite:轻量友链朋友圈"></a><div class="content"><a class="title" href="/posts/4dc716ec/" title="Friend-Circle-Lite:轻量友链朋友圈">Friend-Circle-Lite:轻量友链朋友圈</a><time datetime="2024-08-11T16:02:00.000Z" title="更新于 2024-08-12 00:02:00">2024-08-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/a64defb4/" title="魔改笔记七：分类条及外链卡片"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/08/10/66b74df1ab511.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="魔改笔记七：分类条及外链卡片"></a><div class="content"><a class="title" href="/posts/a64defb4/" title="魔改笔记七：分类条及外链卡片">魔改笔记七：分类条及外链卡片</a><time datetime="2024-08-09T17:40:00.000Z" title="更新于 2024-08-10 01:40:00">2024-08-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/159f1aa5/" title="域名迁移至 blog.liushen.fun"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/08/10/66b6479e1d33c.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="域名迁移至 blog.liushen.fun"></a><div class="content"><a class="title" href="/posts/159f1aa5/" title="域名迁移至 blog.liushen.fun">域名迁移至 blog.liushen.fun</a><time datetime="2024-08-09T08:00:00.000Z" title="更新于 2024-08-09 16:00:00">2024-08-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/3850e950/" title="CloudFlare实用项目推荐"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/31/66a922cb9adcc.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CloudFlare实用项目推荐"></a><div class="content"><a class="title" href="/posts/3850e950/" title="CloudFlare实用项目推荐">CloudFlare实用项目推荐</a><time datetime="2024-07-31T17:32:00.000Z" title="更新于 2024-08-01 01:32:00">2024-08-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap" style="background: transparent"><div id="footer_icons"><div><a class="icon_link" rel="noopener external nofollow" href="https://www.qyliu.top/" title="导航站点" target="_blank"><i class="fa-solid fa-compass"></i></a><a class="icon_link" rel="noopener external nofollow" href="https://admin.qidian.qq.com/static_proxy/b2b-qq/wpa-link/index.html#/person?uin=2411457922" title="联系QQ" target="_blank"><i class="fa-brands fa-qq"></i></a><a class="icon_link" rel="noopener external nofollow" href="https://github.com/willow-god" title="我的github主页" target="_blank"><i class="fa-brands fa-github"></i></a><a class="icon_link" rel="noopener external nofollow" href="mailto:01@liushen.fun" title="发送邮件至博主邮箱" target="_blank"><i class="fa-solid fa-envelope"></i></a></div><img class="footer_logo" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/12/663f9fc48820a.png" onclick="btf.scrollToDest(0,500)" title="返回顶部"><div><a class="icon_link" rel="noopener external nofollow" href="https://wakatime.com/@LiuShen" title="Wikitime" target="_blank"><i class="fa-solid fa-clock"></i></a><a class="icon_link" rel="noopener external nofollow" href="https://gitlab.com/" title="gitlab" target="_blank"><i class="fa-brands fa-gitlab"></i></a><a class="icon_link" href="/shuoshuo/" title="日常说说" data-pjax-state="data-pjax-state"><i class="fa-solid fa-file-pen"></i></a><a class="icon_link" href="/comment/" title="留言板" data-pjax-state="data-pjax-state"><i class="fa-solid fa-comment"></i></a></div></div><div id="footer_content"><div class="footer-group"><h3 class="footer-title">关于本站</h3><div class="footer-links"><a class="footer-item" target="_blank" href="https://www.qyliu.top/">导航站点</a><a class="footer-item" href="/shuoshuo/">日常说说</a><a class="footer-item" target="_blank" href="https://um.liushen.fun/share/G8C2aR0IszHE5VBl/blog.liushen.fun">访客信息</a><a class="footer-item" target="_blank" href="https://m.liushen.fun/">盐焗星球</a><a class="footer-item" target="_blank" href="https://listen.qyliu.top/">在线状态</a><a class="footer-item" href="/subscribe/">订阅本站</a></div></div><div class="footer-group"><h3 class="footer-title">加入组织</h3><div class="footer-links"><a class="footer-item" target="_blank" href="https://www.boyouquan.com/home">博友圈</a><a class="footer-item" target="_blank" href="https://boke.lu/">博客录</a><a class="footer-item" target="_blank" href="https://blogwe.com/">博客我们</a><a class="footer-item" target="_blank" href="https://firewood.news/">积薪站点</a><a class="footer-item" target="_blank" href="https://bf.zzxworld.com/">发现博客</a><a class="footer-item" target="_blank" href="https://ourblo.gs/">OurBlogs</a></div></div><div class="footer-group"><h3 class="footer-title">文章整理</h3><div class="footer-links"><a class="footer-item" href="/categories/博客管理/">博客管理</a><a class="footer-item" href="/categories/学习资料/">学习资料</a><a class="footer-item" href="/categories/日常分享/">日常分享</a><a class="footer-item" href="/achieve/">时光卷轴</a><a class="footer-item" href="/charts/">文章通览</a><a class="footer-item" href="/categories/">查看全部</a></div></div><div class="footer-group"><h3 class="footer-title">文章标签</h3><div class="footer-links"><a class="footer-item" href="/tags/JavaScript/">JS知识</a><a class="footer-item" href="/tags/Hexo/">本站框架</a><a class="footer-item" href="/tags/机器学习/">机器学习</a><a class="footer-item" href="/tags/日记/">个人日记</a><a class="footer-item" href="/tags/CSS/">CSS知识</a><a class="footer-item" href="/tags/">查看全部</a></div></div><div class="footer-group"><h3 class="footer-title">自建工具</h3><div class="footer-links"><a class="footer-item" target="_blank" rel="noopener" href="https://docs_s.tianli0.top/">必应AI</a><a class="footer-item" target="_blank" rel="noopener" href="https://chat.qyliu.top/">NextGPT</a><a class="footer-item" target="_blank" rel="noopener" href="https://draw.qyliu.top/">随心画板</a><a class="footer-item" target="_blank" rel="noopener" href="https://mindmap.qyliu.top/">思维导图</a><a class="footer-item" target="_blank" rel="noopener" href="https://ittools.qyliu.top/">IT工具箱</a><a class="footer-item" target="_blank" rel="noopener" href="https://calcium.qyliu.top/">在线计算</a></div></div><div class="footer-group" id="friend-links-in-footer"><h3 class="footer-title">友链<button title="换一批" href="javascript:;" onclick="liushen.randomLink()"><i class="fa-solid fa-rotate-right"></i></button></h3><div class="footer-links"><a class="footer-item" target="_blank" href="https://blog.liushen.fun">测试1</a><a class="footer-item" target="_blank" href="https://blog.liushen.fun">测试2</a><a class="footer-item" target="_blank" href="https://blog.liushen.fun">测试3</a><a class="footer-item" target="_blank" href="https://blog.liushen.fun">测试4</a><a class="footer-item" target="_blank" href="https://blog.liushen.fun">测试5</a><a class="footer-item" href="/link/" data-pjax-state="data-pjax-state">查看更多</a></div></div></div><div id="footer-bottom"><div class="footer-bottom-content"><div class="footer-bottom-left"><span class="copyright">©2021 - 2024 By <a target="_blank" rel="noopener" href="https://blog.liushen.fun/about/" title="点击访问&quot;LiuShen&quot;的主页" style="margin-left:5px">LiuShen</a></span><div><a class="footer-bottom-link" target="_blank" href="https://beian.miit.gov.cn/" rel="noopener external nofollow" title="工信部备案号">陕ICP备2024028531号</a><a class="footer-bottom-link" target="_blank" href="https://beian.mps.gov.cn/#/query/webSearch?code=61011602000637" rel="noopener external nofollow" title="公安备案号">陕公网安备61011602000637号</a></div></div><div class="footer-bottom-right"> <div id="runtime" title="本站运行时间">本站已苟活：0 天 0 时 0 分 0 秒</div><div> <a class="footer-bottom-link" target="_blank" href="https://www.dogecloud.com/" rel="noopener external nofollow" title="本站通过多吉云CDN提供站点加速">多吉云CDN</a><a class="footer-bottom-link" target="_blank" href="https://hexo.io/zh-cn/" rel="noopener external nofollow" title="本站使用Hexo架构搭建而成">Hexo静态框架</a><a class="footer-bottom-link" target="_blank" href="https://butterfly.js.org/" rel="noopener external nofollow" title="本站由Butterfly主题魔改而成">Butterfly主题</a></div></div></div></div></div><script>if (!window.liushen) {
+  window.liushen = {
+    saveData: (key, data) => {
+      localStorage.setItem(key, JSON.stringify({
+        time: Date.now(),
+        data: data
+      }));
+    },
+
+    loadData: (key, validTimeInMinutes) => {
+      let storedData = JSON.parse(localStorage.getItem(key));
+      if (storedData) {
+        let elapsedTime = Date.now() - storedData.time;
+        if (elapsedTime >= 0 && elapsedTime < validTimeInMinutes * 60000) {
+          return storedData.data;
+        }
+      }
+      return null;
+    },
+
+    runtime: () => {
+      const formatTime = (unit) => unit > 9 ? unit : "0" + unit;
+      const startTime = new Date('2021/12/12 01:27:36').getTime();
+      const currentTime = Date.now();
+      let elapsedTimeInSeconds = Math.round((currentTime - startTime) / 1000);
+
+      let runtimeText = "本站已苟活：";
+      if (elapsedTimeInSeconds >= 86400) {
+        runtimeText += `${formatTime(Math.floor(elapsedTimeInSeconds / 86400))} 天 `;
+        elapsedTimeInSeconds %= 86400;
+      }
+      if (elapsedTimeInSeconds >= 3600) {
+        runtimeText += `${formatTime(Math.floor(elapsedTimeInSeconds / 3600))} 时 `;
+        elapsedTimeInSeconds %= 3600;
+      }
+      if (elapsedTimeInSeconds >= 60) {
+        runtimeText += `${formatTime(Math.floor(elapsedTimeInSeconds / 60))} 分 `;
+        elapsedTimeInSeconds %= 60;
+      }
+      runtimeText += `${formatTime(elapsedTimeInSeconds)} 秒`;
+
+      const runtimeElement = document.getElementById("runtime");
+      if (runtimeElement) {
+        runtimeElement.innerHTML = runtimeText;
+      }
+      setTimeout(window.liushen.runtime, 1000);
+    },
+
+    randomLink: () => {
+      let linksData = window.liushen.loadData("links", 30);
+      if (linksData) {
+        let linkElements = document.querySelectorAll("#friend-links-in-footer .footer-item");
+        if (!linkElements.length) return;
+
+        for (let i = 0; i < linkElements.length; i++) {
+          let randomIndex = Math.floor(Math.random() * linksData.length);
+          linkElements[i].innerText = linksData[randomIndex].name;
+          linkElements[i].href = linksData[randomIndex].link;
+          linksData.splice(randomIndex, 1);
+        }
+      } else {
+        fetch("/flink_count.json")
+          .then(response => response.json())
+          .then(data => {
+            window.liushen.saveData("links", data.link_list);
+            window.liushen.randomLink();
+          });
+      }
+    }
+  };
+}
+
+if (true) {
+  window.liushen.randomLink();
+  document.addEventListener("DOMContentLoaded", window.liushen.randomLink);
+  window.liushen.runtime();
+} else {
+  window.liushen.randomLink();
+  window.liushen.runtime();
+}</script></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><a class="icon-V hidden" onclick="switchNightMode()" title="浅色和深色模式转换"><svg width="25" height="25" viewBox="0 0 1024 1024"><use id="modeicon" xlink:href="#icon-moon"></use></svg></a><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="cat" onclick="toggleLive2dVisibility()" title="小猫显隐"><i class="fa-solid fa-cat"></i></button><button id="fullscreen" onclick="toggleFullScreen()" title="全屏切换"><i class="fa-solid fa-expand"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="fa-solid fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="fa-solid fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="fa-solid fa-arrow-rotate-right"></i></div><div class="rightMenu-item" id="menu-home"><i class="fa-solid fa-house"></i></div></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" id="copy" href="javascript:rm.copySelect();"><i class="fa-solid fa-copy"></i><span>复制选中文字</span></a><a class="rightMenu-item" id="reply" href="javascript:rm.replySelect();"><i class="fa-regular fa-comment"></i><span>评论选中段落</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" href="/archives/"><i class="fa-solid fa-archive"></i><span>文章时间线</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分大类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章小标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuNormal"><a class="rightMenu-item menu-link" id="menu-radompage" href="/comment/"><i class="fa-solid fa-shoe-prints"></i><span>随心留言板</span></a><div class="rightMenu-item" id="menu-translate"><i class="fa-solid fa-earth-asia"></i><span>繁简模式切换</span></div><div class="rightMenu-item" id="menu-darkmode"><i class="fa-solid fa-moon"></i><span>切换亮暗模式</span></div><div class="rightMenu-item" id="menu-live2dvisibility"><i class="fa-solid fa-cat"></i><span>小猫显示隐藏</span></div><div class="rightMenu-item" id="menu-print"><i class="fa-solid fa-print fa-fw"></i><span>打印整个页面</span></div><a class="rightMenu-item menu-link" id="statement" href="/statement/"><i class="fa-regular fa-copyright fa-fw"></i><span>网站声明</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js?v=5.0.0"></script><script src="/js/main.js?v=5.0.0"></script><script src="/js/jquery-3.7.1.slim.min.js?v=5.0.0"></script><script src="/js/others.js?v=5.0.0"></script><script src="/js/echarts.min.js?v=5.0.0"></script><script src="/js/rightmenu.js?v=5.0.0"></script><script src="/js/tw_cn.js?v=5.0.0"></script><script src="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.umd.js?v=5.0.36"></script><script src="/pluginsSrc/instant.page/instantpage.js?v=5.2.0" type="module"></script><script src="/pluginsSrc/vanilla-lazyload/dist/lazyload.iife.min.js?v=19.1.3"></script><div class="js-pjax"><script>(() => {
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.qyliu.top',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.qyliu.top',
+      region: '',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(init,0)
+    else btf.getScript('/pluginsSrc/twikoo/dist/twikoo.all.min.js?v=1.6.38').then(init)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[aside.card_aside.card_aside.card_newest_comments.code]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo.qyliu.top',
+        region: '',
+        pageSize: 5,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        btf.saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      btf.getScript('/pluginsSrc/twikoo/dist/twikoo.all.min.js?v=1.6.38').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = btf.saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  btf.addGlobalFn('pjaxComplete', newestCommentInit, 'twikoo_newestComment')
+})</script><script src="/config/memos/memos.js"></script><canvas class="fireworks" mobile="false"></canvas><script src="/pluginsSrc/butterfly-extsrc/dist/fireworks.min.js?v=1.1.3"></script><script src="/pluginsSrc/pjax/pjax.min.js?v=0.2.8"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+const triggerPjaxFn = (val) => {
+  if (!val) return
+  Object.values(val).forEach(fn => { fn() })
+}
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjaxSendOnce')
+  btf.removeGlobalFnEvent('themeChange')
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  triggerPjaxFn(window.globalFn.pjaxSend)
+})
+
+document.addEventListener('pjax:complete', () => {
+  btf.removeGlobalFnEvent('pjaxCompleteOnce')
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  triggerPjaxFn(window.globalFn.pjaxComplete)
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async="" data-pjax="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="/pluginsSrc/algoliasearch/dist/algoliasearch-lite.umd.js?v=4.24.0"></script><script src="/pluginsSrc/instantsearch.js/dist/instantsearch.production.min.js?v=4.73.3"></script><script src="/js/search/algolia.js?v=5.0.0"></script></div></div><!-- hexo injector body_end start --><script data-pjax="">
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/a64defb4/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/08/10/66b74df1ab511.webp" alt="" onerror="this.src=/img/error-page.png; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-10</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/a64defb4/&quot;);" href="javascript:void(0);" alt="">魔改笔记七：分类条及外链卡片</a><div class="blog-slider__text">虽然说域名换了几乎等于从头开始，但是仍然浇不灭我对于网站的热情，该进行的还是得进行。很久都没有总结魔改了，这篇文章就将最近魔改最大的几个部分进行记录，同时对有需要的朋友提供帮助。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/a64defb4/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/159f1aa5/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/08/10/66b6479e1d33c.webp" alt="" onerror="this.src=/img/error-page.png; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-09</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/159f1aa5/&quot;);" href="javascript:void(0);" alt="">域名迁移至 blog.liushen.fun</a><div class="blog-slider__text">近期遇见了一个很烦人的事情，bing的所有搜索结果全部消失，我也不知道是怎么回事，已经在联系bing管理员了，不过，其实我很早之前就像换域名了，今天趁此机会，干脆直接换了得了！原有的域名301至新域名，不会影响任何使用。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/159f1aa5/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/3850e950/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/31/66a922cb9adcc.webp" alt="" onerror="this.src=/img/error-page.png; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-01</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/3850e950/&quot;);" href="javascript:void(0);" alt="">CloudFlare实用项目推荐</a><div class="blog-slider__text">之前我向大家推荐过vercel上的一些项目，都非常的有趣实用，最近，在和朋友安小歪的聊天中，发现了一些很好玩的cloud flare项目，比如临时邮箱，临时文件传送，计数统计，等等，很多项目都非常好玩，于是在此推荐给大家。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/3850e950/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/4dc716ec/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/19/6699436fe02ec.webp" alt="" onerror="this.src=/img/error-page.png; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-21</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/4dc716ec/&quot;);" href="javascript:void(0);" alt="">Friend-Circle-Lite:轻量友链朋友圈</a><div class="blog-slider__text">前两天出现了友链朋友圈因为版本原因导致无法运行的问题，虽然我已经改好了，但是由于bundle文件过大，经常导致加载较慢，于是我自己手搓了一个轻量化友链朋友圈，同时支持通过提交issue实现邮箱订阅本站最新文章，也算是友链朋友圈部署新思路啦，适合喜欢轻量和免费快速的朋友尝试！</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/4dc716ec/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/67189760/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/06/6688d4b63b50f.webp" alt="" onerror="this.src=/img/error-page.png; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-06</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/67189760/&quot;);" href="javascript:void(0);" alt="">Spikformer脉冲神经网络学习</a><div class="blog-slider__text">近期我们进行了人工智能实训，我们小组选择的是脉冲神经网络，不同于原先的神经网络，这个网络采用的是脉冲信号，目前脉冲神经网络的效果并不是很好，但是因为是一个全新的神经网络架构，并且基于生物启发的计算方式，使得它们在处理稀疏和非结构化数据时具有独特的优势。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/67189760/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer="" src="/config/swiper/swiper.min.js"></script><script defer="" data-pjax="" src="/config/swiper/swiper_init.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"superSample":2,"width":250,"height":500,"position":"left","hOffset":0,"vOffset":-140},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

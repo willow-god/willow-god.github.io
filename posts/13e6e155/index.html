@@ -1,0 +1,621 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>东软软件园实习日记 | LiuShen's Blog</title><meta name="author" content="Willow-God"><meta name="copyright" content="Willow-God"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="大学生累成狗，今天我终于理解了为什么这么说，好不容易结束了为期七天的实训课程，又要写实验报告加小组作业，好不容易完成了小组作业，这不，十五天实习又来了！烦！并且还要天天写学习日志？我直接当作日记写好不好！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="东软软件园实习日记">
+<meta property="og:url" content="https://blog.liushen.fun/posts/13e6e155/index.html">
+<meta property="og:site_name" content="LiuShen's Blog">
+<meta property="og:description" content="大学生累成狗，今天我终于理解了为什么这么说，好不容易结束了为期七天的实训课程，又要写实验报告加小组作业，好不容易完成了小组作业，这不，十五天实习又来了！烦！并且还要天天写学习日志？我直接当作日记写好不好！">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.qyliu.top/i/2024/07/01/66823117502e0.webp">
+<meta property="article:published_time" content="2024-07-01T08:39:00.000Z">
+<meta property="article:modified_time" content="2024-07-16T14:07:00.000Z">
+<meta property="article:author" content="Willow-God">
+<meta property="article:tag" content="日记">
+<meta property="article:tag" content="生活点滴">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.qyliu.top/i/2024/07/01/66823117502e0.webp"><link rel="shortcut icon" href="/info/avatar.ico"><link rel="canonical" href="https://blog.liushen.fun/posts/13e6e155/index.html"><link rel="preconnect"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css?v=5.0.0"><link rel="stylesheet" href="/css/custom.css?v=5.0.0"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css?v=6.6.0"><link rel="stylesheet" href="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.css?v=5.0.36" media="print" onload="this.media='all'"><script>(()=>{
+      const saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+      
+      window.btf = {
+        saveToLocal: saveToLocal,
+        getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+          script.src = url
+          script.async = true
+          script.onerror = reject
+          script.onload = script.onreadystatechange = function() {
+            const loadState = this.readyState
+            if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+            script.onload = script.onreadystatechange = null
+            resolve()
+          }
+
+          Object.keys(attr).forEach(key => {
+            script.setAttribute(key, attr[key])
+          })
+
+          document.head.appendChild(script)
+        }),
+
+        getCSS: (url, id = false) => new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+          link.rel = 'stylesheet'
+          link.href = url
+          if (id) link.id = id
+          link.onerror = reject
+          link.onload = link.onreadystatechange = function() {
+            const loadState = this.readyState
+            if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+            link.onload = link.onreadystatechange = null
+            resolve()
+          }
+          document.head.appendChild(link)
+        }),
+
+        addGlobalFn: (key, fn, name = false, parent = window) => {
+          const pjaxEnable = true
+          if (!pjaxEnable && key.startsWith('pjax')) return
+
+          const globalFn = parent.globalFn || {}
+          const keyObj = globalFn[key] || {}
+    
+          if (name && keyObj[name]) return
+    
+          name = name || Object.keys(keyObj).length
+          keyObj[name] = fn
+          globalFn[key] = keyObj
+          parent.globalFn = globalFn
+        }
+      }
+    
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+      
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })()</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"7IX3UBC6JW","apiKey":"4ac2846352e499675081f1277fb961c1","indexName":"My Blog","hitsPerPage":6,"languages":{"input_placeholder":"搜索全站文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"本篇文章从发布到现在已经隔了","messageNext":"天了，里面的内容可能过期了，你要自己甄别一下哟👉👈"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":400,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":1000,"languages":{"author":"作者: Willow-God","link":"链接: ","source":"来源: LiuShen's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js?v=4.12.0',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '东软软件园实习日记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: undefined,
+  isToc: true,
+  postUpdate: '2024-07-16 22:07:00'
+}</script><link rel="stylesheet" href="/config/Yozai-Medium/result.css"><link rel="stylesheet" href="/config/memos/memos.css"></head><body><svg aria-hidden="true" style="position:absolute; overflow:hidden; width:0; height:0"><symbol id="icon-sun" viewBox="0 0 1024 1024"><path d="M960 512l-128 128v192h-192l-128 128-128-128H192v-192l-128-128 128-128V192h192l128-128 128 128h192v192z" fill="#FFD878" p-id="8420"></path><path d="M736 512a224 224 0 1 0-448 0 224 224 0 1 0 448 0z" fill="#FFE4A9" p-id="8421"></path><path d="M512 109.248L626.752 224H800v173.248L914.752 512 800 626.752V800h-173.248L512 914.752 397.248 800H224v-173.248L109.248 512 224 397.248V224h173.248L512 109.248M512 64l-128 128H192v192l-128 128 128 128v192h192l128 128 128-128h192v-192l128-128-128-128V192h-192l-128-128z" fill="#4D5152" p-id="8422"></path><path d="M512 320c105.888 0 192 86.112 192 192s-86.112 192-192 192-192-86.112-192-192 86.112-192 192-192m0-32a224 224 0 1 0 0 448 224 224 0 0 0 0-448z" fill="#4D5152" p-id="8423"></path></symbol><symbol id="icon-moon" viewBox="0 0 1024 1024"><path d="M611.370667 167.082667a445.013333 445.013333 0 0 1-38.4 161.834666 477.824 477.824 0 0 1-244.736 244.394667 445.141333 445.141333 0 0 1-161.109334 38.058667 85.077333 85.077333 0 0 0-65.066666 135.722666A462.08 462.08 0 1 0 747.093333 102.058667a85.077333 85.077333 0 0 0-135.722666 65.024z" fill="#FFB531" p-id="11345"></path><path d="M329.728 274.133333l35.157333-35.157333a21.333333 21.333333 0 1 0-30.165333-30.165333l-35.157333 35.157333-35.114667-35.157333a21.333333 21.333333 0 0 0-30.165333 30.165333l35.114666 35.157333-35.114666 35.157334a21.333333 21.333333 0 1 0 30.165333 30.165333l35.114667-35.157333 35.157333 35.157333a21.333333 21.333333 0 1 0 30.165333-30.165333z" fill="#030835" p-id="11346"></path></symbol></svg><!-- hexo injector head_end start --><link rel="stylesheet" href="/config/swiper/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="/config/swiper/swiperstyle.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="LiuShen's Blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="LiuShen's Blog" type="application/rss+xml">
+<div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="wizard-scene"><div class="wizard-objects"><div class="wizard-square"></div><div class="wizard-circle"></div><div class="wizard-triangle"></div></div><div class="wizard"><div class="wizard-body"></div><div class="wizard-right-arm"><div class="wizard-right-hand"></div></div><div class="wizard-left-arm"><div class="wizard-left-hand"></div></div><div class="wizard-head"><div class="wizard-beard"></div><div class="wizard-face"><div class="wizard-adds"></div></div><div class="wizard-hat"><div class="wizard-hat-of-the-hat"></div><div class="wizard-four-point-star --first"></div><div class="wizard-four-point-star --second"></div><div class="wizard-four-point-star --third"></div></div></div></div></div></div><script async="async">(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+  
+  preloader.initLoading()
+  
+  let loaded = false;
+  
+  window.addEventListener('load', () => { 
+      if (!loaded) {
+          preloader.endLoading();
+          loaded = true;
+      }
+  });
+
+  setTimeout(() => {
+      if (!loaded) {
+          preloader.endLoading();
+          loaded = true;
+      }
+  }, 5000);
+
+  
+  window.addEventListener('load',() => { preloader.endLoading() })
+  setTimeout(function(){preloader.endLoading();}, 3000);
+  document.getElementById('loading-box').addEventListener('click',()=> {preloader.endLoading()})
+
+  if (true) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><!--.avatar-img.is-center--><!--  img(src=url_for(theme.avatar.img) onerror=`onerror=null;src='${theme.error_img.flink}'` alt="avatar")--><div class="is-center" id="sidebar-avatar"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/03/21/65fc570ca9fe7.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">Willow-God</div><div class="author-info__description">清羽 〄 飞扬</div></div><div class="site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">69</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/willow-god"><i class="fab fa-github"></i><span>Follow Me 🛫</span></a><div class="menu-info-social-icons is-center"><a class="social-icon" href="mailto:01@liushen.fun" target="_blank" title="Email"><i class="fa-solid fa-envelope"></i></a><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2411457922&amp;site=qq&amp;menu=yes" target="_blank" title="QQ：2411457922"><i class="fa-brands fa-qq"></i></a><a class="social-icon" href="https://wakatime.com/@LiuShen" target="_blank" title="Wakatime"><i class="fa-solid fa-chart-column"></i></a><a class="social-icon" href="https://blog.liushen.fun/atom.xml" target="_blank" title="rss地址"><i class="fa-solid fa-rss"></i></a></div><div class="menus_items visible"><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-home"></i><span> 导航</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/"><i class="fa-fw fa-solid fa-house-laptop"></i><span> 博客主页</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.liushen.fun/"><i class="fa-fw fa-solid fa-house-flag"></i><span> 导航主页</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://xc.liushen.fun/"><i class="fa-fw fa fa-camera-retro"></i><span> 个人相册</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-graduation-cap"></i><span> 整理</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时光卷轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 文章标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 文章分类</span></a></li><li><a class="site-page child" href="/charts/"><i class="fa-fw fa-solid fa-chart-pie"></i><span> 文章通览</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa-solid fa-user-group"></i><span> 友人</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链展示</span></a></li><li><a class="site-page child" href="/addlink/"><i class="fa-fw fa fa-at"></i><span> 友链申请</span></a></li><li><a class="site-page child" href="/fcircle/"><i class="fa-fw fa-solid fa-circle-nodes"></i><span> 朋友动态</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-paper-plane"></i><span> 留言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/comment/"><i class="fa-fw fa-solid fa-chalkboard"></i><span> 留言白板</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://m.liushen.fun/"><i class="fa-fw fa-solid fa-basketball"></i><span> 盐焗星球</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa-solid fa-stethoscope"></i><span> 服务</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://um.liushen.fun/"><i class="fa-fw fa-solid fa-eye-low-vision"></i><span> 访客统计</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://pan.liushen.fun/"><i class="fa-fw fa-solid fa-laptop-file"></i><span> 资源分享</span></a></li><li><a class="site-page child" href="/subscribe/"><i class="fa-fw fa-solid fa-rss"></i><span> 订阅本站</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-list"></i><span> 关于</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fa fa-address-card"></i><span> 站长资料</span></a></li><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-commenting"></i><span> 日常说说</span></a></li><li><a class="site-page child" href="/devices/"><i class="fa-fw fa-solid fa-tachograph-digital"></i><span> 我的设备</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(https://cdn.qyliu.top/i/2024/07/01/66823117502e0.webp);"><nav id="nav"><span id="blog-info"><a href="/" title="LiuShen's Blog"><span class="site-name">LiuShen's Blog</span></a></span><div id="menus"></div><div class="menus_items visible"><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-home"></i><span> 导航</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/"><i class="fa-fw fa-solid fa-house-laptop"></i><span> 博客主页</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.liushen.fun/"><i class="fa-fw fa-solid fa-house-flag"></i><span> 导航主页</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://xc.liushen.fun/"><i class="fa-fw fa fa-camera-retro"></i><span> 个人相册</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-graduation-cap"></i><span> 整理</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时光卷轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 文章标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 文章分类</span></a></li><li><a class="site-page child" href="/charts/"><i class="fa-fw fa-solid fa-chart-pie"></i><span> 文章通览</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa-solid fa-user-group"></i><span> 友人</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链展示</span></a></li><li><a class="site-page child" href="/addlink/"><i class="fa-fw fa fa-at"></i><span> 友链申请</span></a></li><li><a class="site-page child" href="/fcircle/"><i class="fa-fw fa-solid fa-circle-nodes"></i><span> 朋友动态</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-paper-plane"></i><span> 留言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/comment/"><i class="fa-fw fa-solid fa-chalkboard"></i><span> 留言白板</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://m.liushen.fun/"><i class="fa-fw fa-solid fa-basketball"></i><span> 盐焗星球</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa-solid fa-stethoscope"></i><span> 服务</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://um.liushen.fun/"><i class="fa-fw fa-solid fa-eye-low-vision"></i><span> 访客统计</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://pan.liushen.fun/"><i class="fa-fw fa-solid fa-laptop-file"></i><span> 资源分享</span></a></li><li><a class="site-page child" href="/subscribe/"><i class="fa-fw fa-solid fa-rss"></i><span> 订阅本站</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-list"></i><span> 关于</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fa fa-address-card"></i><span> 站长资料</span></a></li><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-commenting"></i><span> 日常说说</span></a></li><li><a class="site-page child" href="/devices/"><i class="fa-fw fa-solid fa-tachograph-digital"></i><span> 我的设备</span></a></li></ul></div></div><center id="name-container"><a id="page-name" href="javascript:btf.scrollToDest(0, 500)">PAGE_NAME</a></center><div id="nav-right"><div id="travellings"><a class="site-page" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html" title="友链接力-随机开往"><i class="fa-solid fa-bus fa-fw"></i></a></div><div id="ten-years"><a class="site-page" target="_blank" rel="noopener" href="https://foreverblog.cn/go.html" title="友链接力-十年之约"><i class="fa-brands fa-nfc-symbol fa-fw"></i></a></div><div id="random"><a class="site-page" href="javascript:randomPost()" title="随机前往一个文章"><i class="fa-solid fa-shuffle fa-fw"></i></a></div><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i></span></div><div id="toggle-menu"><span class="site-page" href="javascript:void(0);" title="展开菜单"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">东软软件园实习日记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-01T08:39:00.000Z" title="发表于 2024-07-01 16:39:00">2024-07-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-16T14:07:00.000Z" title="更新于 2024-07-16 22:07:00">2024-07-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%97%A5%E5%B8%B8%E5%88%86%E4%BA%AB/">日常分享</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>19分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="东软软件园实习日记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/posts/13e6e155/#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="碎碎念"><a href="#碎碎念" class="headerlink" title="碎碎念"></a>碎碎念</h2><p>其实吧，虽然说时间有点长，但我还是挺期待这次实习的。一方面可以锻炼自己，另一方面也能出来放松放松。之前我一直盼望能去外地实习，所以当老师说我们人工智能专业要留在武汉实习时，我心里还挺失落的。不过，昨天晚上看到那些去外地同学的住宿环境，让我改变了想法。走廊里飞着蝙蝠，蟑螂定点”复活”，蚊子像自助餐一样不停地叮咬。我只能说，幸好有一个安排得当的好老师！今天，我终于到了心念已久的实习基地——武汉东软软件园。这里环境非常优美，饭菜价格也很合理。此刻，我更加庆幸自己没有去外地实习，真是感到无比幸运啊！</p>
+<p>唯一美中不足的就是，早上学校安排的车是八点十分出发，导致我们必须得连续上十五天早八，并且中午还没办法休息，哎！咕咕咕咕咕！</p>
+<p>本次实习为期十五天，虽然说每天都要写日记，但是我并不想在博客中连续发十五天相似的内容，所以我将其整理到了一篇文章中，后面每天都会在这里更新！</p>
+<h2 id="实习日记"><a href="#实习日记" class="headerlink" title="实习日记"></a>实习日记</h2><h3 id="2024-07-01"><a href="#2024-07-01" class="headerlink" title="2024-07-01"></a>2024-07-01</h3><h4 id="出发"><a href="#出发" class="headerlink" title="出发"></a>出发</h4><p>早上七点四十起床，简单收拾一下之后就上了车，怀着激动的心情踏上了旅程，早上走的时候，天非常的蓝，大家在车上欢声笑语，都期待着本次的实习，这是很多人包括我的第一次实习，都期待着成为一个蓝领，坐在办公室，敲着键盘，羽扇纶巾，谈笑间，樯橹灰飞烟灭的挥斥方遒。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/01/668235f3c8a60.webp" alt="车上的蓝天"></p>
+<h4 id="到站"><a href="#到站" class="headerlink" title="到站"></a>到站</h4><p>终于，经过了一个小时的颠簸，我们顺利到了东软软件园，这里的环境非常好，由于是新建的，建筑风格也大多非常有设计感兼具简约风格，白色的楼房，白色的立柱，看起来赏心悦目，对比其他专业去外地进行实习的，简直好了不是一个档次哈哈。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/01/6682440c31ef3.webp" alt="办公楼"></p>
+<p>边上就是一个小型的公园，很开阔，但是因为正在建设中，所以满地的的小石块，我和朋友绕着公园转了一圈，试图找到其中的”湖”，但是由于杂草丛生，也没有看到湖，所以失望而归（其实后面吃饭的时候，在另外一个角度也看到了那个真正的湖嘿嘿）。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/01/6682480b77e4c.webp" alt="南太子（湖）体育公园"></p>
+<p>进入办公楼，首先看到的就是一个大厅中间的小铺子，哈哈还挺可爱，好像是分发多肉植物的，可惜我们不能拿一个，要不然我们宿舍又能多一个濒死的植物（bushi），大厅非常宽敞，东软为了更加舒适的办公体验，每个楼层都不是很高，比如我们所在的天王星大厅，只有两层，环境很舒服，每个人的面前都有一个充电插座，座位也是人体工学椅，可以自行调整，睡觉都很舒服，就是空调温度调太低了……有点冷……</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/01/66824d29f3b3c.webp" alt="大厅"></p>
+<h4 id="讲解"><a href="#讲解" class="headerlink" title="讲解"></a>讲解</h4><p>在休整片刻后，东软当然也要打广告嘛，就带着我们去了他们的展览厅，刚开始的我对于东软一无所知，以为是某个小公司，但是在深入了解后我发现，东软涉及了我的生活方方面面，并且业务范围极广，公司规模也很大，并且有多项第一，之前的我只知道华为阿里腾讯字节等大公司，现在我才知道还有很多软件公司有极其强劲的实力，这也极大增加了我对于找到工作的信心（QAQ）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/01/66824e6491bec.webp" alt="分布情况"></p>
+<p>在应用领域，除了一些常用的，医疗，日常，我最喜欢的是汽车行业（男人本色哈哈），宝马，宾利，兰博基尼，很多车机都和东软有着密切的服务，他也展示了一些硬件东西，我看不懂，但是喜欢嘿嘿。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/01/668250aab8b87.webp" alt="展示硬件"></p>
+<p>内容太多了这部分掠过……</p>
+<h4 id="探索周边"><a href="#探索周边" class="headerlink" title="探索周边"></a>探索周边</h4><p>等从展厅里出来，我们有一个小时的自由活动，我和我的小伙伴赶紧出去找早餐吃，在寻找的路上，我们发现这是在一个工业群之中，周围有很多的单位，数不胜数，感觉像一个产业孵化园，非常多公司，有的是一栋楼，有的甚至只有一层，继续往里走，我们终于找到了吃饭的地方，除此之外还有一个”DACO COFFEE”，刚开始我还以为是某个英文单词，后面发现其实就是拼音”大口”……</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/01/6682644756da9.webp" alt="大口咖啡"></p>
+<p>等再回到办公地点，开始讲解相关内容，讲解后就开始吃中午饭了，食堂非常整洁，饭菜也很丰盛，公司免费赠送了一个小蛋糕，本来抽奖抽到的是果切，由于同学不喜欢喝红牛，所以我和他换了，总体来说很满意了。</p>
+<h4 id="风雨欲来"><a href="#风雨欲来" class="headerlink" title="风雨欲来"></a>风雨欲来</h4><p>等从食堂出来，发现天空开始变得乌黑，跟独立日一样哈哈，紧接着手机就开始报暴雨预警，感觉下午有什么不好的事情发生，没办法，回到办公地点，美美的睡了个觉，就是有点冷……</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/01/6682693b6a815.webp" alt="黑云压境"></p>
+<p>醒来之后已然两点，老师开始演讲了，首先给我们放了一个他们自己录制的RAP，挺好听的，然后就开始讲解东软的相关知识，其实也是打广告哈哈，不过还挺爱听的，毕竟是科技领域的东西。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/01/668269cf469eb.webp" alt="我真的是拍了一手好图啊……"></p>
+<p>然后就开始一个个的自我介绍了，有无所事事的，有爱唱跳rap的，有喜欢打瓦的，有gta5的，有介绍自己段位的，还有光介绍名字的，应有尽有，自我介绍在一片欢声笑语中度过。</p>
+<p>下面老师就开始安排任务了，等任务下来，我们傻眼了，感觉难度很高，我们需要造一个完整的项目出来，包括前端后端服务端，没办法，只能硬着头皮上了……</p>
+<p>因为今天是第一天，所以更多是熟悉环境，并没有什么高难度的项目，只是安排了后期的流程，但是最后我们是愁眉苦脸的走的，因为项目要寄了QAQ</p>
+<h3 id="2024-07-02"><a href="#2024-07-02" class="headerlink" title="2024-07-02"></a>2024-07-02</h3><h4 id="枯燥"><a href="#枯燥" class="headerlink" title="枯燥"></a>枯燥</h4><p>实习的第二天，任务似乎比想象中的要枯燥一些。一大早，我们就开始了网课视频的刷课之旅。面对50个视频，虽然每个视频只有两三分钟，但数量之多还是让我感到有些压力。视频内容虽短，但频繁忘记点击下一个视频，让我感到有些无奈，尤其是那些仅有45秒的短小视频，让我不禁苦笑。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/03/6684f16758b2b.webp" alt="45秒的无奈"></p>
+<h4 id="午餐"><a href="#午餐" class="headerlink" title="午餐"></a>午餐</h4><p>午餐时间，没有了昨日的免费蛋糕，我们只能享用简单的员工餐。虽然味道尚可，但那些大块的肥肉实在让人难以下咽。机智的我与舍友交换了一块他那12块钱一小碗的瘦肉，这小小的交换，让我们都感到了一丝乐趣。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/03/6684f20985d59.webp" alt="不会拍照的午餐"></p>
+<h4 id="威优易"><a href="#威优易" class="headerlink" title="威优易"></a>威优易</h4><p>下午时分，我们分了小组，看起来我得负责前端开发了。无奈之下，我开始学习Vue（威优易），从最基础的知识开始，一步步深入。我选择了一个看似全面的项目——pure-admin，作为我的学习起点。搭建起基础框架后，我将逐步实现每个页面的功能。虽然过程有些艰难，但看到项目逐渐成型，心中还是充满了成就感。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/03/6684f7a3c6ffb.webp" alt="Vue学习之路"></p>
+<h4 id="傍晚"><a href="#傍晚" class="headerlink" title="傍晚"></a>傍晚</h4><p>晚上六点，我们结束了一天的实习，回到了学校。晚餐是舍友哥哥带来的烤鸡饭，虽然已经有些吃腻，但美味依旧。晚餐后，我将班级的材料交给了老师，虽然老师不在，我还是将材料放在了教室门口的柜子中。晚上，我和安小歪一起完成了一个邮箱订阅功能，这成了这两天唯一的亮点，也是我唯一的兴趣所在。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/03/6684fb929682a.webp" alt="傍晚云朵"></p>
+<p>尽管今天的实习有些枯燥，但我还是从中找到了乐趣，学会了在平凡中寻找不平凡。明天，我将继续以积极的态度面对实习，相信每一天都会有新的收获。</p>
+<h3 id="2024-07-03"><a href="#2024-07-03" class="headerlink" title="2024-07-03"></a>2024-07-03</h3><p>今天也没什么说的，内容呢和昨天是一样的，但是不刷视频了，主要是因为刷完了，昨天，好朋友给我了一个脚本，一次性刷了34个小时，视频的进度也都刷完了，很舒服（虽然我自己也在看）但是就是数据有点离谱，看完了之后，今天就开始正式设计页面啦，威优易博大精深，感觉很多写不完，得亏有万能室友是搞前端的，有什么问题可以直接找他问，今天不好玩，也就不多说了，明天应该会好玩一些，因为在课程安排上写的有展览。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/03/668564d1ea5af.webp" alt="时长"></p>
+<h3 id="2024-07-04"><a href="#2024-07-04" class="headerlink" title="2024-07-04"></a>2024-07-04</h3><h4 id="参观"><a href="#参观" class="headerlink" title="参观"></a>参观</h4><p>今天早上九点，我来到了武汉东软软件园。稍作休整后，十点钟我们前往了武汉经开区展厅，了解了武汉经开区的发展历史。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/06/6688b3abacd8b.webp" alt="经开区展厅"></p>
+<p>武汉经开区位于武汉西南，最初为了承载中法合资的神龙汽车项目而成立，1991年5月动工兴建，1993年4月经国务院批准为国家级经济技术开发区，2013年整体托管汉南区。辖区面积489.7平方公里，下辖7个街道和7大园区，总人口约为48万。这里是东风公司总部所在地，也是第七届世界军人运动会的主会场。经过33年的发展，武汉经开区形成了以汽车及汽车零部件、智慧家居、智能建造为主导的产业。年产整车超过百万辆，工业产值突破3600亿元，在全国230家国家级开发区中经济总量位居前十，是全国汽车产业最密集的区域之一，被誉为“中国车谷”。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/06/6688b4925e370.webp" alt="发展历程"></p>
+<p>在展厅，我们还参观了现代著名的电动汽车，特别是“氢腾”燃料电池系统和理工氢电膜电极，感觉非常高级，特别是后者，是我们武汉理工人研究出来的，让我感到了满满的骄傲！</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/06/6688b54bdff3a.webp" alt="理工氢电膜电极"></p>
+<p>除此之外，我们还上车亲自体验了高大威猛的猛士汽车，和美观轻盈小鹏汽车，回去发条说说：家人们提车了！全款拿下！主要是实力允许哈哈哈哈</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/06/6688b5066ab29.webp" alt="小鹏汽车"></p>
+<p>随后，我们还体验了无人驾驶大巴，感受了一下科技的乐趣。大巴车行驶非常平稳，没有一点晃动，但是好像还不完善，司机说目前只能做到郊区全自动驾驶，如果到了市区，可能会因为需要让行斑马线上的行人而停一天……</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/06/6688b5b8b918f.webp" alt="自动驾驶"></p>
+<h4 id="无聊的准备"><a href="#无聊的准备" class="headerlink" title="无聊的准备"></a>无聊的准备</h4><p>下午，我们继续完善自己的简历，为明天的模拟面试做好准备，听老师说每个人要准备好三分钟的面试，并且还有正式的面试，如果感兴趣可以参加，并且有机会转正。不过因为我考研所以就不需要操心这些啦，首要任务就是学习好自己的课内知识！</p>
+<h4 id="疯狂星期四"><a href="#疯狂星期四" class="headerlink" title="疯狂星期四"></a>疯狂星期四</h4><p>下课后，由于今天是星期四，我们仨决定去KFC好好吃一顿（毕竟疯狂星期四很便宜），我们三个人总共点了三份吮指原味鸡，共六个，两份热辣香骨鸡，共30个。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/06/6688ba31238a2.webp" alt="疯狂星期四"></p>
+<p>点完之后才发现好多，并且因为都是炸鸡，吃的我们非常腻，最后还是没吃完……要了个袋子打包带走了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/06/6688bfa7e6ff8.webp" alt="打包"></p>
+<p>今天又是愉快的一天！</p>
+<h3 id="2024-07-05"><a href="#2024-07-05" class="headerlink" title="2024-07-05"></a>2024-07-05</h3><h4 id="面试讲解"><a href="#面试讲解" class="headerlink" title="面试讲解"></a>面试讲解</h4><p>今天早上，我们参加了一场由东软组织的企业文化讲解活动。老师详细介绍了东软的企业文化和招聘守则，并且帮我们逐一分析了个人简历中的问题和缺点。通过老师的现场指导，我们学到了很多关于如何改进和优化简历的技巧，这些对于我们未来的求职之路非常有帮助。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/06/6688ca30668d8.webp" alt="东软讲解"></p>
+<p>在企业文化讲解环节，老师特别强调了东软在员工培训和成长方面的投入。从丰富的在线知识库和免费课程，到每年超过10万小时的员工培训机会，再到每年超过1200名员工获得行业认证证书，东软确实为员工提供了非常强大的学习和成长平台。这些内容让我们对未来的职业发展充满了期待。</p>
+<h4 id="训练房屋价格模型"><a href="#训练房屋价格模型" class="headerlink" title="训练房屋价格模型"></a>训练房屋价格模型</h4><p>下午，我们开始了一个新的任务：使用神经网络来预测房价。这个任务要求我们运用所学的知识和技能，处理一批关于二手房屋销售的数据，并构建一个房价预测模型。我们小组先是对数据进行了预处理，接着进行了特征工程。尽管过程有些复杂，但在小组讨论和协作中，我们逐步理清了思路，明确了每一步的操作。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/06/6688ca613cecb.webp" alt="训练结果"></p>
+<p>在模型选择和训练过程中，我们选择了神经网络模型。通过不断调整模型的参数，我们最终得到了一个比较理想的结果。虽然过程中遇到了不少挑战，但我们通过不断尝试和优化，解决了许多问题，最终在测试集上取得了不错的预测效果。</p>
+<h3 id="2024-07-06"><a href="#2024-07-06" class="headerlink" title="2024-07-06"></a>2024-07-06</h3><p>今天是周六，我居家办公，不需要去实习基地。虽然不需要出门，但我的工作仍然繁忙。上午，我集中精力学习React，这是我作为前端开发人员需要掌握的重要技能。通过在线课程和一些优秀的教程，我对React的基本概念和组件有了更深的理解。我特别学习了React中的状态管理和生命周期，这对于我接下来的项目开发非常关键。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/12/669150150ab77.webp" alt="达尔文效应！"></p>
+<p>下午，我把注意力转向了Elasticsearch（ES）。Elasticsearch是一种分布式搜索和分析引擎，对于处理大数据集非常高效。我阅读了相关文档，并在本地搭建了一个小型ES集群。通过实验，我了解了如何进行索引、搜索和数据分析，这些知识将帮助我更好地处理和查询存储在ES中的数据。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/12/6691503c1763e.webp" alt="纯净的云"></p>
+<p>在去图书馆的路上，注意到了天边的云，很喜欢这种纯净的云，之前在家，从来没有遇到过这么干净的云，因为是黄土高原，灰尘很大。到了图书馆后，之前座无虚席的图书馆，随着学生的放假显现的有点冷清，不过仍然有人在奋笔疾书，我想，这也许就是坚守吧。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/12/669150e246428.webp" alt="空旷"></p>
+<h3 id="2024-07-07"><a href="#2024-07-07" class="headerlink" title="2024-07-07"></a>2024-07-07</h3><p>今天是七七事变，缅怀先烈。</p>
+<p>依旧是在家办公。早上，我继续学习React。在昨天打下的基础上，我今天重点学习了React Router和表单处理。通过实践项目，我实现了一个简单的单页应用，可以在不同的页面之间导航，并处理用户输入的表单数据。这让我对React的实际应用有了更深的理解。</p>
+<p>中午，我花了一些时间研究了前后端的链接。因为我在组中担任前端开发工作，所以需要确保前端和后端的数据交互顺畅。我学习了如何使用Axios库来发送HTTP请求，并处理从后端获取的数据。通过实际操作，我成功地实现了前端与后端API的对接。</p>
+<p>下午，我继续完成杭州房价预测项目的剩余部分。虽然模型已经训练完毕，但我需要对结果进行进一步的分析，并撰写报告。最烦的就是实验报告了！！！！！</p>
+<p>晚上，我开始尝试实现一些实际的前端功能模块。基于我今天学习的内容，我设计了一个简单的用户界面，能够展示杭州房价预测的结果。我使用React构建了组件，并将预测结果动态地展示在页面上。这是我第一次将前端与实际项目结合起来，尽管还有很多需要改进的地方，但这是一个良好的开始。（良好个屁，其实现在写的屎后面都没用上）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/12/669151dc43925.webp" alt="图书馆的夕阳"></p>
+<h3 id="2024-07-08"><a href="#2024-07-08" class="headerlink" title="2024-07-08"></a>2024-07-08</h3><p>今天，我们的老师正式部署了我们的工作。上午，老师在台上详细讲解了整个工作流程。我们需要使用MinIO作为数据存储服务，使用Elasticsearch（ES）作为数据搜索库，并使用DeepSort算法实现人车流量跟踪统计。此外，我们需要采用合适的技术栈来展示前端数据。经过讨论和划分，我被指定负责组中的前端工作，主要任务是实现结果展示的过程。经过小组讨论，我们决定使用React作为前端框架，因为它具有良好的拓展性，并且有许多现成的插件可以使用。</p>
+<p>下午，我开始简单地实现页面的结构。由于刚开始使用React，对其熟悉程度不高，导致页面的结构和布局非常丑陋。这让我意识到需要更多的时间来学习和实践React，以提高页面的美观度和功能性。为此，我决定利用晚上和接下来的时间深入学习React，争取在短时间内掌握它的基本使用方法和最佳实践。</p>
+<p>今天下午我抢到了回家的下铺，很开心，过两天就能回家啦！！！</p>
+<h3 id="2024-07-09"><a href="#2024-07-09" class="headerlink" title="2024-07-09"></a>2024-07-09</h3><p>前一天晚上，因为一直玩不明白react，我很恼火，所以我直接熬夜学习了一下，最终大致了解了开发流程，今天，我对之前设计的页面进行了重构。首先，我将菜单栏统一放置在右侧，点击菜单项可以跳转到相应的页面。这样可以使页面结构更加清晰和用户友好。接着，我与小组成员讨论了需要实现的功能，并逐步开始实现。</p>
+<p>今天，我主要实现了上传文件的功能，允许用户从本地上传图像到Minio。虽然这个功能相对简单，但对于我来说是一次重要的React探索和实践。此外，我还实现了一个普通检测页面，用户可以在该页面上传视频，后端会返回上传到MinIO的视频链接并进行处理。</p>
+<p>今天也并没有稀奇的事情，有的只是在办公室敲代码，一天就这样过去啦。</p>
+<h3 id="2024-07-10"><a href="#2024-07-10" class="headerlink" title="2024-07-10"></a>2024-07-10</h3><p>今天，经过讨论，我们发现MinIO的上传功能由于需要绝对路径，但前端无法访问到文件结构，因此无法实现。于是，我们决定将上传功能移到后端，由前端通过Flask进行传输。今天，我主要实现了建议的后端，通过模拟数据进一步完善了前端页面。这对于我们项目的整体进展来说是一大步。</p>
+<p>晚上，我们开始对接前后端数据。通过前后端的配合，最终实现了我们想要的功能。前端页面能够成功地接收到后端返回的数据，并进行相应的展示。这不仅验证了我们之前设计和实现的可行性，也为接下来的工作奠定了坚实的基础。</p>
+<p>今天基本掌握了流程，终于实现了前后端的通信，因为react在以前并没有接触过，所以导致现在基本上是从头开始，不过，万事开头难，现在的我已经基本可以独立开发啦！更何况，组里还有个大佬哩！</p>
+<h3 id="2024-07-11"><a href="#2024-07-11" class="headerlink" title="2024-07-11"></a>2024-07-11</h3><p>今天，我实现了前端的最后一部分内容，即人流检测和车流检测功能。同时，我将这些检测功能与Elasticsearch的查找功能进行了对接，基本功能实现完成。通过这种方式，用户可以在前端页面上查看人流和车流的检测结果，并通过ES进行数据查询。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/13/669153bb0b00d.webp" alt="路上碰到的小米su7"></p>
+<p>在实现基本功能后，我开始持续优化CSS样式，以使页面尽量变得美观。通过调整页面布局、字体、颜色等细节，我逐步提升了用户界面的视觉效果和用户体验。最终，前端页面不仅功能完善，而且看起来更加专业和吸引人。</p>
+<p>娱乐方面，今天是星期四，当然是和舍友快乐星期四啦！不过差点又没吃完，我决定了，暑假一定要带我的父母去吃一顿！！！他们还没吃过呢！</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/13/669153f39c08f.webp" alt="vivo50"></p>
+<p>今天中午，我们跑到了外面的食堂，也是员工餐厅，但是幸运的是，可以刷支付宝，于是我们几个自己挑选了自己喜欢吃的菜，阿姨还额外给我打了一勺肉肉，可能是看我帅？哈哈哈哈！不过该说不说，价格还是有点偏高了，虽然质量也很高。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/13/669154908d9e4.webp" alt="美味饭菜！"></p>
+<h3 id="2024-07-12"><a href="#2024-07-12" class="headerlink" title="2024-07-12"></a>2024-07-12</h3><p>今天是一个充满成就感的一天，我终于实现了视频流的快捷处理功能，将视频转成m3u8格式，可以在视频上传的同时进行播放，无需担心速度问题。这项功能的实现极大地提升了用户体验，使得视频处理和观看变得更加流畅和高效。</p>
+<p>首先，我实现了视频上传页面，通过上传接口，用户可以手动上传视频数据。这个页面使用了React和Ant Design的组件，使得用户界面简洁友好，操作简单直观。在视频上传后，系统会自动将视频转换成m3u8格式，并在上传过程中实时播放视频。这项功能的实现，得益于对ffmpeg工具的深入理解和灵活应用，解决了视频处理速度和播放流畅度之间的矛盾。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/13/669154e858005.webp" alt="前端1"></p>
+<p>在视频处理的基础上，我还完善了搜索页面的功能。用户可以通过这个页面进行视频数据的搜索，并获取相应的结果。这一功能的实现，为用户提供了更方便的视频管理和检索方式。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/13/669154fc7365e.webp" alt="前端2"></p>
+<p>除了视频处理和搜索功能，我还实现了人脸识别功能。通过上传人脸图片，系统可以识别出视频中的对应人物，并返回相关信息。这一功能的实现，使得系统的功能更加全面，为用户提供了更加丰富的应用场景和使用体验！</p>
+<h3 id="2024-07-13"><a href="#2024-07-13" class="headerlink" title="2024-07-13"></a>2024-07-13</h3><p>今天我主要集中在实现项目的基本功能上，经过几天的努力，终于看到了初步的成果。为了提升用户体验，我添加了视频管理的页面。在这个页面上，用户可以查看自己上传的视频状态，包括上传的进度、成功与否的标识等。这一功能的实现让我感到特别兴奋，因为它不仅提高了用户对系统的掌控感，还让我能够更好地调试后端逻辑。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/16/6696775256dc1.webp" alt="上传视频"></p>
+<p>在调试过程中，我也遇到了一些挑战，比如如何处理上传失败的情况以及如何优化用户界面的响应速度。不过，这些问题在经过几轮的测试和改进后，最终都得到了有效的解决。通过这次调试，我更加熟悉了整个项目的工作流程，心里也更加有底。接下来，我将继续优化功能，希望能在时间允许的范围内，进一步提升系统的稳定性和用户体验。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/16/6696777ac45a4.webp" alt="上传视频管理"></p>
+<h3 id="2024-07-14"><a href="#2024-07-14" class="headerlink" title="2024-07-14"></a>2024-07-14</h3><p>今天，我着手添加一个用户管理功能，这是我项目中非常重要的一个部分。尽管因为时间限制，这个功能并不全面，但它为后续的系统扩展打下了基础。在用户管理页面上，我实现了用户的基本信息展示和部分操作，例如添加新用户和删除用户等。</p>
+<p>由于时间的紧迫，我没有能够完成用户权限管理和数据统计的功能。这让我有些遗憾，但我知道这并不影响整个项目的核心功能。未来如果有机会，我会在用户管理上继续深化，加入更多实用的功能，比如用户行为追踪和数据分析等。</p>
+<p>总的来说，今天的工作让我对用户管理有了更深刻的理解，虽然未能做到尽善尽美，但我相信这一步是向前迈出的重要一步。接下来，我将集中精力准备即将到来的答辩，希望能将我的项目展示得淋漓尽致。</p>
+<h3 id="2024-07-15"><a href="#2024-07-15" class="headerlink" title="2024-07-15"></a>2024-07-15</h3><p>今天是项目答辩的日子，心情既紧张又兴奋。我提前准备了展示材料，希望能够充分展示我所完成的项目。然而，在答辩过程中，我遇到了一些意外情况：由于防火墙的原因，我无法正常访问项目中的图片和某些关键的演示内容。这使得我的展示受到了一定的影响，感觉遗憾不已。</p>
+<p>尽管如此，我努力调整自己的心态，依然尽力向评委阐述项目的设计理念和实现过程。我相信即使遇到一些小挫折，关键还是在于我对项目的理解和表现。人生中总会有一些遗憾，这次经历让我意识到，即使事情没有按照预期进行，依然可以从中汲取经验教训。</p>
+<p>答辩结束后，虽然结果尚未揭晓，但我感到无论如何都已尽力而为。接下来，我计划认真听取评审老师的反馈，不断改进我的项目。希望未来的工作能够更加顺利！</p>
+<p><em>— 柳影曳曳，清酒孤灯，扬笔撒墨，心境如霜</em></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.liushen.fun/">Willow-God</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.liushen.fun/posts/13e6e155/">https://blog.liushen.fun/posts/13e6e155/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.liushen.fun" target="_blank">LiuShen's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%97%A5%E8%AE%B0/">日记</a><a class="post-meta__tags" href="/tags/%E7%94%9F%E6%B4%BB%E7%82%B9%E6%BB%B4/">生活点滴</a></div><div class="post-share"><div class="social-share" data-image="https://cdn.qyliu.top/i/2024/07/01/66823117502e0.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="/pluginsSrc/butterfly-extsrc/sharejs/dist/css/share.min.css?v=1.1.3" media="print" onload="this.media='all'"><script src="/pluginsSrc/butterfly-extsrc/sharejs/dist/js/social-share.min.js?v=1.1.3" defer=""></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>来😍鼠标过来一点~</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/config/img/wechat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/config/img/wechat.png" alt="微信"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/config/img/wechat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/config/img/wechat.png" alt="支付宝"></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="prev-post pull-left" href="/posts/c2262998/" title="Github Action实现友链状态检测"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/06/23/6676f5b705711.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Github Action实现友链状态检测</div></div></a><a class="next-post pull-right" href="/posts/67189760/" title="Spikformer脉冲神经网络学习"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/06/6688d4b63b50f.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Spikformer脉冲神经网络学习</div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a href="/posts/c724fd1b/" title="随心而动，一辆单车逛遍半个武汉"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/05/66377637e3947.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-05-06</div><div class="title">随心而动，一辆单车逛遍半个武汉</div></div></a><a href="/posts/85a35c94/" title="疫情下的大学生活"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img95.699pic.com/photo/40167/6894.jpg_wh860.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-06</div><div class="title">疫情下的大学生活</div></div></a><a href="/posts/2a697f0c/" title="渺小与不朽"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.pixabay.com/photo/2023/12/06/08/41/mountain-8433234_1280.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-08</div><div class="title">渺小与不朽</div></div></a></div></div><hr class="custom-hr"><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/03/21/65fc570ca9fe7.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info-name">Willow-God</div><div class="author-info-description">清羽 〄 飞扬</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">69</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/willow-god"><i class="fab fa-github"></i><span>Follow Me 🛫</span></a><div class="card-info-social-icons"><a class="social-icon" href="mailto:01@liushen.fun" target="_blank" title="Email"><i class="fa-solid fa-envelope"></i></a><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2411457922&amp;site=qq&amp;menu=yes" target="_blank" title="QQ：2411457922"><i class="fa-brands fa-qq"></i></a><a class="social-icon" href="https://wakatime.com/@LiuShen" target="_blank" title="Wakatime"><i class="fa-solid fa-chart-column"></i></a><a class="social-icon" href="https://blog.liushen.fun/atom.xml" target="_blank" title="rss地址"><i class="fa-solid fa-rss"></i></a></div></div><div class="card-widget" id="card-poem"><div id="poem_sentence"></div><div id="poem_info"><div id="poem_dynasty"></div><div id="poem_author"></div></div></div><script src="/js/jinrishici.js" charset="utf-8"></script><script type="text/javascript">jinrishici.load(function(result) {
+var sentence = document.querySelector("#poem_sentence")
+var author = document.querySelector("#poem_author")
+var dynasty = document.querySelector("#poem_dynasty")
+
+var sentenceText = result.data.content
+sentenceText = sentenceText.substr(0, sentenceText.length - 1);
+sentence.innerHTML = sentenceText
+dynasty.innerHTML = result.data.origin.dynasty
+author.innerHTML = result.data.origin.author + '《' + result.data.origin.title + '》'
+});</script><div class="card-widget card-announcement"><div class="item-headline"><i class="fa fa-user"></i><span>欢迎来访者</span></div><div id="welcome-info"></div><script src="/js/txmap.js"></script><script data-pjax="data-pjax">var longitude="108.546767";
+var Latitude="34.579480";
+var txkey="44BBZ-IZPLZ-V6PXP-ZYLRT-JKFH3-DOFJ6";
+var ipLoacation;
+window.onload = () => {welcometxmap()};
+document.addEventListener("pjax:complete", welcometxmap());</script></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p><strong>博客架构概览：</strong><br>⚙️框架核心：Hexo<br>🕹️界面设计：Butterfly<br>🔮安全保障：长亭雷池<br>🔩管理工具：宝塔面板，1Panel<br>🎰服务器支持：阿里云，腾讯云<br>🎲CDN加速：多吉云，无畏云<br><strong>快捷跳转地址：</strong><br>👻博客主站：<a href="https://blog.liushen.fun">blog.liushen.fun</a><br>😶‍🌫️博客分栏：<a target="_blank" rel="noopener" href="https://www.qingyang.eu.org">qingyang.eu.org</a><br>🤖个人导航：<a target="_blank" rel="noopener" href="https://www.liushen.fun">www.liushen.fun</a><br></p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/config/img/notice.gif" alt="可爱捏" title="可爱捏" style="width:100%; border-radius:10px;"></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A2%8E%E7%A2%8E%E5%BF%B5"><span class="toc-text">碎碎念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E4%B9%A0%E6%97%A5%E8%AE%B0"><span class="toc-text">实习日记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2024-07-01"><span class="toc-text">2024-07-01</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BA%E5%8F%91"><span class="toc-text">出发</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%B0%E7%AB%99"><span class="toc-text">到站</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%B2%E8%A7%A3"><span class="toc-text">讲解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A2%E7%B4%A2%E5%91%A8%E8%BE%B9"><span class="toc-text">探索周边</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A3%8E%E9%9B%A8%E6%AC%B2%E6%9D%A5"><span class="toc-text">风雨欲来</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2024-07-02"><span class="toc-text">2024-07-02</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9E%AF%E7%87%A5"><span class="toc-text">枯燥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%88%E9%A4%90"><span class="toc-text">午餐</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A8%81%E4%BC%98%E6%98%93"><span class="toc-text">威优易</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%82%8D%E6%99%9A"><span class="toc-text">傍晚</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2024-07-03"><span class="toc-text">2024-07-03</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2024-07-04"><span class="toc-text">2024-07-04</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%A7%82"><span class="toc-text">参观</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A0%E8%81%8A%E7%9A%84%E5%87%86%E5%A4%87"><span class="toc-text">无聊的准备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%96%AF%E7%8B%82%E6%98%9F%E6%9C%9F%E5%9B%9B"><span class="toc-text">疯狂星期四</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2024-07-05"><span class="toc-text">2024-07-05</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95%E8%AE%B2%E8%A7%A3"><span class="toc-text">面试讲解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83%E6%88%BF%E5%B1%8B%E4%BB%B7%E6%A0%BC%E6%A8%A1%E5%9E%8B"><span class="toc-text">训练房屋价格模型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2024-07-06"><span class="toc-text">2024-07-06</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2024-07-07"><span class="toc-text">2024-07-07</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2024-07-08"><span class="toc-text">2024-07-08</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2024-07-09"><span class="toc-text">2024-07-09</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2024-07-10"><span class="toc-text">2024-07-10</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2024-07-11"><span class="toc-text">2024-07-11</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2024-07-12"><span class="toc-text">2024-07-12</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2024-07-13"><span class="toc-text">2024-07-13</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2024-07-14"><span class="toc-text">2024-07-14</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2024-07-15"><span class="toc-text">2024-07-15</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/4dc716ec/" title="Friend-Circle-Lite:轻量友链朋友圈"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/19/6699436fe02ec.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Friend-Circle-Lite:轻量友链朋友圈"></a><div class="content"><a class="title" href="/posts/4dc716ec/" title="Friend-Circle-Lite:轻量友链朋友圈">Friend-Circle-Lite:轻量友链朋友圈</a><time datetime="2024-08-11T16:02:00.000Z" title="更新于 2024-08-12 00:02:00">2024-08-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/a64defb4/" title="魔改笔记七：分类条及外链卡片"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/08/10/66b74df1ab511.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="魔改笔记七：分类条及外链卡片"></a><div class="content"><a class="title" href="/posts/a64defb4/" title="魔改笔记七：分类条及外链卡片">魔改笔记七：分类条及外链卡片</a><time datetime="2024-08-09T17:40:00.000Z" title="更新于 2024-08-10 01:40:00">2024-08-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/159f1aa5/" title="域名迁移至 blog.liushen.fun"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/08/10/66b6479e1d33c.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="域名迁移至 blog.liushen.fun"></a><div class="content"><a class="title" href="/posts/159f1aa5/" title="域名迁移至 blog.liushen.fun">域名迁移至 blog.liushen.fun</a><time datetime="2024-08-09T08:00:00.000Z" title="更新于 2024-08-09 16:00:00">2024-08-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/3850e950/" title="CloudFlare实用项目推荐"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/31/66a922cb9adcc.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CloudFlare实用项目推荐"></a><div class="content"><a class="title" href="/posts/3850e950/" title="CloudFlare实用项目推荐">CloudFlare实用项目推荐</a><time datetime="2024-07-31T17:32:00.000Z" title="更新于 2024-08-01 01:32:00">2024-08-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap" style="background: transparent"><div id="footer_icons"><div><a class="icon_link" rel="noopener external nofollow" href="https://www.qyliu.top/" title="导航站点" target="_blank"><i class="fa-solid fa-compass"></i></a><a class="icon_link" rel="noopener external nofollow" href="https://admin.qidian.qq.com/static_proxy/b2b-qq/wpa-link/index.html#/person?uin=2411457922" title="联系QQ" target="_blank"><i class="fa-brands fa-qq"></i></a><a class="icon_link" rel="noopener external nofollow" href="https://github.com/willow-god" title="我的github主页" target="_blank"><i class="fa-brands fa-github"></i></a><a class="icon_link" rel="noopener external nofollow" href="mailto:01@liushen.fun" title="发送邮件至博主邮箱" target="_blank"><i class="fa-solid fa-envelope"></i></a></div><img class="footer_logo" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/12/663f9fc48820a.png" onclick="btf.scrollToDest(0,500)" title="返回顶部"><div><a class="icon_link" rel="noopener external nofollow" href="https://wakatime.com/@LiuShen" title="Wikitime" target="_blank"><i class="fa-solid fa-clock"></i></a><a class="icon_link" rel="noopener external nofollow" href="https://gitlab.com/" title="gitlab" target="_blank"><i class="fa-brands fa-gitlab"></i></a><a class="icon_link" href="/shuoshuo/" title="日常说说" data-pjax-state="data-pjax-state"><i class="fa-solid fa-file-pen"></i></a><a class="icon_link" href="/comment/" title="留言板" data-pjax-state="data-pjax-state"><i class="fa-solid fa-comment"></i></a></div></div><div id="footer_content"><div class="footer-group"><h3 class="footer-title">关于本站</h3><div class="footer-links"><a class="footer-item" target="_blank" href="https://www.qyliu.top/">导航站点</a><a class="footer-item" href="/shuoshuo/">日常说说</a><a class="footer-item" target="_blank" href="https://um.liushen.fun/share/G8C2aR0IszHE5VBl/blog.liushen.fun">访客信息</a><a class="footer-item" target="_blank" href="https://m.liushen.fun/">盐焗星球</a><a class="footer-item" target="_blank" href="https://listen.qyliu.top/">在线状态</a><a class="footer-item" href="/subscribe/">订阅本站</a></div></div><div class="footer-group"><h3 class="footer-title">加入组织</h3><div class="footer-links"><a class="footer-item" target="_blank" href="https://www.boyouquan.com/home">博友圈</a><a class="footer-item" target="_blank" href="https://boke.lu/">博客录</a><a class="footer-item" target="_blank" href="https://blogwe.com/">博客我们</a><a class="footer-item" target="_blank" href="https://firewood.news/">积薪站点</a><a class="footer-item" target="_blank" href="https://bf.zzxworld.com/">发现博客</a><a class="footer-item" target="_blank" href="https://ourblo.gs/">OurBlogs</a></div></div><div class="footer-group"><h3 class="footer-title">文章整理</h3><div class="footer-links"><a class="footer-item" href="/categories/博客管理/">博客管理</a><a class="footer-item" href="/categories/学习资料/">学习资料</a><a class="footer-item" href="/categories/日常分享/">日常分享</a><a class="footer-item" href="/achieve/">时光卷轴</a><a class="footer-item" href="/charts/">文章通览</a><a class="footer-item" href="/categories/">查看全部</a></div></div><div class="footer-group"><h3 class="footer-title">文章标签</h3><div class="footer-links"><a class="footer-item" href="/tags/JavaScript/">JS知识</a><a class="footer-item" href="/tags/Hexo/">本站框架</a><a class="footer-item" href="/tags/机器学习/">机器学习</a><a class="footer-item" href="/tags/日记/">个人日记</a><a class="footer-item" href="/tags/CSS/">CSS知识</a><a class="footer-item" href="/tags/">查看全部</a></div></div><div class="footer-group"><h3 class="footer-title">自建工具</h3><div class="footer-links"><a class="footer-item" target="_blank" rel="noopener" href="https://docs_s.tianli0.top/">必应AI</a><a class="footer-item" target="_blank" rel="noopener" href="https://chat.qyliu.top/">NextGPT</a><a class="footer-item" target="_blank" rel="noopener" href="https://draw.qyliu.top/">随心画板</a><a class="footer-item" target="_blank" rel="noopener" href="https://mindmap.qyliu.top/">思维导图</a><a class="footer-item" target="_blank" rel="noopener" href="https://ittools.qyliu.top/">IT工具箱</a><a class="footer-item" target="_blank" rel="noopener" href="https://calcium.qyliu.top/">在线计算</a></div></div><div class="footer-group" id="friend-links-in-footer"><h3 class="footer-title">友链<button title="换一批" href="javascript:;" onclick="liushen.randomLink()"><i class="fa-solid fa-rotate-right"></i></button></h3><div class="footer-links"><a class="footer-item" target="_blank" href="https://blog.liushen.fun">测试1</a><a class="footer-item" target="_blank" href="https://blog.liushen.fun">测试2</a><a class="footer-item" target="_blank" href="https://blog.liushen.fun">测试3</a><a class="footer-item" target="_blank" href="https://blog.liushen.fun">测试4</a><a class="footer-item" target="_blank" href="https://blog.liushen.fun">测试5</a><a class="footer-item" href="/link/" data-pjax-state="data-pjax-state">查看更多</a></div></div></div><div id="footer-bottom"><div class="footer-bottom-content"><div class="footer-bottom-left"><span class="copyright">©2021 - 2024 By <a target="_blank" rel="noopener" href="https://blog.liushen.fun/about/" title="点击访问&quot;LiuShen&quot;的主页" style="margin-left:5px">LiuShen</a></span><div><a class="footer-bottom-link" target="_blank" href="https://beian.miit.gov.cn/" rel="noopener external nofollow" title="工信部备案号">陕ICP备2024028531号</a><a class="footer-bottom-link" target="_blank" href="https://beian.mps.gov.cn/#/query/webSearch?code=61011602000637" rel="noopener external nofollow" title="公安备案号">陕公网安备61011602000637号</a></div></div><div class="footer-bottom-right"> <div id="runtime" title="本站运行时间">本站已苟活：0 天 0 时 0 分 0 秒</div><div> <a class="footer-bottom-link" target="_blank" href="https://www.dogecloud.com/" rel="noopener external nofollow" title="本站通过多吉云CDN提供站点加速">多吉云CDN</a><a class="footer-bottom-link" target="_blank" href="https://hexo.io/zh-cn/" rel="noopener external nofollow" title="本站使用Hexo架构搭建而成">Hexo静态框架</a><a class="footer-bottom-link" target="_blank" href="https://butterfly.js.org/" rel="noopener external nofollow" title="本站由Butterfly主题魔改而成">Butterfly主题</a></div></div></div></div></div><script>if (!window.liushen) {
+  window.liushen = {
+    saveData: (key, data) => {
+      localStorage.setItem(key, JSON.stringify({
+        time: Date.now(),
+        data: data
+      }));
+    },
+
+    loadData: (key, validTimeInMinutes) => {
+      let storedData = JSON.parse(localStorage.getItem(key));
+      if (storedData) {
+        let elapsedTime = Date.now() - storedData.time;
+        if (elapsedTime >= 0 && elapsedTime < validTimeInMinutes * 60000) {
+          return storedData.data;
+        }
+      }
+      return null;
+    },
+
+    runtime: () => {
+      const formatTime = (unit) => unit > 9 ? unit : "0" + unit;
+      const startTime = new Date('2021/12/12 01:27:36').getTime();
+      const currentTime = Date.now();
+      let elapsedTimeInSeconds = Math.round((currentTime - startTime) / 1000);
+
+      let runtimeText = "本站已苟活：";
+      if (elapsedTimeInSeconds >= 86400) {
+        runtimeText += `${formatTime(Math.floor(elapsedTimeInSeconds / 86400))} 天 `;
+        elapsedTimeInSeconds %= 86400;
+      }
+      if (elapsedTimeInSeconds >= 3600) {
+        runtimeText += `${formatTime(Math.floor(elapsedTimeInSeconds / 3600))} 时 `;
+        elapsedTimeInSeconds %= 3600;
+      }
+      if (elapsedTimeInSeconds >= 60) {
+        runtimeText += `${formatTime(Math.floor(elapsedTimeInSeconds / 60))} 分 `;
+        elapsedTimeInSeconds %= 60;
+      }
+      runtimeText += `${formatTime(elapsedTimeInSeconds)} 秒`;
+
+      const runtimeElement = document.getElementById("runtime");
+      if (runtimeElement) {
+        runtimeElement.innerHTML = runtimeText;
+      }
+      setTimeout(window.liushen.runtime, 1000);
+    },
+
+    randomLink: () => {
+      let linksData = window.liushen.loadData("links", 30);
+      if (linksData) {
+        let linkElements = document.querySelectorAll("#friend-links-in-footer .footer-item");
+        if (!linkElements.length) return;
+
+        for (let i = 0; i < linkElements.length; i++) {
+          let randomIndex = Math.floor(Math.random() * linksData.length);
+          linkElements[i].innerText = linksData[randomIndex].name;
+          linkElements[i].href = linksData[randomIndex].link;
+          linksData.splice(randomIndex, 1);
+        }
+      } else {
+        fetch("/flink_count.json")
+          .then(response => response.json())
+          .then(data => {
+            window.liushen.saveData("links", data.link_list);
+            window.liushen.randomLink();
+          });
+      }
+    }
+  };
+}
+
+if (true) {
+  window.liushen.randomLink();
+  document.addEventListener("DOMContentLoaded", window.liushen.randomLink);
+  window.liushen.runtime();
+} else {
+  window.liushen.randomLink();
+  window.liushen.runtime();
+}</script></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><a class="icon-V hidden" onclick="switchNightMode()" title="浅色和深色模式转换"><svg width="25" height="25" viewBox="0 0 1024 1024"><use id="modeicon" xlink:href="#icon-moon"></use></svg></a><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="cat" onclick="toggleLive2dVisibility()" title="小猫显隐"><i class="fa-solid fa-cat"></i></button><button id="fullscreen" onclick="toggleFullScreen()" title="全屏切换"><i class="fa-solid fa-expand"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="fa-solid fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="fa-solid fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="fa-solid fa-arrow-rotate-right"></i></div><div class="rightMenu-item" id="menu-home"><i class="fa-solid fa-house"></i></div></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" id="copy" href="javascript:rm.copySelect();"><i class="fa-solid fa-copy"></i><span>复制选中文字</span></a><a class="rightMenu-item" id="reply" href="javascript:rm.replySelect();"><i class="fa-regular fa-comment"></i><span>评论选中段落</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" href="/archives/"><i class="fa-solid fa-archive"></i><span>文章时间线</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分大类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章小标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuNormal"><a class="rightMenu-item menu-link" id="menu-radompage" href="/comment/"><i class="fa-solid fa-shoe-prints"></i><span>随心留言板</span></a><div class="rightMenu-item" id="menu-translate"><i class="fa-solid fa-earth-asia"></i><span>繁简模式切换</span></div><div class="rightMenu-item" id="menu-darkmode"><i class="fa-solid fa-moon"></i><span>切换亮暗模式</span></div><div class="rightMenu-item" id="menu-live2dvisibility"><i class="fa-solid fa-cat"></i><span>小猫显示隐藏</span></div><div class="rightMenu-item" id="menu-print"><i class="fa-solid fa-print fa-fw"></i><span>打印整个页面</span></div><a class="rightMenu-item menu-link" id="statement" href="/statement/"><i class="fa-regular fa-copyright fa-fw"></i><span>网站声明</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js?v=5.0.0"></script><script src="/js/main.js?v=5.0.0"></script><script src="/js/jquery-3.7.1.slim.min.js?v=5.0.0"></script><script src="/js/others.js?v=5.0.0"></script><script src="/js/echarts.min.js?v=5.0.0"></script><script src="/js/rightmenu.js?v=5.0.0"></script><script src="/js/tw_cn.js?v=5.0.0"></script><script src="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.umd.js?v=5.0.36"></script><script src="/pluginsSrc/instant.page/instantpage.js?v=5.2.0" type="module"></script><script src="/pluginsSrc/vanilla-lazyload/dist/lazyload.iife.min.js?v=19.1.3"></script><div class="js-pjax"><script>(() => {
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.qyliu.top',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.qyliu.top',
+      region: '',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(init,0)
+    else btf.getScript('/pluginsSrc/twikoo/dist/twikoo.all.min.js?v=1.6.38').then(init)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[aside.card_aside.card_aside.card_newest_comments.code]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo.qyliu.top',
+        region: '',
+        pageSize: 5,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        btf.saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      btf.getScript('/pluginsSrc/twikoo/dist/twikoo.all.min.js?v=1.6.38').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = btf.saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  btf.addGlobalFn('pjaxComplete', newestCommentInit, 'twikoo_newestComment')
+})</script><script src="/config/memos/memos.js"></script><canvas class="fireworks" mobile="false"></canvas><script src="/pluginsSrc/butterfly-extsrc/dist/fireworks.min.js?v=1.1.3"></script><script src="/pluginsSrc/pjax/pjax.min.js?v=0.2.8"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+const triggerPjaxFn = (val) => {
+  if (!val) return
+  Object.values(val).forEach(fn => { fn() })
+}
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjaxSendOnce')
+  btf.removeGlobalFnEvent('themeChange')
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  triggerPjaxFn(window.globalFn.pjaxSend)
+})
+
+document.addEventListener('pjax:complete', () => {
+  btf.removeGlobalFnEvent('pjaxCompleteOnce')
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  triggerPjaxFn(window.globalFn.pjaxComplete)
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async="" data-pjax="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="/pluginsSrc/algoliasearch/dist/algoliasearch-lite.umd.js?v=4.24.0"></script><script src="/pluginsSrc/instantsearch.js/dist/instantsearch.production.min.js?v=4.73.3"></script><script src="/js/search/algolia.js?v=5.0.0"></script></div></div><!-- hexo injector body_end start --><script data-pjax="">
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/a64defb4/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/08/10/66b74df1ab511.webp" alt="" onerror="this.src=/img/error-page.png; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-10</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/a64defb4/&quot;);" href="javascript:void(0);" alt="">魔改笔记七：分类条及外链卡片</a><div class="blog-slider__text">虽然说域名换了几乎等于从头开始，但是仍然浇不灭我对于网站的热情，该进行的还是得进行。很久都没有总结魔改了，这篇文章就将最近魔改最大的几个部分进行记录，同时对有需要的朋友提供帮助。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/a64defb4/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/159f1aa5/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/08/10/66b6479e1d33c.webp" alt="" onerror="this.src=/img/error-page.png; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-09</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/159f1aa5/&quot;);" href="javascript:void(0);" alt="">域名迁移至 blog.liushen.fun</a><div class="blog-slider__text">近期遇见了一个很烦人的事情，bing的所有搜索结果全部消失，我也不知道是怎么回事，已经在联系bing管理员了，不过，其实我很早之前就像换域名了，今天趁此机会，干脆直接换了得了！原有的域名301至新域名，不会影响任何使用。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/159f1aa5/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/3850e950/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/31/66a922cb9adcc.webp" alt="" onerror="this.src=/img/error-page.png; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-01</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/3850e950/&quot;);" href="javascript:void(0);" alt="">CloudFlare实用项目推荐</a><div class="blog-slider__text">之前我向大家推荐过vercel上的一些项目，都非常的有趣实用，最近，在和朋友安小歪的聊天中，发现了一些很好玩的cloud flare项目，比如临时邮箱，临时文件传送，计数统计，等等，很多项目都非常好玩，于是在此推荐给大家。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/3850e950/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/4dc716ec/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/19/6699436fe02ec.webp" alt="" onerror="this.src=/img/error-page.png; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-21</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/4dc716ec/&quot;);" href="javascript:void(0);" alt="">Friend-Circle-Lite:轻量友链朋友圈</a><div class="blog-slider__text">前两天出现了友链朋友圈因为版本原因导致无法运行的问题，虽然我已经改好了，但是由于bundle文件过大，经常导致加载较慢，于是我自己手搓了一个轻量化友链朋友圈，同时支持通过提交issue实现邮箱订阅本站最新文章，也算是友链朋友圈部署新思路啦，适合喜欢轻量和免费快速的朋友尝试！</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/4dc716ec/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/67189760/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/06/6688d4b63b50f.webp" alt="" onerror="this.src=/img/error-page.png; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-06</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/67189760/&quot;);" href="javascript:void(0);" alt="">Spikformer脉冲神经网络学习</a><div class="blog-slider__text">近期我们进行了人工智能实训，我们小组选择的是脉冲神经网络，不同于原先的神经网络，这个网络采用的是脉冲信号，目前脉冲神经网络的效果并不是很好，但是因为是一个全新的神经网络架构，并且基于生物启发的计算方式，使得它们在处理稀疏和非结构化数据时具有独特的优势。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/67189760/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer="" src="/config/swiper/swiper.min.js"></script><script defer="" data-pjax="" src="/config/swiper/swiper_init.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"superSample":2,"width":250,"height":500,"position":"left","hOffset":0,"vOffset":-140},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

@@ -1,0 +1,693 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>操作系统课程主要知识点 | LiuShen's Blog</title><meta name="author" content="Willow-God"><meta name="copyright" content="Willow-God"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本文将就本校操作系统课程所画重点，进行知识点的大致归纳整理，其中加粗为重点，具体知识点请看PPT不要看这里">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统课程主要知识点">
+<meta property="og:url" content="https://blog.liushen.fun/posts/a74e83a1/index.html">
+<meta property="og:site_name" content="LiuShen's Blog">
+<meta property="og:description" content="本文将就本校操作系统课程所画重点，进行知识点的大致归纳整理，其中加粗为重点，具体知识点请看PPT不要看这里">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://and-pc.com/wp-content/uploads/2020/07/image-1024x560-1.png">
+<meta property="article:published_time" content="2024-01-04T01:46:25.000Z">
+<meta property="article:modified_time" content="2024-01-04T02:46:25.000Z">
+<meta property="article:author" content="Willow-God">
+<meta property="article:tag" content="期末复习">
+<meta property="article:tag" content="操作系统">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://and-pc.com/wp-content/uploads/2020/07/image-1024x560-1.png"><link rel="shortcut icon" href="/info/avatar.ico"><link rel="canonical" href="https://blog.liushen.fun/posts/a74e83a1/index.html"><link rel="preconnect"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css?v=5.0.0"><link rel="stylesheet" href="/css/custom.css?v=5.0.0"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css?v=6.6.0"><link rel="stylesheet" href="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.css?v=5.0.36" media="print" onload="this.media='all'"><script>(()=>{
+      const saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+      
+      window.btf = {
+        saveToLocal: saveToLocal,
+        getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+          script.src = url
+          script.async = true
+          script.onerror = reject
+          script.onload = script.onreadystatechange = function() {
+            const loadState = this.readyState
+            if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+            script.onload = script.onreadystatechange = null
+            resolve()
+          }
+
+          Object.keys(attr).forEach(key => {
+            script.setAttribute(key, attr[key])
+          })
+
+          document.head.appendChild(script)
+        }),
+
+        getCSS: (url, id = false) => new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+          link.rel = 'stylesheet'
+          link.href = url
+          if (id) link.id = id
+          link.onerror = reject
+          link.onload = link.onreadystatechange = function() {
+            const loadState = this.readyState
+            if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+            link.onload = link.onreadystatechange = null
+            resolve()
+          }
+          document.head.appendChild(link)
+        }),
+
+        addGlobalFn: (key, fn, name = false, parent = window) => {
+          const pjaxEnable = true
+          if (!pjaxEnable && key.startsWith('pjax')) return
+
+          const globalFn = parent.globalFn || {}
+          const keyObj = globalFn[key] || {}
+    
+          if (name && keyObj[name]) return
+    
+          name = name || Object.keys(keyObj).length
+          keyObj[name] = fn
+          globalFn[key] = keyObj
+          parent.globalFn = globalFn
+        }
+      }
+    
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+      
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })()</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"7IX3UBC6JW","apiKey":"4ac2846352e499675081f1277fb961c1","indexName":"My Blog","hitsPerPage":6,"languages":{"input_placeholder":"搜索全站文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"本篇文章从发布到现在已经隔了","messageNext":"天了，里面的内容可能过期了，你要自己甄别一下哟👉👈"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":400,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":1000,"languages":{"author":"作者: Willow-God","link":"链接: ","source":"来源: LiuShen's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js?v=4.12.0',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '操作系统课程主要知识点',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: undefined,
+  isToc: true,
+  postUpdate: '2024-01-04 10:46:25'
+}</script><link rel="stylesheet" href="/config/Yozai-Medium/result.css"><link rel="stylesheet" href="/config/memos/memos.css"></head><body><svg aria-hidden="true" style="position:absolute; overflow:hidden; width:0; height:0"><symbol id="icon-sun" viewBox="0 0 1024 1024"><path d="M960 512l-128 128v192h-192l-128 128-128-128H192v-192l-128-128 128-128V192h192l128-128 128 128h192v192z" fill="#FFD878" p-id="8420"></path><path d="M736 512a224 224 0 1 0-448 0 224 224 0 1 0 448 0z" fill="#FFE4A9" p-id="8421"></path><path d="M512 109.248L626.752 224H800v173.248L914.752 512 800 626.752V800h-173.248L512 914.752 397.248 800H224v-173.248L109.248 512 224 397.248V224h173.248L512 109.248M512 64l-128 128H192v192l-128 128 128 128v192h192l128 128 128-128h192v-192l128-128-128-128V192h-192l-128-128z" fill="#4D5152" p-id="8422"></path><path d="M512 320c105.888 0 192 86.112 192 192s-86.112 192-192 192-192-86.112-192-192 86.112-192 192-192m0-32a224 224 0 1 0 0 448 224 224 0 0 0 0-448z" fill="#4D5152" p-id="8423"></path></symbol><symbol id="icon-moon" viewBox="0 0 1024 1024"><path d="M611.370667 167.082667a445.013333 445.013333 0 0 1-38.4 161.834666 477.824 477.824 0 0 1-244.736 244.394667 445.141333 445.141333 0 0 1-161.109334 38.058667 85.077333 85.077333 0 0 0-65.066666 135.722666A462.08 462.08 0 1 0 747.093333 102.058667a85.077333 85.077333 0 0 0-135.722666 65.024z" fill="#FFB531" p-id="11345"></path><path d="M329.728 274.133333l35.157333-35.157333a21.333333 21.333333 0 1 0-30.165333-30.165333l-35.157333 35.157333-35.114667-35.157333a21.333333 21.333333 0 0 0-30.165333 30.165333l35.114666 35.157333-35.114666 35.157334a21.333333 21.333333 0 1 0 30.165333 30.165333l35.114667-35.157333 35.157333 35.157333a21.333333 21.333333 0 1 0 30.165333-30.165333z" fill="#030835" p-id="11346"></path></symbol></svg><!-- hexo injector head_end start --><link rel="stylesheet" href="/config/swiper/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="/config/swiper/swiperstyle.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="LiuShen's Blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="LiuShen's Blog" type="application/rss+xml">
+<div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="wizard-scene"><div class="wizard-objects"><div class="wizard-square"></div><div class="wizard-circle"></div><div class="wizard-triangle"></div></div><div class="wizard"><div class="wizard-body"></div><div class="wizard-right-arm"><div class="wizard-right-hand"></div></div><div class="wizard-left-arm"><div class="wizard-left-hand"></div></div><div class="wizard-head"><div class="wizard-beard"></div><div class="wizard-face"><div class="wizard-adds"></div></div><div class="wizard-hat"><div class="wizard-hat-of-the-hat"></div><div class="wizard-four-point-star --first"></div><div class="wizard-four-point-star --second"></div><div class="wizard-four-point-star --third"></div></div></div></div></div></div><script async="async">(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+  
+  preloader.initLoading()
+  
+  let loaded = false;
+  
+  window.addEventListener('load', () => { 
+      if (!loaded) {
+          preloader.endLoading();
+          loaded = true;
+      }
+  });
+
+  setTimeout(() => {
+      if (!loaded) {
+          preloader.endLoading();
+          loaded = true;
+      }
+  }, 5000);
+
+  
+  window.addEventListener('load',() => { preloader.endLoading() })
+  setTimeout(function(){preloader.endLoading();}, 3000);
+  document.getElementById('loading-box').addEventListener('click',()=> {preloader.endLoading()})
+
+  if (true) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><!--.avatar-img.is-center--><!--  img(src=url_for(theme.avatar.img) onerror=`onerror=null;src='${theme.error_img.flink}'` alt="avatar")--><div class="is-center" id="sidebar-avatar"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/03/21/65fc570ca9fe7.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">Willow-God</div><div class="author-info__description">清羽 〄 飞扬</div></div><div class="site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">69</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/willow-god"><i class="fab fa-github"></i><span>Follow Me 🛫</span></a><div class="menu-info-social-icons is-center"><a class="social-icon" href="mailto:01@liushen.fun" target="_blank" title="Email"><i class="fa-solid fa-envelope"></i></a><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2411457922&amp;site=qq&amp;menu=yes" target="_blank" title="QQ：2411457922"><i class="fa-brands fa-qq"></i></a><a class="social-icon" href="https://wakatime.com/@LiuShen" target="_blank" title="Wakatime"><i class="fa-solid fa-chart-column"></i></a><a class="social-icon" href="https://blog.liushen.fun/atom.xml" target="_blank" title="rss地址"><i class="fa-solid fa-rss"></i></a></div><div class="menus_items visible"><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-home"></i><span> 导航</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/"><i class="fa-fw fa-solid fa-house-laptop"></i><span> 博客主页</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.liushen.fun/"><i class="fa-fw fa-solid fa-house-flag"></i><span> 导航主页</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://xc.liushen.fun/"><i class="fa-fw fa fa-camera-retro"></i><span> 个人相册</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-graduation-cap"></i><span> 整理</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时光卷轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 文章标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 文章分类</span></a></li><li><a class="site-page child" href="/charts/"><i class="fa-fw fa-solid fa-chart-pie"></i><span> 文章通览</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa-solid fa-user-group"></i><span> 友人</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链展示</span></a></li><li><a class="site-page child" href="/addlink/"><i class="fa-fw fa fa-at"></i><span> 友链申请</span></a></li><li><a class="site-page child" href="/fcircle/"><i class="fa-fw fa-solid fa-circle-nodes"></i><span> 朋友动态</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-paper-plane"></i><span> 留言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/comment/"><i class="fa-fw fa-solid fa-chalkboard"></i><span> 留言白板</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://m.liushen.fun/"><i class="fa-fw fa-solid fa-basketball"></i><span> 盐焗星球</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa-solid fa-stethoscope"></i><span> 服务</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://um.liushen.fun/"><i class="fa-fw fa-solid fa-eye-low-vision"></i><span> 访客统计</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://pan.liushen.fun/"><i class="fa-fw fa-solid fa-laptop-file"></i><span> 资源分享</span></a></li><li><a class="site-page child" href="/subscribe/"><i class="fa-fw fa-solid fa-rss"></i><span> 订阅本站</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-list"></i><span> 关于</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fa fa-address-card"></i><span> 站长资料</span></a></li><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-commenting"></i><span> 日常说说</span></a></li><li><a class="site-page child" href="/devices/"><i class="fa-fw fa-solid fa-tachograph-digital"></i><span> 我的设备</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(https://and-pc.com/wp-content/uploads/2020/07/image-1024x560-1.png);"><nav id="nav"><span id="blog-info"><a href="/" title="LiuShen's Blog"><span class="site-name">LiuShen's Blog</span></a></span><div id="menus"></div><div class="menus_items visible"><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-home"></i><span> 导航</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/"><i class="fa-fw fa-solid fa-house-laptop"></i><span> 博客主页</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.liushen.fun/"><i class="fa-fw fa-solid fa-house-flag"></i><span> 导航主页</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://xc.liushen.fun/"><i class="fa-fw fa fa-camera-retro"></i><span> 个人相册</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-graduation-cap"></i><span> 整理</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时光卷轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 文章标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 文章分类</span></a></li><li><a class="site-page child" href="/charts/"><i class="fa-fw fa-solid fa-chart-pie"></i><span> 文章通览</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa-solid fa-user-group"></i><span> 友人</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链展示</span></a></li><li><a class="site-page child" href="/addlink/"><i class="fa-fw fa fa-at"></i><span> 友链申请</span></a></li><li><a class="site-page child" href="/fcircle/"><i class="fa-fw fa-solid fa-circle-nodes"></i><span> 朋友动态</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-paper-plane"></i><span> 留言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/comment/"><i class="fa-fw fa-solid fa-chalkboard"></i><span> 留言白板</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://m.liushen.fun/"><i class="fa-fw fa-solid fa-basketball"></i><span> 盐焗星球</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa-solid fa-stethoscope"></i><span> 服务</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://um.liushen.fun/"><i class="fa-fw fa-solid fa-eye-low-vision"></i><span> 访客统计</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://pan.liushen.fun/"><i class="fa-fw fa-solid fa-laptop-file"></i><span> 资源分享</span></a></li><li><a class="site-page child" href="/subscribe/"><i class="fa-fw fa-solid fa-rss"></i><span> 订阅本站</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-list"></i><span> 关于</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fa fa-address-card"></i><span> 站长资料</span></a></li><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-commenting"></i><span> 日常说说</span></a></li><li><a class="site-page child" href="/devices/"><i class="fa-fw fa-solid fa-tachograph-digital"></i><span> 我的设备</span></a></li></ul></div></div><center id="name-container"><a id="page-name" href="javascript:btf.scrollToDest(0, 500)">PAGE_NAME</a></center><div id="nav-right"><div id="travellings"><a class="site-page" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html" title="友链接力-随机开往"><i class="fa-solid fa-bus fa-fw"></i></a></div><div id="ten-years"><a class="site-page" target="_blank" rel="noopener" href="https://foreverblog.cn/go.html" title="友链接力-十年之约"><i class="fa-brands fa-nfc-symbol fa-fw"></i></a></div><div id="random"><a class="site-page" href="javascript:randomPost()" title="随机前往一个文章"><i class="fa-solid fa-shuffle fa-fw"></i></a></div><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i></span></div><div id="toggle-menu"><span class="site-page" href="javascript:void(0);" title="展开菜单"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">操作系统课程主要知识点</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-01-04T01:46:25.000Z" title="发表于 2024-01-04 09:46:25">2024-01-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-01-04T02:46:25.000Z" title="更新于 2024-01-04 10:46:25">2024-01-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/">学习资料</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="操作系统课程主要知识点"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/posts/a74e83a1/#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>本文将就本校操作系统课程所画重点，进行知识点的大致归纳整理，其中加粗为重点，具体知识点请看PPT不要看这里</p>
+<span id="more"></span>
+
+<h2 id="考试分值划分："><a href="#考试分值划分：" class="headerlink" title="考试分值划分："></a>考试分值划分：</h2><ul>
+<li><strong>选择题</strong>：30分</li>
+<li><strong>填空题</strong>：15分</li>
+<li><strong>简答题</strong>：10分</li>
+<li><strong>计算题</strong>：35分</li>
+<li><strong>程序题</strong>：15分</li>
+</ul>
+<h2 id="考试重点："><a href="#考试重点：" class="headerlink" title="考试重点："></a>考试重点：</h2><h3 id="第一章-绪论"><a href="#第一章-绪论" class="headerlink" title="第一章 绪论"></a>第一章 绪论</h3><h4 id="1-OS地位、作用和定义"><a href="#1-OS地位、作用和定义" class="headerlink" title="1. OS地位、作用和定义"></a>1. <strong>OS地位、作用和定义</strong></h4><ul>
+<li>地位和作用： 涉及操作系统在计算机体系中的位置和作用，如资源管理、提供用户界面等。</li>
+<li>定义： 解释操作系统是什么，其基本定义和功能。</li>
+</ul>
+<h4 id="2-OS发展"><a href="#2-OS发展" class="headerlink" title="2. OS发展"></a>2. <strong>OS发展</strong></h4><ul>
+<li>手工操作阶段： 最早的计算机操作方式，完全由人工控制。</li>
+<li>批处理阶段： 计算机按批次处理任务。</li>
+<li>多道程序设计系统阶段： 多个程序同时进入内存并轮流执行。</li>
+<li>分时系统阶段： 让多个用户共享计算机的时间和资源。</li>
+<li>实时系统阶段： 实时性是关键，对任务的响应时间要求极高。</li>
+</ul>
+<h4 id="3-OS分类"><a href="#3-OS分类" class="headerlink" title="3. OS分类"></a>3. <strong>OS分类</strong></h4><ul>
+<li><strong>批处理系统</strong>： 按批次处理作业。</li>
+<li><strong>分时系统</strong>： 允许多个用户共享计算机同时进行交互操作。</li>
+<li><strong>实时系统</strong>： 要求对任务的响应时间非常快。</li>
+<li>网络系统： 支持多台计算机通过网络协作和通信。</li>
+<li>分布式系统： 多台计算机协同工作以完成共同的任务。</li>
+<li>个人机系统： 针对个人计算机的操作系统。</li>
+</ul>
+<h4 id="4-OS的功能"><a href="#4-OS的功能" class="headerlink" title="4. OS的功能"></a>4. <strong>OS的功能</strong></h4><ul>
+<li>涉及操作系统提供的基本功能，例如资源管理、进程调度、文件管理等。</li>
+</ul>
+<h4 id="5-OS的特征"><a href="#5-OS的特征" class="headerlink" title="5. OS的特征"></a>5. <strong>OS的特征</strong></h4><ul>
+<li>并发： 多个任务同时执行。</li>
+<li>共享： 资源共享给多个任务。</li>
+<li>虚拟： 利用技术使得每个用户都觉得有独占的计算机。</li>
+<li>异步： 任务的执行是不可预测的。</li>
+</ul>
+<h4 id="6-OS结构"><a href="#6-OS结构" class="headerlink" title="6. OS结构"></a>6. <strong>OS结构</strong></h4><ul>
+<li>涉及操作系统内部的结构组成，例如内核、系统调用接口等部分。</li>
+</ul>
+<h3 id="第二章-用户接口"><a href="#第二章-用户接口" class="headerlink" title="第二章 用户接口"></a>第二章 用户接口</h3><h4 id="1-用户接口"><a href="#1-用户接口" class="headerlink" title="1. 用户接口"></a>1. <strong>用户接口</strong></h4><ul>
+<li>用户接口是操作系统与用户交互的方式和界面。</li>
+<li>它包括命令行界面、图形用户界面（GUI）、应用程序接口（API）等，使得用户能够向系统提交任务并接收结果。</li>
+</ul>
+<h4 id="2-作业的定义与组成"><a href="#2-作业的定义与组成" class="headerlink" title="2. 作业的定义与组成"></a>2. <strong>作业的定义与组成</strong></h4><ul>
+<li>作业指的是用户提交给计算机系统的任务单元，通常由作业控制块（Job Control Block）组成。</li>
+<li>其中包括作业标识、作业状态、资源需求等信息。</li>
+</ul>
+<h4 id="3-作业的输入方式"><a href="#3-作业的输入方式" class="headerlink" title="3. 作业的输入方式"></a>3. <strong>作业的输入方式</strong></h4><p>作业可以通过不同方式输入：</p>
+<ul>
+<li>联机：实时与系统交互执行任务。</li>
+<li>脱机：独立于系统执行任务。</li>
+<li>直接耦合：直接连接设备执行任务。</li>
+<li>SPOOLing联机外围同时操作：允许同时进行联机和外围设备操作，提高效率。</li>
+</ul>
+<h4 id="4-作业组织和控制"><a href="#4-作业组织和控制" class="headerlink" title="4. 作业组织和控制"></a>4. <strong>作业组织和控制</strong></h4><p>作业组织和控制根据作业的联机或脱机状态进行管理：</p>
+<ul>
+<li>联机作业：即时与系统进行交互的作业组织和控制。</li>
+<li>脱机作业：独立于系统执行的作业组织和控制。</li>
+</ul>
+<h4 id="5-系统调用"><a href="#5-系统调用" class="headerlink" title="5. 系统调用"></a>5. <strong>系统调用</strong></h4><ul>
+<li>系统调用是操作系统提供给应用程序的接口。</li>
+<li>允许应用程序请求操作系统提供的服务或资源，如文件操作、内存管理等。</li>
+</ul>
+<h3 id="第三章-进程管理"><a href="#第三章-进程管理" class="headerlink" title="第三章 进程管理"></a>第三章 进程管理</h3><h4 id="1-程序顺序和并发执行及特点"><a href="#1-程序顺序和并发执行及特点" class="headerlink" title="1. 程序顺序和并发执行及特点"></a>1. <strong>程序顺序和并发执行及特点</strong></h4><ul>
+<li>程序的顺序执行是按照指定的顺序逐条执行代码。</li>
+<li>而并发执行是多个任务同时执行，具有并行性和独立性。</li>
+</ul>
+<h4 id="2-进程的定义、进程控制块及作用"><a href="#2-进程的定义、进程控制块及作用" class="headerlink" title="2. 进程的定义、进程控制块及作用"></a>2. <strong>进程的定义、进程控制块及作用</strong></h4><ul>
+<li>进程是程序的执行实例。</li>
+<li>进程控制块是操作系统中用来描述和控制进程状态的数据结构，其中包含了进程的相关信息。</li>
+</ul>
+<h4 id="3-进程的状态及变迁方式"><a href="#3-进程的状态及变迁方式" class="headerlink" title="3. 进程的状态及变迁方式"></a>3. <strong>进程的状态及变迁方式</strong></h4><ul>
+<li>进程可以处于就绪、运行、阻塞等不同状态。</li>
+<li>通过事件驱动或系统调度等方式在状态之间进行变迁。</li>
+</ul>
+<h4 id="4-进程的互斥与同步及其区别与联系"><a href="#4-进程的互斥与同步及其区别与联系" class="headerlink" title="4. 进程的互斥与同步及其区别与联系"></a>4. <strong>进程的互斥与同步及其区别与联系</strong></h4><ul>
+<li>进程间的互斥和同步是为了避免数据竞争和确保数据一致性。</li>
+<li>操作系统提供了各种同步机制来实现进程间的协作与同步。</li>
+</ul>
+<h4 id="5-死锁问题"><a href="#5-死锁问题" class="headerlink" title="5. 死锁问题"></a>5. <strong>死锁问题</strong></h4><ul>
+<li>死锁是多个进程因相互等待对方持有的资源而无法继续执行的状态。</li>
+<li>了解死锁产生的原因、条件以及预防和避免策略是至关重要的。</li>
+</ul>
+<h4 id="6-进程间通信"><a href="#6-进程间通信" class="headerlink" title="6. 进程间通信"></a>6. <strong>进程间通信</strong></h4><ul>
+<li>不同进程之间进行通信的方式包括共享内存、消息传递、管道等。</li>
+<li>用于实现进程之间的数据交换和协作。</li>
+</ul>
+<h4 id="7-线程"><a href="#7-线程" class="headerlink" title="7. 线程"></a>7. <strong>线程</strong></h4><ul>
+<li>线程是进程的一部分，是CPU调度的基本单位。</li>
+<li>相较于进程，线程更轻量级，可以共享进程资源，提高了并发执行的效率和灵活性。</li>
+</ul>
+<h3 id="第四章-处理机调度"><a href="#第四章-处理机调度" class="headerlink" title="第四章 处理机调度"></a>第四章 处理机调度</h3><h4 id="1-分级调度"><a href="#1-分级调度" class="headerlink" title="1. 分级调度"></a>1. <strong>分级调度</strong></h4><ul>
+<li>分级调度是按照优先级对作业或进程进行排序和调度的方式。</li>
+<li>不同级别的调度机制有不同的优先级，影响任务的执行顺序。</li>
+</ul>
+<h4 id="2-作业的状态及转换"><a href="#2-作业的状态及转换" class="headerlink" title="2. 作业的状态及转换"></a>2. <strong>作业的状态及转换</strong></h4><ul>
+<li>描述了作业在系统中的不同状态，例如就绪、运行、完成等状态。</li>
+<li>并讨论了作业在这些状态之间转换的条件和过程。</li>
+</ul>
+<h4 id="3-作业调度和进程调度的任务及功能"><a href="#3-作业调度和进程调度的任务及功能" class="headerlink" title="3. 作业调度和进程调度的任务及功能"></a>3. <strong>作业调度和进程调度的任务及功能</strong></h4><ul>
+<li>作业调度负责从所有提交的作业中选择优先级最高的进行调度。</li>
+<li>而进程调度则负责在同一作业内部选择进程进行执行。</li>
+</ul>
+<h4 id="4-常用的调度算法思想"><a href="#4-常用的调度算法思想" class="headerlink" title="4. 常用的调度算法思想"></a>4. <strong>常用的调度算法思想</strong></h4><ul>
+<li>涵盖了几种常见的调度算法，如先来先服务（FCFS）、短作业优先（SJF）、优先级调度、轮转调度（RR）等。</li>
+<li>这些算法有不同的思想和特点，影响着任务执行的顺序。</li>
+</ul>
+<h4 id="5-性能评价指标的计算"><a href="#5-性能评价指标的计算" class="headerlink" title="5. 性能评价指标的计算"></a>5. <strong>性能评价指标的计算</strong></h4><ul>
+<li>讨论了用于评价调度算法性能的指标，例如周转时间、响应时间、等待时间等的计算方法。</li>
+<li>这些指标能够衡量调度算法的有效性和效率。</li>
+</ul>
+<h3 id="第五章-存储管理"><a href="#第五章-存储管理" class="headerlink" title="第五章 存储管理"></a>第五章 存储管理</h3><h4 id="1-存储管理的功能"><a href="#1-存储管理的功能" class="headerlink" title="1. 存储管理的功能"></a>1. <strong>存储管理的功能</strong></h4><ul>
+<li>分配和回收： 负责分配内存给进程并在进程结束后回收内存。</li>
+<li>地址转换（重定位）： 将逻辑地址转换为物理地址。</li>
+<li>共享与保护： 确保多个进程能共享内存，并对内存进行保护以防止非授权访问。</li>
+<li>内存扩充（覆盖、交换、虚拟存储器）： 采用覆盖、交换或虚拟存储技术扩展内存空间。</li>
+</ul>
+<h4 id="2-分区管理"><a href="#2-分区管理" class="headerlink" title="2. 分区管理"></a>2. <strong>分区管理</strong></h4><ul>
+<li>固定分区： 将内存划分为固定大小的分区。</li>
+<li>动态分区： 动态地分配内存给进程，不同大小的分区根据需要分配。</li>
+</ul>
+<h4 id="3-页式-段式-段页式管理原理"><a href="#3-页式-段式-段页式管理原理" class="headerlink" title="3. 页式/段式/段页式管理原理"></a>3. <strong>页式/段式/段页式管理原理</strong></h4><ul>
+<li>页式管理： 将物理内存和逻辑地址空间划分为固定大小的页，并进行地址映射。</li>
+<li>段式管理： 将逻辑地址空间划分为若干段，每段长度不同。</li>
+<li>段页式管理： 结合了段和页的管理方式，以解决段式管理和页式管理的问题。</li>
+</ul>
+<h4 id="4-页面置换算法及FIFO异常现象"><a href="#4-页面置换算法及FIFO异常现象" class="headerlink" title="4. 页面置换算法及FIFO异常现象"></a>4. <strong>页面置换算法及FIFO异常现象</strong></h4><ul>
+<li>页面置换算法用于解决内存不足时的页面置换问题，如最优页面置换算法、先进先出（FIFO）算法等。</li>
+<li>FIFO异常指的是FIFO算法在某些情况下可能出现的异常现象，即Belady异常。</li>
+</ul>
+<h4 id="5-局部性原理和抖动现象"><a href="#5-局部性原理和抖动现象" class="headerlink" title="5. 局部性原理和抖动现象"></a>5. <strong>局部性原理和抖动现象</strong></h4><ul>
+<li>局部性原理： 指程序在执行过程中对某些特定的内存区域或页有较高的访问频率。</li>
+<li>抖动现象： 当系统内存不足，频繁发生页面置换，导致性能急剧下降的现象。</li>
+</ul>
+<h3 id="第六章-文件管理"><a href="#第六章-文件管理" class="headerlink" title="第六章 文件管理"></a>第六章 文件管理</h3><h4 id="1-文件和文件系统的定义及文件的组成"><a href="#1-文件和文件系统的定义及文件的组成" class="headerlink" title="1. 文件和文件系统的定义及文件的组成"></a>1. <strong>文件和文件系统的定义及文件的组成</strong></h4><ul>
+<li>文件定义： 文件是数据的有序集合，被存储在辅助存储设备中。</li>
+<li>文件系统： 管理文件的系统软件。</li>
+<li>文件组成： 文件通常由数据块、元数据（文件属性、权限等信息）组成。</li>
+</ul>
+<h4 id="2-文件的组织形式：逻辑结构、物理结构"><a href="#2-文件的组织形式：逻辑结构、物理结构" class="headerlink" title="2. 文件的组织形式：逻辑结构、物理结构"></a>2. <strong>文件的组织形式</strong>：逻辑结构、物理结构</h4><ul>
+<li>逻辑结构： 指文件的逻辑组织形式，如顺序、随机、索引等。</li>
+<li>物理结构： 指文件在存储介质上的组织形式，如连续存储、链接存储等。</li>
+</ul>
+<h4 id="3-文件空闲空间的管理"><a href="#3-文件空闲空间的管理" class="headerlink" title="3. 文件空闲空间的管理"></a>3. 文件空闲空间的管理</h4><ul>
+<li>空闲文件目录法： 记录存储区域的空闲情况。</li>
+<li>空闲块链接法、成组链接法、位示图法： 不同的方式管理文件存储空间。</li>
+</ul>
+<h4 id="4-文件目录"><a href="#4-文件目录" class="headerlink" title="4. 文件目录"></a>4. <strong>文件目录</strong></h4><ul>
+<li>单级目录、二级目录、多级目录： 不同级别的文件目录组织结构，用于管理文件的层次结构。</li>
+</ul>
+<h4 id="5-文件的存取控制"><a href="#5-文件的存取控制" class="headerlink" title="5. 文件的存取控制"></a>5. <strong>文件的存取控制</strong></h4><ul>
+<li>存取控制矩阵、存取控制表、口令、密码术： 控制文件访问权限和安全性的方法。</li>
+</ul>
+<h4 id="6-文件的使用"><a href="#6-文件的使用" class="headerlink" title="6. 文件的使用"></a>6. <strong>文件的使用</strong></h4><ul>
+<li>建立、删除、打开、关闭、读、写文件： 文件管理系统提供的文件操作功能。</li>
+</ul>
+<h3 id="第七章-设备管理"><a href="#第七章-设备管理" class="headerlink" title="第七章 设备管理"></a>第七章 设备管理</h3><h4 id="1-设备管理的功能"><a href="#1-设备管理的功能" class="headerlink" title="1. 设备管理的功能"></a>1. <strong>设备管理的功能</strong></h4><ul>
+<li>设备管理的任务： 包括设备分配、设备调度、设备控制和故障处理等。</li>
+</ul>
+<h4 id="2-设备的分类"><a href="#2-设备的分类" class="headerlink" title="2. 设备的分类"></a>2. <strong>设备的分类</strong></h4><ul>
+<li>按功能分类： 输入设备、输出设备、存储设备等。</li>
+<li>按连接方式分类： 内部设备、外部设备等。</li>
+</ul>
+<h4 id="3-中断技术"><a href="#3-中断技术" class="headerlink" title="3. 中断技术"></a>3. <strong>中断技术</strong></h4><ul>
+<li>中断的概念和作用： 用于处理设备或外部事件引起的中断请求，让处理器暂停当前任务转而处理其他紧急事件。</li>
+</ul>
+<h4 id="4-缓冲技术"><a href="#4-缓冲技术" class="headerlink" title="4. 缓冲技术"></a>4. <strong>缓冲技术</strong></h4><ul>
+<li>缓冲的作用： 在设备之间或设备和主存之间提供临时存储，用于平衡设备和主存速度不匹配的问题。</li>
+</ul>
+<h4 id="5-设备分配技术"><a href="#5-设备分配技术" class="headerlink" title="5. 设备分配技术"></a>5. <strong>设备分配技术</strong></h4><ul>
+<li>设备分配的方法： 设备分配算法，如静态分配、动态分配等。</li>
+</ul>
+<hr>
+<p><strong><strong>以上就是相关操作系统的期末考点，具体请看PPT</strong></strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.liushen.fun/">Willow-God</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.liushen.fun/posts/a74e83a1/">https://blog.liushen.fun/posts/a74e83a1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.liushen.fun" target="_blank">LiuShen's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习</a><a class="post-meta__tags" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></div><div class="post-share"><div class="social-share" data-image="https://and-pc.com/wp-content/uploads/2020/07/image-1024x560-1.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="/pluginsSrc/butterfly-extsrc/sharejs/dist/css/share.min.css?v=1.1.3" media="print" onload="this.media='all'"><script src="/pluginsSrc/butterfly-extsrc/sharejs/dist/js/social-share.min.js?v=1.1.3" defer=""></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>来😍鼠标过来一点~</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/config/img/wechat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/config/img/wechat.png" alt="微信"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/config/img/wechat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/config/img/wechat.png" alt="支付宝"></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="prev-post pull-left" href="/posts/f7016786/" title="Java课程主要内容回顾"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wallpapercave.com/wp/wp7250277.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Java课程主要内容回顾</div></div></a><a class="next-post pull-right" href="/posts/57a50b33/" title="DCAMNet钢铁缺陷检测网络复现"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/03/22/65fc5eceae5bd.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">DCAMNet钢铁缺陷检测网络复现</div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a href="/posts/f7016786/" title="Java课程主要内容回顾"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wallpapercave.com/wp/wp7250277.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-01</div><div class="title">Java课程主要内容回顾</div></div></a><a href="/posts/f2c15334/" title="计算机网络考研复习：概述"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/22/664dfc89133c2.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-05-23</div><div class="title">计算机网络考研复习：概述</div></div></a><a href="/posts/6d87a301/" title="计算机网络考研复习：物理层"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/25/6650c3202f779.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-05-27</div><div class="title">计算机网络考研复习：物理层</div></div></a></div></div><hr class="custom-hr"><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/03/21/65fc570ca9fe7.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info-name">Willow-God</div><div class="author-info-description">清羽 〄 飞扬</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">69</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/willow-god"><i class="fab fa-github"></i><span>Follow Me 🛫</span></a><div class="card-info-social-icons"><a class="social-icon" href="mailto:01@liushen.fun" target="_blank" title="Email"><i class="fa-solid fa-envelope"></i></a><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2411457922&amp;site=qq&amp;menu=yes" target="_blank" title="QQ：2411457922"><i class="fa-brands fa-qq"></i></a><a class="social-icon" href="https://wakatime.com/@LiuShen" target="_blank" title="Wakatime"><i class="fa-solid fa-chart-column"></i></a><a class="social-icon" href="https://blog.liushen.fun/atom.xml" target="_blank" title="rss地址"><i class="fa-solid fa-rss"></i></a></div></div><div class="card-widget" id="card-poem"><div id="poem_sentence"></div><div id="poem_info"><div id="poem_dynasty"></div><div id="poem_author"></div></div></div><script src="/js/jinrishici.js" charset="utf-8"></script><script type="text/javascript">jinrishici.load(function(result) {
+var sentence = document.querySelector("#poem_sentence")
+var author = document.querySelector("#poem_author")
+var dynasty = document.querySelector("#poem_dynasty")
+
+var sentenceText = result.data.content
+sentenceText = sentenceText.substr(0, sentenceText.length - 1);
+sentence.innerHTML = sentenceText
+dynasty.innerHTML = result.data.origin.dynasty
+author.innerHTML = result.data.origin.author + '《' + result.data.origin.title + '》'
+});</script><div class="card-widget card-announcement"><div class="item-headline"><i class="fa fa-user"></i><span>欢迎来访者</span></div><div id="welcome-info"></div><script src="/js/txmap.js"></script><script data-pjax="data-pjax">var longitude="108.546767";
+var Latitude="34.579480";
+var txkey="44BBZ-IZPLZ-V6PXP-ZYLRT-JKFH3-DOFJ6";
+var ipLoacation;
+window.onload = () => {welcometxmap()};
+document.addEventListener("pjax:complete", welcometxmap());</script></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p><strong>博客架构概览：</strong><br>⚙️框架核心：Hexo<br>🕹️界面设计：Butterfly<br>🔮安全保障：长亭雷池<br>🔩管理工具：宝塔面板，1Panel<br>🎰服务器支持：阿里云，腾讯云<br>🎲CDN加速：多吉云，无畏云<br><strong>快捷跳转地址：</strong><br>👻博客主站：<a href="https://blog.liushen.fun">blog.liushen.fun</a><br>😶‍🌫️博客分栏：<a target="_blank" rel="noopener" href="https://www.qingyang.eu.org">qingyang.eu.org</a><br>🤖个人导航：<a target="_blank" rel="noopener" href="https://www.liushen.fun">www.liushen.fun</a><br></p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/config/img/notice.gif" alt="可爱捏" title="可爱捏" style="width:100%; border-radius:10px;"></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%80%83%E8%AF%95%E5%88%86%E5%80%BC%E5%88%92%E5%88%86%EF%BC%9A"><span class="toc-text">考试分值划分：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%80%83%E8%AF%95%E9%87%8D%E7%82%B9%EF%BC%9A"><span class="toc-text">考试重点：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E7%BB%AA%E8%AE%BA"><span class="toc-text">第一章 绪论</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-OS%E5%9C%B0%E4%BD%8D%E3%80%81%E4%BD%9C%E7%94%A8%E5%92%8C%E5%AE%9A%E4%B9%89"><span class="toc-text">1. OS地位、作用和定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-OS%E5%8F%91%E5%B1%95"><span class="toc-text">2. OS发展</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-OS%E5%88%86%E7%B1%BB"><span class="toc-text">3. OS分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-OS%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-text">4. OS的功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-OS%E7%9A%84%E7%89%B9%E5%BE%81"><span class="toc-text">5. OS的特征</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-OS%E7%BB%93%E6%9E%84"><span class="toc-text">6. OS结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E7%94%A8%E6%88%B7%E6%8E%A5%E5%8F%A3"><span class="toc-text">第二章 用户接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%94%A8%E6%88%B7%E6%8E%A5%E5%8F%A3"><span class="toc-text">1. 用户接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%BD%9C%E4%B8%9A%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E7%BB%84%E6%88%90"><span class="toc-text">2. 作业的定义与组成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E4%BD%9C%E4%B8%9A%E7%9A%84%E8%BE%93%E5%85%A5%E6%96%B9%E5%BC%8F"><span class="toc-text">3. 作业的输入方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E4%BD%9C%E4%B8%9A%E7%BB%84%E7%BB%87%E5%92%8C%E6%8E%A7%E5%88%B6"><span class="toc-text">4. 作业组织和控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-text">5. 系统调用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86"><span class="toc-text">第三章 进程管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%A8%8B%E5%BA%8F%E9%A1%BA%E5%BA%8F%E5%92%8C%E5%B9%B6%E5%8F%91%E6%89%A7%E8%A1%8C%E5%8F%8A%E7%89%B9%E7%82%B9"><span class="toc-text">1. 程序顺序和并发执行及特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%AE%9A%E4%B9%89%E3%80%81%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6%E5%9D%97%E5%8F%8A%E4%BD%9C%E7%94%A8"><span class="toc-text">2. 进程的定义、进程控制块及作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%8A%B6%E6%80%81%E5%8F%8A%E5%8F%98%E8%BF%81%E6%96%B9%E5%BC%8F"><span class="toc-text">3. 进程的状态及变迁方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E8%BF%9B%E7%A8%8B%E7%9A%84%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5%E5%8F%8A%E5%85%B6%E5%8C%BA%E5%88%AB%E4%B8%8E%E8%81%94%E7%B3%BB"><span class="toc-text">4. 进程的互斥与同步及其区别与联系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E6%AD%BB%E9%94%81%E9%97%AE%E9%A2%98"><span class="toc-text">5. 死锁问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1"><span class="toc-text">6. 进程间通信</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-%E7%BA%BF%E7%A8%8B"><span class="toc-text">7. 线程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E5%A4%84%E7%90%86%E6%9C%BA%E8%B0%83%E5%BA%A6"><span class="toc-text">第四章 处理机调度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%88%86%E7%BA%A7%E8%B0%83%E5%BA%A6"><span class="toc-text">1. 分级调度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%BD%9C%E4%B8%9A%E7%9A%84%E7%8A%B6%E6%80%81%E5%8F%8A%E8%BD%AC%E6%8D%A2"><span class="toc-text">2. 作业的状态及转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E4%BD%9C%E4%B8%9A%E8%B0%83%E5%BA%A6%E5%92%8C%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%9A%84%E4%BB%BB%E5%8A%A1%E5%8F%8A%E5%8A%9F%E8%83%BD"><span class="toc-text">3. 作业调度和进程调度的任务及功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%B8%B8%E7%94%A8%E7%9A%84%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3"><span class="toc-text">4. 常用的调度算法思想</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E6%80%A7%E8%83%BD%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-text">5. 性能评价指标的计算</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86"><span class="toc-text">第五章 存储管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-text">1. 存储管理的功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%88%86%E5%8C%BA%E7%AE%A1%E7%90%86"><span class="toc-text">2. 分区管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E9%A1%B5%E5%BC%8F-%E6%AE%B5%E5%BC%8F-%E6%AE%B5%E9%A1%B5%E5%BC%8F%E7%AE%A1%E7%90%86%E5%8E%9F%E7%90%86"><span class="toc-text">3. 页式/段式/段页式管理原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95%E5%8F%8AFIFO%E5%BC%82%E5%B8%B8%E7%8E%B0%E8%B1%A1"><span class="toc-text">4. 页面置换算法及FIFO异常现象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E5%B1%80%E9%83%A8%E6%80%A7%E5%8E%9F%E7%90%86%E5%92%8C%E6%8A%96%E5%8A%A8%E7%8E%B0%E8%B1%A1"><span class="toc-text">5. 局部性原理和抖动现象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86"><span class="toc-text">第六章 文件管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%96%87%E4%BB%B6%E5%92%8C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9A%E4%B9%89%E5%8F%8A%E6%96%87%E4%BB%B6%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-text">1. 文件和文件系统的定义及文件的组成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%96%87%E4%BB%B6%E7%9A%84%E7%BB%84%E7%BB%87%E5%BD%A2%E5%BC%8F%EF%BC%9A%E9%80%BB%E8%BE%91%E7%BB%93%E6%9E%84%E3%80%81%E7%89%A9%E7%90%86%E7%BB%93%E6%9E%84"><span class="toc-text">2. 文件的组织形式：逻辑结构、物理结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%96%87%E4%BB%B6%E7%A9%BA%E9%97%B2%E7%A9%BA%E9%97%B4%E7%9A%84%E7%AE%A1%E7%90%86"><span class="toc-text">3. 文件空闲空间的管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="toc-text">4. 文件目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E6%96%87%E4%BB%B6%E7%9A%84%E5%AD%98%E5%8F%96%E6%8E%A7%E5%88%B6"><span class="toc-text">5. 文件的存取控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">6. 文件的使用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86"><span class="toc-text">第七章 设备管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-text">1. 设备管理的功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%AE%BE%E5%A4%87%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-text">2. 设备的分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E4%B8%AD%E6%96%AD%E6%8A%80%E6%9C%AF"><span class="toc-text">3. 中断技术</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E7%BC%93%E5%86%B2%E6%8A%80%E6%9C%AF"><span class="toc-text">4. 缓冲技术</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E8%AE%BE%E5%A4%87%E5%88%86%E9%85%8D%E6%8A%80%E6%9C%AF"><span class="toc-text">5. 设备分配技术</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/4dc716ec/" title="Friend-Circle-Lite:轻量友链朋友圈"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/19/6699436fe02ec.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Friend-Circle-Lite:轻量友链朋友圈"></a><div class="content"><a class="title" href="/posts/4dc716ec/" title="Friend-Circle-Lite:轻量友链朋友圈">Friend-Circle-Lite:轻量友链朋友圈</a><time datetime="2024-08-11T16:02:00.000Z" title="更新于 2024-08-12 00:02:00">2024-08-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/a64defb4/" title="魔改笔记七：分类条及外链卡片"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/08/10/66b74df1ab511.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="魔改笔记七：分类条及外链卡片"></a><div class="content"><a class="title" href="/posts/a64defb4/" title="魔改笔记七：分类条及外链卡片">魔改笔记七：分类条及外链卡片</a><time datetime="2024-08-09T17:40:00.000Z" title="更新于 2024-08-10 01:40:00">2024-08-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/159f1aa5/" title="域名迁移至 blog.liushen.fun"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/08/10/66b6479e1d33c.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="域名迁移至 blog.liushen.fun"></a><div class="content"><a class="title" href="/posts/159f1aa5/" title="域名迁移至 blog.liushen.fun">域名迁移至 blog.liushen.fun</a><time datetime="2024-08-09T08:00:00.000Z" title="更新于 2024-08-09 16:00:00">2024-08-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/3850e950/" title="CloudFlare实用项目推荐"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/31/66a922cb9adcc.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CloudFlare实用项目推荐"></a><div class="content"><a class="title" href="/posts/3850e950/" title="CloudFlare实用项目推荐">CloudFlare实用项目推荐</a><time datetime="2024-07-31T17:32:00.000Z" title="更新于 2024-08-01 01:32:00">2024-08-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap" style="background: transparent"><div id="footer_icons"><div><a class="icon_link" rel="noopener external nofollow" href="https://www.qyliu.top/" title="导航站点" target="_blank"><i class="fa-solid fa-compass"></i></a><a class="icon_link" rel="noopener external nofollow" href="https://admin.qidian.qq.com/static_proxy/b2b-qq/wpa-link/index.html#/person?uin=2411457922" title="联系QQ" target="_blank"><i class="fa-brands fa-qq"></i></a><a class="icon_link" rel="noopener external nofollow" href="https://github.com/willow-god" title="我的github主页" target="_blank"><i class="fa-brands fa-github"></i></a><a class="icon_link" rel="noopener external nofollow" href="mailto:01@liushen.fun" title="发送邮件至博主邮箱" target="_blank"><i class="fa-solid fa-envelope"></i></a></div><img class="footer_logo" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/12/663f9fc48820a.png" onclick="btf.scrollToDest(0,500)" title="返回顶部"><div><a class="icon_link" rel="noopener external nofollow" href="https://wakatime.com/@LiuShen" title="Wikitime" target="_blank"><i class="fa-solid fa-clock"></i></a><a class="icon_link" rel="noopener external nofollow" href="https://gitlab.com/" title="gitlab" target="_blank"><i class="fa-brands fa-gitlab"></i></a><a class="icon_link" href="/shuoshuo/" title="日常说说" data-pjax-state="data-pjax-state"><i class="fa-solid fa-file-pen"></i></a><a class="icon_link" href="/comment/" title="留言板" data-pjax-state="data-pjax-state"><i class="fa-solid fa-comment"></i></a></div></div><div id="footer_content"><div class="footer-group"><h3 class="footer-title">关于本站</h3><div class="footer-links"><a class="footer-item" target="_blank" href="https://www.qyliu.top/">导航站点</a><a class="footer-item" href="/shuoshuo/">日常说说</a><a class="footer-item" target="_blank" href="https://um.liushen.fun/share/G8C2aR0IszHE5VBl/blog.liushen.fun">访客信息</a><a class="footer-item" target="_blank" href="https://m.liushen.fun/">盐焗星球</a><a class="footer-item" target="_blank" href="https://listen.qyliu.top/">在线状态</a><a class="footer-item" href="/subscribe/">订阅本站</a></div></div><div class="footer-group"><h3 class="footer-title">加入组织</h3><div class="footer-links"><a class="footer-item" target="_blank" href="https://www.boyouquan.com/home">博友圈</a><a class="footer-item" target="_blank" href="https://boke.lu/">博客录</a><a class="footer-item" target="_blank" href="https://blogwe.com/">博客我们</a><a class="footer-item" target="_blank" href="https://firewood.news/">积薪站点</a><a class="footer-item" target="_blank" href="https://bf.zzxworld.com/">发现博客</a><a class="footer-item" target="_blank" href="https://ourblo.gs/">OurBlogs</a></div></div><div class="footer-group"><h3 class="footer-title">文章整理</h3><div class="footer-links"><a class="footer-item" href="/categories/博客管理/">博客管理</a><a class="footer-item" href="/categories/学习资料/">学习资料</a><a class="footer-item" href="/categories/日常分享/">日常分享</a><a class="footer-item" href="/achieve/">时光卷轴</a><a class="footer-item" href="/charts/">文章通览</a><a class="footer-item" href="/categories/">查看全部</a></div></div><div class="footer-group"><h3 class="footer-title">文章标签</h3><div class="footer-links"><a class="footer-item" href="/tags/JavaScript/">JS知识</a><a class="footer-item" href="/tags/Hexo/">本站框架</a><a class="footer-item" href="/tags/机器学习/">机器学习</a><a class="footer-item" href="/tags/日记/">个人日记</a><a class="footer-item" href="/tags/CSS/">CSS知识</a><a class="footer-item" href="/tags/">查看全部</a></div></div><div class="footer-group"><h3 class="footer-title">自建工具</h3><div class="footer-links"><a class="footer-item" target="_blank" rel="noopener" href="https://docs_s.tianli0.top/">必应AI</a><a class="footer-item" target="_blank" rel="noopener" href="https://chat.qyliu.top/">NextGPT</a><a class="footer-item" target="_blank" rel="noopener" href="https://draw.qyliu.top/">随心画板</a><a class="footer-item" target="_blank" rel="noopener" href="https://mindmap.qyliu.top/">思维导图</a><a class="footer-item" target="_blank" rel="noopener" href="https://ittools.qyliu.top/">IT工具箱</a><a class="footer-item" target="_blank" rel="noopener" href="https://calcium.qyliu.top/">在线计算</a></div></div><div class="footer-group" id="friend-links-in-footer"><h3 class="footer-title">友链<button title="换一批" href="javascript:;" onclick="liushen.randomLink()"><i class="fa-solid fa-rotate-right"></i></button></h3><div class="footer-links"><a class="footer-item" target="_blank" href="https://blog.liushen.fun">测试1</a><a class="footer-item" target="_blank" href="https://blog.liushen.fun">测试2</a><a class="footer-item" target="_blank" href="https://blog.liushen.fun">测试3</a><a class="footer-item" target="_blank" href="https://blog.liushen.fun">测试4</a><a class="footer-item" target="_blank" href="https://blog.liushen.fun">测试5</a><a class="footer-item" href="/link/" data-pjax-state="data-pjax-state">查看更多</a></div></div></div><div id="footer-bottom"><div class="footer-bottom-content"><div class="footer-bottom-left"><span class="copyright">©2021 - 2024 By <a target="_blank" rel="noopener" href="https://blog.liushen.fun/about/" title="点击访问&quot;LiuShen&quot;的主页" style="margin-left:5px">LiuShen</a></span><div><a class="footer-bottom-link" target="_blank" href="https://beian.miit.gov.cn/" rel="noopener external nofollow" title="工信部备案号">陕ICP备2024028531号</a><a class="footer-bottom-link" target="_blank" href="https://beian.mps.gov.cn/#/query/webSearch?code=61011602000637" rel="noopener external nofollow" title="公安备案号">陕公网安备61011602000637号</a></div></div><div class="footer-bottom-right"> <div id="runtime" title="本站运行时间">本站已苟活：0 天 0 时 0 分 0 秒</div><div> <a class="footer-bottom-link" target="_blank" href="https://www.dogecloud.com/" rel="noopener external nofollow" title="本站通过多吉云CDN提供站点加速">多吉云CDN</a><a class="footer-bottom-link" target="_blank" href="https://hexo.io/zh-cn/" rel="noopener external nofollow" title="本站使用Hexo架构搭建而成">Hexo静态框架</a><a class="footer-bottom-link" target="_blank" href="https://butterfly.js.org/" rel="noopener external nofollow" title="本站由Butterfly主题魔改而成">Butterfly主题</a></div></div></div></div></div><script>if (!window.liushen) {
+  window.liushen = {
+    saveData: (key, data) => {
+      localStorage.setItem(key, JSON.stringify({
+        time: Date.now(),
+        data: data
+      }));
+    },
+
+    loadData: (key, validTimeInMinutes) => {
+      let storedData = JSON.parse(localStorage.getItem(key));
+      if (storedData) {
+        let elapsedTime = Date.now() - storedData.time;
+        if (elapsedTime >= 0 && elapsedTime < validTimeInMinutes * 60000) {
+          return storedData.data;
+        }
+      }
+      return null;
+    },
+
+    runtime: () => {
+      const formatTime = (unit) => unit > 9 ? unit : "0" + unit;
+      const startTime = new Date('2021/12/12 01:27:36').getTime();
+      const currentTime = Date.now();
+      let elapsedTimeInSeconds = Math.round((currentTime - startTime) / 1000);
+
+      let runtimeText = "本站已苟活：";
+      if (elapsedTimeInSeconds >= 86400) {
+        runtimeText += `${formatTime(Math.floor(elapsedTimeInSeconds / 86400))} 天 `;
+        elapsedTimeInSeconds %= 86400;
+      }
+      if (elapsedTimeInSeconds >= 3600) {
+        runtimeText += `${formatTime(Math.floor(elapsedTimeInSeconds / 3600))} 时 `;
+        elapsedTimeInSeconds %= 3600;
+      }
+      if (elapsedTimeInSeconds >= 60) {
+        runtimeText += `${formatTime(Math.floor(elapsedTimeInSeconds / 60))} 分 `;
+        elapsedTimeInSeconds %= 60;
+      }
+      runtimeText += `${formatTime(elapsedTimeInSeconds)} 秒`;
+
+      const runtimeElement = document.getElementById("runtime");
+      if (runtimeElement) {
+        runtimeElement.innerHTML = runtimeText;
+      }
+      setTimeout(window.liushen.runtime, 1000);
+    },
+
+    randomLink: () => {
+      let linksData = window.liushen.loadData("links", 30);
+      if (linksData) {
+        let linkElements = document.querySelectorAll("#friend-links-in-footer .footer-item");
+        if (!linkElements.length) return;
+
+        for (let i = 0; i < linkElements.length; i++) {
+          let randomIndex = Math.floor(Math.random() * linksData.length);
+          linkElements[i].innerText = linksData[randomIndex].name;
+          linkElements[i].href = linksData[randomIndex].link;
+          linksData.splice(randomIndex, 1);
+        }
+      } else {
+        fetch("/flink_count.json")
+          .then(response => response.json())
+          .then(data => {
+            window.liushen.saveData("links", data.link_list);
+            window.liushen.randomLink();
+          });
+      }
+    }
+  };
+}
+
+if (true) {
+  window.liushen.randomLink();
+  document.addEventListener("DOMContentLoaded", window.liushen.randomLink);
+  window.liushen.runtime();
+} else {
+  window.liushen.randomLink();
+  window.liushen.runtime();
+}</script></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><a class="icon-V hidden" onclick="switchNightMode()" title="浅色和深色模式转换"><svg width="25" height="25" viewBox="0 0 1024 1024"><use id="modeicon" xlink:href="#icon-moon"></use></svg></a><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="cat" onclick="toggleLive2dVisibility()" title="小猫显隐"><i class="fa-solid fa-cat"></i></button><button id="fullscreen" onclick="toggleFullScreen()" title="全屏切换"><i class="fa-solid fa-expand"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="fa-solid fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="fa-solid fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="fa-solid fa-arrow-rotate-right"></i></div><div class="rightMenu-item" id="menu-home"><i class="fa-solid fa-house"></i></div></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" id="copy" href="javascript:rm.copySelect();"><i class="fa-solid fa-copy"></i><span>复制选中文字</span></a><a class="rightMenu-item" id="reply" href="javascript:rm.replySelect();"><i class="fa-regular fa-comment"></i><span>评论选中段落</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" href="/archives/"><i class="fa-solid fa-archive"></i><span>文章时间线</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分大类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章小标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuNormal"><a class="rightMenu-item menu-link" id="menu-radompage" href="/comment/"><i class="fa-solid fa-shoe-prints"></i><span>随心留言板</span></a><div class="rightMenu-item" id="menu-translate"><i class="fa-solid fa-earth-asia"></i><span>繁简模式切换</span></div><div class="rightMenu-item" id="menu-darkmode"><i class="fa-solid fa-moon"></i><span>切换亮暗模式</span></div><div class="rightMenu-item" id="menu-live2dvisibility"><i class="fa-solid fa-cat"></i><span>小猫显示隐藏</span></div><div class="rightMenu-item" id="menu-print"><i class="fa-solid fa-print fa-fw"></i><span>打印整个页面</span></div><a class="rightMenu-item menu-link" id="statement" href="/statement/"><i class="fa-regular fa-copyright fa-fw"></i><span>网站声明</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js?v=5.0.0"></script><script src="/js/main.js?v=5.0.0"></script><script src="/js/jquery-3.7.1.slim.min.js?v=5.0.0"></script><script src="/js/others.js?v=5.0.0"></script><script src="/js/echarts.min.js?v=5.0.0"></script><script src="/js/rightmenu.js?v=5.0.0"></script><script src="/js/tw_cn.js?v=5.0.0"></script><script src="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.umd.js?v=5.0.36"></script><script src="/pluginsSrc/instant.page/instantpage.js?v=5.2.0" type="module"></script><script src="/pluginsSrc/vanilla-lazyload/dist/lazyload.iife.min.js?v=19.1.3"></script><div class="js-pjax"><script>(() => {
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.qyliu.top',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.qyliu.top',
+      region: '',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(init,0)
+    else btf.getScript('/pluginsSrc/twikoo/dist/twikoo.all.min.js?v=1.6.38').then(init)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[aside.card_aside.card_aside.card_newest_comments.code]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo.qyliu.top',
+        region: '',
+        pageSize: 5,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        btf.saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      btf.getScript('/pluginsSrc/twikoo/dist/twikoo.all.min.js?v=1.6.38').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = btf.saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  btf.addGlobalFn('pjaxComplete', newestCommentInit, 'twikoo_newestComment')
+})</script><script src="/config/memos/memos.js"></script><canvas class="fireworks" mobile="false"></canvas><script src="/pluginsSrc/butterfly-extsrc/dist/fireworks.min.js?v=1.1.3"></script><script src="/pluginsSrc/pjax/pjax.min.js?v=0.2.8"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+const triggerPjaxFn = (val) => {
+  if (!val) return
+  Object.values(val).forEach(fn => { fn() })
+}
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjaxSendOnce')
+  btf.removeGlobalFnEvent('themeChange')
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  triggerPjaxFn(window.globalFn.pjaxSend)
+})
+
+document.addEventListener('pjax:complete', () => {
+  btf.removeGlobalFnEvent('pjaxCompleteOnce')
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  triggerPjaxFn(window.globalFn.pjaxComplete)
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async="" data-pjax="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="/pluginsSrc/algoliasearch/dist/algoliasearch-lite.umd.js?v=4.24.0"></script><script src="/pluginsSrc/instantsearch.js/dist/instantsearch.production.min.js?v=4.73.3"></script><script src="/js/search/algolia.js?v=5.0.0"></script></div></div><!-- hexo injector body_end start --><script data-pjax="">
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/a64defb4/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/08/10/66b74df1ab511.webp" alt="" onerror="this.src=/img/error-page.png; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-10</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/a64defb4/&quot;);" href="javascript:void(0);" alt="">魔改笔记七：分类条及外链卡片</a><div class="blog-slider__text">虽然说域名换了几乎等于从头开始，但是仍然浇不灭我对于网站的热情，该进行的还是得进行。很久都没有总结魔改了，这篇文章就将最近魔改最大的几个部分进行记录，同时对有需要的朋友提供帮助。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/a64defb4/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/159f1aa5/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/08/10/66b6479e1d33c.webp" alt="" onerror="this.src=/img/error-page.png; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-09</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/159f1aa5/&quot;);" href="javascript:void(0);" alt="">域名迁移至 blog.liushen.fun</a><div class="blog-slider__text">近期遇见了一个很烦人的事情，bing的所有搜索结果全部消失，我也不知道是怎么回事，已经在联系bing管理员了，不过，其实我很早之前就像换域名了，今天趁此机会，干脆直接换了得了！原有的域名301至新域名，不会影响任何使用。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/159f1aa5/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/3850e950/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/31/66a922cb9adcc.webp" alt="" onerror="this.src=/img/error-page.png; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-01</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/3850e950/&quot;);" href="javascript:void(0);" alt="">CloudFlare实用项目推荐</a><div class="blog-slider__text">之前我向大家推荐过vercel上的一些项目，都非常的有趣实用，最近，在和朋友安小歪的聊天中，发现了一些很好玩的cloud flare项目，比如临时邮箱，临时文件传送，计数统计，等等，很多项目都非常好玩，于是在此推荐给大家。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/3850e950/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/4dc716ec/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/19/6699436fe02ec.webp" alt="" onerror="this.src=/img/error-page.png; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-21</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/4dc716ec/&quot;);" href="javascript:void(0);" alt="">Friend-Circle-Lite:轻量友链朋友圈</a><div class="blog-slider__text">前两天出现了友链朋友圈因为版本原因导致无法运行的问题，虽然我已经改好了，但是由于bundle文件过大，经常导致加载较慢，于是我自己手搓了一个轻量化友链朋友圈，同时支持通过提交issue实现邮箱订阅本站最新文章，也算是友链朋友圈部署新思路啦，适合喜欢轻量和免费快速的朋友尝试！</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/4dc716ec/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/67189760/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/06/6688d4b63b50f.webp" alt="" onerror="this.src=/img/error-page.png; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-06</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/67189760/&quot;);" href="javascript:void(0);" alt="">Spikformer脉冲神经网络学习</a><div class="blog-slider__text">近期我们进行了人工智能实训，我们小组选择的是脉冲神经网络，不同于原先的神经网络，这个网络采用的是脉冲信号，目前脉冲神经网络的效果并不是很好，但是因为是一个全新的神经网络架构，并且基于生物启发的计算方式，使得它们在处理稀疏和非结构化数据时具有独特的优势。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/67189760/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer="" src="/config/swiper/swiper.min.js"></script><script defer="" data-pjax="" src="/config/swiper/swiper_init.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"superSample":2,"width":250,"height":500,"position":"left","hOffset":0,"vOffset":-140},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

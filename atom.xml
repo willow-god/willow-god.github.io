@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>LiuShen&#39;s Blog</title>
+  
+  <subtitle>清羽飞扬</subtitle>
+  <link href="https://blog.liushen.fun/atom.xml" rel="self"/>
+  
+  <link href="https://blog.liushen.fun/"/>
+  <updated>2024-08-09T17:40:00.000Z</updated>
+  <id>https://blog.liushen.fun/</id>
+  
+  <author>
+    <name>Willow-God</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>魔改笔记七：分类条及外链卡片</title>
+    <link href="https://blog.liushen.fun/posts/a64defb4/"/>
+    <id>https://blog.liushen.fun/posts/a64defb4/</id>
+    <published>2024-08-09T17:39:00.000Z</published>
+    <updated>2024-08-09T17:40:00.000Z</updated>
+    
+    
+    <summary type="html">虽然说域名换了几乎等于从头开始，但是仍然浇不灭我对于网站的热情，该进行的还是得进行。很久都没有总结魔改了，这篇文章就将最近魔改最大的几个部分进行记录，同时对有需要的朋友提供帮助。</summary>
+    
+    
+    
+    <category term="博客管理" scheme="https://blog.liushen.fun/categories/%E5%8D%9A%E5%AE%A2%E7%AE%A1%E7%90%86/"/>
+    
+    
+    <category term="JavaScript" scheme="https://blog.liushen.fun/tags/JavaScript/"/>
+    
+    <category term="CSS" scheme="https://blog.liushen.fun/tags/CSS/"/>
+    
+    <category term="Hexo" scheme="https://blog.liushen.fun/tags/Hexo/"/>
+    
+    <category term="butterfly" scheme="https://blog.liushen.fun/tags/butterfly/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>域名迁移至 blog.liushen.fun</title>
+    <link href="https://blog.liushen.fun/posts/159f1aa5/"/>
+    <id>https://blog.liushen.fun/posts/159f1aa5/</id>
+    <published>2024-08-09T08:00:00.000Z</published>
+    <updated>2024-08-09T08:00:00.000Z</updated>
+    
+    
+    <summary type="html">近期遇见了一个很烦人的事情，bing的所有搜索结果全部消失，我也不知道是怎么回事，已经在联系bing管理员了，不过，其实我很早之前就像换域名了，今天趁此机会，干脆直接换了得了！原有的域名301至新域名，不会影响任何使用。</summary>
+    
+    
+    
+    <category term="博客管理" scheme="https://blog.liushen.fun/categories/%E5%8D%9A%E5%AE%A2%E7%AE%A1%E7%90%86/"/>
+    
+    
+    <category term="博客大事记" scheme="https://blog.liushen.fun/tags/%E5%8D%9A%E5%AE%A2%E5%A4%A7%E4%BA%8B%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CloudFlare实用项目推荐</title>
+    <link href="https://blog.liushen.fun/posts/3850e950/"/>
+    <id>https://blog.liushen.fun/posts/3850e950/</id>
+    <published>2024-07-31T17:31:00.000Z</published>
+    <updated>2024-07-31T17:32:00.000Z</updated>
+    
+    
+    <summary type="html">之前我向大家推荐过vercel上的一些项目，都非常的有趣实用，最近，在和朋友安小歪的聊天中，发现了一些很好玩的cloud flare项目，比如临时邮箱，临时文件传送，计数统计，等等，很多项目都非常好玩，于是在此推荐给大家。</summary>
+    
+    
+    
+    <category term="日常分享" scheme="https://blog.liushen.fun/categories/%E6%97%A5%E5%B8%B8%E5%88%86%E4%BA%AB/"/>
+    
+    
+    <category term="博客" scheme="https://blog.liushen.fun/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+    <category term="日常分享" scheme="https://blog.liushen.fun/tags/%E6%97%A5%E5%B8%B8%E5%88%86%E4%BA%AB/"/>
+    
+    <category term="CloudFlare" scheme="https://blog.liushen.fun/tags/CloudFlare/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Friend-Circle-Lite:轻量友链朋友圈</title>
+    <link href="https://blog.liushen.fun/posts/4dc716ec/"/>
+    <id>https://blog.liushen.fun/posts/4dc716ec/</id>
+    <published>2024-07-20T16:01:00.000Z</published>
+    <updated>2024-08-11T16:02:00.000Z</updated>
+    
+    
+    <summary type="html">前两天出现了友链朋友圈因为版本原因导致无法运行的问题，虽然我已经改好了，但是由于bundle文件过大，经常导致加载较慢，于是我自己手搓了一个轻量化友链朋友圈，同时支持通过提交issue实现邮箱订阅本站最新文章，也算是友链朋友圈部署新思路啦，适合喜欢轻量和免费快速的朋友尝试！</summary>
+    
+    
+    
+    <category term="博客管理" scheme="https://blog.liushen.fun/categories/%E5%8D%9A%E5%AE%A2%E7%AE%A1%E7%90%86/"/>
+    
+    
+    <category term="Hexo" scheme="https://blog.liushen.fun/tags/Hexo/"/>
+    
+    <category term="友链朋友圈" scheme="https://blog.liushen.fun/tags/%E5%8F%8B%E9%93%BE%E6%9C%8B%E5%8F%8B%E5%9C%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spikformer脉冲神经网络学习</title>
+    <link href="https://blog.liushen.fun/posts/67189760/"/>
+    <id>https://blog.liushen.fun/posts/67189760/</id>
+    <published>2024-07-06T05:33:21.000Z</published>
+    <updated>2024-07-06T05:33:21.000Z</updated>
+    
+    
+    <summary type="html">近期我们进行了人工智能实训，我们小组选择的是脉冲神经网络，不同于原先的神经网络，这个网络采用的是脉冲信号，目前脉冲神经网络的效果并不是很好，但是因为是一个全新的神经网络架构，并且基于生物启发的计算方式，使得它们在处理稀疏和非结构化数据时具有独特的优势。</summary>
+    
+    
+    
+    <category term="学习资料" scheme="https://blog.liushen.fun/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/"/>
+    
+    
+    <category term="机器学习" scheme="https://blog.liushen.fun/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="神经网络" scheme="https://blog.liushen.fun/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
+    
+    <category term="学习笔记" scheme="https://blog.liushen.fun/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>东软软件园实习日记</title>
+    <link href="https://blog.liushen.fun/posts/13e6e155/"/>
+    <id>https://blog.liushen.fun/posts/13e6e155/</id>
+    <published>2024-07-01T08:39:00.000Z</published>
+    <updated>2024-07-16T14:07:00.000Z</updated>
+    
+    
+    <summary type="html">大学生累成狗，今天我终于理解了为什么这么说，好不容易结束了为期七天的实训课程，又要写实验报告加小组作业，好不容易完成了小组作业，这不，十五天实习又来了！烦！并且还要天天写学习日志？我直接当作日记写好不好！</summary>
+    
+    
+    
+    <category term="日常分享" scheme="https://blog.liushen.fun/categories/%E6%97%A5%E5%B8%B8%E5%88%86%E4%BA%AB/"/>
+    
+    
+    <category term="日记" scheme="https://blog.liushen.fun/tags/%E6%97%A5%E8%AE%B0/"/>
+    
+    <category term="生活点滴" scheme="https://blog.liushen.fun/tags/%E7%94%9F%E6%B4%BB%E7%82%B9%E6%BB%B4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Github Action实现友链状态检测</title>
+    <link href="https://blog.liushen.fun/posts/c2262998/"/>
+    <id>https://blog.liushen.fun/posts/c2262998/</id>
+    <published>2024-06-23T17:00:00.000Z</published>
+    <updated>2024-06-23T18:00:00.000Z</updated>
+    
+    
+    <summary type="html">随着友情链接数量的增加，人工检测变得繁琐，我最初尝试通过爬取数据进行检测，但数据更新滞后。在群友安小歪的启发下，我采用了GitHub Action自动运行检测脚本，比较有效实现了友链有效性的自动化监测，同时将数据展示在了友情链接页面中，除此之外，原有的摸鱼页面也被我整合到了友链朋友圈页面中。</summary>
+    
+    
+    
+    <category term="博客管理" scheme="https://blog.liushen.fun/categories/%E5%8D%9A%E5%AE%A2%E7%AE%A1%E7%90%86/"/>
+    
+    
+    <category term="Hexo" scheme="https://blog.liushen.fun/tags/Hexo/"/>
+    
+    <category term="状态检测" scheme="https://blog.liushen.fun/tags/%E7%8A%B6%E6%80%81%E6%A3%80%E6%B5%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>安全跳转页面·插件版</title>
+    <link href="https://blog.liushen.fun/posts/1dfd1f41/"/>
+    <id>https://blog.liushen.fun/posts/1dfd1f41/</id>
+    <published>2024-06-16T17:00:00.000Z</published>
+    <updated>2024-06-16T18:00:00.000Z</updated>
+    
+    
+    <summary type="html">经过两个月的努力，我终于找到了完美的外链跳转解决方案！初始版本使用外置JS存在诸多bug，如图片灯箱、友链和站内跳转链接等问题。经过一段时间的学习和代码调整，我取得了阶段性进展，现在能够实现各种所需功能。最近，我在hexo-external-link插件的基础上进行了底层重构，最终实现了真正的插件版外链替换，不再依赖JS，功能更加完善，且使用更加方便！</summary>
+    
+    
+    
+    <category term="博客管理" scheme="https://blog.liushen.fun/categories/%E5%8D%9A%E5%AE%A2%E7%AE%A1%E7%90%86/"/>
+    
+    
+    <category term="Hexo" scheme="https://blog.liushen.fun/tags/Hexo/"/>
+    
+    <category term="安全跳转" scheme="https://blog.liushen.fun/tags/%E5%AE%89%E5%85%A8%E8%B7%B3%E8%BD%AC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Alist宝塔部署及其美化</title>
+    <link href="https://blog.liushen.fun/posts/a84f5e47/"/>
+    <id>https://blog.liushen.fun/posts/a84f5e47/</id>
+    <published>2024-06-04T11:24:00.000Z</published>
+    <updated>2024-06-04T11:45:00.000Z</updated>
+    
+    
+    <summary type="html">Alist 是一个轻量级的目录列表程序，可以用于管理文件索引。将 Alist 部署在宝塔面板中，并进行美化，可以提升用户体验。在本教程中，将介绍我的部署经过，并给出相应的美化代码。</summary>
+    
+    
+    
+    <category term="日常分享" scheme="https://blog.liushen.fun/categories/%E6%97%A5%E5%B8%B8%E5%88%86%E4%BA%AB/"/>
+    
+    
+    <category term="alist" scheme="https://blog.liushen.fun/tags/alist/"/>
+    
+    <category term="美化" scheme="https://blog.liushen.fun/tags/%E7%BE%8E%E5%8C%96/"/>
+    
+    <category term="教程" scheme="https://blog.liushen.fun/tags/%E6%95%99%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>计算机网络期末总复习</title>
+    <link href="https://blog.liushen.fun/posts/8dfa25e1/"/>
+    <id>https://blog.liushen.fun/posts/8dfa25e1/</id>
+    <published>2024-05-30T16:48:00.000Z</published>
+    <updated>2024-06-08T17:22:00.000Z</updated>
+    
+    
+    <summary type="html">应该注意到标题的改变了吧，本来是一章节一章节的复习，奈何我突然发现，老师画的重点和考研的重点并不是很符合，没办法咯，于是我决定将计算机网络考研复习部分的内容暂时搁置，后面逐步更新，反正一定是会更新的，因为408必考呀！然后将期末复习内容先整理出来，按照老师的考点进行复习。</summary>
+    
+    
+    
+    <category term="学习资料" scheme="https://blog.liushen.fun/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/"/>
+    
+    
+    <category term="期末复习" scheme="https://blog.liushen.fun/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/"/>
+    
+    <category term="计算机网络" scheme="https://blog.liushen.fun/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    <category term="学习资料" scheme="https://blog.liushen.fun/tags/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>计算机网络考研复习：物理层</title>
+    <link href="https://blog.liushen.fun/posts/6d87a301/"/>
+    <id>https://blog.liushen.fun/posts/6d87a301/</id>
+    <published>2024-05-26T16:21:00.000Z</published>
+    <updated>2024-05-26T16:22:00.000Z</updated>
+    
+    
+    <summary type="html">在计算机网络的世界里，物理层是整个网络架构的基石。它负责传输数据的物理媒介和传输方式，是数据传输过程中最基础且不可或缺的一部分。物理层的理解和掌握，对于任何网络工程师或计算机科学专业的学生来说，都是至关重要的。</summary>
+    
+    
+    
+    <category term="学习资料" scheme="https://blog.liushen.fun/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/"/>
+    
+    
+    <category term="期末复习" scheme="https://blog.liushen.fun/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/"/>
+    
+    <category term="计算机网络" scheme="https://blog.liushen.fun/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    <category term="学习资料" scheme="https://blog.liushen.fun/tags/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用Cf Workers搭建反代加速器</title>
+    <link href="https://blog.liushen.fun/posts/dd89adc9/"/>
+    <id>https://blog.liushen.fun/posts/dd89adc9/</id>
+    <published>2024-05-24T05:31:00.000Z</published>
+    <updated>2024-05-24T05:32:00.000Z</updated>
+    
+    
+    <summary type="html">转发服务是一种网络工具，它允许用户通过一个中介服务器将请求转发到另一个服务器，从而简化网络请求、绕过限制或增强隐私保护，本篇文章将介绍如何基于Cloudflare搭建反向代理加速器，这个加速器可以用于仓库克隆，模型下载等各类网络环境受限的场景。</summary>
+    
+    
+    
+    <category term="日常分享" scheme="https://blog.liushen.fun/categories/%E6%97%A5%E5%B8%B8%E5%88%86%E4%BA%AB/"/>
+    
+    
+    <category term="日常分享" scheme="https://blog.liushen.fun/tags/%E6%97%A5%E5%B8%B8%E5%88%86%E4%BA%AB/"/>
+    
+    <category term="Cloudflare" scheme="https://blog.liushen.fun/tags/Cloudflare/"/>
+    
+    <category term="反向代理" scheme="https://blog.liushen.fun/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/"/>
+    
+    <category term="加速" scheme="https://blog.liushen.fun/tags/%E5%8A%A0%E9%80%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>计算机网络考研复习：概述</title>
+    <link href="https://blog.liushen.fun/posts/f2c15334/"/>
+    <id>https://blog.liushen.fun/posts/f2c15334/</id>
+    <published>2024-05-22T16:01:00.000Z</published>
+    <updated>2024-05-22T16:02:00.000Z</updated>
+    
+    
+    <summary type="html">最近学业压力比较重，博客已经咕咕了很久了，今天灵机一动，耶？我可以把我的计算机网络复习笔记搬上来呀？又不费事还能分享给需要的人，还能方便我随时查看，同时再次回顾一遍，我真是个天才！</summary>
+    
+    
+    
+    <category term="学习资料" scheme="https://blog.liushen.fun/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/"/>
+    
+    
+    <category term="期末复习" scheme="https://blog.liushen.fun/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/"/>
+    
+    <category term="计算机网络" scheme="https://blog.liushen.fun/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    <category term="学习资料" scheme="https://blog.liushen.fun/tags/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vercel实用项目推荐</title>
+    <link href="https://blog.liushen.fun/posts/891edc78/"/>
+    <id>https://blog.liushen.fun/posts/891edc78/</id>
+    <published>2024-05-15T03:31:00.000Z</published>
+    <updated>2024-05-15T03:32:00.000Z</updated>
+    
+    
+    <summary type="html">无服务器部署平台为众多个人站长提供了便捷的免费服务。即便我拥有自己的服务器，也常常因为带宽和内存的限制而无法部署大量服务。因此，我将许多网站迁移到了 Vercel 等无服务器平台上，充分利用它们提供的资源。接下来，我将向您介绍一些可以在这些平台上轻松一键部署的实用项目，它们不仅能够节省资源，还能让您快速搭建起高效的在线服务。</summary>
+    
+    
+    
+    <category term="日常分享" scheme="https://blog.liushen.fun/categories/%E6%97%A5%E5%B8%B8%E5%88%86%E4%BA%AB/"/>
+    
+    
+    <category term="博客" scheme="https://blog.liushen.fun/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+    <category term="日常分享" scheme="https://blog.liushen.fun/tags/%E6%97%A5%E5%B8%B8%E5%88%86%E4%BA%AB/"/>
+    
+    <category term="Vercel" scheme="https://blog.liushen.fun/tags/Vercel/"/>
+    
+    <category term="zeabur" scheme="https://blog.liushen.fun/tags/zeabur/"/>
+    
+    <category term="Serverless" scheme="https://blog.liushen.fun/tags/Serverless/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>魔改笔记六：twikoo及导航栏美化</title>
+    <link href="https://blog.liushen.fun/posts/b9d10ed/"/>
+    <id>https://blog.liushen.fun/posts/b9d10ed/</id>
+    <published>2024-05-07T13:39:00.000Z</published>
+    <updated>2024-05-07T13:40:00.000Z</updated>
+    
+    
+    <summary type="html">近期群里有小伙伴问我我的顶栏是怎么实现的动效，还有评论区也在问我twikoo的美化是怎么实现的，于是我就写一篇文章一起水一下好啦！</summary>
+    
+    
+    
+    <category term="博客管理" scheme="https://blog.liushen.fun/categories/%E5%8D%9A%E5%AE%A2%E7%AE%A1%E7%90%86/"/>
+    
+    
+    <category term="JavaScript" scheme="https://blog.liushen.fun/tags/JavaScript/"/>
+    
+    <category term="CSS" scheme="https://blog.liushen.fun/tags/CSS/"/>
+    
+    <category term="Hexo" scheme="https://blog.liushen.fun/tags/Hexo/"/>
+    
+    <category term="twikoo" scheme="https://blog.liushen.fun/tags/twikoo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>随心而动，一辆单车逛遍半个武汉</title>
+    <link href="https://blog.liushen.fun/posts/c724fd1b/"/>
+    <id>https://blog.liushen.fun/posts/c724fd1b/</id>
+    <published>2024-05-06T01:39:00.000Z</published>
+    <updated>2024-05-06T01:40:00.000Z</updated>
+    
+    
+    <summary type="html">终于放假啦！五一可是一个长假啊，那我们去哪里玩呢？算了，我也不知道，那就骑上小黄车，来上一场说走就走的旅行！随心而动，想去哪去哪！</summary>
+    
+    
+    
+    <category term="日常分享" scheme="https://blog.liushen.fun/categories/%E6%97%A5%E5%B8%B8%E5%88%86%E4%BA%AB/"/>
+    
+    
+    <category term="日记" scheme="https://blog.liushen.fun/tags/%E6%97%A5%E8%AE%B0/"/>
+    
+    <category term="生活点滴" scheme="https://blog.liushen.fun/tags/%E7%94%9F%E6%B4%BB%E7%82%B9%E6%BB%B4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>自部署busuanzi访问量统计服务</title>
+    <link href="https://blog.liushen.fun/posts/e401be2d/"/>
+    <id>https://blog.liushen.fun/posts/e401be2d/</id>
+    <published>2024-04-30T09:39:00.000Z</published>
+    <updated>2024-04-30T09:40:00.000Z</updated>
+    
+    
+    <summary type="html">由于busuanzi官网炸了。我放弃了上万的数据，自己部署了busuanzi。而busuanzi源码使用redis版本，我并不会Redis数据库的相关操作，所以数据只能重新从零开始。本次教程将讲解我部署busuanzi的全过程，相关避雷操作，配置信息，除此之外还有我在部署途中遇到的报错解答。</summary>
+    
+    
+    
+    <category term="博客管理" scheme="https://blog.liushen.fun/categories/%E5%8D%9A%E5%AE%A2%E7%AE%A1%E7%90%86/"/>
+    
+    
+    <category term="网站监控" scheme="https://blog.liushen.fun/tags/%E7%BD%91%E7%AB%99%E7%9B%91%E6%8E%A7/"/>
+    
+    <category term="Busuanzi" scheme="https://blog.liushen.fun/tags/Busuanzi/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Shynet：极为轻量化的访客监控系统</title>
+    <link href="https://blog.liushen.fun/posts/7cb13402/"/>
+    <id>https://blog.liushen.fun/posts/7cb13402/</id>
+    <published>2024-04-24T16:24:00.000Z</published>
+    <updated>2024-04-25T01:15:00.000Z</updated>
+    
+    
+    <summary type="html">在先前，我曾推荐过一款访客系统：Umami，不过部署Umami需要部署两个容器，一个是PostgreSQL，一个是Umami本体，这两个占用都超过了200MB，奈何陋室空间有限，只能忍痛放弃，终于在今天找到了一个更加轻量化的统计：Shynet，在此推荐给大家。</summary>
+    
+    
+    
+    <category term="博客管理" scheme="https://blog.liushen.fun/categories/%E5%8D%9A%E5%AE%A2%E7%AE%A1%E7%90%86/"/>
+    
+    
+    <category term="网站监控" scheme="https://blog.liushen.fun/tags/%E7%BD%91%E7%AB%99%E7%9B%91%E6%8E%A7/"/>
+    
+    <category term="Shynet" scheme="https://blog.liushen.fun/tags/Shynet/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>安全跳转页面·重制版</title>
+    <link href="https://blog.liushen.fun/posts/9efc1657/"/>
+    <id>https://blog.liushen.fun/posts/9efc1657/</id>
+    <published>2024-04-20T17:00:00.000Z</published>
+    <updated>2024-04-20T18:00:00.000Z</updated>
+    
+    
+    <summary type="html">大家可能会惊讶，欸嘿你小子，水文是吧？之前发过了现在又来？嘿嘿，其实不是这样的，之前的那个由于当时的我水平有限，所以实现的功能一塌糊涂，甚至可以说是没法用，有群友问我问题我也不知道怎么解决，所以我痛定思痛，在我有点水平后，选择自己实现！</summary>
+    
+    
+    
+    <category term="博客管理" scheme="https://blog.liushen.fun/categories/%E5%8D%9A%E5%AE%A2%E7%AE%A1%E7%90%86/"/>
+    
+    
+    <category term="Hexo" scheme="https://blog.liushen.fun/tags/Hexo/"/>
+    
+    <category term="安全跳转" scheme="https://blog.liushen.fun/tags/%E5%AE%89%E5%85%A8%E8%B7%B3%E8%BD%AC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>twikoo仿段落评论，实现快速评论功能</title>
+    <link href="https://blog.liushen.fun/posts/73765344/"/>
+    <id>https://blog.liushen.fun/posts/73765344/</id>
+    <published>2024-04-20T15:07:00.000Z</published>
+    <updated>2024-04-19T07:07:00.000Z</updated>
+    
+    
+    <summary type="html">先前twikoo的讨论群中提出了一个功能，类似于小说之类的段落评论功能，我思考了一下，感觉这个功能很有意思，评论起来比评论区快多了，于是用我为数不多的JS知识，尝试实现了一下，没想到还真让我给搞出来了。</summary>
+    
+    
+    
+    <category term="博客管理" scheme="https://blog.liushen.fun/categories/%E5%8D%9A%E5%AE%A2%E7%AE%A1%E7%90%86/"/>
+    
+    
+    <category term="JavaScript" scheme="https://blog.liushen.fun/tags/JavaScript/"/>
+    
+    <category term="CSS" scheme="https://blog.liushen.fun/tags/CSS/"/>
+    
+    <category term="Hexo" scheme="https://blog.liushen.fun/tags/Hexo/"/>
+    
+    <category term="twikoo" scheme="https://blog.liushen.fun/tags/twikoo/"/>
+    
+    <category term="功能" scheme="https://blog.liushen.fun/tags/%E5%8A%9F%E8%83%BD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>怎么从PPT中提取出所有的文字内容</title>
+    <link href="https://blog.liushen.fun/posts/c4a2ff35/"/>
+    <id>https://blog.liushen.fun/posts/c4a2ff35/</id>
+    <published>2024-04-18T02:21:00.000Z</published>
+    <updated>2024-04-18T02:22:00.000Z</updated>
+    
+    
+    <summary type="html">为什么要提取PPT所有文字呢？作为班长有的时候需要写新闻稿，造的PPT就是生成式大模型最好的参数，但是奈何大模型不能直接访问PPT，此时就需要提取所有文字再输入进去了。</summary>
+    
+    
+    
+    <category term="日常分享" scheme="https://blog.liushen.fun/categories/%E6%97%A5%E5%B8%B8%E5%88%86%E4%BA%AB/"/>
+    
+    
+    <category term="日常分享" scheme="https://blog.liushen.fun/tags/%E6%97%A5%E5%B8%B8%E5%88%86%E4%BA%AB/"/>
+    
+    <category term="PPT" scheme="https://blog.liushen.fun/tags/PPT/"/>
+    
+    <category term="VBA" scheme="https://blog.liushen.fun/tags/VBA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>魔改笔记五：从头开始，手搓一个关于页面</title>
+    <link href="https://blog.liushen.fun/posts/8f52e732/"/>
+    <id>https://blog.liushen.fun/posts/8f52e732/</id>
+    <published>2024-04-14T05:51:00.000Z</published>
+    <updated>2024-04-14T05:52:00.000Z</updated>
+    
+    
+    <summary type="html">我的关于页面一直沿用的是原本的butterfly的一套，只有干巴巴的文字，没有任何新奇的地方，我自己都懒得看，网站也慢慢趋于稳定，这些屎山也得慢慢修起来了，于是我从头开始，手搓了一个关于页面</summary>
+    
+    
+    
+    <category term="博客管理" scheme="https://blog.liushen.fun/categories/%E5%8D%9A%E5%AE%A2%E7%AE%A1%E7%90%86/"/>
+    
+    
+    <category term="JavaScript" scheme="https://blog.liushen.fun/tags/JavaScript/"/>
+    
+    <category term="CSS" scheme="https://blog.liushen.fun/tags/CSS/"/>
+    
+    <category term="Hexo" scheme="https://blog.liushen.fun/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>魔改笔记四：友链页重构及友链朋友圈适配</title>
+    <link href="https://blog.liushen.fun/posts/59fe844d/"/>
+    <id>https://blog.liushen.fun/posts/59fe844d/</id>
+    <published>2024-04-10T05:02:00.000Z</published>
+    <updated>2024-04-10T05:07:00.000Z</updated>
+    
+    
+    <summary type="html">前天晚上，店长更新了方舟系列的友链卡片，作为店长铁粉，当然要第一时间买店长的火柴啦，于是我将店长所有的友链卡片稍微整合了一下，结合安知鱼的教程，最终实现了“五世同堂”，五种友链可以混合搭配，于是在此分享给大家！</summary>
+    
+    
+    
+    <category term="博客管理" scheme="https://blog.liushen.fun/categories/%E5%8D%9A%E5%AE%A2%E7%AE%A1%E7%90%86/"/>
+    
+    
+    <category term="JavaScript" scheme="https://blog.liushen.fun/tags/JavaScript/"/>
+    
+    <category term="CSS" scheme="https://blog.liushen.fun/tags/CSS/"/>
+    
+    <category term="Hexo" scheme="https://blog.liushen.fun/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>通义灵码，你的编程小助手</title>
+    <link href="https://blog.liushen.fun/posts/a841c/"/>
+    <id>https://blog.liushen.fun/posts/a841c/</id>
+    <published>2024-04-07T03:25:36.000Z</published>
+    <updated>2024-04-07T03:30:22.000Z</updated>
+    
+    
+    <summary type="html">通义灵码是一个编程助手，可以嵌入到你的IDEA中辅助编程，它经过了海量优秀开源代码数据训练，可根据当前代码文件及跨文件的上下文，为你生成行级/函数级代码、单元测试、代码注释等。沉浸式编码心流，秒级生成速度，让你更专注在技术设计，高质高效地完成编码工作。</summary>
+    
+    
+    
+    <category term="日常分享" scheme="https://blog.liushen.fun/categories/%E6%97%A5%E5%B8%B8%E5%88%86%E4%BA%AB/"/>
+    
+    
+    <category term="日常分享" scheme="https://blog.liushen.fun/tags/%E6%97%A5%E5%B8%B8%E5%88%86%E4%BA%AB/"/>
+    
+    <category term="编程" scheme="https://blog.liushen.fun/tags/%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="通义灵码" scheme="https://blog.liushen.fun/tags/%E9%80%9A%E4%B9%89%E7%81%B5%E7%A0%81/"/>
+    
+    <category term="插件" scheme="https://blog.liushen.fun/tags/%E6%8F%92%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>恢复busuanzi访客数据的可行方法</title>
+    <link href="https://blog.liushen.fun/posts/198e4e52/"/>
+    <id>https://blog.liushen.fun/posts/198e4e52/</id>
+    <published>2024-04-04T00:25:36.000Z</published>
+    <updated>2024-04-04T16:30:22.000Z</updated>
+    
+    
+    <summary type="html">一个卜算子进行&quot;刷数据&quot;的可行性方法，可用于换域名后自行恢复访问数据，好方法，在此记录。</summary>
+    
+    
+    
+    <category term="日常分享" scheme="https://blog.liushen.fun/categories/%E6%97%A5%E5%B8%B8%E5%88%86%E4%BA%AB/"/>
+    
+    
+    <category term="网站监控" scheme="https://blog.liushen.fun/tags/%E7%BD%91%E7%AB%99%E7%9B%91%E6%8E%A7/"/>
+    
+    <category term="Busuanzi" scheme="https://blog.liushen.fun/tags/Busuanzi/"/>
+    
+  </entry>
+  
+</feed>

@@ -1,0 +1,831 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Spikformer脉冲神经网络学习 | LiuShen's Blog</title><meta name="author" content="Willow-God"><meta name="copyright" content="Willow-God"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="近期我们进行了人工智能实训，我们小组选择的是脉冲神经网络，不同于原先的神经网络，这个网络采用的是脉冲信号，目前脉冲神经网络的效果并不是很好，但是因为是一个全新的神经网络架构，并且基于生物启发的计算方式，使得它们在处理稀疏和非结构化数据时具有独特的优势。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spikformer脉冲神经网络学习">
+<meta property="og:url" content="https://blog.liushen.fun/posts/67189760/index.html">
+<meta property="og:site_name" content="LiuShen's Blog">
+<meta property="og:description" content="近期我们进行了人工智能实训，我们小组选择的是脉冲神经网络，不同于原先的神经网络，这个网络采用的是脉冲信号，目前脉冲神经网络的效果并不是很好，但是因为是一个全新的神经网络架构，并且基于生物启发的计算方式，使得它们在处理稀疏和非结构化数据时具有独特的优势。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.qyliu.top/i/2024/07/06/6688d4b63b50f.webp">
+<meta property="article:published_time" content="2024-07-06T05:33:21.000Z">
+<meta property="article:modified_time" content="2024-07-06T05:33:21.000Z">
+<meta property="article:author" content="Willow-God">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="神经网络">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.qyliu.top/i/2024/07/06/6688d4b63b50f.webp"><link rel="shortcut icon" href="/info/avatar.ico"><link rel="canonical" href="https://blog.liushen.fun/posts/67189760/index.html"><link rel="preconnect"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css?v=5.0.0"><link rel="stylesheet" href="/css/custom.css?v=5.0.0"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css?v=6.6.0"><link rel="stylesheet" href="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.css?v=5.0.36" media="print" onload="this.media='all'"><script>(()=>{
+      const saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+      
+      window.btf = {
+        saveToLocal: saveToLocal,
+        getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+          script.src = url
+          script.async = true
+          script.onerror = reject
+          script.onload = script.onreadystatechange = function() {
+            const loadState = this.readyState
+            if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+            script.onload = script.onreadystatechange = null
+            resolve()
+          }
+
+          Object.keys(attr).forEach(key => {
+            script.setAttribute(key, attr[key])
+          })
+
+          document.head.appendChild(script)
+        }),
+
+        getCSS: (url, id = false) => new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+          link.rel = 'stylesheet'
+          link.href = url
+          if (id) link.id = id
+          link.onerror = reject
+          link.onload = link.onreadystatechange = function() {
+            const loadState = this.readyState
+            if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+            link.onload = link.onreadystatechange = null
+            resolve()
+          }
+          document.head.appendChild(link)
+        }),
+
+        addGlobalFn: (key, fn, name = false, parent = window) => {
+          const pjaxEnable = true
+          if (!pjaxEnable && key.startsWith('pjax')) return
+
+          const globalFn = parent.globalFn || {}
+          const keyObj = globalFn[key] || {}
+    
+          if (name && keyObj[name]) return
+    
+          name = name || Object.keys(keyObj).length
+          keyObj[name] = fn
+          globalFn[key] = keyObj
+          parent.globalFn = globalFn
+        }
+      }
+    
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+      
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })()</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"7IX3UBC6JW","apiKey":"4ac2846352e499675081f1277fb961c1","indexName":"My Blog","hitsPerPage":6,"languages":{"input_placeholder":"搜索全站文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"本篇文章从发布到现在已经隔了","messageNext":"天了，里面的内容可能过期了，你要自己甄别一下哟👉👈"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":400,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":1000,"languages":{"author":"作者: Willow-God","link":"链接: ","source":"来源: LiuShen's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js?v=4.12.0',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Spikformer脉冲神经网络学习',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: undefined,
+  isToc: true,
+  postUpdate: '2024-07-06 13:33:21'
+}</script><link rel="stylesheet" href="/config/Yozai-Medium/result.css"><link rel="stylesheet" href="/config/memos/memos.css"></head><body><svg aria-hidden="true" style="position:absolute; overflow:hidden; width:0; height:0"><symbol id="icon-sun" viewBox="0 0 1024 1024"><path d="M960 512l-128 128v192h-192l-128 128-128-128H192v-192l-128-128 128-128V192h192l128-128 128 128h192v192z" fill="#FFD878" p-id="8420"></path><path d="M736 512a224 224 0 1 0-448 0 224 224 0 1 0 448 0z" fill="#FFE4A9" p-id="8421"></path><path d="M512 109.248L626.752 224H800v173.248L914.752 512 800 626.752V800h-173.248L512 914.752 397.248 800H224v-173.248L109.248 512 224 397.248V224h173.248L512 109.248M512 64l-128 128H192v192l-128 128 128 128v192h192l128 128 128-128h192v-192l128-128-128-128V192h-192l-128-128z" fill="#4D5152" p-id="8422"></path><path d="M512 320c105.888 0 192 86.112 192 192s-86.112 192-192 192-192-86.112-192-192 86.112-192 192-192m0-32a224 224 0 1 0 0 448 224 224 0 0 0 0-448z" fill="#4D5152" p-id="8423"></path></symbol><symbol id="icon-moon" viewBox="0 0 1024 1024"><path d="M611.370667 167.082667a445.013333 445.013333 0 0 1-38.4 161.834666 477.824 477.824 0 0 1-244.736 244.394667 445.141333 445.141333 0 0 1-161.109334 38.058667 85.077333 85.077333 0 0 0-65.066666 135.722666A462.08 462.08 0 1 0 747.093333 102.058667a85.077333 85.077333 0 0 0-135.722666 65.024z" fill="#FFB531" p-id="11345"></path><path d="M329.728 274.133333l35.157333-35.157333a21.333333 21.333333 0 1 0-30.165333-30.165333l-35.157333 35.157333-35.114667-35.157333a21.333333 21.333333 0 0 0-30.165333 30.165333l35.114666 35.157333-35.114666 35.157334a21.333333 21.333333 0 1 0 30.165333 30.165333l35.114667-35.157333 35.157333 35.157333a21.333333 21.333333 0 1 0 30.165333-30.165333z" fill="#030835" p-id="11346"></path></symbol></svg><!-- hexo injector head_end start --><link rel="stylesheet" href="/config/swiper/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="/config/swiper/swiperstyle.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="LiuShen's Blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="LiuShen's Blog" type="application/rss+xml">
+<div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="wizard-scene"><div class="wizard-objects"><div class="wizard-square"></div><div class="wizard-circle"></div><div class="wizard-triangle"></div></div><div class="wizard"><div class="wizard-body"></div><div class="wizard-right-arm"><div class="wizard-right-hand"></div></div><div class="wizard-left-arm"><div class="wizard-left-hand"></div></div><div class="wizard-head"><div class="wizard-beard"></div><div class="wizard-face"><div class="wizard-adds"></div></div><div class="wizard-hat"><div class="wizard-hat-of-the-hat"></div><div class="wizard-four-point-star --first"></div><div class="wizard-four-point-star --second"></div><div class="wizard-four-point-star --third"></div></div></div></div></div></div><script async="async">(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+  
+  preloader.initLoading()
+  
+  let loaded = false;
+  
+  window.addEventListener('load', () => { 
+      if (!loaded) {
+          preloader.endLoading();
+          loaded = true;
+      }
+  });
+
+  setTimeout(() => {
+      if (!loaded) {
+          preloader.endLoading();
+          loaded = true;
+      }
+  }, 5000);
+
+  
+  window.addEventListener('load',() => { preloader.endLoading() })
+  setTimeout(function(){preloader.endLoading();}, 3000);
+  document.getElementById('loading-box').addEventListener('click',()=> {preloader.endLoading()})
+
+  if (true) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><!--.avatar-img.is-center--><!--  img(src=url_for(theme.avatar.img) onerror=`onerror=null;src='${theme.error_img.flink}'` alt="avatar")--><div class="is-center" id="sidebar-avatar"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/03/21/65fc570ca9fe7.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">Willow-God</div><div class="author-info__description">清羽 〄 飞扬</div></div><div class="site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">69</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/willow-god"><i class="fab fa-github"></i><span>Follow Me 🛫</span></a><div class="menu-info-social-icons is-center"><a class="social-icon" href="mailto:01@liushen.fun" target="_blank" title="Email"><i class="fa-solid fa-envelope"></i></a><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2411457922&amp;site=qq&amp;menu=yes" target="_blank" title="QQ：2411457922"><i class="fa-brands fa-qq"></i></a><a class="social-icon" href="https://wakatime.com/@LiuShen" target="_blank" title="Wakatime"><i class="fa-solid fa-chart-column"></i></a><a class="social-icon" href="https://blog.liushen.fun/atom.xml" target="_blank" title="rss地址"><i class="fa-solid fa-rss"></i></a></div><div class="menus_items visible"><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-home"></i><span> 导航</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/"><i class="fa-fw fa-solid fa-house-laptop"></i><span> 博客主页</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.liushen.fun/"><i class="fa-fw fa-solid fa-house-flag"></i><span> 导航主页</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://xc.liushen.fun/"><i class="fa-fw fa fa-camera-retro"></i><span> 个人相册</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-graduation-cap"></i><span> 整理</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时光卷轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 文章标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 文章分类</span></a></li><li><a class="site-page child" href="/charts/"><i class="fa-fw fa-solid fa-chart-pie"></i><span> 文章通览</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa-solid fa-user-group"></i><span> 友人</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链展示</span></a></li><li><a class="site-page child" href="/addlink/"><i class="fa-fw fa fa-at"></i><span> 友链申请</span></a></li><li><a class="site-page child" href="/fcircle/"><i class="fa-fw fa-solid fa-circle-nodes"></i><span> 朋友动态</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-paper-plane"></i><span> 留言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/comment/"><i class="fa-fw fa-solid fa-chalkboard"></i><span> 留言白板</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://m.liushen.fun/"><i class="fa-fw fa-solid fa-basketball"></i><span> 盐焗星球</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa-solid fa-stethoscope"></i><span> 服务</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://um.liushen.fun/"><i class="fa-fw fa-solid fa-eye-low-vision"></i><span> 访客统计</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://pan.liushen.fun/"><i class="fa-fw fa-solid fa-laptop-file"></i><span> 资源分享</span></a></li><li><a class="site-page child" href="/subscribe/"><i class="fa-fw fa-solid fa-rss"></i><span> 订阅本站</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-list"></i><span> 关于</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fa fa-address-card"></i><span> 站长资料</span></a></li><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-commenting"></i><span> 日常说说</span></a></li><li><a class="site-page child" href="/devices/"><i class="fa-fw fa-solid fa-tachograph-digital"></i><span> 我的设备</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(https://cdn.qyliu.top/i/2024/07/06/6688d4b63b50f.webp);"><nav id="nav"><span id="blog-info"><a href="/" title="LiuShen's Blog"><span class="site-name">LiuShen's Blog</span></a></span><div id="menus"></div><div class="menus_items visible"><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-home"></i><span> 导航</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/"><i class="fa-fw fa-solid fa-house-laptop"></i><span> 博客主页</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.liushen.fun/"><i class="fa-fw fa-solid fa-house-flag"></i><span> 导航主页</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://xc.liushen.fun/"><i class="fa-fw fa fa-camera-retro"></i><span> 个人相册</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-graduation-cap"></i><span> 整理</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时光卷轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 文章标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 文章分类</span></a></li><li><a class="site-page child" href="/charts/"><i class="fa-fw fa-solid fa-chart-pie"></i><span> 文章通览</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa-solid fa-user-group"></i><span> 友人</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链展示</span></a></li><li><a class="site-page child" href="/addlink/"><i class="fa-fw fa fa-at"></i><span> 友链申请</span></a></li><li><a class="site-page child" href="/fcircle/"><i class="fa-fw fa-solid fa-circle-nodes"></i><span> 朋友动态</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-paper-plane"></i><span> 留言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/comment/"><i class="fa-fw fa-solid fa-chalkboard"></i><span> 留言白板</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://m.liushen.fun/"><i class="fa-fw fa-solid fa-basketball"></i><span> 盐焗星球</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa-solid fa-stethoscope"></i><span> 服务</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://um.liushen.fun/"><i class="fa-fw fa-solid fa-eye-low-vision"></i><span> 访客统计</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://pan.liushen.fun/"><i class="fa-fw fa-solid fa-laptop-file"></i><span> 资源分享</span></a></li><li><a class="site-page child" href="/subscribe/"><i class="fa-fw fa-solid fa-rss"></i><span> 订阅本站</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-list"></i><span> 关于</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fa fa-address-card"></i><span> 站长资料</span></a></li><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-commenting"></i><span> 日常说说</span></a></li><li><a class="site-page child" href="/devices/"><i class="fa-fw fa-solid fa-tachograph-digital"></i><span> 我的设备</span></a></li></ul></div></div><center id="name-container"><a id="page-name" href="javascript:btf.scrollToDest(0, 500)">PAGE_NAME</a></center><div id="nav-right"><div id="travellings"><a class="site-page" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html" title="友链接力-随机开往"><i class="fa-solid fa-bus fa-fw"></i></a></div><div id="ten-years"><a class="site-page" target="_blank" rel="noopener" href="https://foreverblog.cn/go.html" title="友链接力-十年之约"><i class="fa-brands fa-nfc-symbol fa-fw"></i></a></div><div id="random"><a class="site-page" href="javascript:randomPost()" title="随机前往一个文章"><i class="fa-solid fa-shuffle fa-fw"></i></a></div><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i></span></div><div id="toggle-menu"><span class="site-page" href="javascript:void(0);" title="展开菜单"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Spikformer脉冲神经网络学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-06T05:33:21.000Z" title="发表于 2024-07-06 13:33:21">2024-07-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-06T05:33:21.000Z" title="更新于 2024-07-06 13:33:21">2024-07-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/">学习资料</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">8.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>26分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Spikformer脉冲神经网络学习"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/posts/67189760/#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="碎碎念"><a href="#碎碎念" class="headerlink" title="碎碎念"></a>碎碎念</h2><p>这篇文章鸽的比较久，也不是说懒（其实就是懒），主要是这两天实在太忙了（试图找借口），比如实习，每天都在办公室坐着（坐着摸鱼），老师也会不断地布置新任务以小组方式实现（其实根本没啥任务），而这个脉冲神经网络是我们六月底进行的研究，在研究的过程中感觉比较有意思（又能水一篇了）。所以还是决定将其分享到这里，可能稍微有些地方有问题（菜就多练），欢迎大家指正！</p>
+<p><strong>注意：</strong>本篇文章可能稍微有些枯燥乏味，因为是以实验报告的内容，可能没有一些华丽的辞藻，更多是关于相关领域的一些术词，可能仅供专业人士研究。</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在当前的深度学习领域，脉冲神经网络（Spiking Neural Networks, SNNs）和Transformer架构的融合正成为一种新的研究趋势。这些模型在各种任务中显示出显著的性能提升。本文的研究对象Spikformer即是一种结合了SNNs和Transformer架构的混合模型，旨在利用两者的优势来实现更高效的计算和更优异的性能</p>
+<h3 id="脉冲神经网络"><a href="#脉冲神经网络" class="headerlink" title="脉冲神经网络"></a>脉冲神经网络</h3><p>脉冲神经网络（SNNs）是模仿生物神经系统的一类神经网络，与传统的人工神经网络（ANNs）不同，SNNs通过离散的脉冲信号进行信息传递。每个神经元在接收到其他神经元的脉冲信号时，积累电压，一旦电压达到一定阈值，神经元就会发出一个脉冲信号。这种基于事件驱动的计算方式，使得SNNs在理论上能够实现更高效的计算和更低的能耗。</p>
+<p>SNNs的主要优点在于其生物启发的计算方式，这使得它们在处理稀疏和非结构化数据时具有独特的优势。然而，SNNs也面临着一些挑战，如训练的复杂性和硬件实现的难度。近年来，随着脉冲神经网络训练算法的发展，如脉冲时间依赖可塑性（STDP）和基于梯度的优化方法，使得SNNs在实际应用中变得更加可行。</p>
+<h3 id="Transformer模型"><a href="#Transformer模型" class="headerlink" title="Transformer模型"></a>Transformer模型</h3><p>Transformer 是一种基于自注意力机制的模型，最早应用于自然语言处理任务，如机器翻译。其核心是自注意力机制（Self-Attention），能够有效捕捉输入序列中各元素之间的依赖关系。近年来，Transformer 在计算机视觉任务中也取得了显著成果，如图像分类、目标检测和语义分割等。自注意力机制通过计算查询（Query）、键（Key）和值（Value）之间的点积来加权特征，从而捕捉全局依赖关系。</p>
+<p>尽管 Transformer 在视觉任务中的表现优异，但其计算复杂度较高，尤其是在处理大规模图像时。这促使研究者们探索改进自注意力机制的方法，例如使用卷积层进行特征提取、简化自注意力计算等。</p>
+<h3 id="Spikformer"><a href="#Spikformer" class="headerlink" title="Spikformer"></a>Spikformer</h3><p>脉冲神经网络（SNNs）是第三代神经网络，与传统的人工神经网络（ANNs）相比，SNNs 模仿生物神经元的活动方式，通过脉冲序列来传递信息。SNNs 中的神经元会在接收到足够的电信号后发出脉冲（spike），这种方式不仅生物学上更具可解释性，而且在硬件实现上能显著降低能量消耗。SNNs 的低功耗和事件驱动特性使其在需要高能效的应用场景中表现出色，如嵌入式系统和物联网设备。</p>
+<p>SNNs 的研究主要集中在两个方面：一种是将传统的 ANN 转换为 SNN（ANN-to-SNN conversion），另一种是直接训练 SNN（direct training）。转换方法通过替换 ANN 中的激活函数为脉冲神经元实现高效的性能移植，但需要较多的时间步长来逼近 ANN 的输出，从而导致较高的延迟。而直接训练方法通过时间步长展开 SNN 并采用反向传播算法训练模型，尽管在事件触发机制上存在非连续性，但可以通过替代梯度法进行训练。</p>
+<p>本文中的Spikformer 是将 SNN 与 Transformer 结合的一种新型架构，旨在结合两者的优势，既保留 SNN 的低功耗特性，又利用 Transformer 的全局特征捕捉能力。Spikformer 引入了脉冲自注意力机制（Spiking Self Attention, SSA），其创新点在于：</p>
+<ol>
+<li>   脉冲自注意力机制（SSA）：传统的自注意力机制需要进行浮点数运算并通过 softmax 函数归一化权重，而 SSA 使用脉冲形式的查询、键和值（仅包含 0 和 1），避免了乘法运算，使得计算更加高效，能耗更低。</li>
+<li>   无 softmax 的脉冲自注意力：由于脉冲形式的查询和键计算出的注意力图天然非负，因此不需要 softmax 进行归一化，从而减少了计算开销。</li>
+<li>   架构设计：Spikformer 的设计考虑了 SNN 的计算特性，利用逻辑与操作和加法进行注意力计算，进一步降低了计算复杂度和能耗。</li>
+</ol>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h3 id="脉冲神经网络-1"><a href="#脉冲神经网络-1" class="headerlink" title="脉冲神经网络"></a>脉冲神经网络</h3><p>脉冲神经网络（Spiking Neural Networks, SNNs）的核心原理在于模拟生物神经元通过电脉冲进行信息传递的过程。在生物神经系统中，神经元通过膜电位的变化来响应外界刺激，当膜电位达到一定阈值时，神经元会发放一个动作电位，即脉冲，随后膜电位迅速复位。SNN正是基于这一机制进行建模的。</p>
+<p>在SNN中，一个基本的神经元模型是Leaky Integrate-and-Fire（LIF）模型。该模型描述了神经元膜电位随时间的变化情况，其动态可以用以下微分方程表示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/06/6688d76d8c6e9.webp" alt="微分方程"></p>
+<p>其中：</p>
+<ol>
+<li><p>Vm(t)代表神经元在时间t的膜电位</p>
+</li>
+<li><p>Vrest是静息膜电位</p>
+</li>
+<li><p>t是膜时间常数</p>
+</li>
+<li><p>I(t) 是输入电流</p>
+</li>
+</ol>
+<p>当膜电位Vm(t) 达到一个预设的发放阈值Vthresh时，神经元发放一个脉冲，并将膜电位重置到一个较低的值，如静息膜电位。</p>
+<p>LIF模型中的“leak”效应模拟了膜电位自然衰减的过程，即使没有新的输入，膜电位也会逐渐向静息状态衰减。这种leak效应是必要的，因为它防止了膜电位的无限积累。</p>
+<p>在SNN中，突触的权重更新通常遵循Spike-Time-Dependent Plasticity（STDP）规则。STDP是一种基于脉冲时间差异的突触可塑性机制，其基本思想是：如果前突触神经元的脉冲紧接着后突触神经元的脉冲之后到达，那么突触权重会增强（Long-Term Potentiation, LTP）；反之，如果后突触神经元的脉冲先于前突触神经元的脉冲到达，突触权重会减弱（Long-Term Depression, LTD）。这种权重更新机制可以用以下公式描述：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/06/6688d7c9d048b.webp" alt="权重更新机制"></p>
+<p>其中：</p>
+<ol>
+<li><p>A+和A-是LTP和LTD的强度参数</p>
+</li>
+<li><p>tpre和tpost分别是突触前和突触后脉冲的时间</p>
+</li>
+<li><p>t+和t-是LTP和LTD的时间窗口参数</p>
+</li>
+</ol>
+<p>STDP规则的实现通常依赖于突触后神经元脉冲发放时的短期变化，这可以通过引入两个状态变量来实现，分别对应突触前和突触后的活动痕迹。当突触前或突触后神经元发放脉冲时，相应的痕迹变量会更新，从而影响突触权重的调整。</p>
+<p>SNN的另一个关键特性是其对时间的编码能力。神经元发放脉冲的时间点和频率都可以携带信息。这种时间编码机制使得SNN能够处理时序数据，并且在某些任务中展现出比传统人工神经网络（ANN）更优越的性能。</p>
+<ol>
+<li><p>时间编码通过脉冲发放的时间间隔来表示信号的强度。例如，较短的时间间隔表示较高的信号强度。</p>
+</li>
+<li><p>频率编码通过脉冲发放的频率来表示信号的强度。例如，较高的脉冲频率表示较高的信号强度。</p>
+</li>
+<li><p>相位编码通过脉冲相对于某一参考时间点的相位来表示信号的强度。相位编码在处理周期性信号时特别有效。</p>
+</li>
+</ol>
+<p>脉冲神经网络的结构可以是前馈网络、反馈网络或递归网络。不同的结构适用于不同的任务，前馈网络是最简单的网络结构，信息从输入层传递到输出层，中间可以有多个隐藏层。每一层的神经元只接收前一层的脉冲输入，递归网络包含环路，神经元不仅可以接收来自前一层的输入，还可以接收来自本层或前几层的反馈输入。递归网络适用于处理时间序列数据，因为它们能够保留之前的状态信息，混合网络结合了前馈和递归网络的特点，能够同时处理静态和动态数据。它们通常在生物神经网络的建模中使用。</p>
+<p>与传统的人工神经网络相比，脉冲神经网络具有更高的能量效率和生物合理性。SNNs 通过脉冲的离散发放和事件驱动的计算方式，显著减少了计算和存储的开销。这使得 SNNs 特别适用于低功耗设备和实时应用，SNNs 的事件驱动计算方式意味着只有在脉冲发放时才进行计算，避免了大量的无效计算。每个脉冲的发放都是一个事件，触发相关神经元的状态更新，由于 SNNs 只在脉冲事件发生时进行计算，这种计算方式极大地降低了功耗。生物神经元也是通过类似的方式实现高效的能量利用，从而支持复杂的认知功能。</p>
+<h3 id="注意力机制-Transformer"><a href="#注意力机制-Transformer" class="headerlink" title="注意力机制&amp;Transformer"></a>注意力机制&amp;Transformer</h3><p>Transformer架构中的注意力机制是其核心组件之一，对其性能和能力的提升至关重要。Transformer模型主要由编码器和解码器组成，而注意力机制在这两个模块中都扮演了关键角色。</p>
+<p>在Transformer中，自注意力机制（Self-Attention）是用于捕捉序列中元素之间关系的主要方法。与传统的序列处理模型不同，自注意力机制能够并行处理整个输入序列，并且可以灵活地建模长距离依赖关系。</p>
+<p>计算过程：</p>
+<ol>
+<li><p>给定输入序列X={x1,x2,x3,……}，首先通过线性变换将每个输入xn映射到查询（Query）、键（Key）和值（Value）向量：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/06/6688d87390ed3.webp"></p>
+</li>
+<li><p>计算注意力得分：接下来，计算查询向量和键向量的点积，得到注意力得分矩阵E，E=QK^T，这种点积操作可以高效地计算序列中每个元素对其他所有元素的相关性。</p>
+</li>
+<li><p>归一化得分：为了使得得分更具可比性，通常使用softmax函数将其归一化，得到注意力权重矩阵A，这一步确保了每个查询向量的注意力权重之和为1。</p>
+</li>
+<li><p>最后，将注意力权重矩阵A应用于值向量V，得到输出表示，从而捕捉到序列中元素之间的全局依赖关系。</p>
+</li>
+</ol>
+<p>Transformer中的自注意力机制进一步扩展为多头注意力机制（Multi-Head Attention）。多头注意力机制的基本思想是使用多个独立的注意力头，每个头在不同的子空间中学习序列元素之间的关系。</p>
+<ol>
+<li><p>对于每个输入序列，通过不同的线性变换得到h组查询、键和值向量：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/06/6688d8e8441cf.webp"></p>
+</li>
+<li><p>独立计算注意力：每个注意力头独立计算自注意力，得到一组输出：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/06/6688d8fff2782.webp"></p>
+</li>
+<li><p>连接和线性变换：将所有注意力头的输出连接起来，形成一个新的表示，随后通过线性变换得到最终输出：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/06/6688d9171068a.webp"></p>
+<p>其中，W0是用于整合不同头输出的权重矩阵。</p>
+</li>
+</ol>
+<p>在编码器中，自注意力机制用于每一层的输入表示，捕捉输入序列内部的依赖关系。编码器中的每一层包括两个子层：多头自注意力机制和前馈神经网络（Feed-Forward Neural Network）。</p>
+<p>多头自注意力子层：通过多个注意力头，并行处理输入序列的每个元素，捕捉到序列中不同位置的关系。</p>
+<p>前馈神经网络子层：对注意力机制的输出进行进一步的非线性变换，以增加模型的表达能力。</p>
+<p>每个子层之后都加了残差连接（Residual Connection）和层归一化（Layer Normalization），确保了梯度的稳定传递，并加速了训练收敛。</p>
+<p>解码器中除了自注意力机制外，还引入了编码器-解码器注意力机制（Encoder-Decoder Attention），以便在生成每个输出时参考编码器的表示。</p>
+<p>自注意力子层：与编码器类似，用于捕捉解码器内部生成序列的依赖关系。</p>
+<p>编码器-解码器注意力子层：将解码器的查询向量与编码器的键和值向量进行注意力计算，结合编码器的全局信息生成当前输出。</p>
+<h3 id="Spikformer-1"><a href="#Spikformer-1" class="headerlink" title="Spikformer"></a>Spikformer</h3><p>Spikformer结合了脉冲神经网络（SNN）和Transformer架构，旨在利用两者的优势来提升处理复杂时序数据的能力。其整体架构由三个主要部分组成：脉冲补丁切割模块（SPS）、Spikformer编码器块和线性分类头。</p>
+<p>首先，输入图像经过脉冲补丁切割模块（SPS）处理。该模块包括一个卷积层（Conv2D），用于提取输入图像的初始特征。然后，通过批归一化（Batch Normalization，BN）对特征进行归一化处理，批归一化在SNN中替代了常用的层归一化，因为层归一化不适用于SNN。接下来，最大池化（Max Pooling，MP）用于对特征进行下采样，最终生成脉冲特征。这一步的输出是一个脉冲序列，包含时序信息的脉冲特征。</p>
+<p>进入Spikformer编码器块后，首先对脉冲序列进行脉冲位置嵌入（Spiking Position Embedding），以保留时序信息。嵌入后的脉冲序列被输入到脉冲自注意力机制（Spiking Self Attention，SSA）中。自注意力机制的核心是计算输入序列中各元素间的相关性，从而在全局范围内捕捉数据特征。SSA在Spikformer中专门为脉冲序列设计，包含线性变换层和批归一化层，通过矩阵点积（Matrix Dot-Product）计算序列间的相似度，并通过缩放（Scale）和软最大（Softmax）函数对相似度进行归一化。然后，将归一化后的相似度与输入序列相乘，生成新的脉冲序列表示。</p>
+<p>脉冲自注意力机制的输出通过多层感知器（Multi-Layer Perceptron，MLP）进行进一步处理。MLP由多个线性层和激活函数组成，能够对数据进行非线性变换，从而增强模型的表达能力。在Spikformer中，MLP模块同样采用批归一化来稳定训练过程。最终，经过多个Spikformer编码器块堆叠，得到高维的脉冲序列表示。</p>
+<p>在模型的最后阶段，经过编码器块处理后的脉冲序列被送入线性分类头。线性分类头将高维脉冲序列映射到分类标签空间，生成最终的分类结果。这一步的输出可以用于各种任务，如图像分类或时序数据分析。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/06/6688d965d3dd8.webp" alt="SkipFormer"></p>
+<p>在SNN的基本原理中，脉冲神经元的膜电位随时间变化的动态过程可以用Leaky Integrate-and-Fire（LIF）模型描述，其微分方程如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/06/6688d9879261a.webp"></p>
+<p>在Spikformer中，脉冲自注意力机制（SSA）是关键组件之一。自注意力机制通过以下步骤计算输入序列的注意力权重：</p>
+<ul>
+<li><p>线性变换：将输入脉冲序列映射到查询（Query），键（Key）和值（Value）表示。</p>
+</li>
+<li><p>矩阵点积：计算查询和键之间的相似度，公式为：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/06/6688d9aa1382c.webp"></p>
+</li>
+<li><p>其中，Q是查询矩阵，K是键矩阵，V是值矩阵，dk是键的维度。通过矩阵点积计算得到的相似度矩阵经过缩放和软最大处理，生成归一化的注意力权重</p>
+<p>加权求和：将归一化的注意力权重与值矩阵相乘，生成新的脉冲序列表示。</p>
+</li>
+</ul>
+<h2 id="尝试实现"><a href="#尝试实现" class="headerlink" title="尝试实现"></a>尝试实现</h2><h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><ol>
+<li><p>硬件</p>
+<p>本地训练（Baseline模型训练）</p>
+<ul>
+<li><p>CPU: 13th Gen Intel(R) Core(TM) i5-13490F</p>
+</li>
+<li><p>GPU: NVIDIA GeForce RTX 4070 Ti SUPER</p>
+</li>
+</ul>
+<p>阿里云（Spikformer与SDTv2训练）</p>
+<ul>
+<li><p>CPU: Intel(R) Xeon(R) Platinum 8168 Processor</p>
+</li>
+<li><p>GPU: NVIDIA A10</p>
+</li>
+</ul>
+<p>AutoDL（Spikformer与SDTv2训练）</p>
+<ul>
+<li><p>CPU: Intel(R) Xeon(R) Platinum 8352V</p>
+</li>
+<li><p>GPU: 2 * NVIDIA GeForce RTX 4090</p>
+</li>
+</ul>
+</li>
+<li><p>软件</p>
+<p>高性能并行计算平台: NVIDIA CUDA</p>
+<ul>
+<li>CUDA提供了对NVIDIA GPU的直接访问，允许我们利用GPU的并行计算能力来加速深度学习模型的训练过程。</li>
+</ul>
+<p>机器学习框架: PyTorch</p>
+<ul>
+<li>PyTorch是一个开源的深度学习框架，提供了灵活且高效的张量计算和动态计算图支持，方便我们构建和训练复杂的深度学习模型。</li>
+</ul>
+<p>图片分类框架（Baseline模型选用）: mmpretrain</p>
+<ul>
+<li>mmpretrain是一个专注于图像分类任务的框架，提供了许多预训练模型和训练工具，使得Baseline模型的训练更加高效和便捷。</li>
+</ul>
+</li>
+</ol>
+<h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><p><strong>CIFAR-10数据集</strong></p>
+<p>CIFAR-10数据集是一个常用于图像分类任务的标准数据集。它由60,000张32×32的RGB彩色图片组成，这些图片分属于10个不同的类别。每个类别包含6,000张图片，类别包括飞机、汽车、鸟、猫、鹿、狗、青蛙、马、船和卡车。数据集进一步划分为训练集和测试集：</p>
+<ul>
+<li><p>训练集：50,000张图片，每个类别5,000张</p>
+</li>
+<li><p>测试集：10,000张图片，每个类别1,000张</p>
+</li>
+</ul>
+<p>CIFAR-10数据集因其规模适中和分类任务的多样性，成为评估图像分类算法性能的一个重要基准。</p>
+<p><strong>ILSVRC2012 (ImageNet)数据集</strong></p>
+<p>ILSVRC2012数据集，通常称为ImageNet数据集，是一个大规模的图像数据集，用于图像分类和物体检测任务。该数据集包含超过1,300,000张RGB彩色图片，分为1,000个类别。每个类别包含约1,300张图片。数据集同样分为训练集和测试集：</p>
+<ul>
+<li><p>训练集：1,300,000张图片，每个类别约1,300张</p>
+</li>
+<li><p>测试集：50,000张图片，每个类别50张</p>
+</li>
+</ul>
+<h3 id="Baseline训练"><a href="#Baseline训练" class="headerlink" title="Baseline训练"></a>Baseline训练</h3><p>在正式复现论文代码前，我们实现了基于残差模型的Baseline模型作为基准参考。该基准模型的详细配置和训练策略如下：</p>
+<p>在模型选型方面，我们选择了ResNet-101作为主干网络。ResNet-101是一种深度残差网络，通过引入残差连接，有效缓解了深层网络中的梯度消失问题，从而使得网络能够在更深的层次上进行训练和优化。在分类颈部分，我们采用了GlobalAveragePooling层。GlobalAveragePooling层将每个通道的特征图的平均值作为输出，从而减少参数数量，降低过拟合的风险，并提高模型的泛化能力。分类头方面，我们使用了LinearClsHead。LinearClsHead是一个简单的全连接层，用于将全局平均池化后的特征映射到最终的类别预测上。</p>
+<p>为了扩增数据量，提高模型的泛化能力，我们在训练过程中采用了多种数据增强技术。首先，我们使用了RandomResizedCrop，该技术通过随机裁剪并调整图片大小，有助于模型学习不同的尺度和视角的特征。其次，我们引入了RandomFlip，通过随机水平翻转图片，增加训练数据的多样性。此外，ColorJitter技术用于随机改变图片的亮度、对比度、饱和度和色调，使得模型对颜色变化更加鲁棒。为了进一步增加训练数据的多样性，我们使用了Mixup技术，通过将两张图片及其标签按一定比例混合，提供了一种正则化效果。最后，我们还采用了CutMix技术，将一张图片的部分区域替换为另一张图片的相应区域，从而进一步增加训练数据的多样性和模型的鲁棒性。</p>
+<p>在优化器和学习率策略方面，我们选择了Adam优化器。Adam优化器结合了动量和自适应学习率的方法，能够更快地收敛并且对学习率的选择不那么敏感。初始学习率设为0.001。在学习率策略上，我们使用了MultiStepLR。在训练的过程中，学习率在特定的训练轮数后进行衰减。具体地，学习率在第30、60、90轮时降低10倍，这样的策略有助于模型在初期快速收敛，同时在后期进行微调以达到更好的性能。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">model = <span class="built_in">dict</span>(</span><br><span class="line">    <span class="built_in">type</span>=<span class="string">'ImageClassifier'</span>,</span><br><span class="line">    backbone=<span class="built_in">dict</span>(</span><br><span class="line">        <span class="built_in">type</span>=<span class="string">'ResNet'</span>,</span><br><span class="line">        depth=<span class="number">101</span>,</span><br><span class="line">        num_stages=<span class="number">4</span>,</span><br><span class="line">        out_indices=(<span class="number">3</span>, ),</span><br><span class="line">        style=<span class="string">'pytorch'</span>),</span><br><span class="line">    neck=<span class="built_in">dict</span>(<span class="built_in">type</span>=<span class="string">'GlobalAveragePooling'</span>),</span><br><span class="line">    head=<span class="built_in">dict</span>(</span><br><span class="line">        <span class="built_in">type</span>=<span class="string">'LinearClsHead'</span>,</span><br><span class="line">        num_classes=<span class="number">100</span>,</span><br><span class="line">        in_channels=<span class="number">2048</span>,</span><br><span class="line">        loss=<span class="built_in">dict</span>(<span class="built_in">type</span>=<span class="string">'CrossEntropyLoss'</span>, loss_weight=<span class="number">1.0</span>),</span><br><span class="line">    ),</span><br><span class="line">    train_cfg=<span class="built_in">dict</span>(augments=[</span><br><span class="line">        <span class="built_in">dict</span>(<span class="built_in">type</span>=<span class="string">'Mixup'</span>, alpha=<span class="number">0.8</span>),</span><br><span class="line">        <span class="built_in">dict</span>(<span class="built_in">type</span>=<span class="string">'CutMix'</span>, alpha=<span class="number">1.0</span>),</span><br><span class="line">    ])</span><br><span class="line">)</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Spikformer模型复现"><a href="#Spikformer模型复现" class="headerlink" title="Spikformer模型复现"></a>Spikformer模型复现</h3><p>在复现论文提供的Spikformer源代码时，我们选择了以下参数配置：</p>
+<p>首先，输入图片的尺寸设定为224像素乘以224像素。这一尺寸与许多图像分类任务中的标准输入尺寸一致，有助于确保模型的通用性。Embedding尺寸被设定为512维，这意味着输入图片在经过初步处理后将被映射到一个512维的特征空间中。</p>
+<p>在Spikformer的结构中，我们使用了SPS Patch尺寸为16像素乘以16像素。这意味着输入图片将被划分为若干个16x16的补丁，每个补丁将被单独处理。Spikformer的层数设定为8层，这为模型提供了足够的深度，以便能够捕捉到图像中的复杂特征。每一层中的注意力头数目为8个，这允许模型能够在多个子空间中并行地关注不同的特征，从而提升模型的表现能力。</p>
+<p>MLP隐藏层的比例被设定为4倍，即2048维。这意味着在多层感知机（MLP）部分，隐藏层的维度是输入维度的四倍，这样的设计有助于增加模型的非线性表示能力，从而增强模型的分类性能。分类头部分，我们选择了一个线性分类头，用于将特征映射到最终的类别预测上。</p>
+<p>在优化器的选择上，我们使用了AdamW优化器。AdamW是一种结合了Adam优化器和权重衰减技术的优化器，能够有效防止过拟合，并且在许多任务中表现优异。初始学习率设定为0.0005，训练的前20轮作为预热轮，学习率从0.000001逐渐增大到0.0005，之后使用余弦学习率调度进行调整。这样的学习率策略有助于模型在训练初期稳定收敛，并在后期通过逐渐减小学习率来达到更好的性能表现。</p>
+<p>整个训练过程共进行了300轮。在数据增强技术方面，我们选用了与之前基准模型训练相同的技术，包括RandomResizedCrop、RandomFlip、ColorJitter、Mixup和CutMix等。这些数据增强技术能够有效扩充训练数据，提高模型的泛化能力。</p>
+<p>通过上述参数配置和训练策略，我们成功复现了论文中的Spikformer模型，并通过详细的训练和评估过程，确保模型能够达到预期的性能表现。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@register_model</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">spikformer</span>(<span class="params">pretrained=<span class="literal">False</span>, **kwargs</span>):</span><br><span class="line">    model = Spikformer(</span><br><span class="line">        img_size_h=<span class="number">224</span>, img_size_w=<span class="number">224</span>,</span><br><span class="line">        patch_size=<span class="number">16</span>, embed_dims=<span class="number">512</span>, num_heads=<span class="number">8</span>, mlp_ratios=<span class="number">4</span>,</span><br><span class="line">        in_channels=<span class="number">3</span>, num_classes=<span class="number">100</span>, qkv_bias=<span class="literal">False</span>,</span><br><span class="line">        norm_layer=partial(nn.LayerNorm, eps=<span class="number">1e-6</span>), depths=<span class="number">8</span>, sr_ratios=<span class="number">1</span>,</span><br><span class="line">        **kwargs</span><br><span class="line">    )</span><br><span class="line">    model.default_cfg = _cfg()</span><br><span class="line">    <span class="keyword">return</span> model</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="SDTv2模型"><a href="#SDTv2模型" class="headerlink" title="SDTv2模型"></a>SDTv2模型</h3><p>运行SDTv2模型源代码时，我们选择了以下参数配置，以确保模型能够在不同的任务中表现出色：</p>
+<p>首先，输入图片的尺寸设定为224像素乘以224像素。这一尺寸与许多标准图像分类任务的输入尺寸一致，确保模型能够处理常见的数据格式。在Embedding尺寸方面，SDTv2模型采用了多种不同的维度：128维、256维、512维和640维。不同的Embedding尺寸允许模型在不同的层次上捕捉到图像的多尺度特征，从而提高模型的整体表现。</p>
+<p>与Spikformer类似，SPS Patch的尺寸设定为16像素乘以16像素。这意味着输入图片将被分割成若干个16x16的补丁，每个补丁将被单独处理，以提取局部特征。SDTv2模型的深度为8层，每层包含8个注意力头。这些注意力头允许模型在多个子空间中并行地关注不同的特征，从而提高模型的特征表示能力。</p>
+<p>MLP隐藏层的比例设定为4倍，这意味着在多层感知机（MLP）部分，隐藏层的维度是输入维度的四倍。这种设计有助于增强模型的非线性表示能力，从而提高模型的分类性能。分类头部分，我们同样选择了一个线性分类头，用于将特征映射到最终的类别预测上。</p>
+<p>在优化器的选择上，我们使用了AdamW优化器。AdamW结合了Adam优化器和权重衰减技术，能够有效防止过拟合，并在许多任务中表现优异。初始学习率设定为0.0005，前20轮作为预热轮，学习率从0.000001逐渐增大到0.0005，之后使用余弦学习率调度进行调整。这种学习率策略有助于模型在训练初期稳定收敛，并在后期通过逐渐减小学习率来达到更好的性能表现。</p>
+<p>整个训练过程共进行了200轮。数据增强技术方面，我们选用了与之前基准模型训练相同的技术，包括RandomResizedCrop、RandomFlip、ColorJitter、Mixup和CutMix等。这些数据增强技术能够有效扩充训练数据，提高模型的泛化能力。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">CUDA_VISIBLE_DEVICES=<span class="number">0</span>,<span class="number">1</span> torchrun --standalone --nproc_per_node=<span class="number">2</span> \</span><br><span class="line">  main_finetune.py \</span><br><span class="line">  --batch_size <span class="number">64</span> \</span><br><span class="line">  --blr <span class="number">6e-4</span> \</span><br><span class="line">  --warmup_epochs <span class="number">10</span> \</span><br><span class="line">  --epochs <span class="number">200</span> \</span><br><span class="line">  --model metaspikformer_8_512 \</span><br><span class="line">  --data_path /root/autodl-tmp/ ILSVRC2012 \</span><br><span class="line">  --output_dir outputs/55M \</span><br><span class="line">  --log_dir outputs/55M \</span><br><span class="line">  --model_mode ms \</span><br><span class="line">  --dist_eval</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h2><h3 id="评估结果"><a href="#评估结果" class="headerlink" title="评估结果"></a>评估结果</h3><table>
+<thead>
+<tr>
+<th align="center"><strong>模型</strong></th>
+<th align="center"><strong>数据集</strong></th>
+<th align="center"><strong>Top-1 (%)</strong></th>
+<th align="center"><strong>Top-5 (%)</strong></th>
+<th align="center"><strong>轮数</strong> <strong>(epoch)</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ResNet-101</td>
+<td align="center">CIFAR-10</td>
+<td align="center">80.99</td>
+<td align="center">/</td>
+<td align="center">100</td>
+</tr>
+<tr>
+<td align="center">Spikformer</td>
+<td align="center">CIFAR-10</td>
+<td align="center"><strong>94.82</strong></td>
+<td align="center"><strong>99.62</strong></td>
+<td align="center">300</td>
+</tr>
+<tr>
+<td align="center">ResNet-101</td>
+<td align="center">ImageNet-100</td>
+<td align="center">72.90</td>
+<td align="center">91.29</td>
+<td align="center">200</td>
+</tr>
+<tr>
+<td align="center">ResNet-101(aug)</td>
+<td align="center">ImageNet-100</td>
+<td align="center">78.26</td>
+<td align="center">92.70</td>
+<td align="center">200</td>
+</tr>
+<tr>
+<td align="center">Spikformer</td>
+<td align="center">ImageNet-100</td>
+<td align="center">82.80</td>
+<td align="center"><strong>96.26</strong></td>
+<td align="center">200</td>
+</tr>
+<tr>
+<td align="center">SDTv2</td>
+<td align="center">ImageNet-100</td>
+<td align="center"><strong>84.46</strong></td>
+<td align="center">95.82</td>
+<td align="center">200</td>
+</tr>
+</tbody></table>
+<h3 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h3><p>在CIFAR-10数据集上，我们比较了ResNet-101和Spikformer的表现。ResNet-101在没有数据增强的情况下，经过100轮训练，达到了80.99%的Top-1准确率。而Spikformer在经过300轮训练后，取得了显著提升，达到了94.82%的Top-1准确率和99.62%的Top-5准确率。这个结果表明Spikformer在处理小规模图像数据集时，表现出色，显著优于传统的卷积神经网络ResNet-101。</p>
+<p>在ImageNet-100数据集上，我们对比了ResNet-101、ResNet-101（使用数据增强技术）和两种新的架构模型Spikformer和SDTv2。结果显示，标准的ResNet-101在没有数据增强的情况下，经过200轮训练，达到了72.90%的Top-1准确率和91.29%的Top-5准确率。加入数据增强技术后，ResNet-101的表现有所提升，达到了78.26%的Top-1准确率和92.70%的Top-5准确率。</p>
+<p>Spikformer在ImageNet-100数据集上的表现比ResNet-101更为优越。经过200轮训练，Spikformer达到了82.80%的Top-1准确率和96.26%的Top-5准确率。相比于使用数据增强的ResNet-101，Spikformer在Top-1和Top-5准确率上分别提升了4.54%和3.56%。</p>
+<p>SDTv2则表现得更加出色。在相同的训练条件下，SDTv2在ImageNet-100数据集上达到了84.46%的Top-1准确率和95.82%的Top-5准确率。这一结果表明，SDTv2在处理大规模图像数据集时，能够提供更高的分类准确率，超过了Spikformer和ResNet-101。</p>
+<p>我们的实验结果表明，Spikformer和SDTv2在处理图像分类任务时，表现优于传统的卷积神经网络ResNet-101。特别是在使用数据增强技术和优化训练策略后，Spikformer和SDTv2展示了更强的特征提取和分类能力。Spikformer在小规模数据集CIFAR-10上的出色表现，以及SDTv2在大规模数据集ImageNet-100上的优越性能，证明了它们在不同场景下的广泛适用性。未来，我们可以进一步优化这些模型，探索它们在更多任务和数据集上的潜力。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在本项目中，我们着重研究并复现了Spikformer模型，通过与传统的卷积神经网络ResNet-101以及另一种新型架构SDTv2进行对比实验，验证了Spikformer在图像分类任务中的性能优势。我们选用了CIFAR-10和ImageNet-100两个数据集，采用不同的训练策略和优化方法，全面评估了各个模型的表现。</p>
+<p>在CIFAR-10数据集上，Spikformer显著超过了传统的ResNet-101模型。经过300轮训练，Spikformer达到了94.82%的Top-1准确率和99.62%的Top-5准确率，远高于ResNet-101的80.99%（Top-1准确率）。这表明Spikformer在处理小规模图像数据时，具有更强的特征提取和分类能力。同时，这一结果展示了Spikformer在小规模数据集上的卓越表现。</p>
+<p>在ImageNet-100数据集上，我们发现数据增强技术对ResNet-101的性能有显著提升。在没有数据增强的情况下，ResNet-101的Top-1和Top-5准确率分别为72.90%和91.29%；而使用数据增强后，准确率提升至78.26%（Top-1）和92.70%（Top-5）。这说明数据增强技术能够有效提高模型的泛化能力。然而，即使在使用数据增强的情况下，ResNet-101的表现依然不及Spikformer。</p>
+<p>在ImageNet-100数据集上，Spikformer同样展示了优越的性能。经过200轮训练，Spikformer的Top-1准确率为82.80%，Top-5准确率为96.26%。相较于使用数据增强的ResNet-101，Spikformer在Top-1和Top-5准确率上分别提升了4.54%和3.56%。这一结果表明，Spikformer在处理大规模数据时依旧具备强大的学习和分类能力。同时，SDTv2在相同数据集上的表现也十分出色，其Top-1准确率为84.46%，Top-5准确率为95.82%，略高于Spikformer，但差距不大。</p>
+<p>通过这些实验，我们验证了Spikformer在图像分类任务中的优越性能，特别是在处理不同规模的数据集时，均展现出强大的特征提取和分类能力。与传统的卷积神经网络相比，Spikformer在多个方面均具有显著的优势。</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><div class="liushen-tag-link"><a class="tag-Link" target="_blank" href="/go.html?u=aHR0cHM6Ly9vcGVucmV2aWV3Lm5ldC9mb3J1bT9pZD1mckU0ZlV3el9o" rel="external nofollow noopener noreferrer">
+    <div class="tag-link-tips">🪧引用站外地址，不保证站点的可用性和安全性</div>
+    <div class="tag-link-bottom">
+        <div class="tag-link-left" style="background-image: url(https://cdn.qyliu.top/i/2024/07/27/66a4632bbf06e.webp);"></div>
+        <div class="tag-link-right">
+            <div class="tag-link-title">Spikformer: When Spiking Neural Network Meets Transformer</div>
+            <div class="tag-link-sitename">openreview.net</div>
+        </div>
+        <i class="fa-solid fa-angle-right"></i>
+    </div>
+    </a></div>
+
+<div class="liushen-tag-link"><a class="tag-Link" target="_blank" href="/go.html?u=aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzI0MDEuMDIwMjA=" rel="external nofollow noopener noreferrer">
+    <div class="tag-link-tips">🪧引用站外地址，不保证站点的可用性和安全性</div>
+    <div class="tag-link-bottom">
+        <div class="tag-link-left" style="background-image: url(https://cdn.qyliu.top/i/2024/07/27/66a4632bbf06e.webp);"></div>
+        <div class="tag-link-right">
+            <div class="tag-link-title">Spikformer V2: Join the High Accuracy Club on ImageNet with an SNN Ticket</div>
+            <div class="tag-link-sitename">arxiv.org</div>
+        </div>
+        <i class="fa-solid fa-angle-right"></i>
+    </div>
+    </a></div>
+
+<div class="liushen-tag-link"><a class="tag-Link" target="_blank" href="/go.html?u=aHR0cHM6Ly9naXRodWIuY29tL1pLLVpob3Uvc3Bpa2Zvcm1lcg==" rel="external nofollow noopener noreferrer">
+    <div class="tag-link-tips">🪧引用站外地址，不保证站点的可用性和安全性</div>
+    <div class="tag-link-bottom">
+        <div class="tag-link-left" style="background-image: url(https://cdn.qyliu.top/i/2024/07/27/66a461a3098aa.webp);"></div>
+        <div class="tag-link-right">
+            <div class="tag-link-title">ICLR 2023 Spikformer: When Spiking Neural Network Meets Transformer</div>
+            <div class="tag-link-sitename">github.com@ZK-Zhou</div>
+        </div>
+        <i class="fa-solid fa-angle-right"></i>
+    </div>
+    </a></div>
+
+<div class="liushen-tag-link"><a class="tag-Link" target="_blank" href="/go.html?u=aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNzg2NDQ0OS9hcnRpY2xlL2RldGFpbHMvMTI2NzcyODMw" rel="external nofollow noopener noreferrer">
+    <div class="tag-link-tips">🪧引用站外地址，不保证站点的可用性和安全性</div>
+    <div class="tag-link-bottom">
+        <div class="tag-link-left" style="background-image: url(https://cdn.qyliu.top/i/2024/07/27/66a461b627dc2.webp);"></div>
+        <div class="tag-link-right">
+            <div class="tag-link-title">一文通俗入门·脉冲神经网络(SNN)·第三代神经网络</div>
+            <div class="tag-link-sitename">Blog.csdn.net@玮涛无敌</div>
+        </div>
+        <i class="fa-solid fa-angle-right"></i>
+    </div>
+    </a></div>
+
+<div class="liushen-tag-link"><a class="tag-Link" target="_blank" href="/go.html?u=aHR0cHM6Ly9kZXZlbG9wZXIudm9sY2VuZ2luZS5jb20vYXJ0aWNsZXMvNzM4MjI2MDM4NzY0NDcwMjc3MQ==" rel="external nofollow noopener noreferrer">
+    <div class="tag-link-tips">🪧引用站外地址，不保证站点的可用性和安全性</div>
+    <div class="tag-link-bottom">
+        <div class="tag-link-left" style="background-image: url(https://cdn.qyliu.top/i/2024/07/27/66a4632bbf06e.webp);"></div>
+        <div class="tag-link-right">
+            <div class="tag-link-title">神经网络算法 - 一文搞懂SNN（脉冲神经网络）</div>
+            <div class="tag-link-sitename">developer.volcengine.com@架构师带你玩转AI</div>
+        </div>
+        <i class="fa-solid fa-angle-right"></i>
+    </div>
+    </a></div>
+
+<h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><ul>
+<li>以上内容仅供学术研究和学习交流使用，如有侵权，请联系我进行删除处理。</li>
+<li>若有任何问题或需要进一步讨论，请随时联系我的邮箱：<a href="mailto:01@liushen.fun">01@liushen.fun</a>。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.liushen.fun/">Willow-God</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.liushen.fun/posts/67189760/">https://blog.liushen.fun/posts/67189760/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.liushen.fun" target="_blank">LiuShen's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><a class="post-meta__tags" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">神经网络</a><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></div><div class="post-share"><div class="social-share" data-image="https://cdn.qyliu.top/i/2024/07/06/6688d4b63b50f.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="/pluginsSrc/butterfly-extsrc/sharejs/dist/css/share.min.css?v=1.1.3" media="print" onload="this.media='all'"><script src="/pluginsSrc/butterfly-extsrc/sharejs/dist/js/social-share.min.js?v=1.1.3" defer=""></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>来😍鼠标过来一点~</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/config/img/wechat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/config/img/wechat.png" alt="微信"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/config/img/wechat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/config/img/wechat.png" alt="支付宝"></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="prev-post pull-left" href="/posts/13e6e155/" title="东软软件园实习日记"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/01/66823117502e0.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">东软软件园实习日记</div></div></a><a class="next-post pull-right" href="/posts/4dc716ec/" title="Friend-Circle-Lite:轻量友链朋友圈"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/19/6699436fe02ec.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Friend-Circle-Lite:轻量友链朋友圈</div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a href="/posts/57a50b33/" title="DCAMNet钢铁缺陷检测网络复现"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/03/22/65fc5eceae5bd.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-01</div><div class="title">DCAMNet钢铁缺陷检测网络复现</div></div></a><a href="/posts/2229c0f4/" title="CNN+transformer入门学习"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic2.zhimg.com/v2-e3b4212c09df05a0484da4eb5392a0d9_r.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-05</div><div class="title">CNN+transformer入门学习</div></div></a><a href="/posts/b1b54fd/" title="机器学习笔记"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic2.zhimg.com/v2-e3b4212c09df05a0484da4eb5392a0d9_r.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-01</div><div class="title">机器学习笔记</div></div></a></div></div><hr class="custom-hr"><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/03/21/65fc570ca9fe7.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info-name">Willow-God</div><div class="author-info-description">清羽 〄 飞扬</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">69</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/willow-god"><i class="fab fa-github"></i><span>Follow Me 🛫</span></a><div class="card-info-social-icons"><a class="social-icon" href="mailto:01@liushen.fun" target="_blank" title="Email"><i class="fa-solid fa-envelope"></i></a><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2411457922&amp;site=qq&amp;menu=yes" target="_blank" title="QQ：2411457922"><i class="fa-brands fa-qq"></i></a><a class="social-icon" href="https://wakatime.com/@LiuShen" target="_blank" title="Wakatime"><i class="fa-solid fa-chart-column"></i></a><a class="social-icon" href="https://blog.liushen.fun/atom.xml" target="_blank" title="rss地址"><i class="fa-solid fa-rss"></i></a></div></div><div class="card-widget" id="card-poem"><div id="poem_sentence"></div><div id="poem_info"><div id="poem_dynasty"></div><div id="poem_author"></div></div></div><script src="/js/jinrishici.js" charset="utf-8"></script><script type="text/javascript">jinrishici.load(function(result) {
+var sentence = document.querySelector("#poem_sentence")
+var author = document.querySelector("#poem_author")
+var dynasty = document.querySelector("#poem_dynasty")
+
+var sentenceText = result.data.content
+sentenceText = sentenceText.substr(0, sentenceText.length - 1);
+sentence.innerHTML = sentenceText
+dynasty.innerHTML = result.data.origin.dynasty
+author.innerHTML = result.data.origin.author + '《' + result.data.origin.title + '》'
+});</script><div class="card-widget card-announcement"><div class="item-headline"><i class="fa fa-user"></i><span>欢迎来访者</span></div><div id="welcome-info"></div><script src="/js/txmap.js"></script><script data-pjax="data-pjax">var longitude="108.546767";
+var Latitude="34.579480";
+var txkey="44BBZ-IZPLZ-V6PXP-ZYLRT-JKFH3-DOFJ6";
+var ipLoacation;
+window.onload = () => {welcometxmap()};
+document.addEventListener("pjax:complete", welcometxmap());</script></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p><strong>博客架构概览：</strong><br>⚙️框架核心：Hexo<br>🕹️界面设计：Butterfly<br>🔮安全保障：长亭雷池<br>🔩管理工具：宝塔面板，1Panel<br>🎰服务器支持：阿里云，腾讯云<br>🎲CDN加速：多吉云，无畏云<br><strong>快捷跳转地址：</strong><br>👻博客主站：<a href="https://blog.liushen.fun">blog.liushen.fun</a><br>😶‍🌫️博客分栏：<a target="_blank" rel="noopener" href="https://www.qingyang.eu.org">qingyang.eu.org</a><br>🤖个人导航：<a target="_blank" rel="noopener" href="https://www.liushen.fun">www.liushen.fun</a><br></p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/config/img/notice.gif" alt="可爱捏" title="可爱捏" style="width:100%; border-radius:10px;"></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A2%8E%E7%A2%8E%E5%BF%B5"><span class="toc-text">碎碎念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%84%89%E5%86%B2%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="toc-text">脉冲神经网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Transformer%E6%A8%A1%E5%9E%8B"><span class="toc-text">Transformer模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spikformer"><span class="toc-text">Spikformer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-text">原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%84%89%E5%86%B2%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-1"><span class="toc-text">脉冲神经网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6-Transformer"><span class="toc-text">注意力机制&amp;Transformer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spikformer-1"><span class="toc-text">Spikformer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%9D%E8%AF%95%E5%AE%9E%E7%8E%B0"><span class="toc-text">尝试实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-text">环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-text">数据集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Baseline%E8%AE%AD%E7%BB%83"><span class="toc-text">Baseline训练</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spikformer%E6%A8%A1%E5%9E%8B%E5%A4%8D%E7%8E%B0"><span class="toc-text">Spikformer模型复现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SDTv2%E6%A8%A1%E5%9E%8B"><span class="toc-text">SDTv2模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="toc-text">结果展示</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%84%E4%BC%B0%E7%BB%93%E6%9E%9C"><span class="toc-text">评估结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90"><span class="toc-text">结果分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-text">参考文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A3%B0%E6%98%8E"><span class="toc-text">声明</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/4dc716ec/" title="Friend-Circle-Lite:轻量友链朋友圈"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/19/6699436fe02ec.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Friend-Circle-Lite:轻量友链朋友圈"></a><div class="content"><a class="title" href="/posts/4dc716ec/" title="Friend-Circle-Lite:轻量友链朋友圈">Friend-Circle-Lite:轻量友链朋友圈</a><time datetime="2024-08-11T16:02:00.000Z" title="更新于 2024-08-12 00:02:00">2024-08-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/a64defb4/" title="魔改笔记七：分类条及外链卡片"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/08/10/66b74df1ab511.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="魔改笔记七：分类条及外链卡片"></a><div class="content"><a class="title" href="/posts/a64defb4/" title="魔改笔记七：分类条及外链卡片">魔改笔记七：分类条及外链卡片</a><time datetime="2024-08-09T17:40:00.000Z" title="更新于 2024-08-10 01:40:00">2024-08-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/159f1aa5/" title="域名迁移至 blog.liushen.fun"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/08/10/66b6479e1d33c.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="域名迁移至 blog.liushen.fun"></a><div class="content"><a class="title" href="/posts/159f1aa5/" title="域名迁移至 blog.liushen.fun">域名迁移至 blog.liushen.fun</a><time datetime="2024-08-09T08:00:00.000Z" title="更新于 2024-08-09 16:00:00">2024-08-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/3850e950/" title="CloudFlare实用项目推荐"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/31/66a922cb9adcc.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CloudFlare实用项目推荐"></a><div class="content"><a class="title" href="/posts/3850e950/" title="CloudFlare实用项目推荐">CloudFlare实用项目推荐</a><time datetime="2024-07-31T17:32:00.000Z" title="更新于 2024-08-01 01:32:00">2024-08-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap" style="background: transparent"><div id="footer_icons"><div><a class="icon_link" rel="noopener external nofollow" href="https://www.qyliu.top/" title="导航站点" target="_blank"><i class="fa-solid fa-compass"></i></a><a class="icon_link" rel="noopener external nofollow" href="https://admin.qidian.qq.com/static_proxy/b2b-qq/wpa-link/index.html#/person?uin=2411457922" title="联系QQ" target="_blank"><i class="fa-brands fa-qq"></i></a><a class="icon_link" rel="noopener external nofollow" href="https://github.com/willow-god" title="我的github主页" target="_blank"><i class="fa-brands fa-github"></i></a><a class="icon_link" rel="noopener external nofollow" href="mailto:01@liushen.fun" title="发送邮件至博主邮箱" target="_blank"><i class="fa-solid fa-envelope"></i></a></div><img class="footer_logo" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/12/663f9fc48820a.png" onclick="btf.scrollToDest(0,500)" title="返回顶部"><div><a class="icon_link" rel="noopener external nofollow" href="https://wakatime.com/@LiuShen" title="Wikitime" target="_blank"><i class="fa-solid fa-clock"></i></a><a class="icon_link" rel="noopener external nofollow" href="https://gitlab.com/" title="gitlab" target="_blank"><i class="fa-brands fa-gitlab"></i></a><a class="icon_link" href="/shuoshuo/" title="日常说说" data-pjax-state="data-pjax-state"><i class="fa-solid fa-file-pen"></i></a><a class="icon_link" href="/comment/" title="留言板" data-pjax-state="data-pjax-state"><i class="fa-solid fa-comment"></i></a></div></div><div id="footer_content"><div class="footer-group"><h3 class="footer-title">关于本站</h3><div class="footer-links"><a class="footer-item" target="_blank" href="https://www.qyliu.top/">导航站点</a><a class="footer-item" href="/shuoshuo/">日常说说</a><a class="footer-item" target="_blank" href="https://um.liushen.fun/share/G8C2aR0IszHE5VBl/blog.liushen.fun">访客信息</a><a class="footer-item" target="_blank" href="https://m.liushen.fun/">盐焗星球</a><a class="footer-item" target="_blank" href="https://listen.qyliu.top/">在线状态</a><a class="footer-item" href="/subscribe/">订阅本站</a></div></div><div class="footer-group"><h3 class="footer-title">加入组织</h3><div class="footer-links"><a class="footer-item" target="_blank" href="https://www.boyouquan.com/home">博友圈</a><a class="footer-item" target="_blank" href="https://boke.lu/">博客录</a><a class="footer-item" target="_blank" href="https://blogwe.com/">博客我们</a><a class="footer-item" target="_blank" href="https://firewood.news/">积薪站点</a><a class="footer-item" target="_blank" href="https://bf.zzxworld.com/">发现博客</a><a class="footer-item" target="_blank" href="https://ourblo.gs/">OurBlogs</a></div></div><div class="footer-group"><h3 class="footer-title">文章整理</h3><div class="footer-links"><a class="footer-item" href="/categories/博客管理/">博客管理</a><a class="footer-item" href="/categories/学习资料/">学习资料</a><a class="footer-item" href="/categories/日常分享/">日常分享</a><a class="footer-item" href="/achieve/">时光卷轴</a><a class="footer-item" href="/charts/">文章通览</a><a class="footer-item" href="/categories/">查看全部</a></div></div><div class="footer-group"><h3 class="footer-title">文章标签</h3><div class="footer-links"><a class="footer-item" href="/tags/JavaScript/">JS知识</a><a class="footer-item" href="/tags/Hexo/">本站框架</a><a class="footer-item" href="/tags/机器学习/">机器学习</a><a class="footer-item" href="/tags/日记/">个人日记</a><a class="footer-item" href="/tags/CSS/">CSS知识</a><a class="footer-item" href="/tags/">查看全部</a></div></div><div class="footer-group"><h3 class="footer-title">自建工具</h3><div class="footer-links"><a class="footer-item" target="_blank" rel="noopener" href="https://docs_s.tianli0.top/">必应AI</a><a class="footer-item" target="_blank" rel="noopener" href="https://chat.qyliu.top/">NextGPT</a><a class="footer-item" target="_blank" rel="noopener" href="https://draw.qyliu.top/">随心画板</a><a class="footer-item" target="_blank" rel="noopener" href="https://mindmap.qyliu.top/">思维导图</a><a class="footer-item" target="_blank" rel="noopener" href="https://ittools.qyliu.top/">IT工具箱</a><a class="footer-item" target="_blank" rel="noopener" href="https://calcium.qyliu.top/">在线计算</a></div></div><div class="footer-group" id="friend-links-in-footer"><h3 class="footer-title">友链<button title="换一批" href="javascript:;" onclick="liushen.randomLink()"><i class="fa-solid fa-rotate-right"></i></button></h3><div class="footer-links"><a class="footer-item" target="_blank" href="https://blog.liushen.fun">测试1</a><a class="footer-item" target="_blank" href="https://blog.liushen.fun">测试2</a><a class="footer-item" target="_blank" href="https://blog.liushen.fun">测试3</a><a class="footer-item" target="_blank" href="https://blog.liushen.fun">测试4</a><a class="footer-item" target="_blank" href="https://blog.liushen.fun">测试5</a><a class="footer-item" href="/link/" data-pjax-state="data-pjax-state">查看更多</a></div></div></div><div id="footer-bottom"><div class="footer-bottom-content"><div class="footer-bottom-left"><span class="copyright">©2021 - 2024 By <a target="_blank" rel="noopener" href="https://blog.liushen.fun/about/" title="点击访问&quot;LiuShen&quot;的主页" style="margin-left:5px">LiuShen</a></span><div><a class="footer-bottom-link" target="_blank" href="https://beian.miit.gov.cn/" rel="noopener external nofollow" title="工信部备案号">陕ICP备2024028531号</a><a class="footer-bottom-link" target="_blank" href="https://beian.mps.gov.cn/#/query/webSearch?code=61011602000637" rel="noopener external nofollow" title="公安备案号">陕公网安备61011602000637号</a></div></div><div class="footer-bottom-right"> <div id="runtime" title="本站运行时间">本站已苟活：0 天 0 时 0 分 0 秒</div><div> <a class="footer-bottom-link" target="_blank" href="https://www.dogecloud.com/" rel="noopener external nofollow" title="本站通过多吉云CDN提供站点加速">多吉云CDN</a><a class="footer-bottom-link" target="_blank" href="https://hexo.io/zh-cn/" rel="noopener external nofollow" title="本站使用Hexo架构搭建而成">Hexo静态框架</a><a class="footer-bottom-link" target="_blank" href="https://butterfly.js.org/" rel="noopener external nofollow" title="本站由Butterfly主题魔改而成">Butterfly主题</a></div></div></div></div></div><script>if (!window.liushen) {
+  window.liushen = {
+    saveData: (key, data) => {
+      localStorage.setItem(key, JSON.stringify({
+        time: Date.now(),
+        data: data
+      }));
+    },
+
+    loadData: (key, validTimeInMinutes) => {
+      let storedData = JSON.parse(localStorage.getItem(key));
+      if (storedData) {
+        let elapsedTime = Date.now() - storedData.time;
+        if (elapsedTime >= 0 && elapsedTime < validTimeInMinutes * 60000) {
+          return storedData.data;
+        }
+      }
+      return null;
+    },
+
+    runtime: () => {
+      const formatTime = (unit) => unit > 9 ? unit : "0" + unit;
+      const startTime = new Date('2021/12/12 01:27:36').getTime();
+      const currentTime = Date.now();
+      let elapsedTimeInSeconds = Math.round((currentTime - startTime) / 1000);
+
+      let runtimeText = "本站已苟活：";
+      if (elapsedTimeInSeconds >= 86400) {
+        runtimeText += `${formatTime(Math.floor(elapsedTimeInSeconds / 86400))} 天 `;
+        elapsedTimeInSeconds %= 86400;
+      }
+      if (elapsedTimeInSeconds >= 3600) {
+        runtimeText += `${formatTime(Math.floor(elapsedTimeInSeconds / 3600))} 时 `;
+        elapsedTimeInSeconds %= 3600;
+      }
+      if (elapsedTimeInSeconds >= 60) {
+        runtimeText += `${formatTime(Math.floor(elapsedTimeInSeconds / 60))} 分 `;
+        elapsedTimeInSeconds %= 60;
+      }
+      runtimeText += `${formatTime(elapsedTimeInSeconds)} 秒`;
+
+      const runtimeElement = document.getElementById("runtime");
+      if (runtimeElement) {
+        runtimeElement.innerHTML = runtimeText;
+      }
+      setTimeout(window.liushen.runtime, 1000);
+    },
+
+    randomLink: () => {
+      let linksData = window.liushen.loadData("links", 30);
+      if (linksData) {
+        let linkElements = document.querySelectorAll("#friend-links-in-footer .footer-item");
+        if (!linkElements.length) return;
+
+        for (let i = 0; i < linkElements.length; i++) {
+          let randomIndex = Math.floor(Math.random() * linksData.length);
+          linkElements[i].innerText = linksData[randomIndex].name;
+          linkElements[i].href = linksData[randomIndex].link;
+          linksData.splice(randomIndex, 1);
+        }
+      } else {
+        fetch("/flink_count.json")
+          .then(response => response.json())
+          .then(data => {
+            window.liushen.saveData("links", data.link_list);
+            window.liushen.randomLink();
+          });
+      }
+    }
+  };
+}
+
+if (true) {
+  window.liushen.randomLink();
+  document.addEventListener("DOMContentLoaded", window.liushen.randomLink);
+  window.liushen.runtime();
+} else {
+  window.liushen.randomLink();
+  window.liushen.runtime();
+}</script></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><a class="icon-V hidden" onclick="switchNightMode()" title="浅色和深色模式转换"><svg width="25" height="25" viewBox="0 0 1024 1024"><use id="modeicon" xlink:href="#icon-moon"></use></svg></a><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="cat" onclick="toggleLive2dVisibility()" title="小猫显隐"><i class="fa-solid fa-cat"></i></button><button id="fullscreen" onclick="toggleFullScreen()" title="全屏切换"><i class="fa-solid fa-expand"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="fa-solid fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="fa-solid fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="fa-solid fa-arrow-rotate-right"></i></div><div class="rightMenu-item" id="menu-home"><i class="fa-solid fa-house"></i></div></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" id="copy" href="javascript:rm.copySelect();"><i class="fa-solid fa-copy"></i><span>复制选中文字</span></a><a class="rightMenu-item" id="reply" href="javascript:rm.replySelect();"><i class="fa-regular fa-comment"></i><span>评论选中段落</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" href="/archives/"><i class="fa-solid fa-archive"></i><span>文章时间线</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分大类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章小标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuNormal"><a class="rightMenu-item menu-link" id="menu-radompage" href="/comment/"><i class="fa-solid fa-shoe-prints"></i><span>随心留言板</span></a><div class="rightMenu-item" id="menu-translate"><i class="fa-solid fa-earth-asia"></i><span>繁简模式切换</span></div><div class="rightMenu-item" id="menu-darkmode"><i class="fa-solid fa-moon"></i><span>切换亮暗模式</span></div><div class="rightMenu-item" id="menu-live2dvisibility"><i class="fa-solid fa-cat"></i><span>小猫显示隐藏</span></div><div class="rightMenu-item" id="menu-print"><i class="fa-solid fa-print fa-fw"></i><span>打印整个页面</span></div><a class="rightMenu-item menu-link" id="statement" href="/statement/"><i class="fa-regular fa-copyright fa-fw"></i><span>网站声明</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js?v=5.0.0"></script><script src="/js/main.js?v=5.0.0"></script><script src="/js/jquery-3.7.1.slim.min.js?v=5.0.0"></script><script src="/js/others.js?v=5.0.0"></script><script src="/js/echarts.min.js?v=5.0.0"></script><script src="/js/rightmenu.js?v=5.0.0"></script><script src="/js/tw_cn.js?v=5.0.0"></script><script src="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.umd.js?v=5.0.36"></script><script src="/pluginsSrc/instant.page/instantpage.js?v=5.2.0" type="module"></script><script src="/pluginsSrc/vanilla-lazyload/dist/lazyload.iife.min.js?v=19.1.3"></script><div class="js-pjax"><script>(() => {
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.qyliu.top',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.qyliu.top',
+      region: '',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(init,0)
+    else btf.getScript('/pluginsSrc/twikoo/dist/twikoo.all.min.js?v=1.6.38').then(init)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[aside.card_aside.card_aside.card_newest_comments.code]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo.qyliu.top',
+        region: '',
+        pageSize: 5,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        btf.saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      btf.getScript('/pluginsSrc/twikoo/dist/twikoo.all.min.js?v=1.6.38').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = btf.saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  btf.addGlobalFn('pjaxComplete', newestCommentInit, 'twikoo_newestComment')
+})</script><script src="/config/memos/memos.js"></script><canvas class="fireworks" mobile="false"></canvas><script src="/pluginsSrc/butterfly-extsrc/dist/fireworks.min.js?v=1.1.3"></script><script src="/pluginsSrc/pjax/pjax.min.js?v=0.2.8"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+const triggerPjaxFn = (val) => {
+  if (!val) return
+  Object.values(val).forEach(fn => { fn() })
+}
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjaxSendOnce')
+  btf.removeGlobalFnEvent('themeChange')
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  triggerPjaxFn(window.globalFn.pjaxSend)
+})
+
+document.addEventListener('pjax:complete', () => {
+  btf.removeGlobalFnEvent('pjaxCompleteOnce')
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  triggerPjaxFn(window.globalFn.pjaxComplete)
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async="" data-pjax="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="/pluginsSrc/algoliasearch/dist/algoliasearch-lite.umd.js?v=4.24.0"></script><script src="/pluginsSrc/instantsearch.js/dist/instantsearch.production.min.js?v=4.73.3"></script><script src="/js/search/algolia.js?v=5.0.0"></script></div></div><!-- hexo injector body_end start --><script data-pjax="">
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/a64defb4/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/08/10/66b74df1ab511.webp" alt="" onerror="this.src=/img/error-page.png; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-10</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/a64defb4/&quot;);" href="javascript:void(0);" alt="">魔改笔记七：分类条及外链卡片</a><div class="blog-slider__text">虽然说域名换了几乎等于从头开始，但是仍然浇不灭我对于网站的热情，该进行的还是得进行。很久都没有总结魔改了，这篇文章就将最近魔改最大的几个部分进行记录，同时对有需要的朋友提供帮助。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/a64defb4/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/159f1aa5/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/08/10/66b6479e1d33c.webp" alt="" onerror="this.src=/img/error-page.png; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-09</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/159f1aa5/&quot;);" href="javascript:void(0);" alt="">域名迁移至 blog.liushen.fun</a><div class="blog-slider__text">近期遇见了一个很烦人的事情，bing的所有搜索结果全部消失，我也不知道是怎么回事，已经在联系bing管理员了，不过，其实我很早之前就像换域名了，今天趁此机会，干脆直接换了得了！原有的域名301至新域名，不会影响任何使用。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/159f1aa5/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/3850e950/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/31/66a922cb9adcc.webp" alt="" onerror="this.src=/img/error-page.png; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-01</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/3850e950/&quot;);" href="javascript:void(0);" alt="">CloudFlare实用项目推荐</a><div class="blog-slider__text">之前我向大家推荐过vercel上的一些项目，都非常的有趣实用，最近，在和朋友安小歪的聊天中，发现了一些很好玩的cloud flare项目，比如临时邮箱，临时文件传送，计数统计，等等，很多项目都非常好玩，于是在此推荐给大家。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/3850e950/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/4dc716ec/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/19/6699436fe02ec.webp" alt="" onerror="this.src=/img/error-page.png; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-21</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/4dc716ec/&quot;);" href="javascript:void(0);" alt="">Friend-Circle-Lite:轻量友链朋友圈</a><div class="blog-slider__text">前两天出现了友链朋友圈因为版本原因导致无法运行的问题，虽然我已经改好了，但是由于bundle文件过大，经常导致加载较慢，于是我自己手搓了一个轻量化友链朋友圈，同时支持通过提交issue实现邮箱订阅本站最新文章，也算是友链朋友圈部署新思路啦，适合喜欢轻量和免费快速的朋友尝试！</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/4dc716ec/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/67189760/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/06/6688d4b63b50f.webp" alt="" onerror="this.src=/img/error-page.png; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-06</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/67189760/&quot;);" href="javascript:void(0);" alt="">Spikformer脉冲神经网络学习</a><div class="blog-slider__text">近期我们进行了人工智能实训，我们小组选择的是脉冲神经网络，不同于原先的神经网络，这个网络采用的是脉冲信号，目前脉冲神经网络的效果并不是很好，但是因为是一个全新的神经网络架构，并且基于生物启发的计算方式，使得它们在处理稀疏和非结构化数据时具有独特的优势。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/67189760/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer="" src="/config/swiper/swiper.min.js"></script><script defer="" data-pjax="" src="/config/swiper/swiper_init.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"superSample":2,"width":250,"height":500,"position":"left","hOffset":0,"vOffset":-140},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

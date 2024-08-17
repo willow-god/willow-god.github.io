@@ -1,0 +1,736 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>DCAMNet钢铁缺陷检测网络复现 | LiuShen's Blog</title><meta name="author" content="Willow-God"><meta name="copyright" content="Willow-God"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="该文章介绍了基于YOLOX检测算法的DCAMNet网络结构及相关改进，其中包括对YOLOX代码结构、MegEngine、ONNX、TensorRT、OpenVINO和NCNN的概述，以及对YOLOX网络结构和DCAMNet改进的详细解释，涉及可变性卷积、注意力机制、EIoU损失函数等方面的创新，最终提高了带钢表面缺陷检测的性能和泛化能力。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DCAMNet钢铁缺陷检测网络复现">
+<meta property="og:url" content="https://blog.liushen.fun/posts/57a50b33/index.html">
+<meta property="og:site_name" content="LiuShen's Blog">
+<meta property="og:description" content="该文章介绍了基于YOLOX检测算法的DCAMNet网络结构及相关改进，其中包括对YOLOX代码结构、MegEngine、ONNX、TensorRT、OpenVINO和NCNN的概述，以及对YOLOX网络结构和DCAMNet改进的详细解释，涉及可变性卷积、注意力机制、EIoU损失函数等方面的创新，最终提高了带钢表面缺陷检测的性能和泛化能力。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.qyliu.top/i/2024/03/22/65fc5eceae5bd.png">
+<meta property="article:published_time" content="2024-02-01T04:33:21.000Z">
+<meta property="article:modified_time" content="2024-02-21T04:33:21.000Z">
+<meta property="article:author" content="Willow-God">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="神经网络">
+<meta property="article:tag" content="YOLOX">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.qyliu.top/i/2024/03/22/65fc5eceae5bd.png"><link rel="shortcut icon" href="/info/avatar.ico"><link rel="canonical" href="https://blog.liushen.fun/posts/57a50b33/index.html"><link rel="preconnect"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css?v=5.0.0"><link rel="stylesheet" href="/css/custom.css?v=5.0.0"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css?v=6.6.0"><link rel="stylesheet" href="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.css?v=5.0.36" media="print" onload="this.media='all'"><script>(()=>{
+      const saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+      
+      window.btf = {
+        saveToLocal: saveToLocal,
+        getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+          script.src = url
+          script.async = true
+          script.onerror = reject
+          script.onload = script.onreadystatechange = function() {
+            const loadState = this.readyState
+            if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+            script.onload = script.onreadystatechange = null
+            resolve()
+          }
+
+          Object.keys(attr).forEach(key => {
+            script.setAttribute(key, attr[key])
+          })
+
+          document.head.appendChild(script)
+        }),
+
+        getCSS: (url, id = false) => new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+          link.rel = 'stylesheet'
+          link.href = url
+          if (id) link.id = id
+          link.onerror = reject
+          link.onload = link.onreadystatechange = function() {
+            const loadState = this.readyState
+            if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+            link.onload = link.onreadystatechange = null
+            resolve()
+          }
+          document.head.appendChild(link)
+        }),
+
+        addGlobalFn: (key, fn, name = false, parent = window) => {
+          const pjaxEnable = true
+          if (!pjaxEnable && key.startsWith('pjax')) return
+
+          const globalFn = parent.globalFn || {}
+          const keyObj = globalFn[key] || {}
+    
+          if (name && keyObj[name]) return
+    
+          name = name || Object.keys(keyObj).length
+          keyObj[name] = fn
+          globalFn[key] = keyObj
+          parent.globalFn = globalFn
+        }
+      }
+    
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+      
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })()</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"7IX3UBC6JW","apiKey":"4ac2846352e499675081f1277fb961c1","indexName":"My Blog","hitsPerPage":6,"languages":{"input_placeholder":"搜索全站文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"本篇文章从发布到现在已经隔了","messageNext":"天了，里面的内容可能过期了，你要自己甄别一下哟👉👈"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":400,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":1000,"languages":{"author":"作者: Willow-God","link":"链接: ","source":"来源: LiuShen's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js?v=4.12.0',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'DCAMNet钢铁缺陷检测网络复现',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: undefined,
+  isToc: true,
+  postUpdate: '2024-02-21 12:33:21'
+}</script><link rel="stylesheet" href="/config/Yozai-Medium/result.css"><link rel="stylesheet" href="/config/memos/memos.css"></head><body><svg aria-hidden="true" style="position:absolute; overflow:hidden; width:0; height:0"><symbol id="icon-sun" viewBox="0 0 1024 1024"><path d="M960 512l-128 128v192h-192l-128 128-128-128H192v-192l-128-128 128-128V192h192l128-128 128 128h192v192z" fill="#FFD878" p-id="8420"></path><path d="M736 512a224 224 0 1 0-448 0 224 224 0 1 0 448 0z" fill="#FFE4A9" p-id="8421"></path><path d="M512 109.248L626.752 224H800v173.248L914.752 512 800 626.752V800h-173.248L512 914.752 397.248 800H224v-173.248L109.248 512 224 397.248V224h173.248L512 109.248M512 64l-128 128H192v192l-128 128 128 128v192h192l128 128 128-128h192v-192l128-128-128-128V192h-192l-128-128z" fill="#4D5152" p-id="8422"></path><path d="M512 320c105.888 0 192 86.112 192 192s-86.112 192-192 192-192-86.112-192-192 86.112-192 192-192m0-32a224 224 0 1 0 0 448 224 224 0 0 0 0-448z" fill="#4D5152" p-id="8423"></path></symbol><symbol id="icon-moon" viewBox="0 0 1024 1024"><path d="M611.370667 167.082667a445.013333 445.013333 0 0 1-38.4 161.834666 477.824 477.824 0 0 1-244.736 244.394667 445.141333 445.141333 0 0 1-161.109334 38.058667 85.077333 85.077333 0 0 0-65.066666 135.722666A462.08 462.08 0 1 0 747.093333 102.058667a85.077333 85.077333 0 0 0-135.722666 65.024z" fill="#FFB531" p-id="11345"></path><path d="M329.728 274.133333l35.157333-35.157333a21.333333 21.333333 0 1 0-30.165333-30.165333l-35.157333 35.157333-35.114667-35.157333a21.333333 21.333333 0 0 0-30.165333 30.165333l35.114666 35.157333-35.114666 35.157334a21.333333 21.333333 0 1 0 30.165333 30.165333l35.114667-35.157333 35.157333 35.157333a21.333333 21.333333 0 1 0 30.165333-30.165333z" fill="#030835" p-id="11346"></path></symbol></svg><!-- hexo injector head_end start --><link rel="stylesheet" href="/config/swiper/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="/config/swiper/swiperstyle.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="LiuShen's Blog" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="LiuShen's Blog" type="application/rss+xml">
+<div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="wizard-scene"><div class="wizard-objects"><div class="wizard-square"></div><div class="wizard-circle"></div><div class="wizard-triangle"></div></div><div class="wizard"><div class="wizard-body"></div><div class="wizard-right-arm"><div class="wizard-right-hand"></div></div><div class="wizard-left-arm"><div class="wizard-left-hand"></div></div><div class="wizard-head"><div class="wizard-beard"></div><div class="wizard-face"><div class="wizard-adds"></div></div><div class="wizard-hat"><div class="wizard-hat-of-the-hat"></div><div class="wizard-four-point-star --first"></div><div class="wizard-four-point-star --second"></div><div class="wizard-four-point-star --third"></div></div></div></div></div></div><script async="async">(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+  
+  preloader.initLoading()
+  
+  let loaded = false;
+  
+  window.addEventListener('load', () => { 
+      if (!loaded) {
+          preloader.endLoading();
+          loaded = true;
+      }
+  });
+
+  setTimeout(() => {
+      if (!loaded) {
+          preloader.endLoading();
+          loaded = true;
+      }
+  }, 5000);
+
+  
+  window.addEventListener('load',() => { preloader.endLoading() })
+  setTimeout(function(){preloader.endLoading();}, 3000);
+  document.getElementById('loading-box').addEventListener('click',()=> {preloader.endLoading()})
+
+  if (true) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><!--.avatar-img.is-center--><!--  img(src=url_for(theme.avatar.img) onerror=`onerror=null;src='${theme.error_img.flink}'` alt="avatar")--><div class="is-center" id="sidebar-avatar"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/03/21/65fc570ca9fe7.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">Willow-God</div><div class="author-info__description">清羽 〄 飞扬</div></div><div class="site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">69</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/willow-god"><i class="fab fa-github"></i><span>Follow Me 🛫</span></a><div class="menu-info-social-icons is-center"><a class="social-icon" href="mailto:01@liushen.fun" target="_blank" title="Email"><i class="fa-solid fa-envelope"></i></a><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2411457922&amp;site=qq&amp;menu=yes" target="_blank" title="QQ：2411457922"><i class="fa-brands fa-qq"></i></a><a class="social-icon" href="https://wakatime.com/@LiuShen" target="_blank" title="Wakatime"><i class="fa-solid fa-chart-column"></i></a><a class="social-icon" href="https://blog.liushen.fun/atom.xml" target="_blank" title="rss地址"><i class="fa-solid fa-rss"></i></a></div><div class="menus_items visible"><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-home"></i><span> 导航</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/"><i class="fa-fw fa-solid fa-house-laptop"></i><span> 博客主页</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.liushen.fun/"><i class="fa-fw fa-solid fa-house-flag"></i><span> 导航主页</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://xc.liushen.fun/"><i class="fa-fw fa fa-camera-retro"></i><span> 个人相册</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-graduation-cap"></i><span> 整理</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时光卷轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 文章标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 文章分类</span></a></li><li><a class="site-page child" href="/charts/"><i class="fa-fw fa-solid fa-chart-pie"></i><span> 文章通览</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa-solid fa-user-group"></i><span> 友人</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链展示</span></a></li><li><a class="site-page child" href="/addlink/"><i class="fa-fw fa fa-at"></i><span> 友链申请</span></a></li><li><a class="site-page child" href="/fcircle/"><i class="fa-fw fa-solid fa-circle-nodes"></i><span> 朋友动态</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-paper-plane"></i><span> 留言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/comment/"><i class="fa-fw fa-solid fa-chalkboard"></i><span> 留言白板</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://m.liushen.fun/"><i class="fa-fw fa-solid fa-basketball"></i><span> 盐焗星球</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa-solid fa-stethoscope"></i><span> 服务</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://um.liushen.fun/"><i class="fa-fw fa-solid fa-eye-low-vision"></i><span> 访客统计</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://pan.liushen.fun/"><i class="fa-fw fa-solid fa-laptop-file"></i><span> 资源分享</span></a></li><li><a class="site-page child" href="/subscribe/"><i class="fa-fw fa-solid fa-rss"></i><span> 订阅本站</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-list"></i><span> 关于</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fa fa-address-card"></i><span> 站长资料</span></a></li><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-commenting"></i><span> 日常说说</span></a></li><li><a class="site-page child" href="/devices/"><i class="fa-fw fa-solid fa-tachograph-digital"></i><span> 我的设备</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(https://cdn.qyliu.top/i/2024/03/22/65fc5eceae5bd.png);"><nav id="nav"><span id="blog-info"><a href="/" title="LiuShen's Blog"><span class="site-name">LiuShen's Blog</span></a></span><div id="menus"></div><div class="menus_items visible"><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-home"></i><span> 导航</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/"><i class="fa-fw fa-solid fa-house-laptop"></i><span> 博客主页</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.liushen.fun/"><i class="fa-fw fa-solid fa-house-flag"></i><span> 导航主页</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://xc.liushen.fun/"><i class="fa-fw fa fa-camera-retro"></i><span> 个人相册</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-graduation-cap"></i><span> 整理</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时光卷轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 文章标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 文章分类</span></a></li><li><a class="site-page child" href="/charts/"><i class="fa-fw fa-solid fa-chart-pie"></i><span> 文章通览</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa-solid fa-user-group"></i><span> 友人</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链展示</span></a></li><li><a class="site-page child" href="/addlink/"><i class="fa-fw fa fa-at"></i><span> 友链申请</span></a></li><li><a class="site-page child" href="/fcircle/"><i class="fa-fw fa-solid fa-circle-nodes"></i><span> 朋友动态</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-paper-plane"></i><span> 留言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/comment/"><i class="fa-fw fa-solid fa-chalkboard"></i><span> 留言白板</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://m.liushen.fun/"><i class="fa-fw fa-solid fa-basketball"></i><span> 盐焗星球</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa-solid fa-stethoscope"></i><span> 服务</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://um.liushen.fun/"><i class="fa-fw fa-solid fa-eye-low-vision"></i><span> 访客统计</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://pan.liushen.fun/"><i class="fa-fw fa-solid fa-laptop-file"></i><span> 资源分享</span></a></li><li><a class="site-page child" href="/subscribe/"><i class="fa-fw fa-solid fa-rss"></i><span> 订阅本站</span></a></li></ul></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fa fa-list"></i><span> 关于</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fa fa-address-card"></i><span> 站长资料</span></a></li><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-commenting"></i><span> 日常说说</span></a></li><li><a class="site-page child" href="/devices/"><i class="fa-fw fa-solid fa-tachograph-digital"></i><span> 我的设备</span></a></li></ul></div></div><center id="name-container"><a id="page-name" href="javascript:btf.scrollToDest(0, 500)">PAGE_NAME</a></center><div id="nav-right"><div id="travellings"><a class="site-page" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html" title="友链接力-随机开往"><i class="fa-solid fa-bus fa-fw"></i></a></div><div id="ten-years"><a class="site-page" target="_blank" rel="noopener" href="https://foreverblog.cn/go.html" title="友链接力-十年之约"><i class="fa-brands fa-nfc-symbol fa-fw"></i></a></div><div id="random"><a class="site-page" href="javascript:randomPost()" title="随机前往一个文章"><i class="fa-solid fa-shuffle fa-fw"></i></a></div><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i></span></div><div id="toggle-menu"><span class="site-page" href="javascript:void(0);" title="展开菜单"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">DCAMNet钢铁缺陷检测网络复现</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-02-01T04:33:21.000Z" title="发表于 2024-02-01 12:33:21">2024-02-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-02-21T04:33:21.000Z" title="更新于 2024-02-21 12:33:21">2024-02-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/">学习资料</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>16分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="DCAMNet钢铁缺陷检测网络复现"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/posts/57a50b33/#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="代码链接"><a href="#代码链接" class="headerlink" title="代码链接"></a>代码链接</h2><p><a target="_blank" rel="external nofollow noopener noreferrer" href="/go.html?u=aHR0cHM6Ly9naXRodWIuY29tL3dpbGxvdy1nb2QvRENBTU5ldC8=">DCAMNet个人修改后的代码链接，非官方！！！！</a>，侵权请在文章尾部联系删除</p>
+<h2 id="YOLOX网络结构与DCAMNet改进"><a href="#YOLOX网络结构与DCAMNet改进" class="headerlink" title="YOLOX网络结构与DCAMNet改进"></a>YOLOX网络结构与DCAMNet改进</h2><h3 id="YOLOX代码结构概述"><a href="#YOLOX代码结构概述" class="headerlink" title="YOLOX代码结构概述"></a>YOLOX代码结构概述</h3><h4 id="文件夹结构"><a href="#文件夹结构" class="headerlink" title="文件夹结构"></a>文件夹结构</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/03/22/65fc5ef15689d.png" alt="YOLOX文件结构"></p>
+<ul>
+<li><p><strong>dataset:</strong> 包含两种数据集样式，COCO2017（JSON格式）和VOC2017（YML文件格式）。</p>
+</li>
+<li><p><strong>demo:</strong> 提供基于 MegEngine、ONNX、TensorRT、OpenVINO 和 ncnn 的部署示例。</p>
+<ul>
+<li><p><strong>MegEngine:</strong> 面向深度学习的框架，适合不同设备上的模型推理和部署。</p>
+</li>
+<li><p><strong>ONNX:</strong> 用于表示深度学习模型的开放格式，支持跨不同框架之间的模型共享和转换。</p>
+</li>
+<li><p><strong>TensorRT:</strong> 用于高性能深度学习推理的 NVIDIA 推理加速库。</p>
+</li>
+<li><p><strong>OpenVINO:</strong> 由英特尔提供的开源工具包，用于加速计算机视觉应用的开发和部署。</p>
+</li>
+<li><p><strong>NCNN:</strong> 面向移动端的高性能神经网络计算库，主要针对 ARM 架构优化。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Exps:</strong> 包含了对 YOLOX 文件的所有使用的配置文件。</p>
+</li>
+</ul>
+<h3 id="MegEngine"><a href="#MegEngine" class="headerlink" title="MegEngine"></a>MegEngine</h3><ul>
+<li><p>MegEngine 是端到端深度学习框架，支持动态计算图和自动微分功能。</p>
+</li>
+<li><p>采用静态图优化、异步执行和自动内存管理，提高计算效率和资源利用率。</p>
+</li>
+<li><p>支持多种硬件后端，包括 CPU、GPU 和 AI 加速器。</p>
+</li>
+</ul>
+<h3 id="ONNX"><a href="#ONNX" class="headerlink" title="ONNX"></a>ONNX</h3><ul>
+<li><p>ONNX 是表示深度学习模型的开放格式，旨在实现跨不同框架和工具的模型互操作性。</p>
+</li>
+<li><p>使用中间表示（Intermediate Representation）表示模型结构和参数。</p>
+</li>
+<li><p>提供用于转换和优化模型的工具和库。</p>
+</li>
+</ul>
+<h3 id="TensorRT"><a href="#TensorRT" class="headerlink" title="TensorRT"></a>TensorRT</h3><ul>
+<li><p>TensorRT 是 NVIDIA 提供的用于高性能深度学习推理的推理加速库。</p>
+</li>
+<li><p>针对 NVIDIA GPU 进行了优化，支持网络剪枝、量化和层次融合等优化技术。</p>
+</li>
+<li><p>支持多种硬件平台，提供用于优化和部署深度学习模型的工具和库。</p>
+</li>
+</ul>
+<h3 id="OpenVINO"><a href="#OpenVINO" class="headerlink" title="OpenVINO"></a>OpenVINO</h3><ul>
+<li><p>OpenVINO 是英特尔提供的工具包，用于优化和部署计算机视觉和深度学习模型。</p>
+</li>
+<li><p>利用模型优化技术，如量化、异步推理和硬件加速，使模型能够在英特尔的不同硬件上高效运行。</p>
+</li>
+<li><p>提供模型优化和部署的工具，适用于边缘计算和嵌入式设备。</p>
+</li>
+</ul>
+<h3 id="NCNN"><a href="#NCNN" class="headerlink" title="NCNN"></a>NCNN</h3><ul>
+<li><p>NCNN 是面向移动端和嵌入式设备的高性能神经网络计算库，主要针对 ARM 架构优化。</p>
+</li>
+<li><p>采用轻量级设计和高效的推理引擎，通过优化算法和硬件指令集提高模型在移动设备上的推理速度和效率。</p>
+</li>
+</ul>
+<h3 id="Exps文件夹"><a href="#Exps文件夹" class="headerlink" title="Exps文件夹"></a>Exps文件夹</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/03/22/65fc5f03f1ff9.png" alt="Exps文件夹内文件结构"></p>
+<ul>
+<li><strong>yolox_s:</strong> 本次修改我们使用该文件夹中的配置文件，定义了一些关键参数，如类别数、模型深度、宽度等。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/03/22/65fc5f1349d88.png" alt="YOLOX_S文件"></p>
+<ul>
+<li><p><strong>Exp类:</strong> 继承了 YOLOX 的实验配置类 MyExp，重写了一些方法和属性，用于配置实验的细节。</p>
+<ul>
+<li><p><strong><strong>init</strong> 方法:</strong> 设置模型训练参数，如类别数、模型深度、宽度等。</p>
+</li>
+<li><p><strong>get_dataset 方法:</strong> 获取训练数据集，设置预处理参数，如 mosaic_prob（拼接图像的概率）、mixup_prob（混合训练的概率）等。</p>
+</li>
+<li><p><strong>get_eval_dataset 方法:</strong> 获取评估所需的数据集，设置评估数据的相关参数。</p>
+</li>
+<li><p><strong>get_evaluator 方法:</strong> 获取评估器，用于评估模型在数据集上的性能。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Tools文件夹"><a href="#Tools文件夹" class="headerlink" title="Tools文件夹"></a>Tools文件夹</h3><ul>
+<li><strong>train 文件:</strong> 用于传递各种训练参数。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/03/22/65fc5f229ee58.png" alt="train文件"></p>
+<h3 id="YOLOX网络结构"><a href="#YOLOX网络结构" class="headerlink" title="YOLOX网络结构"></a>YOLOX网络结构</h3><ul>
+<li><p>YOLOX 检测算法基于 YOLO 系列，但对锚框生成模式进行了改进，引入无锚定(anchor-free)技术。</p>
+</li>
+<li><p>选择 YOLOX 作为基线网络，因其在不同数据集上的泛化能力较强，相对于传统锚框生成方法更灵活。</p>
+</li>
+<li><p>YOLOX 不需要手动调整锚框大小，提高了模型泛化能力。</p>
+</li>
+</ul>
+<h3 id="YOLOX选择原因"><a href="#YOLOX选择原因" class="headerlink" title="YOLOX选择原因"></a>YOLOX选择原因</h3><ul>
+<li><p>现阶段检测算法的问题: 在YOLO系列上的检测头主要采用的聚类方法会导致模型在不同数据集上的泛化能力较差，训练后生成的锚框大多不能使用，导致大量的计算冗余，从而提高了计算成本和检测速度。而在带钢的表面缺陷图像数据中，由于缺陷之间的显著差异，聚类得到的锚框的大小更容易不稳定，会进一步影响检测网络模型的检测效果。</p>
+</li>
+<li><p>为什么选择YOLOX: 对比于YOLO系列网络，YOLOX检测头部分用无锚定(anchor-free)技术取代了基于锚定的技术。采用匈牙利算法作为参考，并设计了简化最优传输分配匹配算法，以减少模型训练过程中的许多冗余锚框。YOLOX不需要手动调整锚框的大小，从而提高了模型对不同图像的泛化能力。YOLOX对YOLOv3上的一系列改进有效地提高了检测效果和速度，特别对不同图像上的泛化性，所以作者选择了YOLOX作为基线网络。</p>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/03/22/65fc5f3ace00c.png" alt="论文上对应部分赘述"></p>
+<ul>
+<li>现阶段YOLOX仍有的不足之处: 由于残余结构的设计问题，YOLOX的骨干网络难以更好地改进带钢表面缺陷特征的提取，再就是由于动态样本匹配的问题，YOLOX在检测带钢这种不规则缺陷对象方面的性能较差。与YOLO系列中传统的anchor-based的方法相比，YOLOX对复杂纹理的缺陷对象的检测性能较差，精度较低。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/03/22/65fc5f46920a8.png" alt="论文上对应部分赘述"></p>
+<h3 id="DCAMNet-改进"><a href="#DCAMNet-改进" class="headerlink" title="DCAMNet 改进"></a>DCAMNet 改进</h3><h4 id="数据集修改"><a href="#数据集修改" class="headerlink" title="数据集修改"></a>数据集修改</h4><ul>
+<li>将数据集分为测试集和训练集，按照 VOC 格式修改数据集格式。</li>
+</ul>
+<h4 id="模型改进"><a href="#模型改进" class="headerlink" title="模型改进"></a>模型改进</h4><ol>
+<li><strong>CSPLayer 添加可变性卷积（EDE-block）:</strong></li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/03/22/65fc5f56c73fc.png" alt="可变性卷积"></p>
+<ul>
+<li><p>在 network_blocks.py 添加 EDE_block 部分的代码，包括 DFMConv 模块和 3x3 BaseConv。</p>
+</li>
+<li><p>在 CSPLayer 中修改代码，添加 EDE_Block 并删除原有的循环串联结构。</p>
+</li>
+</ul>
+<ol start="2">
+<li><strong>DarkNet 中添加 CA 模块:</strong></li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/03/22/65fc5f6b17d6c.png" alt="可变性卷积和CA模块"></p>
+<ul>
+<li><p>实现 CA 模块，替代 SPP 结构。</p>
+</li>
+<li><p>将实现的 CA 模块添加到 Dark5 中。</p>
+</li>
+</ul>
+<ol start="3">
+<li><strong>检测头改进:</strong></li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/03/22/65fc5f75335be.png" alt="检测头改进"></p>
+<ul>
+<li>在 YOLOX 的检测头中，将一个 BaseConv 替换为 DFMConv。</li>
+</ul>
+<h3 id="EIoU损失函数"><a href="#EIoU损失函数" class="headerlink" title="EIoU损失函数"></a>EIoU损失函数</h3><ul>
+<li><p>引入 EIoU 损失函数，替代 IoU 损失函数，加速训练过程，提高回归准确性。</p>
+</li>
+<li><p>EIoU 损失函数包括 IoU 损失、距离损失和宽高比损失。</p>
+</li>
+</ul>
+<h3 id="改代码步骤"><a href="#改代码步骤" class="headerlink" title="改代码步骤"></a>改代码步骤</h3><ol>
+<li><strong>CSPLayer 添加可变性卷积:</strong><ul>
+<li>修改 YOLOX 中的 CSPLayer，加入 EDE_block。</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">EDE_block</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, in_channel, out_channel</span>):</span><br><span class="line">        <span class="built_in">super</span>(EDE, <span class="variable language_">self</span>).__init__()</span><br><span class="line">        <span class="variable language_">self</span>.branch0 = nn.Sequential(</span><br><span class="line">            BaseConv(in_channel, out_channel, ksize=<span class="number">1</span>, stride=<span class="number">1</span>),</span><br><span class="line">            BaseConv(out_channel, out_channel, ksize=<span class="number">3</span>, stride=<span class="number">1</span>)</span><br><span class="line">        )<span class="comment">#左支路分别经过1*1和3*3的两个BaseConv。</span></span><br><span class="line">        <span class="variable language_">self</span>.branch1 = nn.Sequential(</span><br><span class="line">            DeformConv(in_channel, out_channel),</span><br><span class="line">            nn.BatchNorm2d(out_channel),</span><br><span class="line">            nn.SiLU(inplace=<span class="literal">True</span>),</span><br><span class="line">            BaseConv(out_channel, out_channel, ksize=<span class="number">3</span>, stride=<span class="number">1</span>)</span><br><span class="line">        )<span class="comment">#中支路首先经过(可变形卷积，BN归一化，SiLU激活)这三块看作DFMConv模块，然后经过一个3*3的BaseConv。</span></span><br><span class="line">        <span class="variable language_">self</span>.conv_cat = BaseConv(<span class="number">3</span>*out_channel, out_channel, ksize=<span class="number">1</span>, stride=<span class="number">1</span>)<span class="comment">#最后将左、中、和右(右支路就是原特征层)完成拼接后的结果压缩回需要的通道数即out_channel</span></span><br><span class="line"> </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        x0 = <span class="variable language_">self</span>.branch0(x)</span><br><span class="line">        x1 = <span class="variable language_">self</span>.branch1(x)</span><br><span class="line">        x_cat = torch.cat((x, x0, x1), dim=<span class="number">1</span>)<span class="comment">#在维度1即通道上进行拼接</span></span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.conv_cat(x_cat)</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<p>其中DeformConv代码如下:</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DeformConv</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, in_channel, out_channel, kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>, stride=<span class="number">1</span>, bias=<span class="literal">None</span>, modulation=<span class="literal">False</span></span>):</span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        Args:</span></span><br><span class="line"><span class="string">            modulation (bool, optional): If True, Modulated Defomable Convolution (Deformable ConvNets v2).</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="built_in">super</span>(DeformConv, <span class="variable language_">self</span>).__init__()</span><br><span class="line">        <span class="variable language_">self</span>.kernel_size = kernel_size</span><br><span class="line">        <span class="variable language_">self</span>.padding = padding</span><br><span class="line">        <span class="variable language_">self</span>.stride = stride</span><br><span class="line">        <span class="variable language_">self</span>.zero_padding = nn.ZeroPad2d(padding)</span><br><span class="line">        <span class="comment"># conv则是实际进行的卷积操作，注意这里步长设置为卷积核大小，因为与该卷积核进行卷积操作的特征图是由输出特征图中每个点扩展为其对应卷积核那么多个点后生成的。</span></span><br><span class="line">        <span class="variable language_">self</span>.conv = nn.Conv2d(in_channel, out_channel, kernel_size=kernel_size, stride=kernel_size, bias=bias)</span><br><span class="line">        <span class="comment"># p_conv是生成offsets所使用的卷积，输出通道数为卷积核尺寸的平方的2倍，代表对应卷积核每个位置横纵坐标都有偏移量。</span></span><br><span class="line">        <span class="variable language_">self</span>.p_conv = nn.Conv2d(in_channel, <span class="number">2</span> * kernel_size * kernel_size, kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>, stride=stride)</span><br><span class="line">        nn.init.constant_(<span class="variable language_">self</span>.p_conv.weight, <span class="number">0</span>)</span><br><span class="line">        <span class="variable language_">self</span>.p_conv.register_full_backward_hook(<span class="variable language_">self</span>._set_lr)</span><br><span class="line"> </span><br><span class="line">        <span class="variable language_">self</span>.modulation = modulation  <span class="comment"># modulation是可选参数,若设置为True,那么在进行卷积操作时,对应卷积核的每个位置都会分配一个权重。</span></span><br><span class="line">        <span class="keyword">if</span> modulation:</span><br><span class="line">            <span class="variable language_">self</span>.m_conv = nn.Conv2d(in_channel, kernel_size * kernel_size, kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>, stride=stride)</span><br><span class="line">            nn.init.constant_(<span class="variable language_">self</span>.m_conv.weight, <span class="number">0</span>)</span><br><span class="line">            <span class="variable language_">self</span>.m_conv.register_full_backward_hook(<span class="variable language_">self</span>._set_lr)</span><br><span class="line"> </span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_set_lr</span>(<span class="params">module, grad_input, grad_output</span>):</span><br><span class="line">        grad_input = (grad_input[i] * <span class="number">0.1</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(grad_input)))</span><br><span class="line">        grad_output = (grad_output[i] * <span class="number">0.1</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(grad_output)))</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        offset = <span class="variable language_">self</span>.p_conv(x)</span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.modulation:</span><br><span class="line">            m = torch.sigmoid(<span class="variable language_">self</span>.m_conv(x))</span><br><span class="line"> </span><br><span class="line">        dtype = offset.data.<span class="built_in">type</span>()</span><br><span class="line">        ks = <span class="variable language_">self</span>.kernel_size</span><br><span class="line">        N = offset.size(<span class="number">1</span>) // <span class="number">2</span></span><br><span class="line"> </span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.padding:</span><br><span class="line">            x = <span class="variable language_">self</span>.zero_padding(x)</span><br><span class="line"> </span><br><span class="line">        <span class="comment"># (b, 2N, h, w)</span></span><br><span class="line">        p = <span class="variable language_">self</span>._get_p(offset, dtype)</span><br><span class="line"> </span><br><span class="line">        <span class="comment"># (b, h, w, 2N)</span></span><br><span class="line">        p = p.contiguous().permute(<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>)</span><br><span class="line">        q_lt = p.detach().floor()</span><br><span class="line">        q_rb = q_lt + <span class="number">1</span></span><br><span class="line"> </span><br><span class="line">        q_lt = torch.cat([torch.clamp(q_lt[..., :N], <span class="number">0</span>, x.size(<span class="number">2</span>) - <span class="number">1</span>), torch.clamp(q_lt[..., N:], <span class="number">0</span>, x.size(<span class="number">3</span>) - <span class="number">1</span>)],</span><br><span class="line">                         dim=-<span class="number">1</span>).long()</span><br><span class="line">        q_rb = torch.cat([torch.clamp(q_rb[..., :N], <span class="number">0</span>, x.size(<span class="number">2</span>) - <span class="number">1</span>), torch.clamp(q_rb[..., N:], <span class="number">0</span>, x.size(<span class="number">3</span>) - <span class="number">1</span>)],</span><br><span class="line">                         dim=-<span class="number">1</span>).long()</span><br><span class="line">        q_lb = torch.cat([q_lt[..., :N], q_rb[..., N:]], dim=-<span class="number">1</span>)</span><br><span class="line">        q_rt = torch.cat([q_rb[..., :N], q_lt[..., N:]], dim=-<span class="number">1</span>)</span><br><span class="line"> </span><br><span class="line">        <span class="comment"># clip p</span></span><br><span class="line">        p = torch.cat([torch.clamp(p[..., :N], <span class="number">0</span>, x.size(<span class="number">2</span>) - <span class="number">1</span>), torch.clamp(p[..., N:], <span class="number">0</span>, x.size(<span class="number">3</span>) - <span class="number">1</span>)], dim=-<span class="number">1</span>)</span><br><span class="line"> </span><br><span class="line">        <span class="comment"># bilinear kernel (b, h, w, N)</span></span><br><span class="line">        g_lt = (<span class="number">1</span> + (q_lt[..., :N].type_as(p) - p[..., :N])) * (<span class="number">1</span> + (q_lt[..., N:].type_as(p) - p[..., N:]))</span><br><span class="line">        g_rb = (<span class="number">1</span> - (q_rb[..., :N].type_as(p) - p[..., :N])) * (<span class="number">1</span> - (q_rb[..., N:].type_as(p) - p[..., N:]))</span><br><span class="line">        g_lb = (<span class="number">1</span> + (q_lb[..., :N].type_as(p) - p[..., :N])) * (<span class="number">1</span> - (q_lb[..., N:].type_as(p) - p[..., N:]))</span><br><span class="line">        g_rt = (<span class="number">1</span> - (q_rt[..., :N].type_as(p) - p[..., :N])) * (<span class="number">1</span> + (q_rt[..., N:].type_as(p) - p[..., N:]))</span><br><span class="line"> </span><br><span class="line">        <span class="comment"># (b, c, h, w, N)</span></span><br><span class="line">        x_q_lt = <span class="variable language_">self</span>._get_x_q(x, q_lt, N)</span><br><span class="line">        x_q_rb = <span class="variable language_">self</span>._get_x_q(x, q_rb, N)</span><br><span class="line">        x_q_lb = <span class="variable language_">self</span>._get_x_q(x, q_lb, N)</span><br><span class="line">        x_q_rt = <span class="variable language_">self</span>._get_x_q(x, q_rt, N)</span><br><span class="line"> </span><br><span class="line">        <span class="comment"># (b, c, h, w, N)</span></span><br><span class="line">        x_offset = g_lt.unsqueeze(dim=<span class="number">1</span>) * x_q_lt + \</span><br><span class="line">                   g_rb.unsqueeze(dim=<span class="number">1</span>) * x_q_rb + \</span><br><span class="line">                   g_lb.unsqueeze(dim=<span class="number">1</span>) * x_q_lb + \</span><br><span class="line">                   g_rt.unsqueeze(dim=<span class="number">1</span>) * x_q_rt</span><br><span class="line"> </span><br><span class="line">        <span class="comment"># modulation</span></span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.modulation:</span><br><span class="line">            m = m.contiguous().permute(<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>)</span><br><span class="line">            m = m.unsqueeze(dim=<span class="number">1</span>)</span><br><span class="line">            m = torch.cat([m <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(x_offset.size(<span class="number">1</span>))], dim=<span class="number">1</span>)</span><br><span class="line">            x_offset *= m</span><br><span class="line"> </span><br><span class="line">        x_offset = <span class="variable language_">self</span>._reshape_x_offset(x_offset, ks)</span><br><span class="line">        out = <span class="variable language_">self</span>.conv(x_offset)</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">return</span> out</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_get_p_n</span>(<span class="params">self, N, dtype</span>):</span><br><span class="line">        <span class="comment"># 由于卷积核中心点位置是其尺寸的一半，于是中心点向左（上）方向移动尺寸的一半就得到起始点，向右（下）方向移动另一半就得到终止点</span></span><br><span class="line">        p_n_x, p_n_y = torch.meshgrid(</span><br><span class="line">            torch.arange(-(<span class="variable language_">self</span>.kernel_size - <span class="number">1</span>) // <span class="number">2</span>, (<span class="variable language_">self</span>.kernel_size - <span class="number">1</span>) // <span class="number">2</span> + <span class="number">1</span>),</span><br><span class="line">            torch.arange(-(<span class="variable language_">self</span>.kernel_size - <span class="number">1</span>) // <span class="number">2</span>, (<span class="variable language_">self</span>.kernel_size - <span class="number">1</span>) // <span class="number">2</span> + <span class="number">1</span>),</span><br><span class="line">            indexing=<span class="string">'ij'</span></span><br><span class="line">        )</span><br><span class="line">        <span class="comment"># (2N, 1)</span></span><br><span class="line">        p_n = torch.cat([torch.flatten(p_n_x), torch.flatten(p_n_y)], <span class="number">0</span>)</span><br><span class="line">        p_n = p_n.view(<span class="number">1</span>, <span class="number">2</span> * N, <span class="number">1</span>, <span class="number">1</span>).<span class="built_in">type</span>(dtype)</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">return</span> p_n</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_get_p_0</span>(<span class="params">self, h, w, N, dtype</span>):</span><br><span class="line">        <span class="comment"># p0_y、p0_x就是输出特征图每点映射到输入特征图上的纵、横坐标值。</span></span><br><span class="line">        p_0_x, p_0_y = torch.meshgrid(</span><br><span class="line">            torch.arange(<span class="number">1</span>, h * <span class="variable language_">self</span>.stride + <span class="number">1</span>, <span class="variable language_">self</span>.stride),</span><br><span class="line">            torch.arange(<span class="number">1</span>, w * <span class="variable language_">self</span>.stride + <span class="number">1</span>, <span class="variable language_">self</span>.stride),</span><br><span class="line">            indexing=<span class="string">'ij'</span></span><br><span class="line">        )</span><br><span class="line"> </span><br><span class="line">        p_0_x = torch.flatten(p_0_x).view(<span class="number">1</span>, <span class="number">1</span>, h, w).repeat(<span class="number">1</span>, N, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        p_0_y = torch.flatten(p_0_y).view(<span class="number">1</span>, <span class="number">1</span>, h, w).repeat(<span class="number">1</span>, N, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        p_0 = torch.cat([p_0_x, p_0_y], <span class="number">1</span>).<span class="built_in">type</span>(dtype)</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">return</span> p_0</span><br><span class="line"> </span><br><span class="line">    <span class="comment"># 输出特征图上每点（对应卷积核中心）加上其对应卷积核每个位置的相对（横、纵）坐标后再加上自学习的（横、纵坐标）偏移量。</span></span><br><span class="line">    <span class="comment"># p0就是将输出特征图每点对应到卷积核中心，然后映射到输入特征图中的位置；</span></span><br><span class="line">    <span class="comment"># pn则是p0对应卷积核每个位置的相对坐标；</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_get_p</span>(<span class="params">self, offset, dtype</span>):</span><br><span class="line">        N, h, w = offset.size(<span class="number">1</span>) // <span class="number">2</span>, offset.size(<span class="number">2</span>), offset.size(<span class="number">3</span>)</span><br><span class="line"> </span><br><span class="line">        <span class="comment"># (1, 2N, 1, 1)</span></span><br><span class="line">        p_n = <span class="variable language_">self</span>._get_p_n(N, dtype)</span><br><span class="line">        <span class="comment"># (1, 2N, h, w)</span></span><br><span class="line">        p_0 = <span class="variable language_">self</span>._get_p_0(h, w, N, dtype)</span><br><span class="line">        p = p_0 + p_n + offset</span><br><span class="line">        <span class="keyword">return</span> p</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_get_x_q</span>(<span class="params">self, x, q, N</span>):</span><br><span class="line">        <span class="comment"># 计算双线性插值点的4邻域点对应的权重</span></span><br><span class="line">        b, h, w, _ = q.size()</span><br><span class="line">        padded_w = x.size(<span class="number">3</span>)</span><br><span class="line">        c = x.size(<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># (b, c, h*w)</span></span><br><span class="line">        x = x.contiguous().view(b, c, -<span class="number">1</span>)</span><br><span class="line"> </span><br><span class="line">        <span class="comment"># (b, h, w, N)</span></span><br><span class="line">        index = q[..., :N] * padded_w + q[..., N:]  <span class="comment"># offset_x*w + offset_y</span></span><br><span class="line">        <span class="comment"># (b, c, h*w*N)</span></span><br><span class="line">        index = index.contiguous().unsqueeze(dim=<span class="number">1</span>).expand(-<span class="number">1</span>, c, -<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>).contiguous().view(b, c, -<span class="number">1</span>)</span><br><span class="line"> </span><br><span class="line">        x_offset = x.gather(dim=-<span class="number">1</span>, index=index).contiguous().view(b, c, h, w, N)</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">return</span> x_offset</span><br><span class="line"> </span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_reshape_x_offset</span>(<span class="params">x_offset, ks</span>):</span><br><span class="line">        b, c, h, w, N = x_offset.size()</span><br><span class="line">        x_offset = torch.cat([x_offset[..., s:s + ks].contiguous().view(b, c, h, w * ks) <span class="keyword">for</span> s <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, N, ks)],</span><br><span class="line">                             dim=-<span class="number">1</span>)</span><br><span class="line">        x_offset = x_offset.contiguous().view(b, c, h * ks, w * ks)</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">return</span> x_offset</span><br><span class="line">        </span><br></pre></td></tr></tbody></table></figure>
+
+<p>有了EDE即可完成CSPlayer</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CSPLayer</span>(nn.Module):</span><br><span class="line">    <span class="string">"""C3 in yolov5, CSP Bottleneck with 3 convolutions"""</span></span><br><span class="line"> </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params"></span></span><br><span class="line"><span class="params">        self,</span></span><br><span class="line"><span class="params">        in_channels,</span></span><br><span class="line"><span class="params">        out_channels,</span></span><br><span class="line"><span class="params">        n=<span class="number">1</span>,</span></span><br><span class="line"><span class="params">        shortcut=<span class="literal">True</span>,</span></span><br><span class="line"><span class="params">        expansion=<span class="number">0.5</span>,</span></span><br><span class="line"><span class="params">        depthwise=<span class="literal">False</span>,</span></span><br><span class="line"><span class="params">        act=<span class="string">"silu"</span>,</span></span><br><span class="line"><span class="params">    </span>):</span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        Args:</span></span><br><span class="line"><span class="string">            in_channels (int): input channels.</span></span><br><span class="line"><span class="string">            out_channels (int): output channels.</span></span><br><span class="line"><span class="string">            n (int): number of Bottlenecks. Default value: 1.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="comment"># ch_in, ch_out, number, shortcut, groups, expansion</span></span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        hidden_channels = <span class="built_in">int</span>(out_channels * expansion)  <span class="comment"># hidden channels</span></span><br><span class="line">        <span class="variable language_">self</span>.conv1 = BaseConv(in_channels, hidden_channels, <span class="number">1</span>, stride=<span class="number">1</span>, act=act)</span><br><span class="line">        <span class="variable language_">self</span>.conv2 = BaseConv(in_channels, hidden_channels, <span class="number">1</span>, stride=<span class="number">1</span>, act=act)</span><br><span class="line"> </span><br><span class="line">        <span class="variable language_">self</span>.edeblock = EDE_block(hidden_channels, hidden_channels)<span class="comment">#与源代码唯一的区别，在右支路加了一个EDE-block。</span></span><br><span class="line">        <span class="variable language_">self</span>.conv3 = BaseConv(<span class="number">2</span> * hidden_channels, out_channels, <span class="number">1</span>, stride=<span class="number">1</span>, act=act)</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        x_1 = <span class="variable language_">self</span>.conv1(x)</span><br><span class="line">        x_1 = <span class="variable language_">self</span>.edeblock(x_1)</span><br><span class="line"> </span><br><span class="line">        x_2 = <span class="variable language_">self</span>.conv2(x)</span><br><span class="line">        x = torch.cat((x_1, x_2), dim=<span class="number">1</span>)<span class="comment">#在维度1即通道上进行拼接</span></span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.conv3(x)<span class="comment">#拼接后再压缩回原通道</span></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<ol start="2">
+<li><strong>DarkNet 中添加 CA 模块:</strong><ul>
+<li>实现 CA 模块，替代 YOLOX 的 SPP 结构。</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#CA注意模块</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">h_sigmoid</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, inplace=<span class="literal">True</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(h_sigmoid, <span class="variable language_">self</span>).__init__()</span><br><span class="line">        <span class="variable language_">self</span>.relu = nn.ReLU6(inplace=inplace)</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.relu(x + <span class="number">3</span>) / <span class="number">6</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">h_swish</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, inplace=<span class="literal">True</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(h_swish, <span class="variable language_">self</span>).__init__()</span><br><span class="line">        <span class="variable language_">self</span>.sigmoid = h_sigmoid(inplace=inplace)</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        <span class="keyword">return</span> x * <span class="variable language_">self</span>.sigmoid(x)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CA</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, inp, oup, reduction=<span class="number">32</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(CA, <span class="variable language_">self</span>).__init__()</span><br><span class="line">        <span class="variable language_">self</span>.pool_h = nn.AdaptiveAvgPool2d((<span class="literal">None</span>, <span class="number">1</span>))</span><br><span class="line">        <span class="variable language_">self</span>.pool_w = nn.AdaptiveAvgPool2d((<span class="number">1</span>, <span class="literal">None</span>))</span><br><span class="line"> </span><br><span class="line">        mip = <span class="built_in">max</span>(<span class="number">8</span>, inp // reduction)</span><br><span class="line"> </span><br><span class="line">        <span class="variable language_">self</span>.conv1 = nn.Conv2d(inp, mip, kernel_size=<span class="number">1</span>, stride=<span class="number">1</span>, padding=<span class="number">0</span>)</span><br><span class="line">        <span class="variable language_">self</span>.bn1 = nn.BatchNorm2d(mip)</span><br><span class="line">        <span class="variable language_">self</span>.act = h_swish()</span><br><span class="line"> </span><br><span class="line">        <span class="variable language_">self</span>.conv_h = nn.Conv2d(mip, oup, kernel_size=<span class="number">1</span>, stride=<span class="number">1</span>, padding=<span class="number">0</span>)</span><br><span class="line">        <span class="variable language_">self</span>.conv_w = nn.Conv2d(mip, oup, kernel_size=<span class="number">1</span>, stride=<span class="number">1</span>, padding=<span class="number">0</span>)</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        identity = x</span><br><span class="line"> </span><br><span class="line">        n, c, h, w = x.size()</span><br><span class="line">        x_h = <span class="variable language_">self</span>.pool_h(x)</span><br><span class="line">        x_w = <span class="variable language_">self</span>.pool_w(x).permute(<span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>)</span><br><span class="line"> </span><br><span class="line">        y = torch.cat([x_h, x_w], dim=<span class="number">2</span>)</span><br><span class="line">        y = <span class="variable language_">self</span>.conv1(y)</span><br><span class="line">        y = <span class="variable language_">self</span>.bn1(y)</span><br><span class="line">        y = <span class="variable language_">self</span>.act(y)</span><br><span class="line"> </span><br><span class="line">        x_h, x_w = torch.split(y, [h, w], dim=<span class="number">2</span>)</span><br><span class="line">        x_w = x_w.permute(<span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>)</span><br><span class="line"> </span><br><span class="line">        a_h = <span class="variable language_">self</span>.conv_h(x_h).sigmoid()</span><br><span class="line">        a_w = <span class="variable language_">self</span>.conv_w(x_w).sigmoid()</span><br><span class="line"> </span><br><span class="line">        out = identity * a_w * a_h</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">return</span> out</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>将 CA 模块添加到 Dark5 中。</li>
+</ul>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># dark5</span></span><br><span class="line"><span class="variable language_">self</span>.dark5 = nn.Sequential(</span><br><span class="line">    Conv(base_channels * <span class="number">8</span>, base_channels * <span class="number">16</span>, <span class="number">3</span>, <span class="number">2</span>, act=act),</span><br><span class="line">    <span class="comment"># SPPBottleneck(base_channels * 16, base_channels * 16, activation=act),</span></span><br><span class="line">    CA(base_channels * <span class="number">16</span>, base_channels * <span class="number">16</span>),</span><br><span class="line">    CSPLayer(</span><br><span class="line">        base_channels * <span class="number">16</span>,</span><br><span class="line">        base_channels * <span class="number">16</span>,</span><br><span class="line">        n=base_depth,</span><br><span class="line">        shortcut=<span class="literal">False</span>,</span><br><span class="line">        depthwise=depthwise,</span><br><span class="line">        act=act,</span><br><span class="line">    ),</span><br><span class="line">)</span><br></pre></td></tr></tbody></table></figure>
+
+<ol start="3">
+<li><strong>检测头改进:</strong><ul>
+<li>在 YOLOX 的检测头中，将 BaseConv 替换为 DFMConv。</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="variable language_">self</span>.reg_convs.append(</span><br><span class="line">    nn.Sequential(</span><br><span class="line">        *[</span><br><span class="line">            DeformConv( <span class="built_in">int</span>(<span class="number">256</span> * width),</span><br><span class="line">                        <span class="built_in">int</span>(<span class="number">256</span> * width)),</span><br><span class="line">                        nn.BatchNorm2d(<span class="built_in">int</span>(<span class="number">256</span> * width)),</span><br><span class="line">                        nn.SiLU(inplace=<span class="literal">True</span>),</span><br><span class="line">            <span class="comment"># Conv(</span></span><br><span class="line">            <span class="comment">#     in_channels=int(256 * width),</span></span><br><span class="line">            <span class="comment">#     out_channels=int(256 * width),</span></span><br><span class="line">            <span class="comment">#     ksize=3,</span></span><br><span class="line">            <span class="comment">#     stride=1,</span></span><br><span class="line">            <span class="comment">#     act=act,</span></span><br><span class="line">            <span class="comment"># ),</span></span><br><span class="line">            Conv(</span><br><span class="line">                in_channels=<span class="built_in">int</span>(<span class="number">256</span> * width),</span><br><span class="line">                out_channels=<span class="built_in">int</span>(<span class="number">256</span> * width),</span><br><span class="line">                ksize=<span class="number">3</span>,</span><br><span class="line">                stride=<span class="number">1</span>,</span><br><span class="line">                act=act,</span><br><span class="line">            ),</span><br><span class="line">        ]</span><br><span class="line">    )</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>通过以上改进，DCAMNet 在带钢表面缺陷检测中引入了可变性卷积、注意力机制和 EIoU 损失函数，提高了对不规则缺陷的检测性能和泛化能力。这些改进使得 DCAMNet 在复杂场景中更具优势，对不同形状、大小和纹理的缺陷有更好的适应性。</p>
+<h2 id="参考文章概述"><a href="#参考文章概述" class="headerlink" title="参考文章概述"></a>参考文章概述</h2><p>以下是关于 DCAMNet 网络的学习笔记与复现指南的参考文章，供学者深入了解该算法及实现过程。</p>
+<ol>
+<li><p><a target="_blank" rel="external nofollow noopener noreferrer" href="/go.html?u=aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpS2VRaW5nMTAyNzUyMC9hcnRpY2xlL2RldGFpbHMvMTM0NTE1MDMwP3NwbT0xMDAxLjIwMTQuMzAwMS41NTAx">DCAMNet学习笔记</a></p>
+<ul>
+<li>该文章深入解析了 DCAMNet 网络的结构和关键创新，为理解 DCAMNet 提供了详实的学习笔记。</li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="external nofollow noopener noreferrer" href="/go.html?u=aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50LzEwMDI0Mzk2">DCAMNet论文原文链接</a></p>
+<ul>
+<li>DCAMNet 论文的原始链接，提供了算法设计和实验结果等详尽信息。</li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="external nofollow noopener noreferrer" href="/go.html?u=aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpS2VRaW5nMTAyNzUyMC9hcnRpY2xlL2RldGFpbHMvMTM0Njk3MjY3">DCAMNet复现</a></p>
+<ul>
+<li>该文章详细介绍了如何复现 DCAMNet 算法，为读者提供了实际操作的指导，包括环境配置和代码实现。</li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="external nofollow noopener noreferrer" href="/go.html?u=aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zOTc5OTMzMTU=">YOLOX讲解</a></p>
+<ul>
+<li>对 YOLOX 算法进行讲解，为理解 DCAMNet 基于 YOLOX 的改进提供了背景知识。</li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="external nofollow noopener noreferrer" href="/go.html?u=aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NTQxMDk3L2FydGljbGUvZGV0YWlscy8xMjUxMzI4MTc=">YOLOX网络结构</a></p>
+<ul>
+<li>介绍 YOLOX 网络结构，为理解 DCAMNet 基于 YOLOX 的修改提供了基础。</li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="external nofollow noopener noreferrer" href="/go.html?u=aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC80MTEwNDUzMDA=">YOLOX代码解析</a></p>
+<ul>
+<li>对 YOLOX 代码进行解析，为读者提供了深入了解 YOLOX 实现细节的资料。</li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="external nofollow noopener noreferrer" href="/go.html?u=aHR0cHM6Ly9naXRodWIuY29tL3Jlbnl1ZWhlL2JpbGliaWxpLXlvbG94X3NpbXBsZV92b2NfY29jbw==">配置好的VOC_YOLOX代码</a></p>
+<ul>
+<li>提供了一个配置好的 VOC_YOLOX 代码库，其中包含中文注释，为读者提供了可直接运行的代码实例。</li>
+</ul>
+</li>
+</ol>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ul>
+<li>以上内容仅供学术研究和学习交流使用，如有侵权，请联系我进行删除处理。</li>
+<li>若有任何问题或需要进一步讨论，请随时联系我的邮箱：<a href="mailto:01@liushen.fun">01@liushen.fun</a>。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.liushen.fun/">Willow-God</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.liushen.fun/posts/57a50b33/">https://blog.liushen.fun/posts/57a50b33/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.liushen.fun" target="_blank">LiuShen's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><a class="post-meta__tags" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">神经网络</a><a class="post-meta__tags" href="/tags/YOLOX/">YOLOX</a><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></div><div class="post-share"><div class="social-share" data-image="https://cdn.qyliu.top/i/2024/03/22/65fc5eceae5bd.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="/pluginsSrc/butterfly-extsrc/sharejs/dist/css/share.min.css?v=1.1.3" media="print" onload="this.media='all'"><script src="/pluginsSrc/butterfly-extsrc/sharejs/dist/js/social-share.min.js?v=1.1.3" defer=""></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>来😍鼠标过来一点~</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/config/img/wechat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/config/img/wechat.png" alt="微信"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/config/img/wechat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/config/img/wechat.png" alt="支付宝"></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="prev-post pull-left" href="/posts/a74e83a1/" title="操作系统课程主要知识点"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://and-pc.com/wp-content/uploads/2020/07/image-1024x560-1.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">操作系统课程主要知识点</div></div></a><a class="next-post pull-right" href="/posts/51728b12/" title="魔改笔记一：简单特效添加"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/04/10/6616120325702.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">魔改笔记一：简单特效添加</div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a href="/posts/2229c0f4/" title="CNN+transformer入门学习"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic2.zhimg.com/v2-e3b4212c09df05a0484da4eb5392a0d9_r.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-05</div><div class="title">CNN+transformer入门学习</div></div></a><a href="/posts/67189760/" title="Spikformer脉冲神经网络学习"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/06/6688d4b63b50f.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-06</div><div class="title">Spikformer脉冲神经网络学习</div></div></a><a href="/posts/b1b54fd/" title="机器学习笔记"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic2.zhimg.com/v2-e3b4212c09df05a0484da4eb5392a0d9_r.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-01</div><div class="title">机器学习笔记</div></div></a></div></div><hr class="custom-hr"><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/03/21/65fc570ca9fe7.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info-name">Willow-God</div><div class="author-info-description">清羽 〄 飞扬</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">69</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/willow-god"><i class="fab fa-github"></i><span>Follow Me 🛫</span></a><div class="card-info-social-icons"><a class="social-icon" href="mailto:01@liushen.fun" target="_blank" title="Email"><i class="fa-solid fa-envelope"></i></a><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2411457922&amp;site=qq&amp;menu=yes" target="_blank" title="QQ：2411457922"><i class="fa-brands fa-qq"></i></a><a class="social-icon" href="https://wakatime.com/@LiuShen" target="_blank" title="Wakatime"><i class="fa-solid fa-chart-column"></i></a><a class="social-icon" href="https://blog.liushen.fun/atom.xml" target="_blank" title="rss地址"><i class="fa-solid fa-rss"></i></a></div></div><div class="card-widget" id="card-poem"><div id="poem_sentence"></div><div id="poem_info"><div id="poem_dynasty"></div><div id="poem_author"></div></div></div><script src="/js/jinrishici.js" charset="utf-8"></script><script type="text/javascript">jinrishici.load(function(result) {
+var sentence = document.querySelector("#poem_sentence")
+var author = document.querySelector("#poem_author")
+var dynasty = document.querySelector("#poem_dynasty")
+
+var sentenceText = result.data.content
+sentenceText = sentenceText.substr(0, sentenceText.length - 1);
+sentence.innerHTML = sentenceText
+dynasty.innerHTML = result.data.origin.dynasty
+author.innerHTML = result.data.origin.author + '《' + result.data.origin.title + '》'
+});</script><div class="card-widget card-announcement"><div class="item-headline"><i class="fa fa-user"></i><span>欢迎来访者</span></div><div id="welcome-info"></div><script src="/js/txmap.js"></script><script data-pjax="data-pjax">var longitude="108.546767";
+var Latitude="34.579480";
+var txkey="44BBZ-IZPLZ-V6PXP-ZYLRT-JKFH3-DOFJ6";
+var ipLoacation;
+window.onload = () => {welcometxmap()};
+document.addEventListener("pjax:complete", welcometxmap());</script></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p><strong>博客架构概览：</strong><br>⚙️框架核心：Hexo<br>🕹️界面设计：Butterfly<br>🔮安全保障：长亭雷池<br>🔩管理工具：宝塔面板，1Panel<br>🎰服务器支持：阿里云，腾讯云<br>🎲CDN加速：多吉云，无畏云<br><strong>快捷跳转地址：</strong><br>👻博客主站：<a href="https://blog.liushen.fun">blog.liushen.fun</a><br>😶‍🌫️博客分栏：<a target="_blank" rel="noopener" href="https://www.qingyang.eu.org">qingyang.eu.org</a><br>🤖个人导航：<a target="_blank" rel="noopener" href="https://www.liushen.fun">www.liushen.fun</a><br></p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/config/img/notice.gif" alt="可爱捏" title="可爱捏" style="width:100%; border-radius:10px;"></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E9%93%BE%E6%8E%A5"><span class="toc-text">代码链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#YOLOX%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E4%B8%8EDCAMNet%E6%94%B9%E8%BF%9B"><span class="toc-text">YOLOX网络结构与DCAMNet改进</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#YOLOX%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84%E6%A6%82%E8%BF%B0"><span class="toc-text">YOLOX代码结构概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%A4%B9%E7%BB%93%E6%9E%84"><span class="toc-text">文件夹结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MegEngine"><span class="toc-text">MegEngine</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ONNX"><span class="toc-text">ONNX</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TensorRT"><span class="toc-text">TensorRT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OpenVINO"><span class="toc-text">OpenVINO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NCNN"><span class="toc-text">NCNN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Exps%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-text">Exps文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tools%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-text">Tools文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#YOLOX%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="toc-text">YOLOX网络结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#YOLOX%E9%80%89%E6%8B%A9%E5%8E%9F%E5%9B%A0"><span class="toc-text">YOLOX选择原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DCAMNet-%E6%94%B9%E8%BF%9B"><span class="toc-text">DCAMNet 改进</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E4%BF%AE%E6%94%B9"><span class="toc-text">数据集修改</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E6%94%B9%E8%BF%9B"><span class="toc-text">模型改进</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EIoU%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-text">EIoU损失函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E4%BB%A3%E7%A0%81%E6%AD%A5%E9%AA%A4"><span class="toc-text">改代码步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0%E6%A6%82%E8%BF%B0"><span class="toc-text">参考文章概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">注意事项</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/4dc716ec/" title="Friend-Circle-Lite:轻量友链朋友圈"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/19/6699436fe02ec.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Friend-Circle-Lite:轻量友链朋友圈"></a><div class="content"><a class="title" href="/posts/4dc716ec/" title="Friend-Circle-Lite:轻量友链朋友圈">Friend-Circle-Lite:轻量友链朋友圈</a><time datetime="2024-08-11T16:02:00.000Z" title="更新于 2024-08-12 00:02:00">2024-08-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/a64defb4/" title="魔改笔记七：分类条及外链卡片"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/08/10/66b74df1ab511.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="魔改笔记七：分类条及外链卡片"></a><div class="content"><a class="title" href="/posts/a64defb4/" title="魔改笔记七：分类条及外链卡片">魔改笔记七：分类条及外链卡片</a><time datetime="2024-08-09T17:40:00.000Z" title="更新于 2024-08-10 01:40:00">2024-08-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/159f1aa5/" title="域名迁移至 blog.liushen.fun"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/08/10/66b6479e1d33c.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="域名迁移至 blog.liushen.fun"></a><div class="content"><a class="title" href="/posts/159f1aa5/" title="域名迁移至 blog.liushen.fun">域名迁移至 blog.liushen.fun</a><time datetime="2024-08-09T08:00:00.000Z" title="更新于 2024-08-09 16:00:00">2024-08-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/3850e950/" title="CloudFlare实用项目推荐"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/31/66a922cb9adcc.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CloudFlare实用项目推荐"></a><div class="content"><a class="title" href="/posts/3850e950/" title="CloudFlare实用项目推荐">CloudFlare实用项目推荐</a><time datetime="2024-07-31T17:32:00.000Z" title="更新于 2024-08-01 01:32:00">2024-08-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap" style="background: transparent"><div id="footer_icons"><div><a class="icon_link" rel="noopener external nofollow" href="https://www.qyliu.top/" title="导航站点" target="_blank"><i class="fa-solid fa-compass"></i></a><a class="icon_link" rel="noopener external nofollow" href="https://admin.qidian.qq.com/static_proxy/b2b-qq/wpa-link/index.html#/person?uin=2411457922" title="联系QQ" target="_blank"><i class="fa-brands fa-qq"></i></a><a class="icon_link" rel="noopener external nofollow" href="https://github.com/willow-god" title="我的github主页" target="_blank"><i class="fa-brands fa-github"></i></a><a class="icon_link" rel="noopener external nofollow" href="mailto:01@liushen.fun" title="发送邮件至博主邮箱" target="_blank"><i class="fa-solid fa-envelope"></i></a></div><img class="footer_logo" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/05/12/663f9fc48820a.png" onclick="btf.scrollToDest(0,500)" title="返回顶部"><div><a class="icon_link" rel="noopener external nofollow" href="https://wakatime.com/@LiuShen" title="Wikitime" target="_blank"><i class="fa-solid fa-clock"></i></a><a class="icon_link" rel="noopener external nofollow" href="https://gitlab.com/" title="gitlab" target="_blank"><i class="fa-brands fa-gitlab"></i></a><a class="icon_link" href="/shuoshuo/" title="日常说说" data-pjax-state="data-pjax-state"><i class="fa-solid fa-file-pen"></i></a><a class="icon_link" href="/comment/" title="留言板" data-pjax-state="data-pjax-state"><i class="fa-solid fa-comment"></i></a></div></div><div id="footer_content"><div class="footer-group"><h3 class="footer-title">关于本站</h3><div class="footer-links"><a class="footer-item" target="_blank" href="https://www.qyliu.top/">导航站点</a><a class="footer-item" href="/shuoshuo/">日常说说</a><a class="footer-item" target="_blank" href="https://um.liushen.fun/share/G8C2aR0IszHE5VBl/blog.liushen.fun">访客信息</a><a class="footer-item" target="_blank" href="https://m.liushen.fun/">盐焗星球</a><a class="footer-item" target="_blank" href="https://listen.qyliu.top/">在线状态</a><a class="footer-item" href="/subscribe/">订阅本站</a></div></div><div class="footer-group"><h3 class="footer-title">加入组织</h3><div class="footer-links"><a class="footer-item" target="_blank" href="https://www.boyouquan.com/home">博友圈</a><a class="footer-item" target="_blank" href="https://boke.lu/">博客录</a><a class="footer-item" target="_blank" href="https://blogwe.com/">博客我们</a><a class="footer-item" target="_blank" href="https://firewood.news/">积薪站点</a><a class="footer-item" target="_blank" href="https://bf.zzxworld.com/">发现博客</a><a class="footer-item" target="_blank" href="https://ourblo.gs/">OurBlogs</a></div></div><div class="footer-group"><h3 class="footer-title">文章整理</h3><div class="footer-links"><a class="footer-item" href="/categories/博客管理/">博客管理</a><a class="footer-item" href="/categories/学习资料/">学习资料</a><a class="footer-item" href="/categories/日常分享/">日常分享</a><a class="footer-item" href="/achieve/">时光卷轴</a><a class="footer-item" href="/charts/">文章通览</a><a class="footer-item" href="/categories/">查看全部</a></div></div><div class="footer-group"><h3 class="footer-title">文章标签</h3><div class="footer-links"><a class="footer-item" href="/tags/JavaScript/">JS知识</a><a class="footer-item" href="/tags/Hexo/">本站框架</a><a class="footer-item" href="/tags/机器学习/">机器学习</a><a class="footer-item" href="/tags/日记/">个人日记</a><a class="footer-item" href="/tags/CSS/">CSS知识</a><a class="footer-item" href="/tags/">查看全部</a></div></div><div class="footer-group"><h3 class="footer-title">自建工具</h3><div class="footer-links"><a class="footer-item" target="_blank" rel="noopener" href="https://docs_s.tianli0.top/">必应AI</a><a class="footer-item" target="_blank" rel="noopener" href="https://chat.qyliu.top/">NextGPT</a><a class="footer-item" target="_blank" rel="noopener" href="https://draw.qyliu.top/">随心画板</a><a class="footer-item" target="_blank" rel="noopener" href="https://mindmap.qyliu.top/">思维导图</a><a class="footer-item" target="_blank" rel="noopener" href="https://ittools.qyliu.top/">IT工具箱</a><a class="footer-item" target="_blank" rel="noopener" href="https://calcium.qyliu.top/">在线计算</a></div></div><div class="footer-group" id="friend-links-in-footer"><h3 class="footer-title">友链<button title="换一批" href="javascript:;" onclick="liushen.randomLink()"><i class="fa-solid fa-rotate-right"></i></button></h3><div class="footer-links"><a class="footer-item" target="_blank" href="https://blog.liushen.fun">测试1</a><a class="footer-item" target="_blank" href="https://blog.liushen.fun">测试2</a><a class="footer-item" target="_blank" href="https://blog.liushen.fun">测试3</a><a class="footer-item" target="_blank" href="https://blog.liushen.fun">测试4</a><a class="footer-item" target="_blank" href="https://blog.liushen.fun">测试5</a><a class="footer-item" href="/link/" data-pjax-state="data-pjax-state">查看更多</a></div></div></div><div id="footer-bottom"><div class="footer-bottom-content"><div class="footer-bottom-left"><span class="copyright">©2021 - 2024 By <a target="_blank" rel="noopener" href="https://blog.liushen.fun/about/" title="点击访问&quot;LiuShen&quot;的主页" style="margin-left:5px">LiuShen</a></span><div><a class="footer-bottom-link" target="_blank" href="https://beian.miit.gov.cn/" rel="noopener external nofollow" title="工信部备案号">陕ICP备2024028531号</a><a class="footer-bottom-link" target="_blank" href="https://beian.mps.gov.cn/#/query/webSearch?code=61011602000637" rel="noopener external nofollow" title="公安备案号">陕公网安备61011602000637号</a></div></div><div class="footer-bottom-right"> <div id="runtime" title="本站运行时间">本站已苟活：0 天 0 时 0 分 0 秒</div><div> <a class="footer-bottom-link" target="_blank" href="https://www.dogecloud.com/" rel="noopener external nofollow" title="本站通过多吉云CDN提供站点加速">多吉云CDN</a><a class="footer-bottom-link" target="_blank" href="https://hexo.io/zh-cn/" rel="noopener external nofollow" title="本站使用Hexo架构搭建而成">Hexo静态框架</a><a class="footer-bottom-link" target="_blank" href="https://butterfly.js.org/" rel="noopener external nofollow" title="本站由Butterfly主题魔改而成">Butterfly主题</a></div></div></div></div></div><script>if (!window.liushen) {
+  window.liushen = {
+    saveData: (key, data) => {
+      localStorage.setItem(key, JSON.stringify({
+        time: Date.now(),
+        data: data
+      }));
+    },
+
+    loadData: (key, validTimeInMinutes) => {
+      let storedData = JSON.parse(localStorage.getItem(key));
+      if (storedData) {
+        let elapsedTime = Date.now() - storedData.time;
+        if (elapsedTime >= 0 && elapsedTime < validTimeInMinutes * 60000) {
+          return storedData.data;
+        }
+      }
+      return null;
+    },
+
+    runtime: () => {
+      const formatTime = (unit) => unit > 9 ? unit : "0" + unit;
+      const startTime = new Date('2021/12/12 01:27:36').getTime();
+      const currentTime = Date.now();
+      let elapsedTimeInSeconds = Math.round((currentTime - startTime) / 1000);
+
+      let runtimeText = "本站已苟活：";
+      if (elapsedTimeInSeconds >= 86400) {
+        runtimeText += `${formatTime(Math.floor(elapsedTimeInSeconds / 86400))} 天 `;
+        elapsedTimeInSeconds %= 86400;
+      }
+      if (elapsedTimeInSeconds >= 3600) {
+        runtimeText += `${formatTime(Math.floor(elapsedTimeInSeconds / 3600))} 时 `;
+        elapsedTimeInSeconds %= 3600;
+      }
+      if (elapsedTimeInSeconds >= 60) {
+        runtimeText += `${formatTime(Math.floor(elapsedTimeInSeconds / 60))} 分 `;
+        elapsedTimeInSeconds %= 60;
+      }
+      runtimeText += `${formatTime(elapsedTimeInSeconds)} 秒`;
+
+      const runtimeElement = document.getElementById("runtime");
+      if (runtimeElement) {
+        runtimeElement.innerHTML = runtimeText;
+      }
+      setTimeout(window.liushen.runtime, 1000);
+    },
+
+    randomLink: () => {
+      let linksData = window.liushen.loadData("links", 30);
+      if (linksData) {
+        let linkElements = document.querySelectorAll("#friend-links-in-footer .footer-item");
+        if (!linkElements.length) return;
+
+        for (let i = 0; i < linkElements.length; i++) {
+          let randomIndex = Math.floor(Math.random() * linksData.length);
+          linkElements[i].innerText = linksData[randomIndex].name;
+          linkElements[i].href = linksData[randomIndex].link;
+          linksData.splice(randomIndex, 1);
+        }
+      } else {
+        fetch("/flink_count.json")
+          .then(response => response.json())
+          .then(data => {
+            window.liushen.saveData("links", data.link_list);
+            window.liushen.randomLink();
+          });
+      }
+    }
+  };
+}
+
+if (true) {
+  window.liushen.randomLink();
+  document.addEventListener("DOMContentLoaded", window.liushen.randomLink);
+  window.liushen.runtime();
+} else {
+  window.liushen.randomLink();
+  window.liushen.runtime();
+}</script></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><a class="icon-V hidden" onclick="switchNightMode()" title="浅色和深色模式转换"><svg width="25" height="25" viewBox="0 0 1024 1024"><use id="modeicon" xlink:href="#icon-moon"></use></svg></a><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="cat" onclick="toggleLive2dVisibility()" title="小猫显隐"><i class="fa-solid fa-cat"></i></button><button id="fullscreen" onclick="toggleFullScreen()" title="全屏切换"><i class="fa-solid fa-expand"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="fa-solid fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="fa-solid fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="fa-solid fa-arrow-rotate-right"></i></div><div class="rightMenu-item" id="menu-home"><i class="fa-solid fa-house"></i></div></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" id="copy" href="javascript:rm.copySelect();"><i class="fa-solid fa-copy"></i><span>复制选中文字</span></a><a class="rightMenu-item" id="reply" href="javascript:rm.replySelect();"><i class="fa-regular fa-comment"></i><span>评论选中段落</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" href="/archives/"><i class="fa-solid fa-archive"></i><span>文章时间线</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="fa-solid fa-folder-open"></i><span>文章分大类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="fa-solid fa-tags"></i><span>文章小标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuNormal"><a class="rightMenu-item menu-link" id="menu-radompage" href="/comment/"><i class="fa-solid fa-shoe-prints"></i><span>随心留言板</span></a><div class="rightMenu-item" id="menu-translate"><i class="fa-solid fa-earth-asia"></i><span>繁简模式切换</span></div><div class="rightMenu-item" id="menu-darkmode"><i class="fa-solid fa-moon"></i><span>切换亮暗模式</span></div><div class="rightMenu-item" id="menu-live2dvisibility"><i class="fa-solid fa-cat"></i><span>小猫显示隐藏</span></div><div class="rightMenu-item" id="menu-print"><i class="fa-solid fa-print fa-fw"></i><span>打印整个页面</span></div><a class="rightMenu-item menu-link" id="statement" href="/statement/"><i class="fa-regular fa-copyright fa-fw"></i><span>网站声明</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js?v=5.0.0"></script><script src="/js/main.js?v=5.0.0"></script><script src="/js/jquery-3.7.1.slim.min.js?v=5.0.0"></script><script src="/js/others.js?v=5.0.0"></script><script src="/js/echarts.min.js?v=5.0.0"></script><script src="/js/rightmenu.js?v=5.0.0"></script><script src="/js/tw_cn.js?v=5.0.0"></script><script src="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.umd.js?v=5.0.36"></script><script src="/pluginsSrc/instant.page/instantpage.js?v=5.2.0" type="module"></script><script src="/pluginsSrc/vanilla-lazyload/dist/lazyload.iife.min.js?v=19.1.3"></script><div class="js-pjax"><script>(() => {
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.qyliu.top',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.qyliu.top',
+      region: '',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(init,0)
+    else btf.getScript('/pluginsSrc/twikoo/dist/twikoo.all.min.js?v=1.6.38').then(init)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[aside.card_aside.card_aside.card_newest_comments.code]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo.qyliu.top',
+        region: '',
+        pageSize: 5,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        btf.saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      btf.getScript('/pluginsSrc/twikoo/dist/twikoo.all.min.js?v=1.6.38').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = btf.saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  btf.addGlobalFn('pjaxComplete', newestCommentInit, 'twikoo_newestComment')
+})</script><script src="/config/memos/memos.js"></script><canvas class="fireworks" mobile="false"></canvas><script src="/pluginsSrc/butterfly-extsrc/dist/fireworks.min.js?v=1.1.3"></script><script src="/pluginsSrc/pjax/pjax.min.js?v=0.2.8"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+const triggerPjaxFn = (val) => {
+  if (!val) return
+  Object.values(val).forEach(fn => { fn() })
+}
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjaxSendOnce')
+  btf.removeGlobalFnEvent('themeChange')
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  triggerPjaxFn(window.globalFn.pjaxSend)
+})
+
+document.addEventListener('pjax:complete', () => {
+  btf.removeGlobalFnEvent('pjaxCompleteOnce')
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  triggerPjaxFn(window.globalFn.pjaxComplete)
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async="" data-pjax="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="/pluginsSrc/algoliasearch/dist/algoliasearch-lite.umd.js?v=4.24.0"></script><script src="/pluginsSrc/instantsearch.js/dist/instantsearch.production.min.js?v=4.73.3"></script><script src="/js/search/algolia.js?v=5.0.0"></script></div></div><!-- hexo injector body_end start --><script data-pjax="">
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/a64defb4/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/08/10/66b74df1ab511.webp" alt="" onerror="this.src=/img/error-page.png; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-10</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/a64defb4/&quot;);" href="javascript:void(0);" alt="">魔改笔记七：分类条及外链卡片</a><div class="blog-slider__text">虽然说域名换了几乎等于从头开始，但是仍然浇不灭我对于网站的热情，该进行的还是得进行。很久都没有总结魔改了，这篇文章就将最近魔改最大的几个部分进行记录，同时对有需要的朋友提供帮助。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/a64defb4/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/159f1aa5/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/08/10/66b6479e1d33c.webp" alt="" onerror="this.src=/img/error-page.png; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-09</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/159f1aa5/&quot;);" href="javascript:void(0);" alt="">域名迁移至 blog.liushen.fun</a><div class="blog-slider__text">近期遇见了一个很烦人的事情，bing的所有搜索结果全部消失，我也不知道是怎么回事，已经在联系bing管理员了，不过，其实我很早之前就像换域名了，今天趁此机会，干脆直接换了得了！原有的域名301至新域名，不会影响任何使用。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/159f1aa5/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/3850e950/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/31/66a922cb9adcc.webp" alt="" onerror="this.src=/img/error-page.png; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-01</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/3850e950/&quot;);" href="javascript:void(0);" alt="">CloudFlare实用项目推荐</a><div class="blog-slider__text">之前我向大家推荐过vercel上的一些项目，都非常的有趣实用，最近，在和朋友安小歪的聊天中，发现了一些很好玩的cloud flare项目，比如临时邮箱，临时文件传送，计数统计，等等，很多项目都非常好玩，于是在此推荐给大家。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/3850e950/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/4dc716ec/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/19/6699436fe02ec.webp" alt="" onerror="this.src=/img/error-page.png; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-21</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/4dc716ec/&quot;);" href="javascript:void(0);" alt="">Friend-Circle-Lite:轻量友链朋友圈</a><div class="blog-slider__text">前两天出现了友链朋友圈因为版本原因导致无法运行的问题，虽然我已经改好了，但是由于bundle文件过大，经常导致加载较慢，于是我自己手搓了一个轻量化友链朋友圈，同时支持通过提交issue实现邮箱订阅本站最新文章，也算是友链朋友圈部署新思路啦，适合喜欢轻量和免费快速的朋友尝试！</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/4dc716ec/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/67189760/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.qyliu.top/i/2024/07/06/6688d4b63b50f.webp" alt="" onerror="this.src=/img/error-page.png; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-06</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/67189760/&quot;);" href="javascript:void(0);" alt="">Spikformer脉冲神经网络学习</a><div class="blog-slider__text">近期我们进行了人工智能实训，我们小组选择的是脉冲神经网络，不同于原先的神经网络，这个网络采用的是脉冲信号，目前脉冲神经网络的效果并不是很好，但是因为是一个全新的神经网络架构，并且基于生物启发的计算方式，使得它们在处理稀疏和非结构化数据时具有独特的优势。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/67189760/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer="" src="/config/swiper/swiper.min.js"></script><script defer="" data-pjax="" src="/config/swiper/swiper_init.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"superSample":2,"width":250,"height":500,"position":"left","hOffset":0,"vOffset":-140},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
